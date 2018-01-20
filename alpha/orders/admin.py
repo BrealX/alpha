@@ -12,8 +12,6 @@ class OrderAdmin(admin.ModelAdmin):
         model = Order
 
     list_display = [field.name for field in Order._meta.fields]
-    list_filter = ['name', 'id']
-    search_fields = ['name', 'id']
     inlines = [ProductInOrderInline]
 
 

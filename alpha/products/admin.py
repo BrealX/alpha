@@ -12,7 +12,7 @@ class ProductAdmin(admin.ModelAdmin):
         model = Product
 
     list_display = [field.name for field in Product._meta.fields]
-    list_filter = ['name', 'id']
+    list_filter = ['name', ]
     search_fields = ['name', 'id']
     inlines = [ProductImageInline]
 
