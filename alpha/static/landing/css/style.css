@@ -1,11 +1,16 @@
 html, body {
 	height: 100%;
 	max-height: 100%;
+	width: 100%;
+	max-width: 100%;
 	font-family: 'Roboto', sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .main-container {
-	background: url("/static/landing/img/background1.jpg") no-repeat center;
+	background: url("../img/background1.jpg") no-repeat center;
 	background-color: rgba(0,0,0,.5);
 	background-blend-mode: darken;
 	height: auto;
@@ -60,6 +65,7 @@ html, body {
 .btn-orange:hover{
 	background-color: #b3330f;
 	border: none;
+	cursor: pointer;
 }
 
 .footer .left_mini_footer{
