@@ -1,6 +1,5 @@
 from django.db import models
-from products.models import Product
-
+from products.models import *
 
 class Status(models.Model):
     name = models.CharField(max_length=24, blank=True, null=True, default=None)
