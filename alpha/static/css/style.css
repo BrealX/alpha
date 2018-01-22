@@ -1,0 +1,27 @@
+html, body {
+	height: 100%;
+	max-height: 100%;
+	font-family: 'Roboto', sans-serif;
+	background-color: #edeef0; 
+}
+
+.section-top {
+	margin: 20px;
+	margin-bottom: 30px;
+}
+
+.product-item {
+	height: 480px;
+	background-color: white;
+	border: 1px solid lightgrey;
+	position: relative;
+	padding: 5px;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.add-to-cart-btn {
+	position: absolute;
+	bottom: 15px;
+	left: 50px;
+}

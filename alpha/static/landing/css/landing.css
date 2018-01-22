@@ -4,9 +4,6 @@ html, body {
 	width: 100%;
 	max-width: 100%;
 	font-family: 'Roboto', sans-serif;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
 .main-container {
@@ -20,13 +17,28 @@ html, body {
 	top: 0;
 	width: auto;
 	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.top-container{
+.head-container{
 	padding-top: 10%;
 	text-align: center;
 	position: relative;
 	z-index: 2;
+	width: 1170px;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.main-container .title-container{
+	text-align: center;
+	font-weight: 100;
+	line-height: 50px;
+	margin-bottom: 0;
 }
 
 .main-container .mailing-form{
@@ -39,22 +51,12 @@ html, body {
 
 .main-container form label {
 	font-weight: 100;
-	padding-left: 10px;
+	padding-left: 20px;
 }
 
 .main-container form button {
 	font-weight: 100;
-	margin-left: 10px;
-}
-
-.centered_div{
-	margin:0 auto;
-}
-
-.title{
-	text-align: center;
-	font-weight: 100;
-	line-height: 50px;
+	margin-left: 15px;
 }
 
 .btn-orange{
@@ -66,9 +68,4 @@ html, body {
 	background-color: #b3330f;
 	border: none;
 	cursor: pointer;
-}
-
-.footer .left_mini_footer{
-	position: fixed;
-	bottom: 20px;
 }
