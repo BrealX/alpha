@@ -36,3 +36,13 @@ class ProductInOrderAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ProductInOrder, ProductInOrderAdmin)
+
+
+class ProductInBasketAdmin(admin.ModelAdmin):
+    class Meta:
+        model = ProductInBasket
+
+    list_display = [field.name for field in ProductInBasket._meta.fields]
+
+
+admin.site.register(ProductInBasket, ProductInBasketAdmin)
