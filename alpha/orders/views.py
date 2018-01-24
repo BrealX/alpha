@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.http import JsonResponse
 from .models import ProductInBasket
 
@@ -33,3 +34,9 @@ def basket_adding(request):
         product_dict['nmb'] = item.nmb
         return_dict['products'].append(product_dict)
     return JsonResponse(return_dict)
+
+
+def checkout(request):
+    session_key = request.session.session_key
+    products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
+    return render(request, 'orders/checkout.html', locals())
