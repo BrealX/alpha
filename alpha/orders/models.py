@@ -90,4 +90,4 @@ class ProductInBasket(models.Model):
         price_per_item = self.product.price
         self.price_per_item = price_per_item
         self.total_price = int(self.nmb) * price_per_item
-        super(ProductInBasket, self).save(*args, **kwargs)        
+        super(ProductInBasket, self).save(*args, **kwargs) 
