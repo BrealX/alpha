@@ -76,10 +76,11 @@ class ProductInBasket(models.Model):
     product = models.ForeignKey(Product, blank=True, null=True, default=None, on_delete=models.CASCADE)
     nmb = models.IntegerField(default=1)
     price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0) # price * nmb
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    
 
     def __str__(self):
         return "%s" % self.product.name
