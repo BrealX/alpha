@@ -1,21 +1,32 @@
-<div class="col-lg-3">
-    <div class="product-item">
-        <div class="image">
-            <a href="{% url 'product' product_image.product.id %}">
-                <img src="{{ product_image.image.url }}" class="img-responsive" alt="image">
+<div class="owl-item" style="width: 293px;">
+    <div class="item">
+        <div class="product">
+            <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Понравилось" data-placement="left"> <!-- JAVASCRIPT-->
+                <i class="glyphicon glyphicon-heart"></i>
             </a>
-        </div>
-
-        {% if product_image.product.discount %}
-            <div class="discount-container">
-                <span class="discount">{{ product_image.product.discount }}%</span>
+            <div class="image">
+                <div class="quickview">
+                    <a class="btn btn-xs btn-quickview" data-toggle="modal" href="" data-target="#productSetailsModalAjax">
+                        Быстрый просмотр</a>  <!-- JAVASCRIPT-->
+                </div>
+                <a href="{% url 'product' product_image.product.id %}">
+                    <img class="img-responsive" src="{{ product_image.image.url }}" alt="img">
+                </a>
+                <div class="promotion">
+                    <span class="new-product"></span> <!--ADD BOLEAN NEW TO PRODUCT MODEL-->
+                    {% if product_image.product.discount %}
+                    <span class="discount">{{ product_image.product.discount }}% OFF</span>
+                    {% endif %}
+                </div>
             </div>
-        {% endif %}
-
-        <div class="description">
-            <h4>
-                <a href="#">{{ product_image.product.name }}</a>
-            </h4>
+            <div class="description">
+                <h4>
+                    <a href="{% url 'product' product_image.product.id %}">{{ product_image.product.name }}</a>
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
             <p>
             {{ product_image.product.short_description|truncatechars_html:70 }}
             </p>    
