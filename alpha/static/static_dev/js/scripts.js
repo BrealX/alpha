@@ -120,6 +120,11 @@ $(document).ready(function() {
         $(this).attr('data-original-title', 'Понравилось');// Change Tooltip text
     });
 
+    // Product Page Zoomer Initializer
+    
+    $(window).on('load', function() {
+        $('.sp-wrap').smoothproducts();
+    }); 
 });
 
 

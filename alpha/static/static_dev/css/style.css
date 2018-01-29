@@ -106,6 +106,10 @@ h6 {
     margin-top: 0;
 }
 
+.no-padding {
+    padding: 0 !important;
+}
+
 .width100, .w100 {
     width: 100%;
 }
@@ -261,10 +265,10 @@ input[type="text"], input[type="password"], input[type="email"] {
     text-transform: uppercase;
 }
 
-.nav > li.active,
-.nav > li > a:hover,
-.nav > li > a:focus,
-.nav > li:hover > a {
+.navbar-collapse > .nav > li.active,
+.navbar-collapse > .nav > li > a:hover,
+.navbar-collapse > .nav > li > a:focus,
+.navbar-collapse > .nav > li:hover > a {
   background: #27ae60;
 }
 
@@ -755,17 +759,10 @@ h5.parallaxSubtitle {
 }
 
 .sp-wrap {
-    display: none;
-    line-height: 0;
-    font-size: 0;
-    background: none;
-    position: relative;
-    border-radius: 3px;
-    margin: 0 25px 15px 0;
-    border: none !important;
-    float: left;
     z-index: 10;
     width: 100%;
+    background: none !important;
+    border: none !important;
     max-width: 100% !important;
 }
 
@@ -773,12 +770,232 @@ h5.parallaxSubtitle {
     background: #fff !important;
 }
 
-.sp-large {
-    position: relative;
-    overflow: hidden;
-    top: 0;
-    left: 0;
-    max-width: calc(100% - 80px);
+.sp-thumbs {
+    text-align: center !important;
+}
+
+.main-image:not(.main-image-thumb-list) .sp-thumbs {
+    position: absolute;
+    right: 0 !important;
+    text-align: left;
+    bottom: 20% !important;
+    width: 100px !important;
+    z-index: 70;
+}
+
+.main-image.sp-wrap .sp-thumbs {
+    right: 10px !important;
+}
+
+.sp-thumbs a:hover, .sp-thumbs a:active, .sp-current, .sp-current:visited {
+    border: 2px solid #4ec67f !important;
+}
+
+.main-image .sp-thumbs a:link, .main-image .sp-thumbs a:visited {
+    border: 2px solid #EEEEEE;
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-right: 0 !important;
+    float: right;
+    transition: margin 0.2s ease 0s;
+    border: 2px solid #eee;
+    display: inline-block;
+    float: right;
+    width: 70px;
+    height: 70px;
+}
+
+@media (min-width: 768px) {
+    .sp-large {
+        max-width: calc(100% - 80px);
+    }
+    .main-image:not(.main-image-thumb-list) .sp-thumbs {
+        position: absolute;
+        right: 0 !important;
+        text-align: left;
+        bottom: 20% !important;
+        width: 100px !important;
+        z-index: 70;
+    }
+}
+
+.product-title {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 0.25px;
+    line-height: 1;
+    margin-bottom: 0;
+    text-transform: uppercase;
+}
+
+.rating span {
+    display: inline-block;
+}
+
+.rating-here .fa, .rating .fa {
+    color: #E7711B;
+}
+
+.ratingInfo {
+    margin-left: 10px;
+}
+
+.product-price {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 10px;
+}
+
+.price-standard {
+    color: #999999;
+    font-size: 18px;
+    text-decoration: line-through;
+}
+
+.productFilter {
+    clear: both;
+    display: block;
+    margin-bottom: 20px;
+    padding-bottom: 7px;
+    margin-top: 20px;
+    background: #fff;
+    border: 1px solid #dddddd !important;
+        border-right-width: 1px;
+        border-left-width: 1px;
+        border-right-style: solid;
+        border-left-style: solid;
+        border-right-color: rgb(221, 221, 221);
+        border-left-color: rgb(221, 221, 221);
+    padding: 10px 15px 10px !important;
+        padding-right: 15px;
+        padding-left: 15px;
+}
+
+.productFilter.productFilterLook2 {
+    background: none !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.filterBox {
+    display: inline-block;
+}
+
+.productFilterLook2 .filterBox {
+    display: block;
+    float: left;
+    margin-right: 0;
+    width: 100%;
+}
+
+button.first {
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.form-group button, .form-group .wishlist {
+    background: none repeat scroll 0 0 #4ec67f;
+    border: 2px solid #27ae60;
+}
+
+.form-group button, .form-group .btn-cart, .form-group .wishlist {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    color: #FFFFFF;
+    display: block;
+    float: left;
+    font-family: Oswald, Helvetica Neue, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: lighter;
+    line-height: 1em;
+    margin: 0 20px 0 0;
+    padding: 14px 20px;
+    text-transform: uppercase;
+    transition: all 0.25s ease 0s;
+    -moz-transition: all 0.25s ease 0s;
+    -webkit-transition: all 0.25s ease 0s;
+    -o-transition: all 0.25s ease 0s;
+    -ms-transition: all 0.25s ease 0s;
+}
+
+.incaps i {
+    font-size: 20px;
+}
+.color-in {
+    color: #4CC94A;
+}
+
+.color-out {
+    color: #F00C0C;
+}
+
+.product-tab {
+    width: 100%;
+    display: inline-block;
+    clear: both;
+}
+
+.nav-tabs {
+    border-bottom: 3px solid #bfc9ca;
+    margin-bottom: 20px;
+}
+
+.nav-tabs > li.active, .nav-tabs > li {
+    background: none;
+}
+
+.nav-tabs > li > a {
+    border: 0;
+    border-radius: 0;
+}
+
+.nav-tabs li a {
+    font-size: 14px;
+    font-weight: 200;
+    letter-spacing: 2px;
+    margin: 0 0 0 0;
+    text-transform: uppercase;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus, .nav-tabs > li:hover > a {
+    color: #fff !important;
+    border: 0;
+    border-radius: 0;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus, .nav-tabs > li:hover > a {
+    background: #bfc9ca !important;
+}
+
+.product-share {
+    border-top: 1px solid #DDDDDD;
+    clear: both;
+    display: inline-block;
+    margin-top: 20px;
+    padding-top: 14px;
+    width: 100%;
+}
+
+.socialIcon a {
+    background: #CCCCCC;
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 22px;
+    padding: 6px 3px;
+    margin-right: 10px;
+    text-align: center;
+    width: 35px;
+    transition: all 0.15s ease-in-out 0s;
+    -moz-transition: all 0.15s ease-in-out 0s;
+    -webkit-transition: all 0.15s ease-in-out 0s;
+    -o-transition: all 0.15s ease-in-out 0s;
+    -ms-transition: all 0.15s ease-in-out 0s;
 }
 
 /* =============================================================== */
