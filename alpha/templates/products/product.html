@@ -2,7 +2,38 @@
 {% load static %}
 
 {% block content %}
-    <div class="container">
+<div class="container main-container headerOffset">
+    <div class="row">
+        <div class="breadcrumbDiv col-lg-12">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/">Домой</a>
+                </li>
+                <li>
+                    <a href="/#{{ product.category.name }}">{{ product.category.name }}</a>
+                </li>
+                <li class="active">
+                    {{ product.name }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row transitionfx">
+        <!-- left column -->
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <!-- product image & zoom -->
+            <div class="main-image sp-wrap col-lg-12 no-padding sp-non-touch" style="display: inline-block;">
+                <div class="sp-large"> <!--JAVASCRIPT-->
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
         <div class="row">
             <div class="col-lg-6">
                 {% for image_item in product.productimage_set.all %}

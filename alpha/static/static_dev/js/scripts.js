@@ -95,4 +95,32 @@ $(document).ready(function() {
     });
 
     calculatingBasketAmount();
+
+    $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:25,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:4
+        }
+    }
+    });
+
+    // Add to Wishlist Click Event
+    $('.add-fav').click(function (e) {
+        e.preventDefault();
+        $(this).addClass("active"); // ADD TO WISH LIST BUTTON 
+        $(this).attr('data-original-title', 'Понравилось');// Change Tooltip text
+    });
+
 });
+
+
+

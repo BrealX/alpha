@@ -1,7 +1,7 @@
-<div class="owl-item" style="width: 293px;">
-    <div class="item">
+    
         <div class="product">
-            <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Понравилось" data-placement="left"> <!-- JAVASCRIPT-->
+            <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Понравилось" data-placement="left">
+                <!--JAVASCRIPT-->
                 <i class="glyphicon glyphicon-heart"></i>
             </a>
             <div class="image">
@@ -13,7 +13,7 @@
                     <img class="img-responsive" src="{{ product_image.image.url }}" alt="img">
                 </a>
                 <div class="promotion">
-                    <span class="new-product"></span> <!--ADD BOLEAN NEW TO PRODUCT MODEL-->
+                    <!--<span class="new-product">NEW</span> <!--ADD BOLEAN NEW TO PRODUCT MODEL-->
                     {% if product_image.product.discount %}
                     <span class="discount">{{ product_image.product.discount }}% OFF</span>
                     {% endif %}
@@ -23,22 +23,20 @@
                 <h4>
                     <a href="{% url 'product' product_image.product.id %}">{{ product_image.product.name }}</a>
                 </h4>
+                <p>
+                    {{ product_image.product.short_description|truncatechars_html:70 }}
+                </p>
+                <span class="category">{{ product_image.product.category }}</span>
+            </div>
+            <div class="price">
+                <span>{{ product_image.product.price }} UAH</span>
+            </div>
+            <div class="action-control">
+                <a class="btn btn-primary">
+                    <span class="add2cart">
+                        <i class="glyphicon glyphicon-shopping-cart"> В корзину</i>
+                    </span>
+                </a>
             </div>
         </div>
-    </div>
-</div>
-            <p>
-            {{ product_image.product.short_description|truncatechars_html:70 }}
-            </p>    
-        </div>
-        <div class="price">
-            <span>{{ product_image.product.price }} UAH</span>
-        </div>
-        <div class="add-to-cart-btn">
-            <button class="btn btn-success">
-                <i class="glyphicon glyphicon-shopping-cart"></i>
-                Добавить в корзину
-            </button>
-        </div>
-    </div>
-</div>
+    
