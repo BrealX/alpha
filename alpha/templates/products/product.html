@@ -26,6 +26,11 @@
                 <a href="{{ product.product_main_image.image.url }}">
                     <img class="img-responsive" src="{{ product.product_main_image.image.url }}" alt="img">
                 </a>
+                {% for image in product.product_all_images %}
+                    <a href="{{ image.image.url }}">
+                        <img src="{{ image.image.url }}" alt="img">
+                    </a>
+                {% endfor %}
             </div>
         </div>
         <!--/ left column end -->
@@ -78,16 +83,21 @@
                 </div>
             </div>
             <!--/.productFilter-->
-            {% if product.is_active %}
+            {% if product.is_in_stock %}
                 <h3 class="incaps">
-                    <i class="fa fa fa-check-circle-o color-in"></i>
+                <i class="fa fa fa-check-circle-o color-in"></i>
                     Товар в наличии
                 </h3>
-            {% else %}
-                <h3 class="incaps">
-                    <i class="fa fa-times-circle color-out"></i>
-                    Товар закончился
-                </h3>
+                {% elif product.is_on_demand %}
+                    <h3 class="incaps">
+                    <i class="fa fa-clock-o color-demand"></i>
+                        Товар под заказ
+                    </h3>
+                {% else %}
+                    <h3 class="incaps">
+                        <i class="fa fa-times-circle color-out"></i>
+                        Товар закончился
+                    </h3>
             {% endif %}
             <div class="product-tab w100 clearfix">
                 <ul class="nav nav-tabs">
@@ -107,10 +117,10 @@
                         {{ product.description }}
                     </div>
                     <div id="additional" class="tab-pane">
-                        Добавить описание
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident odio sunt accusamus aperiam explicabo ea laudantium, molestiae quasi nihil atque natus, quod ratione qui minima. Corrupti dolore, quas nobis sit!
                     </div> 
                     <div id="Доставка" class="tab-pane">
-                        Доставка
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et beatae sint eius autem quae nostrum vel saepe, dolore, ipsum repellendus dicta voluptas iste mollitia asperiores ea ut similique aliquam reiciendis.
                     </div>  
                 </div>
                 <!--/.tab-content-->

@@ -16,12 +16,13 @@ class ProductCategory(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=64, blank=True, null=True, default=None)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    discount = models.IntegerField(default=0)
-    price_with_discount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    discount = models.DecimalField(max_digits=4, decimal_places=2, default=0)
     category = models.ForeignKey(ProductCategory, blank=True, null=True, default=None, on_delete=models.CASCADE)
     short_description = models.TextField(blank=True, null=True, default=None)
     description = models.TextField(blank=True, null=True, default=None)
     is_active = models.BooleanField(default=True)
+    is_in_stock = models.BooleanField(default=True)
+    is_on_demand = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
@@ -39,10 +40,13 @@ class Product(models.Model):
         return self.images.get(is_main=True)
 
 
-    def save(self, *args, **kwargs):
-        self.price_with_discount = self.price - (self.price * self.discount / 100)
-        super(Product, self).save(*args, **kwargs)
+    @property
+    def product_all_images(self):
+        return (self.images.get(is_main=False),) 
 
+
+    def price_with_discount(self):
+        return float(self.price) - (float(self.price) * float(self.discount) / 100)  
 
 
 class ProductImage(models.Model):

@@ -4,7 +4,7 @@
 {% block content %}
     <div class="banner">
         <div class="full-container">
-            <img src="{% static 'img/slider0.jpg' %}" alt="img" class="img-responsive">
+            <img src="{% static 'img/banner.jpg' %}" alt="img" class="img-responsive">
         </div>
     </div>
     <!--/.banner-->
@@ -42,8 +42,8 @@
     </div>
     <!--/.parallax-image-1-->
     <div class="container main-container">
-        <div class="morePost row featuredPostContainer style2 globalPaddingTop">
-            <h3 id="Микрофоны" class="section-title style2 text-center">
+        <div id="Микрофоны" class="morePost row featuredPostContainer style2 globalPaddingTop">
+            <h3 class="section-title style2 text-center">
                 <span>Микрофоны-караоке</span>
             </h3>
             <div id="productslider" class="owl-carousel owl-theme" style="opacity: 1; display: block;"> <!-- JAVASCRIPT-->
@@ -54,34 +54,31 @@
             <!--/.productSlider-->
         </div>
         <!--/.featuredPostContainer-->
+    </div>
+    <!--/.main-container-->
         <hr class="no-margin-top">
-        <div class="width100 section-block">
-            <div class="row featureImg">
-                <div class="col-md-3 col-sm-3 col-xs-6">
-                    <a href="">
-                        <img class="img-responsive" src="{% static 'img/images.png' %}" alt="img">
-                    </a>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-6">
-                    <a href="">
-                        <img class="img-responsive" src="" alt="img">
-                    </a>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-6">
-                    <a href="">
-                        <img class="img-responsive" src="" alt="img">
-                    </a>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-6">
-                    <a href="">
-                        <img class="img-responsive" src="" alt="img">
-                    </a>
+    <div class="parallax-section parallax-image-2" style="background-position: 50% 50px;">
+        <div class="w100 parallax-section-overlay">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="parallax-content clearfix">
+                            <h1 class="xlarge">
+                                Сотрудничество с известными авторами и композиторами
+                            </h1>
+                            <h5 class="parallaxSubtitle">
+                                Такими как Шаинский В.Я., Энтин Ю.С., Танич М.И., Пахмутова А.Н. и многими другими
+                            </h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!--/.section-block-->
-        <div class="morePost row featuredPostContainer style2 globalPaddingTop">
-            <h3 id="Плееры" class="section-title style2 text-center">
+    </div>
+    <!--/.parallax-image-2-->
+    <div class="container main-container">
+        <div id="Плееры" class="morePost row featuredPostContainer style2 globalPaddingTop">
+            <h3 class="section-title style2 text-center">
                 <span>Мультиплееры</span>
             </h3>
             <div id="productslider" class="owl-carousel owl-theme" style="opacity: 1; display: block;"> <!-- JAVASCRIPT-->
@@ -94,7 +91,7 @@
         <!--/.featuredPostContainer-->
     </div>
     <!--/.main-container-->
-    <div class="parallax-section parallax-image-2" style="background-position: 50% 50px;">
+    <div class="parallax-section parallax-image-3" style="background-position: 50% 50px;">
         <div class="w100 parallax-section-overlay">
             <div class="container">
                 <div class="row">
@@ -104,7 +101,8 @@
                                 Нам доверяют уже более 3 лет
                             </h1>
                             <h5 class="parallaxSubtitle">
-                                Доверьте нам образование Вашего ребенка
+                                Все наши игрушки и книги разработаны с 
+                                учётом возрастных и психологических особенностей ребёнка
                             </h5>
                         </div>
                     </div>
@@ -112,5 +110,5 @@
             </div>
         </div>
     </div>
-    <!--/.parallax-section-->
+    <!--/.parallax-image-3-->
 {% endblock %}
