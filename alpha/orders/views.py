@@ -40,7 +40,6 @@ def basket_adding(request):
 def checkout(request):
     session_key = request.session.session_key
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True, order__isnull=True)
-    product_image = ProductImage.objects.filter(is_main=True, product__name__contains='Шаинского')
 
     form = CheckoutContactForm(request.POST or None)
     if request.POST:

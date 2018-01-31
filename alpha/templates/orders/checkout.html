@@ -1,140 +1,147 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9 col-md-9 col-sm-7 col-xs6 col-xxs-12 text-center-xs">
-                <h1 class="section-title-inner">
-                    <span>
-                        <i class="glyphicon glyphicon-shopping-cart"></i>
+<div class="container main-container headerOffset">
+    <div class="row">
+        <div class="breadcrumbDiv col-lg-12">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/">Домой</a>
+                </li>
+                <li class="active">
+                    Корзина
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--/.row-->
+    <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-7 col-xs6 col-xxs-12 text-center-xs">
+            <h1 class="section-title-inner">
+                <span>
+                    <i class="glyphicon glyphicon-shopping-cart"></i>
                         Корзина
-                    </span>
-                </h1>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar col-xs-6 col-xxs-12 text-center-xs">
-                <h4 class="caps section-title-inner">
-                    <a href="/">
-                        <i class="fa fa-chevron-left"></i>
+                </span>
+            </h1>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar col-xs-6 col-xxs-12 text-center-xs">
+            <h4 class="caps section-title-inner">
+                <a href="/">
+                    <i class="fa fa-chevron-left"></i>
                         Продолжить покупки
-                    </a>
-                </h4>
-            </div>
-            <div class="row">
-                {% if products_in_basket %}
-                <div class="col-lg-9 col-md-9 col-sm-7">
-                    <div class="row userInfo">
-                        <div class="col-xs-12 col-sm-12">
-                            <div class="cartContent w100">
-                                <table class="cartTable table-responsive" style="width:100%">
-                                    <tbody>
-                                        <tr class="CartProduct cartTableHeader">
-                                            <td style="width:15%">Товар</td>
-                                            <td style="width:40%">Наименование</td>
-                                            <td style="width:10%" class="delete"></td>
-                                            <td style="width:10%">Кол-во</td>
-                                            <td style="width:10%">Скидка</td>
-                                            <td style="width:15%">Итого</td>
-                                        </tr>
-                                        {% for product_in_basket in products_in_basket %}
-                                        <tr class="CartProduct">
-                                            <td class="CartProductThumb">
-                                                <div>
-                                                    <a href="{% url 'product' product_in_basket.product.id %}">
-                                                        {% for image_item in product_image %}
-                                                        <img src="{{ image_item.image.url }}" alt="img" class="img-responsive">
-                                                        {% endfor %}
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="CartDescription">
-                                                    <h4>
-                                                        <a href="{% url 'product' product_in_basket.product.id %}">{{ product_in_basket.product.name }}</a>
-                                                    </h4>
-                                                    <div class="price">
-                                                        <span>{{ product_in_basket.price_per_item }} UAH</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="delete">
-                                                <a title="Delete">
-                                                    <i class="glyphicon glyphicon-trash fa-2x"></i>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <div class="input-group bootstrap-touchspin">
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-link bootstrap-touchspin-down" type="button">-</button>
-                                                    </span>
-                                                    <input class="quanitySniper form-control" name="quanitySniper" type="text">
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-link bootstrap-touchspin-up" type="button">+</button>
-                                                    </span>
-                                                </div>
-                                            </td>
-                                            <td>{{ product_in_basket.product.discount }} %</td>
-                                            <td class="price">{{ product_in_basket.total_price }}</td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
+                </a>
+            </h4>
+        </div>
+    </div>
+    <!--/.row-->
+    <div class="row">
+        {% if products_in_basket %}
+        <div class="col-lg-9 col-md-9 col-sm-7">
+            <div class="row userInfo">
+                <div class="col-xs-12 col-sm-12">
+                    <div class="cartContent w100">
+                        <table class="cartTable table-responsive" style="width:100%">
+                            <tbody>
+                                <tr class="CartProduct cartTableHeader">
+                                    <td style="width:15%">Товар</td>
+                                    <td style="width:35%">Наименование</td>
+                                    <td style="width:10%" class="delete"></td>
+                                    <td style="width:15%">Количество</td>
+                                    <td style="width:10%">Скидка</td>
+                                    <td style="width:15%">Итого</td>
+                                </tr>
+                                {% for product_in_basket in products_in_basket %}
+                                <tr class="CartProduct">
+                                    <td class="CartProductThumb">
+                                        <div>
+                                            <a href="{% url 'product' product_in_basket.product.id %}">
+                                                <img src="{{ product_in_basket.product.product_main_image.image.url }}" alt="img" class="img-responsive">
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="CartDescription">
+                                            <h4>
+                                                <a href="{% url 'product' product_in_basket.product.id %}">{{ product_in_basket.product.name }}</a>
+                                            </h4>
+                                            <div class="price">
+                                                <span>{{ product_in_basket.price_per_item }} UAH</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="delete">
+                                        <a title="Удалить">
+                                            <i class="glyphicon glyphicon-trash fa-2x"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <div class="input-group bootstrap-touchspin">
+                                            <input class="quanitySniper form-control product-in-basket-nmb" name="quanitySniper" type="text" value="{{ product_in_basket.nmb }}">
+                                        </div>
+                                    </td>
+                                    <td>{{ product_in_basket.product.discount }} %</td>
+                                    <td class="price">{{ product_in_basket.total_price }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--/.cartContent-->
+                    <div class="cartFooter w100">
+                        <div class="box-footer">
+                            <div class="pull-right">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="fa fa-undo"></i>
+                                    Обновить корзину
+                                </button>
                             </div>
                         </div>
                     </div>
+                    <!--/.cartFooter-->
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
-                    <div class="contentBox">
-                        <div class="w100 costDetails">
-                            <div id="order-detail-content" class="table-block">
-                                <a class="btn btn-primary btn-lg btn-block" title="checkout" href="" style="margin-bottom:20px">Оформить заказ
-                                    <i class="fa fa-arrow-right"></i></a>
-                                <div class="w100 cartMiniTable">
-                                     <table id="cart-summary" class="std table">
-                                        <tbody>
-                                            <tr>
-                                                <td>Сумма</td>
-                                                <td class="price">{{ products_in_basket.total_price }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Доставка</td>
-                                                <td class="price">
-                                                    <span class="success">30.00 UAH</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Итого</td>
-                                                <td id="total-price" class="site-color">{{ products_in_basket.total_price }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+            </div>
+            <!--/.row end-->
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+            <div class="contentBox">
+                <div class="w100 costDetails">
+                    <div id="order-detail-content" class="table-block">
+                        <a class="btn btn-primary btn-lg btn-block" title="checkout" href="" style="margin-bottom:20px">Оформить заказ
+                            <i class="fa fa-arrow-right"></i></a>
+                        <div class="w100 cartMiniTable">
+                            <table id="cart-summary" class="std table">
+                                <tbody>
+                                    <tr>
+                                        <td>Сумма</td>
+                                        <td class="price">{{ products_in_basket.total_price }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Доставка</td>
+                                        <td class="price">
+                                            <span class="success">30.00 UAH</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Итого</td>
+                                        <td id="total-price" class="site-color">
+                                            <span id="total_order_amount">0</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                {% endif %}
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        </div>
+        <!--/.rightSidebar-->
+        {% endif %}
+    </div>
+    <!--/row-->
+</div>
+<!--/.main-container-->
+        
 
                 {% if products_in_basket %}
                 <div class="col-lg-8 col-lg-offset-2">
@@ -195,10 +202,6 @@
                                 {% endfor %}
                             </tbody>
                         </table>
-
-                        <div class="text-right">
-                            <b>Сумма заказа: </b> <span id="total_order_amount">54</span>
-                        </div>
 
                         <hr>
 

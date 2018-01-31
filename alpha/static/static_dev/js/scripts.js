@@ -125,6 +125,12 @@ $(document).ready(function() {
     $(window).on('load', function() {
         $('.sp-wrap').smoothproducts();
     }); 
+
+    // Bootstrap Touchspin at Cart Page
+    $(window).on('load', function() {
+        $("input[name='quanitySniper']").TouchSpin();
+    });
+
 });
 
 
