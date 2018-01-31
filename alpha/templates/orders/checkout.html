@@ -35,8 +35,8 @@
         </div>
     </div>
     <!--/.row-->
+    {% if products_in_basket %}
     <div class="row">
-        {% if products_in_basket %}
         <div class="col-lg-9 col-md-9 col-sm-7">
             <div class="row userInfo">
                 <div class="col-xs-12 col-sm-12">
@@ -66,7 +66,7 @@
                                                 <a href="{% url 'product' product_in_basket.product.id %}">{{ product_in_basket.product.name }}</a>
                                             </h4>
                                             <div class="price">
-                                                <span>{{ product_in_basket.price_per_item }} UAH</span>
+                                                <span class="product-in-basket-price">{{ product_in_basket.price_per_item }} UAH</span>
                                             </div>
                                         </div>
                                     </td>
@@ -77,11 +77,11 @@
                                     </td>
                                     <td>
                                         <div class="input-group bootstrap-touchspin">
-                                            <input class="quanitySniper form-control product-in-basket-nmb" name="quanitySniper" type="text" value="{{ product_in_basket.nmb }}">
+                                            <input class="quanitySniper form-control product-in-basket-qnty" name="quanitySniper" type="text" value="{{ product_in_basket.nmb }}">
                                         </div>
                                     </td>
                                     <td>{{ product_in_basket.product.discount }} %</td>
-                                    <td class="price">{{ product_in_basket.total_price }}</td>
+                                    <td class="price total-product-in-basket-amount">{{ product_in_basket.total_price }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -107,14 +107,16 @@
             <div class="contentBox">
                 <div class="w100 costDetails">
                     <div id="order-detail-content" class="table-block">
-                        <a class="btn btn-primary btn-lg btn-block" title="checkout" href="" style="margin-bottom:20px">Оформить заказ
+                        <a class="btn btn-primary btn-lg btn-block" title="Оформить заказ" href="" style="margin-bottom:20px">Оформить заказ
                             <i class="fa fa-arrow-right"></i></a>
                         <div class="w100 cartMiniTable">
                             <table id="cart-summary" class="std table">
                                 <tbody>
                                     <tr>
                                         <td>Сумма</td>
-                                        <td class="price">{{ products_in_basket.total_price }}</td>
+                                        <td class="price" id="total_price">
+                                            <span id="total_basket_amount">0</span>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Доставка</td>
@@ -124,8 +126,8 @@
                                     </tr>
                                     <tr>
                                         <td>Итого</td>
-                                        <td id="total-price" class="site-color">
-                                            <span id="total_order_amount">0</span>
+                                        <td class="site-color">
+                                            <span>0</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -136,16 +138,26 @@
             </div>
         </div>
         <!--/.rightSidebar-->
-        {% endif %}
     </div>
     <!--/row-->
+    {% elif not products_in_basket %}
+    <div class="row innerPage">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="row userInfo">
+                <p class="lead text-center">
+                    ... В Вашей корзине еще нет товаров ...
+                </p>
+            </div>
+            <!--/.row end-->
+        </div>
+    </div>
+    <!--/.innerPage-->
+    {% endif %}
 </div>
 <!--/.main-container-->
+
         
-
-                {% if products_in_basket %}
-                <div class="col-lg-8 col-lg-offset-2">
-
+<!--
                     <form class="form-horizontal" method="post">{% csrf_token %}
 
                             <div class="form-group">
@@ -212,13 +224,13 @@
                     </form>
 
                 </div>
-             {% else %}
+             
                 <h3 class="text-center">В Вашей корзине нет товаров</h3>
-            {% endif %}
+            
             </div>
         </div>
     </div>
-    <!-- /.main-container-->
+    /.main-container-->
     <div class="gap"></div>
 
 {% endblock %}

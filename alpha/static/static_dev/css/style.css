@@ -1856,12 +1856,6 @@ div.cartMiniTable table#cart-summary{
     padding: 8px 12px;
 }
 
-
-/* =============================================================== */
-/* 
-/* =============================================================== */
-
-
 .userInfo .CartProductThumb a img,
 .userInfo .CartProductThumb a img
 {
@@ -1874,6 +1868,15 @@ div.cartMiniTable table#cart-summary{
     background: #fff;
 }
 
+.innerPage {
+    padding-top: 120px;
+}
+
+p.lead {
+    font-size: 20px;
+    font-weight: bolder;
+    line-height: 1.4;
+}
 
 /* =============================================================== */
 /* Right side bar  //> .rightSidebar //> if needed
@@ -1933,7 +1936,7 @@ p.success div.success
     color: #8bb418;
 }
 
-#total_order_amount
+#total_price
 {
     font-size: 22px;
     font-weight: bold;
@@ -1966,6 +1969,11 @@ p.success div.success
 #cart-summary tr td:nth-child(2)
 {
     text-align: right;
+}
+
+.site-color
+{
+    color: #4ec67f !important;
 }
 
 /* =============================================================== */
