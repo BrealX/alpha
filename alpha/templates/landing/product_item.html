@@ -9,7 +9,9 @@
                     <img class="img-responsive" src="{{ product_image.image.url }}" alt="img">
                 </a>
                 <div class="promotion">
-                    <!--<span class="new-product">NEW</span> <!--ADD BOLEAN NEW TO PRODUCT MODEL-->
+                    {% if product_image.product.is_new %}
+                    <span class="new-product">NEW</span>
+                    {% endif %}
                     {% if product_image.product.discount %}
                     <span class="discount">{{ product_image.product.discount }}% OFF</span>
                     {% endif %}

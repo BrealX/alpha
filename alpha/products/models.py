@@ -21,6 +21,7 @@ class Product(models.Model):
     short_description = models.TextField(blank=True, null=True, default=None)
     description = models.TextField(blank=True, null=True, default=None)
     is_active = models.BooleanField(default=True)
+    is_new = models.BooleanField(default=False)
     is_in_stock = models.BooleanField(default=True)
     is_on_demand = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)

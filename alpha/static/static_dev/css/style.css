@@ -228,6 +228,95 @@ input[type="text"], input[type="password"], input[type="email"] {
     position: static;
 }
 
+.dropdown-menu {
+    border-top: solid #27ae60;
+}
+
+.megamenu .dropdown-menu {
+    left: auto;
+}
+
+.megamenu .dropdown.megamenu-80width .dropdown-menu {
+    width: 80%;
+    left: 0;
+    right: 0;
+}
+
+.megamenu .megamenu-content {
+    padding: 20px 30px;
+    *zoom: 1;
+}
+
+.megamenu .dropdown-menu > li {
+    display: block;
+}
+
+.navbar-tshop ul.nav li.dropdown ul.dropdown-menu .megamenu-content, .navbar-tshop ul.nav li.dropdown ul.dropdown-menu .megamenu-content {
+    opacity: 0;
+    visibility: visible;
+    display: inherit;
+    transition: opacity .35s linear;
+    -webkit-transition: opacity .35s linear;
+}
+
+.megamenu-content ul li {
+    border-bottom: 1px solid #EDEDED;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+.navbar-tshop ul.nav li.dropdown:hover ul.dropdown-menu .megamenu-content, .navbar-tshop ul.nav li.dropdown.open ul.dropdown-menu .megamenu-content {
+    opacity: 1;
+    visibility: visible;
+}
+
+.navbar-tshop ul.nav li.dropdown:hover ul.dropdown-menu, .navbar-tshop ul.nav li.dropdown.open ul.dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    display: inherit;
+}
+
+.navbar-tshop ul.nav li.dropdown:hover ul.dropdown-menu, div.cartMenu.dropdown:hover div.dropdown-menu {
+    display: block;
+    filter: none;
+    opacity: 1;
+}
+
+.megamenu-content ul li a {
+    font-size: 12px;
+}
+
+.megamenu-content ul li a {
+    transition: all 0.2s ease 0s;
+    -webkit-transition: all 0.2s ease 0s;
+    -moz-transition: all 0.2s ease 0s;
+    -ms-transition: all 0.2s ease 0s;
+    -o-transition: all 0.2s ease 0s;
+    display: block;
+}
+
+.megamenu .dropdown.megamenu-fullwidth .dropdown-menu {
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+.navbar-tshop ul.nav li.dropdown ul.dropdown-menu {
+    display: inherit;
+    -webkit-transform: initial !important;
+    transform: initial !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s linear;
+    -webkit-transition: opacity .25s linear;
+}
+
+.navbar-tshop ul.nav li.dropdown ul.dropdown-menu {
+}
+
+.navbar-tshop ul.nav li.dropdown ul.dropdown-menu {
+}
+
 .navbar-default .navbar-nav > li > a {
     color: #ffffff;
 }

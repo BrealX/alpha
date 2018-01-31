@@ -53,11 +53,42 @@
                     <li class="active">
                         <a href="/">Домой</a>
                     </li>
-                    <li>
-                        <a href="#about">О нас</a>
+                    <li class="dropdown megamenu-80width">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Каталог товаров
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="megamenu-content">
+                                <!--megamenu-content-->
+                                <ul class="col-lg-2 col-sm-2 col-md-2 unstyled noMarginLeft">
+                                    <li>
+                                        <p>
+                                           <strong>Микрофоны</strong>
+                                        </p>
+                                    </li>
+                                    {% for item in products_microphones %}
+                                    <li>
+                                        <a href="{% url 'product' item.id %}">{{ item.name }}</a>
+                                    </li> 
+                                    {% endfor %}
+                                </ul>
+                                <ul class="col-lg-2 col-sm-2 col-md-2 unstyled noMarginLeft">
+                                    <li>
+                                        <p>
+                                           <strong>Мультиплееры</strong>
+                                        </p>
+                                    </li>
+                                    {% for item in products_players %}
+                                    <li>
+                                        <a href="{% url 'product' item.id %}">{{ item.name }}</a>
+                                    </li> 
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a href="#">Товары</a>
+                        <a href="#">Оплата и доставка</a>
                     </li>
                     <li>
                         <a href="#">Контакты</a>
