@@ -8,6 +8,7 @@ $(document).ready(function() {
         data.nmb = nmb;
         var csfr_token = $('#form-buying-product [name="csrfmiddlewaretoken"]').val();
         data["csrfmiddlewaretoken"] = csfr_token;
+        console.log($('#form-buying-product [name="csrfmiddlewaretoken"]').val())
 
         if (is_delete){
             data["is_delete"] = true;
@@ -22,7 +23,7 @@ $(document).ready(function() {
             cache: true,
             success: function(data) {
                 console.log('OK');
-                console.log(data.products_total_nmb)
+                //console.log(data.products_total_nmb)
                 if (data.products_total_nmb || data.products_total_nmb == 0) {
                     $('#basket_total_nmb').text("("+data.products_total_nmb+")");
                     console.log(data.products);
@@ -53,10 +54,25 @@ $(document).ready(function() {
 
         basketUpdating(product_id, nmb, is_delete=false);
 
-    })
+    });
 
+    
+    // function for opening dropdown menu at Navbar
+    function showingMenu() {
+        $('.dropdown-menu').toggleClass('hidden');
+    };
+
+    $('.dropmenu').mouseover(function() {
+        showingMenu();
+    });
+
+    $('.dropmenu').mouseout(function() {
+        showingMenu();
+    });
+
+    // function for opening dropdown basket menu at RightNavbar
     function showingBasket() {
-        $('.basket-items').toggleClass('hidden');
+        $('.droppingbasket').toggleClass('hidden');
     };
 
     $('.basket-container').mouseover(function() {
@@ -66,6 +82,7 @@ $(document).ready(function() {
     $('.basket-container').mouseout(function() {
         showingBasket();
     });
+
 
     $(document).on('click', '.delete-item', function(e) {
         e.preventDefault();
@@ -136,6 +153,34 @@ $(document).ready(function() {
     // Bootstrap Touchspin at Cart Page
     $(window).on('load', function() {
         $("input[name='quanitySniper']").TouchSpin();
+    });
+
+    // jQuery mCustomScrollbar at miniCartPage Initializer
+    $(".scroll-pane").mCustomScrollbar({
+        advanced: {
+            updateOnContentResize: true
+        },
+
+        scrollButtons: {
+            enable: false
+        },
+
+        mouseWheelPixels: "200",
+        theme: "dark-2"
+    });
+
+    $(".smoothscroll").mCustomScrollbar({
+        advanced: {
+            updateOnContentResize: true
+        },
+
+        scrollButtons: {
+            enable: false
+        },
+
+        mouseWheelPixels: "100",
+        theme: "dark-2"
+
     });
 
 });
