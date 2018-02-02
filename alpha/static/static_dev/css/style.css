@@ -302,6 +302,10 @@ input[type='email']
     text-shadow: none;
 }
 
+.btn-default
+{
+    background-color: transparent;
+}
 
 /* ================================================================== */
 /* CUSTOMIZE NAVBAR
@@ -1644,51 +1648,27 @@ h5.parallaxSubtitle
     margin-right: 0;
 }
 
-
-button.first
+div.productFilter button.btn-success
 {
-    margin-right: 20px;
-    margin-bottom: 10px;
+    width: 100%;
+    padding: 7px 20px;
+
+    border: 2px solid #4ec67f
+    ;
 }
 
-
-.form-group button,
-.form-group .wishlist
+div.productFilter button.btn-success:hover
 {
-    border: 2px solid #27ae60;
-    background: none repeat scroll 0 0 #4ec67f;
+    background-color: #66de97;
 }
 
-
-.form-group button,
-.form-group .btn-cart,
-.form-group .wishlist
+div.productFilter a.btn-danger
 {
-    font-size: 18px;
-    line-height: 1em;
+    width: 100%;
+    padding: 7px 20px;
 
-    display: block;
-    float: left;
-
-    margin: 0 20px 0 20px;
-    padding: 14px 20px;
-
-    -webkit-transition: all .25s ease 0s;
-       -moz-transition: all .25s ease 0s;
-        -ms-transition: all .25s ease 0s;
-         -o-transition: all .25s ease 0s;
-            transition: all .25s ease 0s;
-    text-transform: uppercase;
-
-    color: #fff;
-    -webkit-border-radius: 3px;
-       -moz-border-radius: 3px;
-            border-radius: 3px;
-
-         -o-border-radius: 3px;
-        -ms-border-radius: 3px;
+    border: 2px solid #d9534f;
 }
-
 
 .incaps i
 {
@@ -1808,37 +1788,6 @@ button.first
 
     color: #fff;
     background: #ccc;
-}
-
-div.filterBox a.link-order
-{
-    font-size: 18px;
-    line-height: 1em;
-
-    display: block;
-    float: left;
-
-    margin: 15px 20px 10px 235px;
-    padding: 14px 20px;
-
-    -webkit-transition: all .25s ease 0s;
-       -moz-transition: all .25s ease 0s;
-        -ms-transition: all .25s ease 0s;
-         -o-transition: all .25s ease 0s;
-            transition: all .25s ease 0s;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-
-    color: #fff;
-    border: 2px solid #ec7063;
-    -webkit-border-radius: 3px;
-       -moz-border-radius: 3px;
-            border-radius: 3px;
-    background: none repeat scroll 0 0 #ec7063;
-
-         -o-border-radius: 3px;
-        -ms-border-radius: 3px;
 }
 
 .form-error

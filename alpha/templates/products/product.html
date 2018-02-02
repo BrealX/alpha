@@ -66,23 +66,24 @@
             </div>
             <div class="productFilter productFilterLook2">
                 <div class="row">
-                    <div class="col-lg-12 col-sm-6 col-xs-6">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
                         <div class="filterBox">
-                            <form id="form-buying-product" class="form-inline" action="{% url 'basket_adding' %}">
-                            {% csrf_token %}
-                                <div class="form-group">
-                                    <input type="number" class="form-control" name="number" id="number" placeholder="Количество" min="1">
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-block btn-cart cart first" id="submit_btn" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price }}">Добавить в корзину
-                                    </button>
-                                </div>                            
-                            </form>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <a href="/checkout" class="link-order btn-block">Оформить заказ</a>
-                                </div>
-                            </div>  
+                            <form id="form-buying-product" class="form-inline" action="{% url 'basket_adding' %}">{% csrf_token %}
+                                <div class="row">
+                                    <div class="form-group col-lg-4 col-sm-4 col-xs-4">
+                                        <div class="input-group bootstrap-touchspin">
+                                            <input type="text" class="form-control quanitySniper" name="quanitySniper" id="number" placeholder="Количество" value="1">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-4 col-sm-4 col-xs-4">
+                                        <button type="submit" class="btn btn-success" id="submit_btn" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price }}">В корзину
+                                        </button>
+                                    </div> 
+                                    <div class="form-group col-lg-4 col-sm-4 col-xs-4">
+                                        <a href="/checkout" class="btn btn-danger">Оформить заказ</a>
+                                    </div>
+                                </div>                          
+                            </form>  
                         </div>
                     </div>
                 </div>
