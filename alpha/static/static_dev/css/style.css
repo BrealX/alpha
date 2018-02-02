@@ -801,13 +801,6 @@ div.cartMenu.dropmenu:hover div.dropdown-menu
     color: #444;
 }
 
-.mCS-dark-2.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar
-{
-    width: 8px;
-
-    background-color: rgba(78,198,127,.5) !important;
-}
-
 .miniCartFooter
 {
     padding: 10px 10px 10px;

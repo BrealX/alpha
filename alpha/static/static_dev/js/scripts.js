@@ -8,14 +8,14 @@ $(document).ready(function() {
         data.nmb = nmb;
         var csfr_token = $('#form-buying-product [name="csrfmiddlewaretoken"]').val();
         data["csrfmiddlewaretoken"] = csfr_token;
-        console.log($('#form-buying-product [name="csrfmiddlewaretoken"]').val())
+        console.log($('#form-buying-product [name="csrfmiddlewaretoken"]').val());
 
         if (is_delete){
             data["is_delete"] = true;
-        }
+        };
 
         var url = form.attr("action");
-        console.log(data)
+        console.log(data);
         $.ajax({
             url: url,
             type: 'POST',
@@ -32,14 +32,14 @@ $(document).ready(function() {
                         $('.basket-items ul').append('<li>' + v.name + ', ' + v.nmb + ' шт. ' + 'по ' + v.price_per_item + ' грн   ' +
                         '<a class="delete-item" href="" data-product_id="'+v.id+'">x</a>' +
                         '</li>');
-                    })
-                }
+                    });
+                };
             },
             error: function() {
-                console.log('error');
-            }
-        })
-    }
+                console.log('error')
+            },
+        });
+    };
 
     form.on('submit', function(e) {
         e.preventDefault();
@@ -155,35 +155,6 @@ $(document).ready(function() {
         $("input[name='quanitySniper']").TouchSpin();
     });
 
-    // jQuery mCustomScrollbar at miniCartPage Initializer
-    $(".scroll-pane").mCustomScrollbar({
-        advanced: {
-            updateOnContentResize: true
-        },
-
-        scrollButtons: {
-            enable: false
-        },
-
-        mouseWheelPixels: "200",
-        theme: "dark-2"
-    });
-
-    $(".smoothscroll").mCustomScrollbar({
-        advanced: {
-            updateOnContentResize: true
-        },
-
-        scrollButtons: {
-            enable: false
-        },
-
-        mouseWheelPixels: "100",
-        theme: "dark-2"
-
-    });
-
 });
-
 
 
