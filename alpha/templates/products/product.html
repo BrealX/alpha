@@ -68,15 +68,15 @@
                 <div class="row">
                     <div class="col-lg-12 col-sm-12 col-xs-12">
                         <div class="filterBox">
-                            <form id="form-buying-product" class="form-inline" action="{% url 'basket_adding' %}">{% csrf_token %}
+                            <form id="product_page_form" class="form-inline" action="{% url 'add_to_cart' %}">{% csrf_token %}
                                 <div class="row">
                                     <div class="form-group col-lg-4 col-sm-4 col-xs-4">
                                         <div class="input-group bootstrap-touchspin">
-                                            <input type="text" class="form-control quanitySniper" name="quanitySniper" id="number" placeholder="Количество" value="1">
+                                            <input type="text" class="form-control quanitySniper" name="quanitySniper" id="product_page_qnty" placeholder="Количество" value="1">
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-4 col-sm-4 col-xs-4">
-                                        <button type="submit" class="btn btn-success" id="submit_btn" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price }}">В корзину
+                                        <button type="submit" class="btn btn-success" id="product_page_submit_btn" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price_with_discount }}" data-image="{{ product.product_main_image.image.url }}">В корзину
                                         </button>
                                     </div> 
                                     <div class="form-group col-lg-4 col-sm-4 col-xs-4">

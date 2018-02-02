@@ -115,10 +115,10 @@
                             <i class="fa fa-shopping-cart fa-lg"></i>
                             <span class="cartRespons">
                                 Корзина
-                                <span id="basket_total_amount"></span>
-                                <span id="basket_total_nmb">
-                                    {% if products_total_nmb %}
-                                        ({{ products_total_nmb }})
+                                <span id="cart_ptroduct_total"></span>
+                                <span id="cart_qnty_subtotal">
+                                    {% if products_in_cart_total_qnty %}
+                                        ({{ products_in_cart_total_qnty }})
                                     {% else %}
                                         (0)
                                     {% endif %}
@@ -126,40 +126,40 @@
                             </span>
                                 <b class="caret"></b>
                         </a>
-                        {% if products_in_basket %}
-                        <div class="droppingbasket col-lg-4 col-xs-12 col-md-4 hidden">
+                        
+                        <div class="droppingbasket col-lg-5 col-xs-12 col-md-4 hidden">
                             <div class="w100 miniCartTable pre-scrollable">
                                 <div>
                                     <div>
                                         <table>
                                             <tbody>
-                                                {% for product_in_basket in products_in_basket %}
+                                                {% for item_in_cart in products_in_cart %}
                                                 <tr class="miniCartProduct">
                                                     <td class="miniCartProductThumb" style="width: 20%;">
                                                         <div>
-                                                            <a href="{% url 'product' product_in_basket.product.id %}">
-                                                                <img src="{{ product_in_basket.product.product_main_image.image.url }}" alt="img">
+                                                            <a href="{% url 'product' item_in_cart.product.id %}">
+                                                                <img src="{{ item_in_cart.product.product_main_image.image.url }}" alt="img">
                                                             </a>
                                                         </div>
                                                     </td>
                                                     <td style="width: 40%;">
                                                         <div class="miniCartDescription">
                                                             <h4>
-                                                                <a href="{% url 'product' product_in_basket.product.id %}">{{ product_in_basket.product.name }}</a>
+                                                                <a href="{% url 'product' item_in_cart.product.id %}">{{ item_in_cart.product.name }}</a>
                                                             </h4>
                                                             <div class="price">
-                                                                <span>{{ product_in_basket.price_per_item }}</span>
+                                                                <span>{{ item_in_cart.price_per_item }}</span>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td class="miniCartQuantity" style="width: 10%;">
-                                                        <a>X {{ product_in_basket.nmb }}</a>
+                                                        <a>* {{ item_in_cart.qnty }} шт.</a>
                                                     </td>
                                                     <td class="miniCartSubtotal" style="width: 15%;">
-                                                        <span>{{ product_in_basket.total_price }}</span>
+                                                        <span>{{ item_in_cart.total_price }} UAH</span>
                                                     </td>
                                                     <td class="delete" style="width: 5%;">
-                                                        <a class="delete-item" href="" data-product_id="{{ product_in_basket.id }}">x</a>
+                                                        <a class="delete-item" href="" data-product_id="{{ item_in_cart.id }}">x</a>
                                                     </td>
                                                 </tr>
                                                 {% endfor %}
@@ -189,7 +189,7 @@
                             </ul>-->
                         </div>
                         <!--/.droppingbasket-->
-                        {% endif %}
+                        
                     </div>
                     <!--/.cartMenu-->
                 </div>
