@@ -1,52 +1,68 @@
 $(document).ready(function() {
     var product_page_form = $('#product_page_form');
-    //console.log(form);
+    var navbar_form = $('#navbar_form');
 
-    /*function basketUpdating(product_id, qnty, is_delete){
+    function cart_updating(product_id, qnty, is_delete) {
         var data = {};
         data.product_id = product_id;
         data.qnty = qnty;
-        var csfr_token = $('#product_page_form [name="csrfmiddlewaretoken"]').val();
+        var csfr_token = $('#navbar_form [name="csrfmiddlewaretoken"]').val();
         data["csrfmiddlewaretoken"] = csfr_token;
-        //console.log($('#product_page_form [name="csrfmiddlewaretoken"]').val());
 
         if (is_delete){
-            data["is_delete"] = true;
-        };
-
+            data['is_delete'] = true;
+        }
+            
         // url address where to send POST
-        var url = product_page_form.attr("action");
-        console.log(data);
+        var url = navbar_form.attr("action");
+            
         $.ajax({
             url: url,
             type: 'POST',
             data: data,
             cache: true,
             success: function(data) {
+                //console.log(data);
                 console.log('OK');
-                //console.log(data.products_total_nmb)
-                if (data.products_total_nmb || data.products_total_nmb == 0) {
-                    $('#basket_total_nmb').text("("+data.products_total_nmb+")");
+                if (data.products_in_cart_total_qnty || data.products_in_cart_total_qnty == 0) {
+                    $('#cart_qnty_subtotal').text('('+data.products_in_cart_total_qnty+')');
                     console.log(data.products);
-                    $('.basket-items ul').html('');
+                    $('.droppingbasket div.miniCartTable div div table tbody').html("");
                     $.each(data.products, function(k, v) {
-                        $('.basket-items ul').append('<li>' + v.name + ', ' + v.nmb + ' шт. ' + 'по ' + v.price_per_item + ' грн   ' +
-                        '<a class="delete-item" href="" data-product_id="'+v.id+'">x</a>' +
-                        '</li>');
+                        $('.droppingbasket div.miniCartTable div div table tbody').append('<tr class=\"miniCartProduct\">\
+                            <td class=\"miniCartProductThumb\" style=\"width: 20%;\">\
+                            <div>\
+                            <a href=\"/product/'+v.id+'\">\
+                            <img src=\"'+v.image+'\" alt=\"img\"></a>\
+                            </div>\
+                            </td><td style=\"width: 30%;\">\
+                            <div class=\"miniCartDescription\">\
+                            <h4><a href=\"/product/'+v.id+'\">'+v.name+'</a></h4>\
+                            <div class=\"price\">\
+                            <span>'+v.price_per_item+'</span></div>\
+                            </div>\
+                            </td>\
+                            <td class=\"miniCartQuantity\" style=\"width: 13%;\">\
+                            <a>* '+v.qnty+' шт.</a></td>\
+                            <td class=\"miniCartSubtotal\" style=\"width: 20%;\">\
+                            <span>'+parseFloat(v.total_price).toFixed(2)+' UAH</span></td>\
+                            <td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\">x</a>\
+                            </td></tr>')
                     });
                 };
+                    
             },
             error: function() {
-                console.log('error')
-            },
+                    console.log('some error');
+            }
         });
-    };*/
+        };
+
 
     // getting data from Product Page Form
     product_page_form.on('submit', function(e) {
         e.preventDefault();
         var qnty = $('#product_page_qnty').val();
-        console.log(qnty);
         var submit_btn = $('#product_page_submit_btn');
         var product_id = submit_btn.data('product_id');
         var product_name = submit_btn.data('name');
@@ -56,60 +72,23 @@ $(document).ready(function() {
         console.log(product_id);
         console.log(product_name);
 
-            
-            var data = {};
-            data.product_id = product_id;
-            data.qnty = qnty;
-            var csfr_token = $('#product_page_form [name="csrfmiddlewaretoken"]').val();
-            data["csrfmiddlewaretoken"] = csfr_token;
-            
-            // url address where to send POST
-            var url = product_page_form.attr("action");
-            
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: data,
-                cache: true,
-                success: function(data) {
-                    console.log('OK');
-                    console.log(data.products_in_cart_total_qnty);
-                    if (data.products_in_cart_total_qnty || data.products_in_cart_total_qnty == 0) {
-                        $('#cart_qnty_subtotal').text('('+data.products_in_cart_total_qnty+')');
-                        console.log(data.products);
-                        $('.droppingbasket div.miniCartTable div div table tbody').html("");
-                        $.each(data.products, function(k, v) {
-                            $('.droppingbasket div.miniCartTable div div table tbody').append('<tr class=\"miniCartProduct\">\
-                                <td class=\"miniCartProductThumb\" style=\"width: 20%;\">\
-                                <div>\
-                                <a href=\"/product/'+v.id+'\">\
-                                <img src=\"'+v.image+'\" alt=\"img\"></a>\
-                                </div>\
-                                </td><td style=\"width: 30%;\">\
-                                <div class=\"miniCartDescription\">\
-                                <h4><a href=\"/product/'+v.id+'\">'+v.name+'</a></h4>\
-                                <div class=\"price\">\
-                                <span>'+v.price_per_item+'</span></div>\
-                                </div>\
-                                </td>\
-                                <td class=\"miniCartQuantity\" style=\"width: 13%;\">\
-                                <a>* '+v.qnty+' шт.</a></td>\
-                                <td class=\"miniCartSubtotal\" style=\"width: 20%;\">\
-                                <span>'+parseFloat(v.total_price).toFixed(2)+' UAH</span></td>\
-                                <td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\">x</a>\
-                                </td></tr>')
-                        });
-                    };
-                    
-                },
-                error: function() {
-                    console.log('error');
-                }
-            });
 
+        cart_updating(product_id, qnty, is_delete=false);
+    });
 
-        //basketUpdating(product_id, qnty, is_delete=false);
+    // getting data from Main Page Form
+    $('button[id^="main_page_submit_id"]').one('click', function (e) {
+        button = $(this)
+        e.preventDefault();
+        var qnty = button.data('qnty');
+        var product_id = button.data('product_id');
+        var product_name = button.data('name');
+        var product_price = button.data('price');
+        var product_total_price = qnty*product_price;
+        var product_image = button.data('image');
+        //console.log(qnty, product_id, product_name);
 
+        cart_updating(product_id, qnty, is_delete=false);
     });
 
     
@@ -144,17 +123,27 @@ $(document).ready(function() {
     });*/
 
 
-    $(document).on('click', '.delete-item', function(e) {
-        e.preventDefault();
-        $(this).closest('tr').remove();
-    });
+    // delete item in cart
+    /*function cart_cleaning() {
+        $('.delete-item').on('click', function(e) {
+            e.preventDefault();
+            product_id = $(this).data("product_id");
+            qnty = 0;
+            console.log(product_id, qnty);
+            cart_updating(product_id, qnty, is_delete=true);    
+        });
+    };
 
-    /*$(document).on('click', '.delete-item', function(e) {
+    cart_cleaning();*/
+
+    $(document).on('click', '.delete-item', function(e) {
         e.preventDefault();
         product_id = $(this).data("product_id");
         qnty = 0;
-        basketUpdating(product_id, qnty, is_delete=true);
-    });*/
+        console.log(product_id, qnty);
+        cart_updating(product_id, qnty, is_delete=true);
+    });
+
 
     // function iterates for each product in basket total amount
     // and sums them in Total Basket (or Order) amount

@@ -10,16 +10,16 @@ def add_to_cart(request):
     session_key = request.session.session_key
     product_id = request.POST.get('product_id')
     qnty = request.POST.get('qnty')
-    #is_delete = request.POST.get('is_delete')
+    is_delete = request.POST.get('is_delete')
 
-    #if is_delete == 'true':
-        #ProductInBasket.objects.filter(id=product_id).update(is_active=False)
-    #else:
-    new_product_in_basket, created = ProductInBasket.objects.get_or_create(
-        session_key=session_key, product_id=product_id, defaults={'qnty': qnty})
-    if not created:
-        new_product_in_basket.qnty += int(qnty)
-        new_product_in_basket.save(force_update=True)
+    if is_delete == 'true':
+        ProductInBasket.objects.filter(id=product_id).update(is_active=False)
+    else:
+        new_product_in_basket, created = ProductInBasket.objects.get_or_create(
+            session_key=session_key, product_id=product_id, is_active=True, defaults={'qnty': qnty})
+        if not created:
+            new_product_in_basket.qnty += int(qnty)
+            new_product_in_basket.save(force_update=True)
 
     products_in_cart = ProductInBasket.objects.filter(session_key=session_key, is_active=True, order__isnull=True)
     products_in_cart_total_qnty = products_in_cart.count()
@@ -42,25 +42,24 @@ def checkout(request):
     session_key = request.session.session_key
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True, order__isnull=True)
 
-    form = CheckoutContactForm(request.POST or None)
-    if request.POST:
-        print(request.POST)
-        if form.is_valid():
-            data = request.POST
-            name = data.get('name', None)
-            phone = data.get('phone')
-            user, created = User.objects.get_or_create(username=phone, defaults={'first_name': name})
+    #form = CheckoutContactForm(request.POST or None)
+    #if request.POST:
+        #if form.is_valid():
+            #data = request.POST
+            #name = data.get('name')
+            #phone = data.get('phone')
+            #user, created = User.objects.get_or_create(username=phone, defaults={'first_name': name})
             
-            order = Order.objects.create(user=user, customer_name=name, customer_phone=phone, status_id=1)
+            #order = Order.objects.create(user=user, customer_name=name, customer_phone=phone, status_id=1)
 
-            for name, value in data.items():
-                if name.startswith('product_in_basket_'):
-                    product_in_basket_id = name.split('product_in_basket_')[1]
-                    product_in_basket = ProductInBasket.objects.get(id=product_in_basket_id)
-                    product_in_basket.nmb = value
-                    product_in_basket.order = order
-                    product_in_basket.save(force_update=True)
-                    ProductInOrder.objects.create(product=product_in_basket.product, nmb=product_in_basket.nmb, price_per_item=product_in_basket.price_per_item, total_price=product_in_basket.total_price, order=order)
-        else:
-            print('no')
+    #for name, value in data.items():
+    #    if name.startswith('product_in_basket_'):
+    #        product_in_basket_id = name.split('product_in_basket_')[1]
+    #        product_in_basket = ProductInBasket.objects.get(id=product_in_basket_id)
+    #        product_in_basket.nmb = value
+    #        product_in_basket.order = order
+    #        product_in_basket.save(force_update=True)
+    #        ProductInOrder.objects.create(product=product_in_basket.product, nmb=product_in_basket.nmb, price_per_item=product_in_basket.price_per_item, total_price=product_in_basket.total_price, order=order)
+    #    else:
+    #        print('no')
     return render(request, 'orders/checkout.html', locals())

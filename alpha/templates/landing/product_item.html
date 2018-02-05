@@ -29,12 +29,14 @@
             <div class="price">
                 <span>{{ product_image.product.price }} UAH</span>
             </div>
-            <div class="action-control">
-                <a class="btn btn-primary">
-                    <span class="add2cart">
-                        <i class="glyphicon glyphicon-shopping-cart"> В корзину</i>
-                    </span>
-                </a>
-            </div>
+            <form class="form-inline" id="main_page_add_to_cart_form" action="{% url 'add_to_cart' %}">{% csrf_token %}
+                <div class="action-control">
+                    <button class="btn btn-primary" id="main_page_submit_id_{{ product_image.product.id }}" type="submit" data-product_id="{{ product_image.product.id }}" data-name="{{ product_image.product.name }}" data-price="{{ product_image.product.price_with_discount }}" data-image="{{ product_image.image.url }}" data-qnty="1">
+                        <span class="add2cart">
+                            <i class="glyphicon glyphicon-shopping-cart"> В корзину</i>
+                        </span>
+                    </button>
+                </div>
+            </form>
         </div>
     

@@ -1,6 +1,8 @@
 {% load static %}
     <!-- Static navbar -->
     <nav class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
+        <form class="form-inline hidden" id="navbar_form" action="{% url 'add_to_cart' %}">{% csrf_token %}
+        </form>            
         <div class="navbar-top">
             <div class="container">
                 <div class="row">
