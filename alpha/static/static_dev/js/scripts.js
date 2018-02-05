@@ -8,11 +8,12 @@ $(document).ready(function() {
         data.qnty = qnty;
         var csfr_token = $('#navbar_form [name="csrfmiddlewaretoken"]').val();
         data["csrfmiddlewaretoken"] = csfr_token;
+        console.log(data);
 
         if (is_delete){
             data['is_delete'] = true;
         }
-            
+
         // url address where to send POST
         var url = navbar_form.attr("action");
             
@@ -24,6 +25,7 @@ $(document).ready(function() {
             success: function(data) {
                 //console.log(data);
                 console.log('OK');
+                console.log(data.products_in_cart_total_qnty);
                 if (data.products_in_cart_total_qnty || data.products_in_cart_total_qnty == 0) {
                     $('#cart_qnty_subtotal').text('('+data.products_in_cart_total_qnty+')');
                     console.log(data.products);
@@ -49,6 +51,7 @@ $(document).ready(function() {
                             <td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\">x</a>\
                             </td></tr>')
                     });
+                    
                 };
                     
             },
@@ -77,7 +80,7 @@ $(document).ready(function() {
     });
 
     // getting data from Main Page Form
-    $('button[id^="main_page_submit_id"]').one('click', function (e) {
+    $('div.action-control').on('click', 'button[id^="main_page_submit_id"]', function (e) {
         button = $(this)
         e.preventDefault();
         var qnty = button.data('qnty');
@@ -88,7 +91,7 @@ $(document).ready(function() {
         var product_image = button.data('image');
         //console.log(qnty, product_id, product_name);
 
-        cart_updating(product_id, qnty, is_delete=false);
+        cart_updating(product_id, qnty, is_delete=false)
     });
 
     
@@ -123,27 +126,21 @@ $(document).ready(function() {
     });*/
 
 
-    // delete item in cart
-    /*function cart_cleaning() {
-        $('.delete-item').on('click', function(e) {
-            e.preventDefault();
-            product_id = $(this).data("product_id");
-            qnty = 0;
-            console.log(product_id, qnty);
-            cart_updating(product_id, qnty, is_delete=true);    
-        });
-    };
-
-    cart_cleaning();*/
-
-    $(document).on('click', '.delete-item', function(e) {
+    $('div.cartMenu').on('click', 'a.delete-item', function(e) {
         e.preventDefault();
         product_id = $(this).data("product_id");
         qnty = 0;
         console.log(product_id, qnty);
-        cart_updating(product_id, qnty, is_delete=true);
-    });
+        cart_updating(product_id, qnty, is_delete=true)
+	});
 
+    $('div.cartContent').on('click', 'a.delete-item', function(e) {
+        e.preventDefault();
+        product_id = $(this).data("product_id");
+        qnty = 0;
+        console.log(product_id, qnty);
+        cart_updating(product_id, qnty, is_delete=true)
+	});
 
     // function iterates for each product in basket total amount
     // and sums them in Total Basket (or Order) amount

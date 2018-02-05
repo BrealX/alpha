@@ -13,8 +13,11 @@ def add_to_cart(request):
     is_delete = request.POST.get('is_delete')
 
     if is_delete == 'true':
-        ProductInBasket.objects.filter(id=product_id).update(is_active=False)
+        print('Is delete = true')
+        deleted_items = ProductInBasket.objects.filter(session_key=session_key, id=product_id).update(is_active=False)
+        print(deleted_items)
     else:
+        print('Is delete = false')
         new_product_in_basket, created = ProductInBasket.objects.get_or_create(
             session_key=session_key, product_id=product_id, is_active=True, defaults={'qnty': qnty})
         if not created:
@@ -35,6 +38,7 @@ def add_to_cart(request):
         product_dict['image'] = item.product.product_main_image.image.url
         product_dict['total_price'] = item.total_price
         return_dict['products'].append(product_dict)
+    print(return_dict)
     return JsonResponse(return_dict)
 
 
