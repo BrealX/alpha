@@ -8,18 +8,17 @@ from django.contrib.auth.models import User
 def add_to_cart(request):
     return_dict = dict()
     session_key = request.session.session_key
-    product_id = request.POST.get('product_id')
+    product_in_cart_id = request.POST.get('product_id')
     qnty = request.POST.get('qnty')
     is_delete = request.POST.get('is_delete')
 
     if is_delete == 'true':
-        print('Is delete = true')
-        deleted_items = ProductInBasket.objects.filter(session_key=session_key, id=product_id).update(is_active=False)
-        print(deleted_items)
+        items_to_delete = ProductInBasket.objects.get(session_key=session_key, id=product_in_cart_id)
+        items_to_delete.is_active = False
+        items_to_delete.save(force_update=True)
     else:
-        print('Is delete = false')
         new_product_in_basket, created = ProductInBasket.objects.get_or_create(
-            session_key=session_key, product_id=product_id, is_active=True, defaults={'qnty': qnty})
+            session_key=session_key, product_id=product_in_cart_id, is_active=True, defaults={'qnty': qnty})
         if not created:
             new_product_in_basket.qnty += int(qnty)
             new_product_in_basket.save(force_update=True)
@@ -31,14 +30,13 @@ def add_to_cart(request):
     return_dict['products'] = list()
     for item in products_in_cart:
         product_dict = dict()
-        product_dict['id'] = item.product.id
+        product_dict['id'] = item.id
         product_dict['name'] = item.product.name
         product_dict['price_per_item'] = item.price_per_item
         product_dict['qnty'] = item.qnty
         product_dict['image'] = item.product.product_main_image.image.url
         product_dict['total_price'] = item.total_price
         return_dict['products'].append(product_dict)
-    print(return_dict)
     return JsonResponse(return_dict)
 
 

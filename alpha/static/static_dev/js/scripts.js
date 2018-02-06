@@ -8,7 +8,7 @@ $(document).ready(function() {
         data.qnty = qnty;
         var csfr_token = $('#navbar_form [name="csrfmiddlewaretoken"]').val();
         data["csrfmiddlewaretoken"] = csfr_token;
-        console.log(data);
+        //console.log(data);
 
         if (is_delete){
             data['is_delete'] = true;
@@ -25,10 +25,9 @@ $(document).ready(function() {
             success: function(data) {
                 //console.log(data);
                 console.log('OK');
-                console.log(data.products_in_cart_total_qnty);
                 if (data.products_in_cart_total_qnty || data.products_in_cart_total_qnty == 0) {
                     $('#cart_qnty_subtotal').text('('+data.products_in_cart_total_qnty+')');
-                    console.log(data.products);
+                    //console.log(data.products);
                     $('.droppingbasket div.miniCartTable div div table tbody').html("");
                     $.each(data.products, function(k, v) {
                         $('.droppingbasket div.miniCartTable div div table tbody').append('<tr class=\"miniCartProduct\">\
@@ -72,8 +71,8 @@ $(document).ready(function() {
         var product_price = submit_btn.data('price');
         var product_total_price = qnty*product_price;
         var product_image = submit_btn.data('image');
-        console.log(product_id);
-        console.log(product_name);
+        //console.log(product_id);
+        //console.log(product_name);
 
 
         cart_updating(product_id, qnty, is_delete=false);
