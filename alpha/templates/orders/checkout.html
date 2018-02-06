@@ -77,7 +77,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group bootstrap-touchspin">
-                                            <input class="quanitySniper form-control product-in-basket-qnty" name="quanitySniper" type="text" value="{{ product_in_basket.qnty }}">
+                                            <input class="quanitySniper form-control product-in-basket-qnty" name="quanitySniper" type="text" value="{{ product_in_basket.qnty }}" id="checkout_page_input_{{ product_in_basket.id }}" data-product_id="{{ product_in_basket.product.id }}">
                                         </div>
                                     </td>
                                     <td>{{ product_in_basket.product.discount }} %</td>
@@ -91,9 +91,9 @@
                     <div class="cartFooter w100">
                         <div class="box-footer">
                             <div class="pull-right">
-                                <a class="btn btn-default" href="/checkout">
+                                <a class="btn btn-default" id="cart_refresh">
                                     <i class="fa fa-undo"></i>
-                                    Обновить корзину
+                                    Внести изменения
                                 </a>
                             </div>
                         </div>

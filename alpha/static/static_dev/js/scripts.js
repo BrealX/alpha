@@ -2,13 +2,14 @@ $(document).ready(function() {
     var product_page_form = $('#product_page_form');
     var navbar_form = $('#navbar_form');
 
+    // function updates miniCart dynamically (Ajax) after adding or removing items
     function cart_updating(product_id, qnty, is_delete) {
         var data = {};
         data.product_id = product_id;
         data.qnty = qnty;
         var csfr_token = $('#navbar_form [name="csrfmiddlewaretoken"]').val();
         data["csrfmiddlewaretoken"] = csfr_token;
-        //console.log(data);
+        console.log(data);
 
         if (is_delete){
             data['is_delete'] = true;
@@ -23,7 +24,6 @@ $(document).ready(function() {
             data: data,
             cache: true,
             success: function(data) {
-                //console.log(data);
                 console.log('OK');
                 if (data.products_in_cart_total_qnty || data.products_in_cart_total_qnty == 0) {
                     $('#cart_qnty_subtotal').text('('+data.products_in_cart_total_qnty+')');
@@ -48,7 +48,7 @@ $(document).ready(function() {
                             <td class=\"miniCartSubtotal\" style=\"width: 20%;\">\
                             <span>'+parseFloat(v.total_price).toFixed(2)+' UAH</span></td>\
                             <td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\">x</a>\
-                            </td></tr>')
+                            </td></tr>');
                     });
                     
                 };
@@ -78,7 +78,7 @@ $(document).ready(function() {
         cart_updating(product_id, qnty, is_delete=false);
     });
 
-    // getting data from Main Page Form
+    // getting data from Main Page Add-to-cart buttons
     $('div.action-control').on('click', 'button[id^="main_page_submit_id"]', function (e) {
         button = $(this)
         e.preventDefault();
@@ -91,6 +91,21 @@ $(document).ready(function() {
         //console.log(qnty, product_id, product_name);
 
         cart_updating(product_id, qnty, is_delete=false)
+    });
+
+    // getting data from Checkout Page Touchspin input
+	var checkout_page_input = $('input[id^="checkout_page_input"]');
+    var start_checkout_input = parseInt(checkout_page_input.attr('value'));
+    $('div.cartFooter').on('click', '#cart_refresh', function(e) {
+        e.preventDefault();
+        var current_checkout_input = parseInt(checkout_page_input.val());
+        console.log(current_checkout_input);
+    	var qnty = current_checkout_input-start_checkout_input;
+    	console.log(qnty);
+    	var product_id = checkout_page_input.data('product_id');
+
+    	cart_updating(product_id, qnty, is_delete=false);
+    	start_checkout_input = current_checkout_input;
     });
 
     
