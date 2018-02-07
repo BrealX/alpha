@@ -25,7 +25,7 @@ $(document).ready(function() {
             cache: true,
             success: function(data) {
                 console.log('OK');
-                if (data.products_in_cart_total_qnty || data.products_in_cart_total_qnty == 0) {
+                if (data.products_in_cart_total_qnty) {
                     $('#cart_qnty_subtotal').text('('+data.products_in_cart_total_qnty+')');
                     $('.droppingbasket div.miniCartTable div div table tbody').html("");
                     $.each(data.products, function(k, v) {
@@ -49,7 +49,15 @@ $(document).ready(function() {
                             <td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\">x</a>\
                             </td></tr>')
                     });
-                    
+                }
+                else if (data.products_in_cart_total_qnty == 0) {
+                    $('#cart_qnty_subtotal').text('(0)');
+                    $('.droppingbasket div.miniCartTable div div table tbody').html("");
+                    $('.droppingbasket div.miniCartTable div div table tbody').append(
+                        '<p class="lead text-center">\
+                        ... В Вашей корзине еще нет товаров ...\
+                        </p>'
+                        );
                 };
                     
             },
