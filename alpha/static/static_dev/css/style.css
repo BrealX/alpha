@@ -1560,11 +1560,12 @@ h5.parallaxSubtitle
 .rating span
 {
     display: inline-block;
+    color: #e7711b;
 }
 
 
 .rating-here .fa,
-.rating .fa
+.rating .fa,
 {
     color: #e7711b;
 }

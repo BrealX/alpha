@@ -22,6 +22,7 @@
         <!-- left column -->
         <div class="col-lg-6 col-md-6 col-sm-6">
             <!-- product image & zoom -->
+            <div class="sp-loading"><img scr="{% static '/img/ajax-loader.gif' %}" alt=""><br>Изображение загружается</div>
             <div class="main-image sp-wrap col-lg-12 no-padding sp-non-touch" style="display: inline-block;">
                 <a href="{{ product.product_main_image.image.url }}">
                     <img class="img-responsive" src="{{ product.product_main_image.image.url }}" alt="img">
@@ -39,11 +40,11 @@
             <h1 class="product-title">{{ product.name }}</h1>
             <div class="rating">
                 <p>
-                    <span><i class="fa fa-star"></i></span>
-                    <span><i class="fa fa-star"></i></span>
-                    <span><i class="fa fa-star"></i></span>
-                    <span><i class="fa fa-star"></i></span>
-                    <span><i class="fa fa-star-o"></i></span>
+                    <span><i class="fas fa-star"></i></span>
+                    <span><i class="fas fa-star"></i></span>
+                    <span><i class="fas fa-star"></i></span>
+                    <span><i class="fas fa-star"></i></span>
+                    <span><i class="fas fa-star-half"></i></span>
                     <span class="ratingInfo">
                         <span>/</span>
                         <i>Рейтинг</i>
@@ -91,12 +92,12 @@
             <!--/.productFilter-->
             {% if product.is_in_stock %}
                 <h3 class="incaps">
-                <i class="fa fa fa-check-circle-o color-in"></i>
+                <i class="far fa-check-circle color-in"></i>
                     Товар в наличии
                 </h3>
                 {% elif product.is_on_demand %}
                     <h3 class="incaps">
-                    <i class="fa fa-clock-o color-demand"></i>
+                    <i class="far fa-clock color-demand"></i>
                         Товар под заказ
                     </h3>
                 {% else %}
