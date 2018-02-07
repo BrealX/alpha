@@ -93,19 +93,21 @@ $(document).ready(function() {
         cart_updating(product_id, qnty, is_delete=false)
     });
 
-    // getting data from Checkout Page Touchspin input
-	var checkout_page_input = $('input[id^="checkout_page_input"]');
-    var start_checkout_input = parseInt(checkout_page_input.attr('value'));
-    $('div.cartFooter').on('click', '#cart_refresh', function(e) {
-        e.preventDefault();
-        var current_checkout_input = parseInt(checkout_page_input.val());
-        console.log(current_checkout_input);
-    	var qnty = current_checkout_input-start_checkout_input;
-    	console.log(qnty);
-    	var product_id = checkout_page_input.data('product_id');
+    // cart Ajax changing while checkout page touchspin is changing (after Refresh button is pressed)
+    $('.product-in-cart-qnty').each(function(input) {
+    	var checkout_page_input = $(this);
+    	var start_checkout_input = parseInt(checkout_page_input.attr('value'));
+    	$('div.cartFooter').on('click', '#cart_refresh', function(e) {
+        	e.preventDefault();
+        	var current_checkout_input = parseInt(checkout_page_input.val());
+    		var qnty = current_checkout_input-start_checkout_input;
+    		var product_id = checkout_page_input.data('product_id');
 
-    	cart_updating(product_id, qnty, is_delete=false);
-    	start_checkout_input = current_checkout_input;
+    		if (qnty != 0) {
+    			cart_updating(product_id, qnty, is_delete=false);
+    		};
+    		start_checkout_input = current_checkout_input;
+    	});
     });
 
     

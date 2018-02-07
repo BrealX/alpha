@@ -43,7 +43,6 @@ def add_to_cart(request):
 def checkout(request):
     session_key = request.session.session_key
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True, order__isnull=True)
-    print(products_in_basket)
 
     #form = CheckoutContactForm(request.POST or None)
     #if request.POST:
