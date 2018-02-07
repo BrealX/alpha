@@ -65,7 +65,7 @@
                                            <a href="/#Микрофоны"><strong>Микрофоны</strong></a>
                                         </p>
                                     </li>
-                                    {% for item in products_microphones %}
+                                    {% for item in nav_products_microphones %}
                                     <li>
                                         <a href="{% url 'product' item.id %}">{{ item.name }}</a>
                                     </li> 
@@ -74,10 +74,10 @@
                                 <ul class="col-lg-2 col-sm-2 col-md-2 unstyled noMarginLeft">
                                     <li>
                                         <p>
-                                           <a href="/#Плееры"><strong>Мультиплееры</strong></a>
+                                           <a href="/#Плееры"><strong>Плееры</strong></a>
                                         </p>
                                     </li>
-                                    {% for item in products_players %}
+                                    {% for item in nav_products_players %}
                                     <li>
                                         <a href="{% url 'product' item.id %}">{{ item.name }}</a>
                                     </li> 
@@ -133,6 +133,7 @@
                             <div class="w100 miniCartTable pre-scrollable">
                                 <div>
                                     <div>
+                                        {% if products_in_cart %}
                                         <table>
                                             <tbody>
                                                 {% for item_in_cart in products_in_cart %}
@@ -167,28 +168,24 @@
                                                 {% endfor %}
                                             </tbody>
                                         </table>
+                                        {% else %}
+                                        <p class="lead text-center">
+                                            ... В Вашей корзине еще нет товаров ...
+                                        </p>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
                             <!--/.miniCartTable-->
                             <div class="miniCartFooter text-right">
                                 <h3 class="text-right subtotal">
-                                    ИТОГО: 2000.00 UAH
+                                    ИТОГО: <span id="miniCart_subtotal">0 UAH</span>
                                 </h3>
                                     <a class="btn btn-sm btn-primary" href="/checkout">
                                         <i class="fa fa-shopping-cart"></i>ПЕРЕЙТИ В КОРЗИНУ
                                     </a>
                                     <a class="btn btn-sm btn-danger" href="">ОФОРМИТЬ ЗАКАЗ</a>
                             </div>
-                            <!--/.miniCartFooter-->
-                            <!--<ul>
-                                {% for product_in_basket in products_in_basket %}
-                                    <li>
-                                        {{ product_in_basket.product.name }}, {{ product_in_basket.nmb }} шт. по {{ product_in_basket.price_per_item }} грн
-                                        <a class="delete-item" href="" data-product_id="{{ product_in_basket.id }}">x</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>-->
                         </div>
                         <!--/.droppingbasket-->
                         

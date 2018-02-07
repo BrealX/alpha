@@ -81,7 +81,7 @@
                                         </div>
                                     </td>
                                     <td>{{ product_in_basket.product.discount }} %</td>
-                                    <td class="price total-product-in-basket-amount">{{ product_in_basket.total_price }}</td>
+                                    <td class="price total-product-in-cart-sum">{{ product_in_basket.total_price }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -90,11 +90,11 @@
                     <!--/.cartContent-->
                     <div class="cartFooter w100">
                         <div class="box-footer">
-                            <div class="pull-left">
-                                <a class="btn btn-default" style="color: #4ec67f">
+                            <div class="pull-left" style="display: none;">
+                                <span style="color: #4ec67f">
                                     <i class="fas fa-cart-arrow-down"></i>
                                     Ваши изменения успешно внесены!
-                                </a>
+                                </span>
                             </div>
                             <div class="pull-right">
                                 <a class="btn btn-default" id="cart_refresh">
@@ -119,21 +119,12 @@
                             <table id="cart-summary" class="std table">
                                 <tbody>
                                     <tr>
+                                        <td class="site-color" style="text-transform: uppercase; font-weight: bolder;">Ваш заказ:</td>
+                                    </tr>
+                                    <tr>
                                         <td>Сумма</td>
                                         <td class="price" id="total_price">
-                                            <span id="total_basket_amount">0</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Доставка</td>
-                                        <td class="price">
-                                            <span class="success">30.00 UAH</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Итого</td>
-                                        <td class="site-color">
-                                            <span>0</span>
+                                            <span id="total_basket_amount">0.00 UAH</span>
                                         </td>
                                     </tr>
                                 </tbody>

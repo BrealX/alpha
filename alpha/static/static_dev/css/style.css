@@ -1658,8 +1658,7 @@ div.productFilter button.btn-success
     width: 100%;
     padding: 7px 20px;
 
-    border: 2px solid #4ec67f
-    ;
+    border: 2px solid #66de97;
 }
 
 div.productFilter button.btn-success:hover
@@ -2047,7 +2046,7 @@ p.success div.success
 
 .cartMiniTable
 {
-    padding: 10px;
+    padding: 10px 10px 0 10px;
 
     border: 1px solid #ddd;
     background: #fff;

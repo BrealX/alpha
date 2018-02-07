@@ -2,7 +2,7 @@ $(document).ready(function() {
     var product_page_form = $('#product_page_form');
     var navbar_form = $('#navbar_form');
 
-    // function updates miniCart dynamically (Ajax) after adding or removing items
+    // MiniCart dynamically update (Ajax) after items adding or removing
     function cart_updating(product_id, qnty, is_delete) {
         var data = {};
         data.product_id = product_id;
@@ -27,7 +27,6 @@ $(document).ready(function() {
                 console.log('OK');
                 if (data.products_in_cart_total_qnty || data.products_in_cart_total_qnty == 0) {
                     $('#cart_qnty_subtotal').text('('+data.products_in_cart_total_qnty+')');
-                    //console.log(data.products);
                     $('.droppingbasket div.miniCartTable div div table tbody').html("");
                     $.each(data.products, function(k, v) {
                         $('.droppingbasket div.miniCartTable div div table tbody').append('<tr class=\"miniCartProduct\">\
@@ -48,7 +47,7 @@ $(document).ready(function() {
                             <td class=\"miniCartSubtotal\" style=\"width: 20%;\">\
                             <span>'+parseFloat(v.total_price).toFixed(2)+' UAH</span></td>\
                             <td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\">x</a>\
-                            </td></tr>');
+                            </td></tr>')
                     });
                     
                 };
@@ -61,7 +60,7 @@ $(document).ready(function() {
         };
 
 
-    // getting data from Product Page Form
+    // Get data from Product Page Form
     product_page_form.on('submit', function(e) {
         e.preventDefault();
         var qnty = $('#product_page_qnty').val();
@@ -71,14 +70,12 @@ $(document).ready(function() {
         var product_price = submit_btn.data('price');
         var product_total_price = qnty*product_price;
         var product_image = submit_btn.data('image');
-        //console.log(product_id);
-        //console.log(product_name);
-
 
         cart_updating(product_id, qnty, is_delete=false);
     });
 
-    // getting data from Main Page Add-to-cart buttons
+
+    // Get data from Main Page Add-to-cart buttons
     $('div.action-control').on('click', 'button[id^="main_page_submit_id"]', function (e) {
         button = $(this)
         e.preventDefault();
@@ -88,12 +85,12 @@ $(document).ready(function() {
         var product_price = button.data('price');
         var product_total_price = qnty*product_price;
         var product_image = button.data('image');
-        //console.log(qnty, product_id, product_name);
 
         cart_updating(product_id, qnty, is_delete=false)
     });
 
-    // cart Ajax changing while checkout page touchspin is changing (after Refresh button is pressed)
+    
+    // Cart refreshing while Checkout Page touchspin is activated (only after Refresh button is pressed)
     $('.product-in-cart-qnty').each(function(input) {
     	var checkout_page_input = $(this);
     	var start_checkout_input = parseInt(checkout_page_input.attr('value'));
@@ -110,8 +107,24 @@ $(document).ready(function() {
     	});
     });
 
+
+    // Hide success div (Checkout page footer)
+    function hideCartFooterDiv() {
+    	$('div.box-footer div.pull-left').delay(10000).fadeOut();
+    };
+
+
+    // Show success div when AJAX is OK during cart products adding or removing
+    $(document).ajaxSuccess(function(event, request, settings) {
+    	element = $('.box-footer').children('.pull-left')
+    	if (!element.is(':visible')) {
+    		element.attr('style', 'display: visible');
+    		hideCartFooterDiv();
+    	};
+    });
     
-    // function for opening dropdown menu at Navbar
+
+    // Open dropdown menu at Navbar
     function showingMenu() {
         $('.dropdown-menu').toggleClass('hidden');
     };
@@ -124,7 +137,8 @@ $(document).ready(function() {
         showingMenu();
     });
 
-    // function for opening dropdown basket menu at RightNavbar
+    
+    // Opening dropdown cart menu at RightNavbar
     function showingBasket() {
         $('.droppingbasket').toggleClass('hidden');
     };
@@ -142,11 +156,12 @@ $(document).ready(function() {
     });*/
 
 
+    // Delete items from miniCart
     $('div.cartMenu').on('click', 'a.delete-item', function(e) {
         e.preventDefault();
         product_id = $(this).data("product_id");
         qnty = 0;
-        console.log(product_id, qnty);
+    
         cart_updating(product_id, qnty, is_delete=true)
 	});
 
@@ -154,31 +169,28 @@ $(document).ready(function() {
         e.preventDefault();
         product_id = $(this).data("product_id");
         qnty = 0;
-        console.log(product_id, qnty);
+        
         cart_updating(product_id, qnty, is_delete=true)
 	});
 
-    // function iterates for each product in basket total amount
-    // and sums them in Total Basket (or Order) amount
+    
+    // Show Cart subtotal (at miniCart dropdown & Checkout Page Right Bar)
     function calculatingTotalBasketAmount(){
         var total_price = 0
-        $(".total-product-in-basket-amount").each(function(){
-            //console.log($(this).text());
+        $(".total-product-in-cart-sum").each(function(){
             total_price += parseFloat($(this).text());
         });
-        //console.log(total_price);
-        $('#total_price').text(total_price.toFixed(2) + ' UAH');
+        $('#total_price, #miniCart_subtotal').text(total_price.toFixed(2) + ' UAH');
     };
 
     
-    // function checks any quantity changes at Cart Page and makes 
-    // changes to Cart.
-    $(document).on('change', ".product-in-basket-qnty", function(){
+    // Check any quantity changes at Cart Page and make changes to Cart
+    $(document).on('change', ".product-in-cart-qnty", function(){
         var current_qnty = $(this).val();
         var current_tr = $(this).closest('tr');
         var current_price = parseFloat(current_tr.find('.product-in-basket-price').text()).toFixed(2);
         var total_amount = parseFloat(current_qnty*current_price).toFixed(2);
-        current_tr.find('.total-product-in-basket-amount').text(total_amount);
+        current_tr.find('.total-product-in-cart-sum').text(total_amount);
 
         calculatingTotalBasketAmount();
     });
@@ -204,6 +216,7 @@ $(document).ready(function() {
     }
     });
 
+
     // Add to Wishlist Click Event
     $('.add-fav').click(function (e) {
         e.preventDefault();
@@ -211,13 +224,15 @@ $(document).ready(function() {
         $(this).attr('data-original-title', 'Понравилось');// Change Tooltip text
     });
 
+
     // Product Page Zoomer Initializer
     
     $(window).on('load', function() {
         $('.sp-wrap').smoothproducts();
     }); 
 
-    // Bootstrap Touchspin at Cart Page
+
+    // Bootstrap Touchspin at Cart Page Initializer
     $(window).on('load', function() {
         $("input[name='quanitySniper']").TouchSpin();
     });
