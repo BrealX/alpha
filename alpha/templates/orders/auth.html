@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container main-container headerOffset">
+	<div class="row">
+		<div class="breadcrumbDiv col-lg-12">
+			<ul class="breadcrumb">
+				<li>
+					<a href="/">На главную</a>
+				</li>
+				<li class="active">
+					Авторизация
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!--/.row-->
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12">
+			<h1 class="section-title-inner">
+				<span>
+					<i class="fas fa-lock"></i>
+					Авторизация
+				</span>
+			</h1>
+			<div class="row userInfo">
+				<div class="col-xs-12 col-sm-4">
+					<h2 class="block-title-2">
+						Создать аккаунт
+					</h2>
+					<form role="form">
+						<div class="form-group">
+							<label for="exampleInputName">Имя</label>
+							<input type="text" id="exampleInputName" class="form-control" placeholder="Введите имя">
+						</div>
+						<div class="form-group">
+							<label for="InputEmail">Адрес эл.почты</label>
+							<input type="email" id="InputEmail" class="form-control" placeholder="Введите email">
+						</div>
+						<div class="form-group">
+							<label for="InputPassword1">Пароль</label>
+							<input type="password" id="InputPassword1" class="form-control" placeholder="Пароль">
+						</div>
+						<button class="btn btn-primary" type="submit">
+							<i class="fas fa-user-plus"></i>
+							Создать аккаунт
+						</button>
+					</form>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<h2 class="block-title-2">
+						<span>Уже зарегистрированы?</span>
+					</h2>
+					<form role="form">
+						<div class="form-group">
+							<label for="InputEmail2">Адрес email</label>
+							<input type="email" id="InputEmail2" class="form-control" placeholder="Введите email">
+						</div>
+						<div class="form-group">
+							<label for="InputPassword2">Пароль</label>
+							<input type="password" id="InputPassword2" class="form-control" placeholder="Введите пароль">
+						</div>
+						<div class="checkbox">
+							<label>
+								<input name="ICheck" type="checkbox">
+								Запомнить меня
+							</label>
+						</div>
+						<div class="form-group">
+							<p>
+								<a title="Восстановить пароль" href="#">
+									Забыли пароль?
+								</a>
+							</p>
+						</div>
+						<button class="btn btn-primary" type="submit">
+							<i class="fas fa-sign-in-alt"></i>
+							Войти
+						</button>
+					</form>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<h2 class="block-title-2">
+						<span>Войти как Гость</span>
+					</h2>
+					<p>
+						У Вас нет аккаунта и Вы не желаете регистрироваться? Используйте гостевой режим!
+					</p>
+					<a class="btn btn-primary" href="/checkout1">
+						<i class="fas fa-sign-in-alt"></i>
+						Продолжить как Гость
+					</a>
+				</div>
+			</div>
+			<!--/.row end-->
+		</div>
+	</div>
+	<div style="clear:both"></div>
+</div>
+<!--/.main container-->
+<div class="gap"></div>
+{% endblock %}

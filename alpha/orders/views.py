@@ -44,6 +44,19 @@ def checkout(request):
     session_key = request.session.session_key
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True, order__isnull=True)
 
+    return render(request, 'orders/checkout.html', locals())
+
+
+def auth(request):
+    return render(request, 'orders/auth.html', locals())
+
+
+def checkout1(request):
+    return render(request, 'orders/checkout1.html', locals())
+
+def checkout2(request):
+    return render(request, 'orders/checkout2.html', locals())
+
     #form = CheckoutContactForm(request.POST or None)
     #if request.POST:
         #if form.is_valid():
@@ -64,4 +77,4 @@ def checkout(request):
     #        ProductInOrder.objects.create(product=product_in_basket.product, nmb=product_in_basket.nmb, price_per_item=product_in_basket.price_per_item, total_price=product_in_basket.total_price, order=order)
     #    else:
     #        print('no')
-    return render(request, 'orders/checkout.html', locals())
+    

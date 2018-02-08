@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container main-container headerOffset">
+	<div class="row">
+		<div class="breadcrumbDiv col-lg-12">
+			<ul class="breadcrumb">
+				<li>
+					<a href="/">На главную</a>
+				</li>
+				<li>
+					<a href="/checkout">К корзине</a>
+				</li>
+				<li class="active">
+					Оформление заказа
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!--/.row end-->
+	<div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-7 col-xs6 col-xxs-12 text-center-xs">
+            <h1 class="section-title-inner">
+                <span>
+                    <i class="fas fa-shopping-basket"></i>
+                        Оформление заказа
+                </span>
+            </h1>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar col-xs-6 col-xxs-12 text-center-xs">
+            <h4 class="caps section-title-inner">
+                <a href="/">
+                    <i class="fas fa-chevron-left"></i>
+                        Продолжить покупки
+                </a>
+            </h4>
+        </div>
+    </div>
+    <!--/.row end-->
+    <div class="row">
+		<div class="col-lg-9 col-md-9 col-sm-12">
+			<div class="row userInfo">
+				<div class="col-xs-12 col-sm-12">
+					<div class="w100 clearfix">
+						<ul class="orderStep orderStepLook2">
+							<li>
+								<a href="/checkout1">
+									<i class="glyphicon glyphicon-map-marker"></i>
+									<span>Адрес доставки</span>
+								</a>
+							</li>
+							<li class="active">
+								<a href="/checkout2">
+									<i class="glyphicon glyphicon-road"></i>
+									<span>Доставка</span>
+								</a>
+							</li>
+						</ul>
+						<!--/.orderStep end-->
+					</div>
+					<div class="w100 clearfix">
+						<div class="row userInfo">
+							<div class="col-lg-12">
+								<h2 class="block-title-2">Выберете, пожалуйста, способ доставки</h2>
+							</div>
+							<div class="col-xs-12 col-sm-12">
+								<div class="w100 row">
+									<div class="form-group col-lg-12 col-sm-12 col-md-12 -col-xs-12">
+									<table class="table-bordered table tablelook2" style="width: 100%">
+										<tbody>
+											<tr>
+												<td>Перевозчик</td>
+												<td>Информация</td>
+												<td>Ориентировочная стоимость</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="radio">
+														<input name="ICheck" type="radio" id="novaposhta">
+														<a href="https://novaposhta.ua/" target="_blank" title="Перейти на сайт Нова Пошта">
+															<img src="{% static '/img/nova–poshta-75px.png' %}">
+														</a>
+													</div>
+												</td>
+												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+											</tr>
+											<tr>
+												<td>
+													<div class="radio">
+														<input name="ICheck" type="radio" id="delivery-auto">
+														<a href="https://www.delivery-auto.com.ua/" target="_blank" title="Перейти на сайт Деливери-Авто">
+															<img src="{% static '/img/delivery-auto-75px.png' %}">
+														</a>
+													</div>
+												</td>
+												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+											</tr>
+											<tr>
+												<td>
+													<div class="radio">
+														<input name="ICheck" type="radio" id="intime">
+														<a href="https://intime.ua/" target="_blank" title="Перейти на сайт Интайм">
+															<img src="{% static '/img/intime-75px.png' %}">
+														</a>
+													</div>
+												</td>
+												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+											</tr>
+											<tr>
+												<td>
+													<div class="radio">
+														<input name="ICheck" type="radio" id="nodelivery">
+														<i class="fas fa-handshake fa-2x"></i>
+													</div>
+												</td>
+												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+											</tr>
+										</tbody>
+									</table>
+									</div>
+								</div>
+								<!--/.row end-->
+								<div class="cartFooter w100">
+									<div class="box-footer">
+										<div class="pull-left">
+											<a class="btn btn-default" href="/checkout1">
+												<i class="fas fa-arrow-left"></i>
+												Вернуться к оформлению
+											</a>
+										</div>
+										<div class="pull-right">
+											<a class="btn btn-primary btn-small" href="">
+												Далее
+												<i class="fas fa-arrow-circle-right"></i>
+											</a>
+										</div>
+									</div>
+								</div>
+								<!--/ cartFooter-->
+							</div>
+						</div>
+						<!--/.row end-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/.row end-->
+	<div style="clear: both"></div>
+</div>
+<!--/.main-container-->
+<div class="gap"></div>
+{% endblock %}

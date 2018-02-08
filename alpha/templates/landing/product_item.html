@@ -2,7 +2,7 @@
         <div class="product">
             <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Понравилось" data-placement="left">
                 <!--JAVASCRIPT-->
-                <i class="glyphicon glyphicon-heart"></i>
+                <i class="fas fa-heart"></i>
             </a>
             <div class="image">
                 <a href="{% url 'product' product_image.product.id %}">
@@ -33,7 +33,8 @@
                 <div class="action-control">
                     <button class="btn btn-primary" id="main_page_submit_id_{{ product_image.product.id }}" type="submit" data-product_id="{{ product_image.product.id }}" data-name="{{ product_image.product.name }}" data-price="{{ product_image.product.price_with_discount }}" data-image="{{ product_image.image.url }}" data-qnty="1">
                         <span class="add2cart">
-                            <i class="glyphicon glyphicon-shopping-cart"> В корзину</i>
+                            <i class="fas fa-cart-plus"></i>
+                            В корзину
                         </span>
                     </button>
                 </div>

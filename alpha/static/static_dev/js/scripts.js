@@ -245,6 +245,18 @@ $(document).ready(function() {
         $("input[name='quanitySniper']").TouchSpin();
     });
 
+    // ICheck Initializer
+    // https://github.com/fronteed/iCheck/
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+        increaseArea: '20%' // optional
+    });
+
+    // Select2 Initializer
+    // https://select2.org/getting-started/basic-usage
+    $('.js-example-basic-single').select2();
+
 });
 
 
