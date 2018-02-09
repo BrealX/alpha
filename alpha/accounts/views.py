@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm
+from django.contrib.auth.models import User
 
 
 def user_login(request):
@@ -12,7 +13,6 @@ def user_login(request):
 		if login_form.is_valid():
 			cd = login_form.cleaned_data
 			user = authenticate(email=cd['user_email'], password=cd['user_password'])
-			print(user)
 			if user is not None:
 				if user.is_active:
 					login(request, user)
@@ -20,11 +20,9 @@ def user_login(request):
 				elif not(user.is_active):
 					error = 'Данный аккаунт заблокирован. Пожалуйста, свяжитесь с нами для' \
 						+ ' восстановления учетной записи!'
-					return render(request, 'accounts/auth.html', {'login_form': login_form, 'error': error})
 			else:
 				error = 'Пользователь с таким email не зарегистрирован. Пожалуйста,' \
 					+ ' проверьте введенные данные или зарегистрируйтесь!'
-				return render(request, 'accounts/auth.html', {'login_form': login_form, 'error': error})
 	else:
 		login_form = LoginForm()
 	return render(request, 'accounts/auth.html', {'login_form': login_form, 'error': error})

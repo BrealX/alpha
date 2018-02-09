@@ -6,8 +6,8 @@ class CustomerAdmin(admin.ModelAdmin):
 		model = Customer
 
 	list_display = [field.name for field in Customer._meta.fields]
-	search_fields = ('email',)
-	ordering = ('email',)
+	search_fields = ('user',)
+	ordering = ('user',)
 
 
 admin.site.register(Customer, CustomerAdmin)
