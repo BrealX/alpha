@@ -2,5 +2,10 @@ from django import forms
 
 
 class LoginForm(forms.Form):
-	username = forms.CharField(required=True)
-	password = forms.CharField(required=True)
+	"""Форма для входа в систему"""
+	user_email = forms.EmailField(
+		required=True
+		)
+	user_password = forms.CharField(
+		required=True
+		)

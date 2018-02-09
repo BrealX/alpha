@@ -1,30 +1,37 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm
 
 
 def user_login(request):
+	error = None
 	if request.POST:
-		form = LoginForm(request.POST or None)
-		if form.is_valid():
-			cd = form.cleaned_data
-			user = authenticate(username=cd['username'], password=cd['password'])
+		login_form = LoginForm(request.POST or None)
+		if login_form.is_valid():
+			cd = login_form.cleaned_data
+			user = authenticate(email=cd['user_email'], password=cd['user_password'])
+			print(user)
 			if user is not None:
 				if user.is_active:
 					login(request, user)
-					return HttpResponse('Авторизация прошла успешно')
-				else:
-					return HttpResponse('Аккаунт заблокирован')
+					return HttpResponseRedirect(reverse('checkout1'))
+				elif not(user.is_active):
+					error = 'Данный аккаунт заблокирован. Пожалуйста, свяжитесь с нами для' \
+						+ ' восстановления учетной записи!'
+					return render(request, 'accounts/auth.html', {'login_form': login_form, 'error': error})
 			else:
-				return HttpResponse('Неверный логин')
+				error = 'Пользователь с таким email не зарегистрирован. Пожалуйста,' \
+					+ ' проверьте введенные данные или зарегистрируйтесь!'
+				return render(request, 'accounts/auth.html', {'login_form': login_form, 'error': error})
 	else:
-		form = LoginForm()
-	return render(request, 'accounts/login.html', {'form': form})
+		login_form = LoginForm()
+	return render(request, 'accounts/auth.html', {'login_form': login_form, 'error': error})
 
 
 
-#form = CheckoutContactForm(request.POST or None)
+
     #if request.POST:
         #if form.is_valid():
             #data = request.POST
