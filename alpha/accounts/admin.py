@@ -1,13 +1,13 @@
 from django.contrib import admin
-from .models import Customer
+from .models import Profile
 
-class CustomerAdmin(admin.ModelAdmin):
+class ProfileAdmin(admin.ModelAdmin):
 	class Meta:
-		model = Customer
+		model = Profile
 
-	list_display = [field.name for field in Customer._meta.fields]
+	list_display = [field.name for field in Profile._meta.fields]
 	search_fields = ('user',)
 	ordering = ('user',)
 
 
-admin.site.register(Customer, CustomerAdmin)
+admin.site.register(Profile, ProfileAdmin)

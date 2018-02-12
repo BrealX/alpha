@@ -113,8 +113,13 @@
             <div class="contentBox">
                 <div class="w100 costDetails">
                     <div id="order-detail-content" class="table-block">
-                        <a class="btn btn-primary btn-lg btn-block" title="Оформить заказ" href="/auth" style="margin-bottom:20px">Оформить заказ
+                        {% if username %}
+                        <a class="btn btn-primary btn-lg btn-block" title="Оформить заказ" href="/checkout1" style="margin-bottom:20px">Оформить заказ
                             <i class="fa fa-arrow-right"></i></a>
+                        {% else %}
+                        <a class="btn btn-primary btn-lg btn-block" title="Оформить заказ" href="/auth/login" style="margin-bottom:20px">Оформить заказ
+                            <i class="fa fa-arrow-right"></i></a>
+                        {% endif %}
                         <div class="w100 cartMiniTable">
                             <table id="cart-summary" class="std table">
                                 <tbody>

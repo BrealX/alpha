@@ -25,18 +25,26 @@
                         <div class=pull-right>
                             <ul class="userMenu">
                                 <li>
-                                    <a href="#">
-                                        <span class="hidden-xs">Мой аккаунт</span>
+                                    <a href="/mycabinet/">
+                                        <span class="hidden-xs">Мой кабинет</span>
                                     </a>
                                 </li>
+                                {% if username %}
                                 <li>
-                                    <a href="#">
+                                    <a href="/auth/logout">
+                                        <span class="hidden-xs">Выйти ({{ username }})</span>
+                                    </a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <a href="/auth/login">
                                         <span class="hidden-xs">Войти</span>
                                     </a>
                                 </li>
                                 <li class="hidden-xs">
-                                    <a href="#">Зарегистрироваться</a>
+                                    <a href="/auth/login">Зарегистрироваться</a>
                                 </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
@@ -184,7 +192,7 @@
                                     <a class="btn btn-sm btn-primary" href="/checkout">
                                         <i class="fas fa-shopping-basket"></i>ПЕРЕЙТИ В КОРЗИНУ
                                     </a>
-                                    <a class="btn btn-sm btn-danger" href="/auth">ОФОРМИТЬ ЗАКАЗ</a>
+                                    <a class="btn btn-sm btn-danger" href="/auth/login">ОФОРМИТЬ ЗАКАЗ</a>
                             </div>
                         </div>
                         <!--/.droppingbasket-->

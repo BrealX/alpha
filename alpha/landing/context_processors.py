@@ -1,4 +1,5 @@
 from products.models import Product, ProductCategory, ProductImage
+from django.contrib import auth
 
 
 def navigation_bar(request):
@@ -8,5 +9,6 @@ def navigation_bar(request):
     products_images = ProductImage.objects.filter(is_active=True, is_main=True, product__is_active=True)
     products_images_microphones = products_images.filter(product__category__id=1)
     products_images_players = products_images.filter(product__category__id=2)
+    username = auth.get_user(request).username
 
     return locals()
