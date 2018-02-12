@@ -192,7 +192,11 @@
                                     <a class="btn btn-sm btn-primary" href="/checkout">
                                         <i class="fas fa-shopping-basket"></i>ПЕРЕЙТИ В КОРЗИНУ
                                     </a>
+                                    {% if username %}
+                                    <a class="btn btn-sm btn-danger" href="/checkout1">ОФОРМИТЬ ЗАКАЗ</a>
+                                    {% else %}
                                     <a class="btn btn-sm btn-danger" href="/auth/login">ОФОРМИТЬ ЗАКАЗ</a>
+                                    {% endif %}
                             </div>
                         </div>
                         <!--/.droppingbasket-->

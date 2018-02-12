@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
 	user = models.OneToOneField(
 		User, 
-		on_delete=models.CASCADE
+		on_delete=models.CASCADE,
+		related_name='profile'
 	)
 	phone = models.CharField(
 		null=True,
@@ -25,6 +26,15 @@ class Profile(models.Model):
 
 	def __str__(self):
 		return "Клиент %s" % self.user.username
+
+
+	def user_email(self):
+		return self.user.email
+
+
+	def user_username(self):
+		return self.user.username
+
 
 	class Meta:
 		verbose_name = "Клиент"
