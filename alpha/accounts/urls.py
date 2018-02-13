@@ -15,5 +15,5 @@ urlpatterns = [
 
 	# after registering new account
 	re_path(r'^registration/', views.after_registration, name="after_registration"),
-	re_path(r'^activation/', views.account_activation, name="account_activation"),		
+	re_path(r'^activation/(?P<uidb64>.+)/(?P<token>.+)/$', views.account_activation, name="account_activation"),		
 ]

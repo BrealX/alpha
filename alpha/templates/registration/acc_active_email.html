@@ -1,0 +1,8 @@
+{% autoescape off %}
+
+Здравствуйте, {{ user.username }},
+Пожалуйста, перейдите по ссылке, чтобы подтвердить Вашу регистрацию:
+
+http://{{ domain }}{% url 'account_activation' uidb64=uid token=token %}
+
+{% endautoescape %}

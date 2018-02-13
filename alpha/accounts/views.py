@@ -2,7 +2,7 @@
 
 from django.shortcuts import render
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, UserRegistrationForm
 from django.contrib.auth.models import User
@@ -11,6 +11,11 @@ from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_text
+from .tokens import account_activation_token
 
 
 def user_login(request):
@@ -75,18 +80,18 @@ def user_cabinet(request):
 def after_registration(request):
 	# Successful account registration alert & activation link creation
 	user = User.objects.latest('id')
-	#User.profile = property(lambda u: Profile.objects.get_or_create(user=u)[0])
-	profile = user.profile
-	print(profile)
-	profile.activation_link = request.COOKIES['sessionid']
-	profile.save()
 
 	# Email settings
 	subject = 'Активация аккаунта на сайте "Книжный Ёж"'
-	activation_link = '{{ site }}/activation/%s' % request.COOKIES['sessionid']
-	message = 'Дорогой посетитель, для активации Вашей учетной записи воспользуйтесь ссылкой: \
-		%s \
-		Спасибо за регистрацию! Удачных Вам покупок!' % activation_link
+	message = render_to_string(
+		template_name='registration/acc_active_email.html', 
+		context={
+		'user': user, 
+		'domain': get_current_site(request), 
+		'uid': urlsafe_base64_encode(force_bytes(user.pk, encoding='utf-8')), 
+		'token': account_activation_token.make_token(user)
+		})
+
 	send_to = user.email
 
 	send_mail(
@@ -101,18 +106,31 @@ def after_registration(request):
 	return render(request, 'registration/after_registration.html', args)
 
 
-def account_activation(request, activation_id):
+def account_activation(request, uidb64, token):
 	# New account activation from emailed activation link
-	profiles_count = Profile.objects.filter(activation_link__exact=activation_id).count()
-	if profiles_count == 0:
+	#try:
+	uid = force_text(urlsafe_base64_decode(uidb64), encoding='utf-8')
+	print(uid)
+	user = User.objects.get(pk=uid)
+	print(user)
+	#except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+	#	user = None
+	if user is not None and account_activation_token.check_token(user, token):
+		user.is_active = True
+		user.save()
+	else:
 		return Http404
+	#profiles_count = Profile.objects.filter(
+	#	activation_link__exact=activation_id).count()
+	#if profiles_count == 0:
+	#	return Http404
 
-	profiles = Profile.objects.filter(activation_link__exact=activation_id)[:1]
-	for profile in profiles:
-		profile.is_active = True
-		profile.save()
-	args = {}
-	args['message'] = message
+	#profiles = Profile.objects.filter(
+	#	activation_link__exact=activation_id)[:1]
+	#for profile in profiles:
+	#	profile.is_active = True
+	#	profile.save()
+	args = {'user': user}
 	return render(request, 'account_activation.html', args)
 
     #for name, value in data.items():
