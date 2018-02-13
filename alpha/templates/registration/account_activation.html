@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container main-container headerOffset">
+	<div class="row">
+		<div class="breadcrumbDiv col-lg-12">
+			<ul class="breadcrumb">
+				<li>
+					<a href="{% url 'home' %}">На главную</a>
+				</li>
+				<li>
+					<a href="{% url 'login' %}">Авторизация</a>
+				</li>
+				<li class="active">
+					Учетная запись успешно активирована!
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!--/.row-->
+	<div class="row">
+		<div class="col-lg-9 col-md-9 col-sm-7">
+			<h1 class="section-title-inner">
+				<span>
+					<i class="fas fa-user-plus"></i>
+					Ваша новая учетная запись успешно активирована. <br>
+					Теперь Вы можете <a href="{% url 'login' %}">войти</a> на сайт!
+				</span>
+			</h1>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-5"></div>
+	</div>
+	<!--/.row-->
+	<div style="clear:both"></div>
+</div>
+<!--/.main container-->
+<div class="gap"></div>
+{% endblock %}

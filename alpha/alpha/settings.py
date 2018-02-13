@@ -110,7 +110,17 @@ AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',
     )
 
-AUTH_PROFILE_MODULE = 'accounts.models.Profile'
+# settings for Email
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'albrechio@gmail.com'
+EMAIL_HOST_PASSWORD = 'nashuatec1'
+DEFAULT_FROM_EMAIL = 'albrechio@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# days before account activation link is active
+ACCOUNT_ACTIVATION_DAYS = 2
 
 
 # Internationalization

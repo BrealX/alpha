@@ -25,24 +25,24 @@
                         <div class=pull-right>
                             <ul class="userMenu">
                                 <li>
-                                    <a href="/mycabinet/">
+                                    <a href="{% url 'user_cabinet' %}">
                                         <span class="hidden-xs">Мой кабинет</span>
                                     </a>
                                 </li>
                                 {% if username %}
                                 <li>
-                                    <a href="/auth/logout">
+                                    <a href="{% url 'logout' %}">
                                         <span class="hidden-xs">Выйти ({{ username }})</span>
                                     </a>
                                 </li>
                                 {% else %}
                                 <li>
-                                    <a href="/auth/login">
+                                    <a href="{% url 'login' %}">
                                         <span class="hidden-xs">Войти</span>
                                     </a>
                                 </li>
                                 <li class="hidden-xs">
-                                    <a href="/auth/login">Зарегистрироваться</a>
+                                    <a href="{% url 'login' %}">Зарегистрироваться</a>
                                 </li>
                                 {% endif %}
                             </ul>
@@ -54,7 +54,7 @@
         <!--/.navbar-top-->
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="{% url 'home' %}">
                     <img src="{% static 'img/logo.png' %}" alt="shop">
                 </a>
             </div>
@@ -189,13 +189,13 @@
                                 <h3 class="text-right subtotal">
                                     ИТОГО: <span id="miniCart_subtotal">0 UAH</span>
                                 </h3>
-                                    <a class="btn btn-sm btn-primary" href="/checkout">
+                                    <a class="btn btn-sm btn-primary" href="{% url 'checkout' %}">
                                         <i class="fas fa-shopping-basket"></i>ПЕРЕЙТИ В КОРЗИНУ
                                     </a>
                                     {% if username %}
-                                    <a class="btn btn-sm btn-danger" href="/checkout1">ОФОРМИТЬ ЗАКАЗ</a>
+                                    <a class="btn btn-sm btn-danger" href="{% url 'checkout1' %}">ОФОРМИТЬ ЗАКАЗ</a>
                                     {% else %}
-                                    <a class="btn btn-sm btn-danger" href="/auth/login">ОФОРМИТЬ ЗАКАЗ</a>
+                                    <a class="btn btn-sm btn-danger" href="{% url 'login' %}">ОФОРМИТЬ ЗАКАЗ</a>
                                     {% endif %}
                             </div>
                         </div>

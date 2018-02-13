@@ -7,7 +7,7 @@
         <div class="breadcrumbDiv col-lg-12">
             <ul class="breadcrumb">
                 <li>
-                    <a href="/">На главную</a>
+                    <a href="{% url 'home' %}">На главную</a>
                 </li>
                 <li class="active">
                     Корзина
@@ -27,7 +27,7 @@
         </div>
         <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar col-xs-6 col-xxs-12 text-center-xs">
             <h4 class="caps section-title-inner">
-                <a href="/">
+                <a href="{% url 'home' %}">
                     <i class="fas fa-chevron-left"></i>
                         Продолжить покупки
                 </a>
@@ -114,10 +114,10 @@
                 <div class="w100 costDetails">
                     <div id="order-detail-content" class="table-block">
                         {% if username %}
-                        <a class="btn btn-primary btn-lg btn-block" title="Оформить заказ" href="/checkout1" style="margin-bottom:20px">Оформить заказ
+                        <a class="btn btn-primary btn-lg btn-block" title="Оформить заказ" href="{% url 'checkout1' %}" style="margin-bottom:20px">Оформить заказ
                             <i class="fa fa-arrow-right"></i></a>
                         {% else %}
-                        <a class="btn btn-primary btn-lg btn-block" title="Оформить заказ" href="/auth/login" style="margin-bottom:20px">Оформить заказ
+                        <a class="btn btn-primary btn-lg btn-block" title="Оформить заказ" href="{% url 'login' %}" style="margin-bottom:20px">Оформить заказ
                             <i class="fa fa-arrow-right"></i></a>
                         {% endif %}
                         <div class="w100 cartMiniTable">

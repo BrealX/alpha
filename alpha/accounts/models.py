@@ -3,11 +3,14 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
+	# this field is required
 	user = models.OneToOneField(
 		User, 
 		on_delete=models.CASCADE,
 		related_name='profile'
 	)
+
+	# other additional fields
 	phone = models.CharField(
 		null=True,
 		blank=True,
@@ -21,6 +24,11 @@ class Profile(models.Model):
 		max_length=150,
 		null=True,
 		blank=True
+	)
+	activation_link = models.CharField(
+		null=True,
+		blank=True,
+		max_length=240
 	)
 
 

@@ -300,13 +300,11 @@ input[type='email']
             border-radius: 3px;
 }
 
-
-.form-control:focus
+.form-control:focus,
 {
     outline: 0 none;
     box-shadow: NONE;
 }
-
 
 .btn
 {

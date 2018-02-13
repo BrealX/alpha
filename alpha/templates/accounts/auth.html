@@ -7,7 +7,7 @@
 		<div class="breadcrumbDiv col-lg-12">
 			<ul class="breadcrumb">
 				<li>
-					<a href="/">На главную</a>
+					<a href="{% url 'home' %}">На главную</a>
 				</li>
 				<li class="active">
 					Авторизация
@@ -29,24 +29,28 @@
 					<h2 class="block-title-2">
 						Создать аккаунт
 					</h2>
-					<form role="form">
+					<form action="/auth/login/" role="form" method="post">
+						{% csrf_token %}
 						<div class="form-group">
-							<label for="new_user_name">Как Вас зовут?</label>
-							<input type="text" id="new_user_name" class="form-control" placeholder="Введите имя" name="{{ form_register.new_user_name.html_name }}">
+							<label for="new_user_email">Адрес email (используется в качестве логина)</label>
+							<input type="email" id="new_user_email" class="form-control" placeholder="Введите email" name="{{ reg_form.new_user_email.html_name }}">
 						</div>
 						<div class="form-group">
-							<label for="new_user_email">Адрес email</label>
-							<input type="email" id="new_user_email" class="form-control" placeholder="Введите email" name="{{ form_register.new_user_email.html_name }}">
+							<label for="new_user_name">Ваше имя</label>
+							<input type="text" id="new_user_name" class="form-control" placeholder="Введите имя" name="{{ reg_form.new_user_name.html_name }}">
 						</div>
 						<div class="form-group">
-							<label for="new_user_password1">Пароль</label>
-							<input type="password" id="new_user_password1" class="form-control" placeholder="Пароль" name="{{ form_register.new_user_password.html_name }}">
+							<label for="new_user_password">Пароль</label>
+							<input type="password" id="new_user_password" class="form-control" placeholder="Пароль" name="{{ reg_form.password.html_name }}">
 						</div>
 						<div class="form-group">
-							<label for="new_user_password2">Подтвердите пароль</label>
-							<input type="password" id="new_user_password2" class="form-control" placeholder="Пароль еще раз" name="{{ form_register.new_user_password_repeat.html_name }}">
+							<label for="new_user_password_repeat">Подтвердите пароль</label>
+							<input type="password" id="new_user_password_repeat" class="form-control" placeholder="Пароль еще раз" name="{{ reg_form.password_repeat.html_name }}">
 						</div>
-						<button class="btn btn-primary" type="submit">
+						{% if reg_error %}
+							<p class="form-error">{{ reg_error }}</p>
+						{% endif %}
+						<button class="btn btn-primary" type="submit" value="Зарегистрироваться">
 							<i class="fas fa-user-plus"></i>
 							Создать аккаунт
 						</button>
@@ -69,8 +73,8 @@
 						{% if form_login.errors %}
 							<p class="form-error">Не верно указан email или пароль. Пожалуйста, попробуйте еще раз.</p>
 						{% endif %}
-						{% if error %}
-							<p class="form-error">{{ error }}</p>
+						{% if login_error %}
+							<p class="form-error">{{ login_error }}</p>
 						{% endif %}
 						<div class="checkbox">
 							<label>
@@ -80,7 +84,7 @@
 						</div>
 						<div class="form-group">
 							<p>
-								<a title="Восстановить пароль" href="/password-reset/">
+								<a title="Восстановить пароль" href="{% url 'password_reset' %}">
 									Забыли пароль?
 								</a>
 							</p>
@@ -98,7 +102,7 @@
 					<p>
 						У Вас нет аккаунта и Вы не желаете регистрироваться? Используйте гостевой режим!
 					</p>
-					<a class="btn btn-primary" href="/checkout1">
+					<a class="btn btn-primary" href="{% url 'checkout1' %}">
 						<i class="fas fa-sign-in-alt"></i>
 						Продолжить как Гость
 					</a>
