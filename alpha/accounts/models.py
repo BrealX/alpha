@@ -25,10 +25,14 @@ class Profile(models.Model):
 		null=True,
 		blank=True
 	)
-	activation_link = models.CharField(
+	activation_key = models.CharField(
 		null=True,
 		blank=True,
 		max_length=240
+	)
+	key_expires = models.DateTimeField(
+		null=True,
+		blank=True,
 	)
 
 

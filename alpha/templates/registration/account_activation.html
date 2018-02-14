@@ -23,9 +23,15 @@
 		<div class="col-lg-9 col-md-9 col-sm-7">
 			<h1 class="section-title-inner">
 				<span>
+					{% if error %}
+					<i class="far fa-calendar-times"></i>
+					К сожалению, активационная ссылка устарела (прошло 48 часов с момента её получения).<br>
+					Вы можете пройти регистрацию заново и получить новую ссылку. <a href="{% url 'login' %}">Зарегистрироваться заново!</a>
+					{% else %}
 					<i class="fas fa-user-plus"></i>
 					Ваша новая учетная запись успешно активирована. <br>
 					Теперь Вы можете <a href="{% url 'login' %}">войти</a> на сайт!
+					{% endif %}
 				</span>
 			</h1>
 		</div>

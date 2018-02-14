@@ -13,9 +13,9 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_text
-from .tokens import account_activation_token
+import datetime, hashlib, os
+from django.utils import timezone
+from django.shortcuts import get_object_or_404
 
 
 def user_login(request):
@@ -76,10 +76,17 @@ def user_cabinet(request):
 	return locals()
 
 
-#@login_required(login_url='/auth/login')
 def after_registration(request):
 	# Successful account registration alert & activation link creation
 	user = User.objects.latest('id')
+	salt = os.urandom(32).hex()
+	activation_key = hashlib.sha512()
+	activation_key.update(('%s%s' % (salt, user.username)).encode('utf-8'))
+	activation_key = activation_key.hexdigest()
+	key_expires = datetime.datetime.today() + datetime.timedelta(2)
+	user.profile.activation_key = activation_key
+	user.profile.key_expires = key_expires
+	user.save()
 
 	# Email settings
 	subject = 'Активация аккаунта на сайте "Книжный Ёж"'
@@ -88,8 +95,9 @@ def after_registration(request):
 		context={
 		'user': user, 
 		'domain': get_current_site(request), 
-		'uid': urlsafe_base64_encode(force_bytes(user.pk, encoding='utf-8')), 
-		'token': account_activation_token.make_token(user)
+		'activation_key': activation_key
+		#'uid': urlsafe_base64_encode(force_bytes(user.pk, encoding='utf-8')), 
+		#'token': account_activation_token.make_token(user)
 		})
 
 	send_to = user.email
@@ -106,32 +114,18 @@ def after_registration(request):
 	return render(request, 'registration/after_registration.html', args)
 
 
-def account_activation(request, uidb64, token):
+def account_activation(request, activation_key):
 	# New account activation from emailed activation link
-	#try:
-	uid = force_text(urlsafe_base64_decode(uidb64), encoding='utf-8')
-	print(uid)
-	user = User.objects.get(pk=uid)
-	print(user)
-	#except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-	#	user = None
-	if user is not None and account_activation_token.check_token(user, token):
-		user.is_active = True
-		user.save()
-	else:
-		return Http404
-	#profiles_count = Profile.objects.filter(
-	#	activation_link__exact=activation_id).count()
-	#if profiles_count == 0:
-	#	return Http404
-
-	#profiles = Profile.objects.filter(
-	#	activation_link__exact=activation_id)[:1]
-	#for profile in profiles:
-	#	profile.is_active = True
-	#	profile.save()
-	args = {'user': user}
-	return render(request, 'account_activation.html', args)
+	user_profile = get_object_or_404(Profile, activation_key=activation_key)
+	error = None
+	if user_profile.key_expires < timezone.now():
+		error = 1
+		return render(request, 'registration/account_activation.html', {'error': error})
+	user_account = user_profile.user
+	user_account.is_active = True
+	user_profile.activation_key = ""
+	user_account.save()
+	return render(request, 'registration/account_activation.html')
 
     #for name, value in data.items():
     #    if name.startswith('product_in_basket_'):
