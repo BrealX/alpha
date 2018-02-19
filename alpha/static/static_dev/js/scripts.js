@@ -271,8 +271,6 @@ $(document).ready(function() {
             data: data,
             cache: true,
             success: function(data) {
-                console.log('OK');
-                console.log(data);
                 if (!data.profile_delivery_address) {
                     $('.address-line').html("");
                     $('.address-line').text("Вы не указали адрес доставки");

@@ -152,3 +152,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_prod')
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
+
+# Close the session when user closes the browser
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

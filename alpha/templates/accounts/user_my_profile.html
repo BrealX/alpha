@@ -28,7 +28,7 @@
 				</span>
 			</h1>
 			<p>
-				Здесь Вы можете отредактировать Ваши персональные данные, адрес доставки товаров по умолчанию и контактный номер телефона.
+				Здесь Вы можете отредактировать Ваши персональные данные, адрес доставки товаров по умолчанию и контактный номер телефона. При необходимости можно также изменить Ваш пароль.
 			</p>
 			<div class="row userInfo">
 				<div class="col-lg-12">
@@ -47,8 +47,8 @@
 							<div class="panel-body">
 								<ul>
 									<li>
-										<span class="address-name">
-											<strong>{{ user.username }}</strong>
+										<span>
+											<strong>Адрес доставки (по умолчанию)</strong>
 										</span>
 									</li>
 									<li style="margin-top: 10px;">
@@ -83,6 +83,55 @@
 									Удалить
 								</a>
 								<form id="my_profile_address_delete_form" action="{% url 'delete_address' %}">{% csrf_token %}</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">	
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<strong>Личные данные</strong>
+								</h3>
+							</div>
+							<div class="panel-body">
+								<ul>
+									<li>
+										<span>
+											<strong>Имя</strong>
+										</span>
+									</li>
+									<li style="margin-top: 10px;">
+										<span class="profile-firstname">
+											{% if user.first_name %}
+												{{ user.first_name }}
+											{% else %}
+												Вы не указали имя
+											{% endif %}
+										</span>
+									</li>
+									<li style="margin-top: 10px;">
+										<span>
+											{% if user.profile.phone %}
+												<strong>Номер телефона: </strong><br>
+												{{ user.profile.phone }}
+											{% else %}
+												<strong>Номер телефона: </strong><br>
+												Вы не указали контактный номер телефона
+											{% endif %}
+										</span>
+									</li>
+								</ul>
+							</div>
+							<div class="panel-footer panel-footer-address">
+								<a href="{% url 'add_personal' %}" class="btn btn-sm btn-success">
+									<i class="far fa-edit"></i>
+									Редактировать
+								</a>
+								<a class="btn btn-sm btn-danger" id="my_personal_delete">
+									<i class="fas fa-minus-circle"></i>
+									Удалить
+								</a>
+								<form id="my_personal_delete_form" action="{% url 'delete_personal' %}">{% csrf_token %}</form>
 							</div>
 						</div>	
 					</div>

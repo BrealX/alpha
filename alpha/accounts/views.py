@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm, UserRegistrationForm, UserAddAddressForm
+from .forms import LoginForm, UserRegistrationForm, UserAddAddressForm, UserAddPersonalForm
 from django.contrib.auth.models import User
 from .models import Profile
 from django.template.context_processors import csrf
@@ -101,7 +101,7 @@ def add_address(request):
             message = "Вы пытаетесь отправить пустую форму. Пожалуйста, заполните " + \
                 "поля формы."    
     form = UserAddAddressForm()
-    return render(request, 'accounts/user_add_address.html', locals())  
+    return render(request, 'accounts/user_add_address.html', locals())
 
 
 @login_required(login_url='/auth/login')
@@ -111,6 +111,40 @@ def delete_address(request):
     user.save()
     return_dict = {}
     return_dict['profile_delivery_address'] = user.profile.delivery_address
+    return JsonResponse(return_dict)
+
+
+@login_required(login_url='/auth/login')
+def add_personal(request):
+    user = request.user
+    message = ""
+    if request.POST:
+        form = UserAddPersonalForm(request.POST or None)
+        if form.is_valid():
+            data = request.POST
+            profile_phone = data.get('profile_phone')
+            user_firstname = data.get('user_firstname')
+            user.profile.phone = profile_phone
+            user.first_name = user_firstname
+            user.save()
+            message = "Данные успешно изменены. Спасибо!"
+            return render(request, 'accounts/user_add_personal.html', locals())  
+        else:
+            message = "Вы пытаетесь отправить пустую форму. Пожалуйста, заполните " + \
+                "поля формы."    
+    form = UserAddPersonalForm()
+    return render(request, 'accounts/user_add_personal.html', locals())
+
+
+@login_required(login_url='/auth/login')
+def delete_personal(request):
+    user = request.user
+    user.firstname = None
+    user.profile.phone = None
+    user.save()
+    return_dict = {}
+    return_dict['user_firstname'] = user.firstname
+    return_dict['profile_phone'] = user.profile.phone
     return JsonResponse(return_dict)
 
 

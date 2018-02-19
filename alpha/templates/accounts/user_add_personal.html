@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block dashboard %}
+<div class="container main-container headerOffset">
+	<div class="row">
+		<div class="breadcrumbDiv col-lg-12">
+			<ul class="breadcrumb">
+				<li>
+					<a href="{% url 'home' %}">На главную</a>
+				</li>
+				<li>
+					<a href="{% url 'user_dashboard' %}">Мой кабинет</a>
+				</li>
+				<li class="active">
+					Добавление личной информации
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!--/.row-->
+	<div class="row">
+		<div class="col-lg-9 col-md-9 col-sm-7">
+			<h1 class="section-title-inner">
+				<span>
+					<i class="fas fa-map-marker-alt"></i>
+					Добавление личной информации
+				</span>
+			</h1>
+			<div class="row userInfo">
+				<div class="col-lg-12">
+					<h2 class="block-title-2">
+						Чтобы добавить или изменить Вашу личную информацию, заполните или отредактируйте форму ниже.
+					</h2>
+				</div>
+				<form action="{% url 'add_personal' %}" role="form" method="post">{% csrf_token %}
+					<div class="col-xs-12 col-sm-6">
+						<div class="form-group required">
+							<label for="user_firstname">Текущее имя<sup>*</sup></label>
+							<input type="text" name="user_firstname" id="user_firstname" class="form-control" placeholder="{% if user.first_name %}{{ user.first_name }}{% else %}Вы еще не сообщили нам своё имя{% endif %}" autofocus value="{{ request.POST.user_firstname }}"></input>	
+						</div>
+						<div class="form-group required">
+							<label for="profile_phone">Текущий контактный номер телефона<sup>*</sup></label>
+							<input type="tel" name="profile_phone" id="profile_phone" class="form-control" placeholder="{% if user.profile.phone %}{{ user.profile.phone }}{% else %}Вы еще не сообщили нам свой номер телефона{% endif %}" value="{{ request.POST.profile_phone }}"></input>	
+						</div>
+					</div>
+					<div class="col-lg-12 col-xs-12 clearfix">
+						<p class="form-error">{% if message %}{{ message }}{% endif %}</p>
+						<button type="submit" class="btn btn-primary">
+							<i class="fas fa-map-marker-alt"></i>
+							Сохранить
+						</button>
+					</div>
+				</form>
+				<div class="col-lg-12 clearfix">
+					<ul class="pager">
+						<li class="next pull-left">
+							<a href="{% url 'user_my_profile' %}">
+								<i class="fas fa-arrow-left"></i>
+								Назад в Личный кабинет
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--/.row end-->
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-5"></div>
+	</div>
+	<div style="clear:both"></div>
+</div>
+<!--/.main container-->
+<div class="gap"></div>
+{% endblock %}
