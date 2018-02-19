@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block dashboard %}
+<div class="container main-container headerOffset">
+	<div class="row">
+		<div class="breadcrumbDiv col-lg-12">
+			<ul class="breadcrumb">
+				<li>
+					<a href="{% url 'home' %}">На главную</a>
+				</li>
+				<li>
+					<a href="{% url 'user_dashboard' %}">Мой кабинет</a>
+				</li>
+				<li class="active">
+					Мой профиль
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!--/.row-->
+	<div class="row">
+		<div class="col-lg-9 col-md-9 col-sm-7">
+			<h1 class="section-title-inner">
+				<span>
+					<i class="fas fa-map-marker-alt"></i>
+					Мой профиль
+				</span>
+			</h1>
+			<p>
+				Здесь Вы можете отредактировать Ваши персональные данные, адрес доставки товаров по умолчанию и контактный номер телефона.
+			</p>
+			<div class="row userInfo">
+				<div class="col-lg-12">
+					<h2 class="block-title-2">
+						Ваши данные указаны ниже. 
+					</h2>
+				</div>
+				<div class="w100 clearfix">
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<strong>Мой адрес доставки</strong>
+								</h3>
+							</div>
+							<div class="panel-body">
+								<ul>
+									<li>
+										<span class="address-name">
+											<strong>{{ user.username }}</strong>
+										</span>
+									</li>
+									<li style="margin-top: 10px;">
+										<span class="address-line">
+											{% if user.profile.delivery_address %}
+												{{ user.profile.delivery_address }}
+											{% else %}
+												Вы не указали адрес доставки
+											{% endif %}
+										</span>
+									</li>
+									<li style="margin-top: 10px;">
+										<span>
+											{% if user.profile.phone %}
+												<strong>Номер телефона получателя: </strong><br>
+												{{ user.profile.phone }}
+											{% else %}
+												<strong>Номер телефона получателя: </strong><br>
+												Вы не указали контактный номер телефона
+											{% endif %}
+										</span>
+									</li>
+								</ul>
+							</div>
+							<div class="panel-footer panel-footer-address">
+								<a href="{% url 'add_address' %}" class="btn btn-sm btn-success">
+									<i class="far fa-edit"></i>
+									Редактировать
+								</a>
+								<a class="btn btn-sm btn-danger">
+									<i class="fas fa-minus-circle"></i>
+									Удалить
+								</a>
+							</div>
+						</div>	
+					</div>
+				</div>
+				<!--/.w100-->
+				<div class="col-lg-12 clearfix">
+					<ul class="pager">
+						<li class="next pull-left">
+							<a href="{% url 'user_dashboard' %}">
+								<i class="fas fa-arrow-left"></i>
+								Назад в Мой кабинет
+							</a>
+						</li>
+					</ul>
+				</div>
+					<div class="clear clearfix"></div>
+				</div>
+			</div>
+			<!--/.row end-->
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-5"></div>
+	</div>
+	<div style="clear:both"></div>
+</div>
+<!--/.main container-->
+<div class="gap"></div>
+{% endblock %}

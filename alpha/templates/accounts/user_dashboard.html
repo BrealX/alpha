@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block dashboard %}
+<div class="container main-container headerOffset">
+	<div class="row">
+		<div class="breadcrumbDiv col-lg-12">
+			<ul class="breadcrumb">
+				<li>
+					<a href="{% url 'home' %}">На главную</a>
+				</li>
+				<li>
+					<a href="{% url 'login' %}">Авторизация</a>
+				</li>
+				<li class="active">
+					Мой кабинет
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!--/.row-->
+	<div class="row">
+		<div class="col-lg-9 col-md-9 col-sm-7">
+			<h1 class="section-title-inner">
+				<span>
+					<i class="far fa-building"></i>
+					Мой кабинет
+				</span>
+			</h1>
+			<div class="row userInfo">
+				<div class="col-xs-12 col-sm-12">
+					<h2 class="block-title-2">
+						<span>Добро пожаловать в личный кабинет. <br>Здесь Вы можете управлять Вашей персональной информацией и Вашими заказами.</span>
+					</h2>
+					<ul class="myAccountList row">
+						<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4 text-center" style="height: 126px;">
+							<div class="thumbnail">
+								<a title="Заказы" href="">
+									<span style="display: block; clear: both; font-size: 44px; margin-bottom: 10px;">
+									<i class="far fa-calendar-alt"></i>
+									</span>
+									История заказов
+								</a>
+							</div>
+						</li>
+						<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4 text-center" style="height: 126px;">
+							<div class="thumbnail">
+								<a title="Мой профиль" href="{% url 'user_my_profile' %}">
+									<span style="display: block; clear: both; font-size: 44px; margin-bottom: 10px;">
+									<i class="fas fa-cog"></i>
+									</span>
+									Мой профиль
+								</a>
+							</div>
+						</li>
+					</ul>
+					<div class="clear clearfix"></div>
+				</div>
+			</div>
+			<!--/.row end-->
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-5"></div>
+	</div>
+	<div style="clear:both"></div>
+</div>
+<!--/.main container-->
+<div class="gap"></div>
+{% endblock %}

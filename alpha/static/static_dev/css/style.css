@@ -306,21 +306,6 @@ input[type='email']
     box-shadow: NONE;
 }
 
-.btn
-{
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1.4;
-
-    padding: 8px 20px;
-
-    transition: all .25s linear 0s;
-
-    border: medium none;
-    border-radius: 3px;
-}
-
-
 .btn.btn-lg
 {
     font-size: 16px;
@@ -348,41 +333,6 @@ input[type='email']
 }
 
 
-.btn-primary
-{
-    font-weight: 600;
-
-    color: #fff;
-    background-color: #4ec67f;
-    -webkit-box-shadow: 0 -1px rgba(0, 0, 0, .1) inset;
-            box-shadow: 0 -1px rgba(0, 0, 0, .1) inset;
-            text-shadow: 0 1px rgba(0, 0, 0, .1);
-
-         -o-text-shadow: 0 1px rgba(0, 0, 0, .1);
-    -webkit-text-shadow: 0 1px rgba(0, 0, 0, .1);
-        -ms-text-shadow: 0 1px rgba(0, 0, 0, .1);
-         -o-box-shadow: 0 -1px rgba(0, 0, 0, .1) inset;
-        -ms-box-shadow: 0 -1px rgba(0, 0, 0, .1) inset;
-}
-
-
-.btn-primary:hover,
-.btn-primary:focus
-{
-    color: #fff;
-    border-color: #66de97;
-    background-color: #66de97;
-}
-
-
-.btn-success
-{
-    padding: 8px 20px;
-
-    background-color: #4ec67f;
-}
-
-
 .btn-thin
 {
     color: #bdc3c7;
@@ -395,6 +345,54 @@ input[type='email']
 {
     background-color: transparent;
 }
+
+.btn-success
+{
+    color: #fff;
+    background-color: #2ecc71;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active
+{
+    color: #fff;
+    border-color: #58d68d;
+    background-color: #58d68d;
+}
+
+.btn-danger
+{
+    color: #fff;
+    background-color: #e74c3c;
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger.active
+{
+    color: #fff;
+    border-color: #ec7063;
+    background-color: #ec7063;
+}
+
+.btn-primary
+{
+    color: #fff;
+    background-color: #4ec67f;
+    border: medium none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus
+{
+    color: #fff;
+    border-color: #66de97;
+    background-color: #66de97;
+}
+
 
 /* ================================================================== */
 /* CUSTOMIZE NAVBAR
@@ -2385,6 +2383,47 @@ p.required,
     background: #fff;
 }
 
+.myAccountList li
+{
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.myAccountList .thumbnail
+{
+    height: 100%;
+}
+
+.myAccountList li a
+{
+    font-size: 14px;
+
+    display: block;
+}
+
+.panel-default > .panel-heading
+{
+    border-top: 4px solid #4ec67f !important;
+}
+
+.panel-title
+{
+    font-size: 16px;
+    font-size: 15px;
+
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+
+    color: inherit;
+    color: #454545;
+}
+
+.panel-footer-address .btn
+{
+    margin-right: 5px;
+}
+
 
 /* =============================================================== */
 /*  FOOTER
@@ -2512,6 +2551,12 @@ p.required,
          -o-border-radius: 3px;
         -ms-border-radius: 3px;
 }
+
+.newsLatterBox .btn:hover
+{
+    background: #27ae60;
+}
+
 
 .newsLatterBox
 {

@@ -21,7 +21,7 @@ include/*
 
 env/
 venv/
-shopper_venv/
+alpha_venv/
 
 *.ini
 *.env

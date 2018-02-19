@@ -41,3 +41,8 @@ class UserRegistrationForm(forms.Form):
 		if cd['password'] != cd['password_repeat']:
 			raise forms.ValidationError('Введенные пароли не совпадают')
 		return cd['password_repeat']
+
+
+class UserAddAddressForm(forms.Form):
+	"""Form for delivery address adding or editing"""
+	profile_delivery_address = forms.CharField()

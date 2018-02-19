@@ -25,6 +25,11 @@ class Profile(models.Model):
 		null=True,
 		blank=True
 	)
+	receiver_name = models.CharField(
+		max_length=240,
+		null=True,
+		blank=True
+	)
 	activation_key = models.CharField(
 		null=True,
 		blank=True,

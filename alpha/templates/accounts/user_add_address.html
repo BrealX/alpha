@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block dashboard %}
+<div class="container main-container headerOffset">
+	<div class="row">
+		<div class="breadcrumbDiv col-lg-12">
+			<ul class="breadcrumb">
+				<li>
+					<a href="{% url 'home' %}">На главную</a>
+				</li>
+				<li>
+					<a href="{% url 'user_dashboard' %}">Мой кабинет</a>
+				</li>
+				<li class="active">
+					Добавление адреса
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!--/.row-->
+	<div class="row">
+		<div class="col-lg-9 col-md-9 col-sm-7">
+			<h1 class="section-title-inner">
+				<span>
+					<i class="fas fa-map-marker-alt"></i>
+					Добавление адреса доставки
+				</span>
+			</h1>
+			<div class="row userInfo">
+				<div class="col-lg-12">
+					<h2 class="block-title-2">
+						Чтобы добавить или изменить Ваш адрес доставки, заполните или отредактируйте форму ниже.
+					</h2>
+				</div>
+				<form action="{% url 'add_address' %}" role="form" method="post">{% csrf_token %}
+					<div class="col-xs-12 col-sm-6">
+						<div class="form-group">
+							<label for="profile_delivery_address">Текущий адрес доставки</label>
+							<textarea name="profile_delivery_address" id="profile_delivery_address" cols="26" rows="3" class="form-control" placeholder="{% if user.profile.delivery_address %}{{ user.profile.delivery_address }}{% else %}У вас пока нет сохраненных адресов доставки{% endif %}" autofocus value="{{ request.POST.profile_delivery_address }}"></textarea>	
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6">
+						<div class="form-group">
+							<label>Укажите Ваш основной адрес доставки согласно следующего формата:</label>
+							<p>
+								<Область>,<Населенный пункт>,<номер отделения грузоперевозчика (Новая почта, Деливери...)>
+								<br> <strong>или</strong><br>
+								<Полный почтовый адрес с индексом (при заказе Укрпочтой)>
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-12 col-xs-12 clearfix">
+						<p class="form-error">{% if message %}{{ message }}{% endif %}</p>
+						<button type="submit" class="btn btn-primary">
+							<i class="fas fa-map-marker-alt"></i>
+							Сохранить адрес
+						</button>
+					</div>
+				</form>
+				<div class="col-lg-12 clearfix">
+					<ul class="pager">
+						<li class="next pull-left">
+							<a href="{% url 'user_my_profile' %}">
+								<i class="fas fa-arrow-left"></i>
+								Назад к Моим адресам
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--/.row end-->
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-5"></div>
+	</div>
+	<div style="clear:both"></div>
+</div>
+<!--/.main container-->
+<div class="gap"></div>
+{% endblock %}
