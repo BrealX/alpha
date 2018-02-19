@@ -16,6 +16,7 @@ from django.contrib.sites.shortcuts import get_current_site
 import datetime, hashlib, os
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
 
 
 def user_login(request):
@@ -101,6 +102,16 @@ def add_address(request):
                 "поля формы."    
     form = UserAddAddressForm()
     return render(request, 'accounts/user_add_address.html', locals())  
+
+
+@login_required(login_url='/auth/login')
+def delete_address(request):
+    user = request.user
+    user.profile.delivery_address = None
+    user.save()
+    return_dict = {}
+    return_dict['profile_delivery_address'] = user.profile.delivery_address
+    return JsonResponse(return_dict)
 
 
 def after_registration(request):

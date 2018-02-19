@@ -78,10 +78,11 @@
 									<i class="far fa-edit"></i>
 									Редактировать
 								</a>
-								<a class="btn btn-sm btn-danger">
+								<a class="btn btn-sm btn-danger" id="my_profile_address_delete">
 									<i class="fas fa-minus-circle"></i>
 									Удалить
 								</a>
+								<form id="my_profile_address_delete_form" action="{% url 'delete_address' %}">{% csrf_token %}</form>
 							</div>
 						</div>	
 					</div>

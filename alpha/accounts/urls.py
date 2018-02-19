@@ -8,6 +8,7 @@ urlpatterns = [
     re_path(r'^user_dashboard/$', views.user_dashboard, name="user_dashboard"),
     re_path(r'^user_dashboard/my_profile$', views.user_my_profile, name="user_my_profile"),
     re_path(r'^user_dashboard/add_address$', views.add_address, name="add_address"),
+    re_path(r'^user_dashboard/delete_address$', views.delete_address, name="delete_address"),
 
     # restore password urls
 	re_path(r'^password-reset/$', password_reset, name='password_reset'),

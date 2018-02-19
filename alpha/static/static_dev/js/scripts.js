@@ -257,6 +257,30 @@ $(document).ready(function() {
     // https://select2.org/getting-started/basic-usage
     $('.js-example-basic-single').select2();
 
+    // My Profile Page address delete button
+    $('#my_profile_address_delete').on('click', function(e) {
+        e.preventDefault();
+        var address_delete_form = $('#my_profile_address_delete_form');
+        var url = address_delete_form.attr('action');
+        var csfr_token = $('#my_profile_address_delete_form [name="csrfmiddlewaretoken"]').val();
+        data = {}
+        data["csrfmiddlewaretoken"] = csfr_token;
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            cache: true,
+            success: function(data) {
+                console.log('OK');
+                console.log(data);
+                if (!data.profile_delivery_address) {
+                    $('.address-line').html("");
+                    $('.address-line').text("Вы не указали адрес доставки");
+                };
+            }
+        });
+    });
+
 });
 
 
