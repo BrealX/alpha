@@ -6,7 +6,7 @@ class ProfileAdmin(admin.ModelAdmin):
 	class Meta:
 		model = Profile
 
-	list_display = ('user_email', 'user_username', 'phone', 'delivery_address')
+	list_display = ('user_username', 'user_email', 'phone', 'delivery_address')
 	#or [field.name for field in Profile._meta.fields] for all fields to show
 	search_fields = ('user',)
 	ordering = ('user',)

@@ -393,6 +393,43 @@ input[type='email']
     background-color: #66de97;
 }
 
+.fade {
+  opacity: 1;
+}
+
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+
+.modal-backdrop .fade .in {
+  opacity: 0.5 !important;
+}
+
+
+.modal-backdrop.fade {
+    opacity: 0.5 !important;
+}
+
+.modal-dialog-centered
+{
+    width: 600px;
+    margin: 30px auto;
+}
+
+.modal
+{
+    top: 40%;
+}
+
+.modal-title
+{
+    padding-bottom: 0;
+    padding-top: 25px;
+}
+
+
 
 /* ================================================================== */
 /* CUSTOMIZE NAVBAR
@@ -790,7 +827,8 @@ div.cartMenu.dropmenu:hover div.dropdown-menu
     margin-top: 0;
     padding-bottom: 0;
 
-    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
     background: #ecf0f1;
 }
 
@@ -1746,13 +1784,18 @@ div.productFilter button.btn-success
     width: 100%;
     padding: 7px 20px;
 
-    border: 2px solid #66de97;
+    border: 2px solid #27ae60;
+    background: none repeat scroll 0 0 #4ec67f;
 }
+
 
 div.productFilter button.btn-success:hover
 {
-    background-color: #66de97;
+    color: #303030;
+    border: solid 2px #4ec67f;
+    background: #fff;
 }
+
 
 div.productFilter a.btn-danger
 {
@@ -1760,6 +1803,12 @@ div.productFilter a.btn-danger
     padding: 7px 20px;
 
     border: 2px solid #d9534f;
+}
+
+div.productFilter a.btn-danger:hover
+{
+    color: #303030;
+    background: #fff;
 }
 
 .incaps i
@@ -2419,11 +2468,15 @@ p.required,
     color: #454545;
 }
 
-.panel-footer-address .btn
+.panel-body
 {
-    margin-right: 5px;
+    min-height: 170px;
 }
 
+.panel-footer.panel-footer-address
+{
+    text-align: center;
+}
 
 
 /* =============================================================== */

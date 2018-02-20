@@ -24,11 +24,11 @@ $(document).ready(function() {
             data: data,
             cache: true,
             success: function(data) {
-                console.log('OK');
                 if (data.products_in_cart_total_qnty) {
                     $('#cart_qnty_subtotal').text('('+data.products_in_cart_total_qnty+')');
                     $('.droppingbasket div.miniCartTable div div table tbody').html("");
                     $.each(data.products, function(k, v) {
+                        console.log('OK')
                         $('.droppingbasket div.miniCartTable div div table tbody').append('<tr class=\"miniCartProduct\">\
                             <td class=\"miniCartProductThumb\" style=\"width: 20%;\">\
                             <div>\
@@ -277,6 +277,52 @@ $(document).ready(function() {
                 };
             }
         });
+    });
+
+    // My Profile Page Personal delete button
+    $('#my_personal_delete').on('click', function(e) {
+        e.preventDefault();
+        var personal_delete_form = $('#my_personal_delete_form');
+        var url = personal_delete_form.attr('action');
+        var csfr_token = $('#my_personal_delete_form [name="csrfmiddlewaretoken"]').val();
+        data = {}
+        data["csrfmiddlewaretoken"] = csfr_token;
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            cache: true,
+            success: function(data) {
+                if (!data.user_firstname && !data.profile_phone) {
+                    $('.profile-firstname').html("");
+                    $('.profile-phone').html("");
+                    $('.profile-firstname').text("Вы не указали имя");
+                    $('.profile-phone').text("Вы не указали контактный номер телефона");
+                };
+            }
+        });
+    });
+
+    // Modal window on account deletion (delete confirmation & delete process)
+    $('div#deleteModalCenter').on('show.bs.modal', function(e) {
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+    });
+    $('div#deleteModalCenter').on('click', '.btn-ok', function(e) {
+        e.preventDefault();
+        var account_delete_form = $('#my_account_delete_form');
+        var url = account_delete_form.attr('action');
+        var csfr_token = $('#my_account_delete_form [name="csrfmiddlewaretoken"]').val();
+        data = {}
+        data["csrfmiddlewaretoken"] = csfr_token;
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            cache: true,
+            success: function(data) {
+                window.location.href = url;
+            }
+        })
     });
 
 });

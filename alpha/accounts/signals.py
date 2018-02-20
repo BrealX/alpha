@@ -12,5 +12,4 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
 	if created:
 		instance.profile = Profile.objects.create(user=instance)
 	instance.profile.save()
-	#instance.profile = Profile.objects.create(user=instance)
 	

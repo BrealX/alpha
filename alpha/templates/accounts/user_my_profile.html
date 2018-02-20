@@ -20,7 +20,7 @@
 	</div>
 	<!--/.row-->
 	<div class="row">
-		<div class="col-lg-9 col-md-9 col-sm-7">
+		<div class="col-lg-12 col-md-9 col-sm-7">
 			<h1 class="section-title-inner">
 				<span>
 					<i class="fas fa-map-marker-alt"></i>
@@ -28,12 +28,12 @@
 				</span>
 			</h1>
 			<p>
-				Здесь Вы можете отредактировать Ваши персональные данные, адрес доставки товаров по умолчанию и контактный номер телефона. При необходимости можно также изменить Ваш пароль.
+				Здесь Вы можете отредактировать Ваши персональные данные, адрес доставки товаров по умолчанию и контактный номер телефона. При необходимости можно также изменить Ваш пароль или удалить аккаунт.
 			</p>
 			<div class="row userInfo">
 				<div class="col-lg-12">
 					<h2 class="block-title-2">
-						Ваши данные указаны ниже. 
+						Ваши данные указаны ниже 
 					</h2>
 				</div>
 				<div class="w100 clearfix">
@@ -62,11 +62,14 @@
 									</li>
 									<li style="margin-top: 10px;">
 										<span>
+											<strong>Номер телефона получателя:</strong>
+										</span>
+									</li>
+									<li style="margin-top: 10px;">
+										<span class="profile-phone">
 											{% if user.profile.phone %}
-												<strong>Номер телефона получателя: </strong><br>
 												{{ user.profile.phone }}
 											{% else %}
-												<strong>Номер телефона получателя: </strong><br>
 												Вы не указали контактный номер телефона
 											{% endif %}
 										</span>
@@ -97,7 +100,7 @@
 								<ul>
 									<li>
 										<span>
-											<strong>Имя</strong>
+											<strong>Ф.И.О. (используется для создания накладных при отправке):</strong>
 										</span>
 									</li>
 									<li style="margin-top: 10px;">
@@ -111,11 +114,14 @@
 									</li>
 									<li style="margin-top: 10px;">
 										<span>
+											<strong>Номер телефона (для уточнения деталей заказа):</strong>
+										</span>
+									</li>
+									<li style="margin-top: 10px;">
+										<span class="profile-phone">
 											{% if user.profile.phone %}
-												<strong>Номер телефона: </strong><br>
 												{{ user.profile.phone }}
 											{% else %}
-												<strong>Номер телефона: </strong><br>
 												Вы не указали контактный номер телефона
 											{% endif %}
 										</span>
@@ -132,6 +138,65 @@
 									Удалить
 								</a>
 								<form id="my_personal_delete_form" action="{% url 'delete_personal' %}">{% csrf_token %}</form>
+							</div>
+						</div>	
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">	
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<strong>Управление учетной записью</strong>
+								</h3>
+							</div>
+							<div class="panel-body">
+								<ul>
+									<li>
+										<span>
+											<strong>Пароль</strong>
+										</span>
+									</li>
+									<li style="margin-top: 10px;">
+										<span class="profile-password">
+												Вы можете при необходимости изменить Ваш текущий пароль.
+												Также Вы можете удалить Вашу учетную запись на нашем сайте.
+										</span>
+									</li>
+								</ul>
+							</div>
+							<div class="panel-footer panel-footer-address">
+								<a href="{% url 'password_reset' %}" class="btn btn-sm btn-success">
+									<i class="far fa-edit"></i>
+									Изменить пароль
+								</a>
+								<!-- Button trigger modal -->
+								<button id="account_delete" type="button" class="btn btn-sm btn-danger" data-href="{% url 'login' %}" data-toggle="modal" data-target="#deleteModalCenter">
+									<i class="fas fa-minus-circle"></i>
+									Удалить аккаунт
+								</button>
+								<!-- Modal -->
+								<div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden='true'>
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="deleteModalCenterTitle"><strong>Внимание! Удаление аккаунта {{ user.username }}!</strong>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">x</span>
+													</button>
+												</h5>
+											</div>
+											<div class="modal-body">
+												<p>
+													Если Вы действительно желаете удалить аккаунт, нажмите кнопку "Удалить". Все Ваши данные будут удалены и восстановить их будет уже нельзя. Удалить?
+												</p>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+												<button href="" type="button" class="btn btn-danger btn-ok">Удалить</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<form id="my_account_delete_form" action="{% url 'delete_account' %}">{% csrf_token %}</form>
 							</div>
 						</div>	
 					</div>
