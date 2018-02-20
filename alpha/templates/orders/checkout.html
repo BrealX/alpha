@@ -97,7 +97,7 @@
                                 </span>
                             </div>
                             <div class="pull-right">
-                                <a class="btn btn-default" id="cart_refresh">
+                                <a class="btn btn-default" id="cart_refresh" href="{% url 'checkout' %}">
                                     <i class="fa fa-undo"></i>
                                     Внести изменения в корзину
                                 </a>
@@ -113,13 +113,8 @@
             <div class="contentBox">
                 <div class="w100 costDetails">
                     <div id="order-detail-content" class="table-block">
-                        {% if username %}
                         <a class="btn btn-primary btn-lg btn-block" title="Оформить заказ" href="{% url 'checkout1' %}" style="margin-bottom:20px">Оформить заказ
                             <i class="fa fa-arrow-right"></i></a>
-                        {% else %}
-                        <a class="btn btn-primary btn-lg btn-block" title="Оформить заказ" href="{% url 'login' %}" style="margin-bottom:20px">Оформить заказ
-                            <i class="fa fa-arrow-right"></i></a>
-                        {% endif %}
                         <div class="w100 cartMiniTable">
                             <table id="cart-summary" class="std table">
                                 <tbody>

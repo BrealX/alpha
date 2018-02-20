@@ -9,7 +9,6 @@ $(document).ready(function() {
         data.qnty = qnty;
         var csfr_token = $('#navbar_form [name="csrfmiddlewaretoken"]').val();
         data["csrfmiddlewaretoken"] = csfr_token;
-        console.log(data);
 
         if (is_delete){
             data['is_delete'] = true;
@@ -28,7 +27,6 @@ $(document).ready(function() {
                     $('#cart_qnty_subtotal').text('('+data.products_in_cart_total_qnty+')');
                     $('.droppingbasket div.miniCartTable div div table tbody').html("");
                     $.each(data.products, function(k, v) {
-                        console.log('OK')
                         $('.droppingbasket div.miniCartTable div div table tbody').append('<tr class=\"miniCartProduct\">\
                             <td class=\"miniCartProductThumb\" style=\"width: 20%;\">\
                             <div>\
@@ -193,7 +191,7 @@ $(document).ready(function() {
 
     
     // Check any quantity changes at Cart Page and make changes to Cart
-    $(document).on('change', ".product-in-cart-qnty", function(){
+    $(document).on('change', '.product-in-cart-qnty', function(){
         var current_qnty = $(this).val();
         var current_tr = $(this).closest('tr');
         var current_price = parseFloat(current_tr.find('.product-in-basket-price').text()).toFixed(2);
@@ -234,7 +232,6 @@ $(document).ready(function() {
 
 
     // Product Page Zoomer Initializer
-    
     $(window).on('load', function() {
         $('.sp-wrap').smoothproducts();
     }); 

@@ -34,7 +34,7 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('checkout1')
+                    return redirect('home')
                 else:
                     login_error = 'Данный аккаунт заблокирован. Пожалуйста, свяжитесь с нами для' \
                         + ' восстановления учетной записи!'

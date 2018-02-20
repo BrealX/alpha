@@ -29,7 +29,7 @@
 					<h2 class="block-title-2">
 						Создать аккаунт
 					</h2>
-					<form action="/auth/login/" role="form" method="post">
+					<form action="{% url 'login' %}" role="form" method="post">
 						{% csrf_token %}
 						<div class="form-group">
 							<label for="new_user_email">Адрес email (используется в качестве логина)</label>
@@ -60,7 +60,7 @@
 					<h2 class="block-title-2">
 						<span>Уже зарегистрированы?</span>
 					</h2>
-					<form action="/auth/login/" role="form" method="post">
+					<form action="{% url 'login' %}" role="form" method="post">
 						{% csrf_token %}
 						<div class="form-group">
 							<label for="user_email">Адрес email</label>
@@ -102,7 +102,7 @@
 					<p>
 						У Вас нет аккаунта и Вы не желаете регистрироваться? Используйте гостевой режим!
 					</p>
-					<a class="btn btn-primary" href="{% url 'checkout1' %}">
+					<a class="btn btn-primary" href="{% url 'home' %}">
 						<i class="fas fa-sign-in-alt"></i>
 						Продолжить как Гость
 					</a>

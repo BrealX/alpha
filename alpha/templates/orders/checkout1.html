@@ -10,7 +10,7 @@
 					<a href="{% url 'home' %}">На главную</a>
 				</li>
 				<li>
-					<a href="{% url 'checkout' %}">К корзине</a>
+					<a href="{% url 'checkout' %}">Корзина</a>
 				</li>
 				<li class="active">
 					Оформление заказа
@@ -64,85 +64,70 @@
 							<div class="col-lg-12">
 								<h2 class="block-title-2">Чтобы оформить заказ, пожалуйста, заполните форму ниже</h2>
 							</div>
-							<form>
+							<form action="{% url 'checkout1' %}" role="form" method="post" id="checkout_form">{% csrf_token %}
 								<div class="col-xs-12 col-sm-6">
 									<div class="form-group required">
-										<label for="InputName">Имя
-											<sup>*</sup>
-										</label>
-										<input type="text" id="InputName" class="form-control" required="" placeholder="Ваше имя">
+										<label for="anonymous_name">Имя<sup>*</sup></label>
+										<input type="text" id="anonymous_name" class="form-control" required placeholder="Ваше имя" value="{{ request.POST.anonymous_name }}" name="{{ form.anonymous_name.html_name }}">
 									</div>
 									<div class="form-group required">
-										<label for="InputEmail">Email</label>
-										<input type="email" id="InputEmail" class="form-control" placeholder="Ваш email">
+										<label for="anonymous_email">Email<sup>*</sup></label>
+										<input type="email" id="anonymous_email" class="form-control" required placeholder="Ваш email" value="{{ request.POST.anonymous_email }}" name="{{ form.anonymous_email.html_name }}">
 									</div>
 									<div class="form-group required">
-										<label for="InputMobile">Контактный номер телефона
-											<sup>*</sup>
+										<label for="anonymous_phone">Контактный номер телефона<sup>*</sup>
 										</label>
-										<input type="tel" id="InputMobile" class="form-control" required="" placeholder="Номер телефона">
+										<input type="tel" id="anonymous_phone" class="form-control phone-mask" required placeholder="Номер телефона" value="{{ request.POST.anonymous_phone }}" name="{{ form.anonymous_phone.html_name }}">
 									</div>
 								</div>
 								<div class="col-xs-12 col-sm-6">
 									<div class="form-group required">
-										<label for="InputState">Область
-											<sup>*</sup>
-										</label>
-										<select class="js-example-basic-single form-control" name="state_id" id="state_id">
+										<label for="anonymous_state">Область<sup>*</sup></label>
+										<select class="js-example-basic-single form-control" name="anonymous_state" id="anonymous_state">
 											<option value="">Выберите область</option>
-											<option value="1">Винницкая</option>
-											<option value="2">Волынская</option>
-											<option value="3">Днепропетровская</option>
-											<option value="4">Донецкая</option>
-											<option value="5">Житомирская</option>
-											<option value="6">Закарпатская</option>
-											<option value="7">Запорожская</option>
-											<option value="8">Ивано-Франковская</option>
-											<option value="9">Киевская</option>
-											<option value="10">Кировоградская</option>
-											<option value="11">Луганская</option>
-											<option value="12">Львовская</option>
-											<option value="13">Николаевская</option>
-											<option value="14">Одесская</option>
-											<option value="15">Полтавская</option>
-											<option value="16">Ровенская</option>
-											<option value="17">Сумская</option>
-											<option value="18">Тернопольская</option>
-											<option value="19">Харьковская</option>
-											<option value="20">Херсонская</option>
-											<option value="21">Хмельницкая</option>
-											<option value="22">Черкасская</option>
-											<option value="23">Черновецкая</option>
-											<option value="24">Черниговская</option>
+											<option value="Винницкая">Винницкая</option>
+											<option value="Волынская">Волынская</option>
+											<option value="Днепропетровская">Днепропетровская</option>
+											<option value="Донецкая">Донецкая</option>
+											<option value="Житомирская">Житомирская</option>
+											<option value="Закарпатская">Закарпатская</option>
+											<option value="Запорожская">Запорожская</option>
+											<option value="Ивано-Франковская">Ивано-Франковская</option>
+											<option value="Киевская">Киевская</option>
+											<option value="Кировоградская">Кировоградская</option>
+											<option value="Луганская">Луганская</option>
+											<option value="Львовская">Львовская</option>
+											<option value="Николаевская">Николаевская</option>
+											<option value="Одесская">Одесская</option>
+											<option value="Полтавская">Полтавская</option>
+											<option value="Ровенская">Ровенская</option>
+											<option value="Сумская">Сумская</option>
+											<option value="Тернопольская">Тернопольская</option>
+											<option value="Харьковская">Харьковская</option>
+											<option value="Херсонская">Херсонская</option>
+											<option value="Хмельницкая">Хмельницкая</option>
+											<option value="Черкасская">Черкасская</option>
+											<option value="Черновецкая">Черновецкая</option>
+											<option value="Черниговская">Черниговская</option>
 										</select>
 									</div>
 									<div class="form-group required">
-										<label for="InputRegion">Район
-											<sup>*</sup>
-										</label>
-										<select class="js-example-basic-single form-control" name="region_id" id="region_id" disabled="disabled">
-											<option value="0">Выберете район</option>
+										<label for="anonymous_region">Район<sup>*</sup></label>
+										<select class="js-example-basic-single form-control" name="anonymous_region" id="anonymous_region">
+											<option value="">Выберете район</option>
+											<option value="Тестовый">Тестовый район</option>
 										</select>
 									</div>
 									<div class="form-group required">
-										<label for="InputCity">Населенный пункт
-											<sup>*</sup>
-										</label>
-										<select class="js-example-basic-single form-control" name="city_id" id="city_id" disabled="disabled">
-											<option value="0">Выберете населенный пункт</option>
+										<label for="anonymous_city">Населенный пункт<sup>*</sup></label>
+										<select class="js-example-basic-single form-control" name="anonymous_city" id="anonymous_city">
+											<option value="">Выберете населенный пункт</option>
+											<option value="Тестовск">Тестовск</option>
 										</select>
 									</div>
 									<div class="form-group required">
-											<label for="InputDelivery">Способ доставки
-												<sup>*</sup>
-											</label>
-											<select class="js-example-basic-single form-control" name="delivery_id" id="delivery_id" disabled="disabled">
-												<option value="0">Выберете способ доставки</option>
-											</select>
-									</div>
-									<div class="form-group required">
-										<label for="InputAdditionalInfo">Дополнительная информация: <br>укажите номер и адрес отделения склада перевозчика или номер почтового отделения Укрпочты и адрес (не требуется заполнять при самовывозе)</label>
-										<textarea type="textarea" id="InputAdditionalInfo" class="form-control" rows="3" cols="26"></textarea>
+										<label for="anonymous_additional">Дополнительная информация: <br>укажите номер и адрес отделения склада перевозчика или номер почтового отделения Укрпочты и адрес (не требуется заполнять при самовывозе)</label>
+										<textarea type="textarea" id="anonymous_additional" class="form-control" rows="3" cols="26" value="{{ request.POST.new_user_delivery_address }}"></textarea>
 									</div>
 								</div>
 							</form>
@@ -152,16 +137,16 @@
 					<div class="cartFooter w100">
 						<div class="box-footer">
 							<div class="pull-left">
-								<a class="btn btn-default" href="{% url 'login' %}">
+								<a class="btn btn-default" href="{% url 'checkout' %}">
 									<i class="fas fa-arrow-left"></i>
-									Вернуться к учетным записям
+									Вернуться к корзине
 								</a>
 							</div>
 							<div class="pull-right">
-								<a class="btn btn-primary btn-small" href="{% url 'checkout2' %}">
+								<button class="btn btn-primary btn-small" type="submit" form="checkout_form">
 									Далее
 									<i class="fas fa-arrow-circle-right"></i>
-								</a>
+								</button>
 							</div>
 						</div>
 					</div>

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import *
-from .forms import CheckoutContactForm
+from .forms import CheckoutFormLeft, CheckoutFormRight
 from django.contrib.auth.models import User
 
 
@@ -52,6 +52,43 @@ def auth(request):
 
 
 def checkout1(request):
+    user = request.user
+    message = ''
+    if request.POST:
+        form1 = CheckoutFormLeft(Request.POST or None)
+        form2 = CheckoutFormRight(Request.POST or None)
+        if form1.is_valid():
+            data = request.POST
+            print(data)
+            new_user_username = data.get('anonymous_email')
+            new_user_email = data.get('anonymous_email')
+            new_user_phone = data.get('anonymous_phone')
+            new_user_firstname = data.get('anonymous_name')
+            new_user_delivery_address = data.get('anonymous_state') + ' область, ' +  data.get('anonymous_region') + 'г. ' + data.get('anonymous_city') + ', ' + data.get('anonymous_additional')
+            new_user, created = User.objects.get_or_create(
+                    username=new_user_username, 
+                    first_name=new_user_firstname,
+                    email=new_user_email,
+                )
+            new_user.save()
+            print(new_user.username, new_user.first_name, new_user.email)
+            new_user.profile.phone = new_user_phone
+            new.user.profile.delivery_address = new_user_delivery_address
+            new_user.save()
+            print(new_user.profile.phone, new_user.profile.delivery_address)
+            new_user_order, created = Order.objects.get_or_create(
+                user=new_user,
+                customer_name=new_user.first_name,
+                customer_phone=new_user.profile.phone,
+                customer_address=new_user.profile.delivery_address,
+                status=Status.objects.filter(id=1)
+                )
+            new_user_order.save()
+            print(new_user_order.customer_name, new_user_order.customer_phone, new_user_order.customer_address, new_user_order.status)
+            return render(request, '/checkout2.html', locals())
+        print('not VALID')
+    form1 = CheckoutFormLeft()
+    form2 = CheckoutFormRight()
     return render(request, 'orders/checkout1.html', locals())
 
 def checkout2(request):
