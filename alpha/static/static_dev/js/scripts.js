@@ -311,6 +311,8 @@ $(document).ready(function() {
         e.preventDefault();
         var account_delete_form = $('#my_account_delete_form');
         var url = account_delete_form.attr('action');
+        var go_home_form = $('#go_home_form');
+        var redirect_url = go_home_form.attr('action');
         var csfr_token = $('#my_account_delete_form [name="csrfmiddlewaretoken"]').val();
         data = {}
         data["csrfmiddlewaretoken"] = csfr_token;
@@ -320,7 +322,7 @@ $(document).ready(function() {
             data: data,
             cache: true,
             success: function(data) {
-                window.location.href = url;
+                window.location.href = redirect_url;
             }
         })
     });

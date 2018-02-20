@@ -152,6 +152,8 @@ def delete_personal(request):
 
 @login_required(login_url='/auth/login')
 def delete_account(request):
+    '''makes current User inactive and marks his username as deleted in order to
+    user can create his profile again with the same username later if needed'''
     if request.POST:
         user = request.user
         User.objects.filter(id=user.id).update(email=user.username)
