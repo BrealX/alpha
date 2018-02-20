@@ -156,10 +156,13 @@ def delete_account(request):
     user can create his profile again with the same username later if needed'''
     if request.POST:
         user = request.user
-        User.objects.filter(id=user.id).update(email=user.username)
-        name = 'zzdeleted' + str(user.id)
-        process = User.objects.filter(id=user.id).update(is_active=False, username=name)
         return_dict = {}
+        if user.is_superuser:
+            pass
+        else:
+            User.objects.filter(id=user.id).update(email=user.username)
+            name = 'zzdeleted' + str(user.id)
+            process = User.objects.filter(id=user.id).update(is_active=False, username=name)
     return JsonResponse(return_dict)
 
 
