@@ -328,7 +328,6 @@ $(document).ready(function() {
     // Ajax request to Nova Poshta API for cities data
     $('select#id_anonymous_area').on('change', function() {
         var id_area = $(this).val();
-        console.log(id_area);
         $.ajax({
             type: 'get',
             url: '/ajax/get_cities/',
@@ -336,6 +335,16 @@ $(document).ready(function() {
             cache: true,
             success: function(response) {
                 $('select#id_anonymous_city').prop('disabled', false); // Enables element
+                var new_options = response.cities;
+                console.log(new_options);
+                $.each(new_options, function(key, value) {
+                    $.each(value, function(k, v) {
+                        $('select#id_anonymous_city').append(
+                        $('<option>', { value: k }).text(v));
+                    });
+                });
+                
+
                 
             }
         });

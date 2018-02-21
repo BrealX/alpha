@@ -106,7 +106,7 @@ def get_cities(request):
     https://api.novaposhta.ua/v2.0/{format}/ [json]
     '''
     # Sending request for Cities
-    id_area = request.GET['id_area']
+    id_area = request.GET.get('id_area', None)
     print(id_area)
     if id_area in [city['Ref'] for city in AREAS_LIST]:
         url = 'https://api.novaposhta.ua/v2.0/json/AddressGeneral/getSettlements'
@@ -116,12 +116,12 @@ def get_cities(request):
             "calledMethod": "getSettlements",
             "methodProperties": {
                 "Area": id_area,
-                "Page": 1
+                "Page": 1,
+                "Warehouse": 1
             },
             "apiKey": config('NOVA_POSHTA_API_KEY')
         }
         context = json.dumps(context, separators=(',', ':'))
-        print(context)
         answer = requests.post(url, headers=headers, data=context)
 
         # Getting responce with data
@@ -133,11 +133,10 @@ def get_cities(request):
                     'errors': data['errors'],
                     'warnings': data['warnings'],
                     'info': data['info'],
-                    'cities': [{'Ref': city['Ref'], 'Description': city['Description']} for city in data['data']]
+                    'cities': [{city['Ref']: city['Description']} for city in data['data']]
                 }
                 if data['data']:
-                    print(context['cities'])
-                    return JsonResponse(context['cities'], safe=False)
+                    return JsonResponse(dict(cities=context['cities']))
                 return JsonResponse({'error': 'No data returned'})
             else:
                 context = {'errors': data['errors']}
