@@ -252,7 +252,8 @@ $(document).ready(function() {
 
     // Select2 Initializer
     // https://select2.org/getting-started/basic-usage
-    $('.js-example-basic-single').select2();
+    //$('.js-example-basic-single').select2();
+    //$('.django-select2').djangoSelect2();
 
     // My Profile Page address delete button
     $('#my_profile_address_delete').on('click', function(e) {
@@ -322,6 +323,22 @@ $(document).ready(function() {
                 window.location.href = redirect_url;
             }
         })
+    });
+
+    // Ajax request to Nova Poshta API for cities data
+    $('select#id_anonymous_area').on('change', function() {
+        var id_area = $(this).val();
+        console.log(id_area);
+        $.ajax({
+            type: 'get',
+            url: '/ajax/get_cities/',
+            data: { 'id_area': id_area },
+            cache: true,
+            success: function(response) {
+                $('select#id_anonymous_city').prop('disabled', false); // Enables element
+                
+            }
+        });
     });
 
 });

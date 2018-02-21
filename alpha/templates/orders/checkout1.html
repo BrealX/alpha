@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
 <div class="container main-container headerOffset">
@@ -67,67 +68,40 @@
 							<form action="{% url 'checkout1' %}" role="form" method="post" id="checkout_form">{% csrf_token %}
 								<div class="col-xs-12 col-sm-6">
 									<div class="form-group required">
-										<label for="anonymous_name">Имя<sup>*</sup></label>
-										<input type="text" id="anonymous_name" class="form-control" required placeholder="Ваше имя" value="{{ request.POST.anonymous_name }}" name="{{ form.anonymous_name.html_name }}">
+										<label for="{{ form1.anonymous_name.auto_id }}">{{ form1.anonymous_name.label }}<sup>*</sup></label>
+										{% render_field form1.anonymous_name|add_class:"form-control"|attr:"autofocus" %}
 									</div>
 									<div class="form-group required">
-										<label for="anonymous_email">Email<sup>*</sup></label>
-										<input type="email" id="anonymous_email" class="form-control" required placeholder="Ваш email" value="{{ request.POST.anonymous_email }}" name="{{ form.anonymous_email.html_name }}">
+										<label for="{{ form1.anonymous_email.auto_id }}">{{ form1.anonymous_email.label }}<sup>*</sup></label>
+										{% render_field form1.anonymous_email|add_class:"form-control" %}
 									</div>
 									<div class="form-group required">
-										<label for="anonymous_phone">Контактный номер телефона<sup>*</sup>
+										<label for="{{ form1.anonymous_phone.auto_id }}">{{ form1.anonymous_phone.label }}<sup>*</sup>
 										</label>
-										<input type="tel" id="anonymous_phone" class="form-control phone-mask" required placeholder="Номер телефона" value="{{ request.POST.anonymous_phone }}" name="{{ form.anonymous_phone.html_name }}">
+										{% render_field form1.anonymous_phone|add_class:"form-control phone-mask" placeholder="Номер телефона" %}
 									</div>
 								</div>
 								<div class="col-xs-12 col-sm-6">
 									<div class="form-group required">
-										<label for="anonymous_state">Область<sup>*</sup></label>
-										<select class="js-example-basic-single form-control" name="anonymous_state" id="anonymous_state">
-											<option value="">Выберите область</option>
-											<option value="Винницкая">Винницкая</option>
-											<option value="Волынская">Волынская</option>
-											<option value="Днепропетровская">Днепропетровская</option>
-											<option value="Донецкая">Донецкая</option>
-											<option value="Житомирская">Житомирская</option>
-											<option value="Закарпатская">Закарпатская</option>
-											<option value="Запорожская">Запорожская</option>
-											<option value="Ивано-Франковская">Ивано-Франковская</option>
-											<option value="Киевская">Киевская</option>
-											<option value="Кировоградская">Кировоградская</option>
-											<option value="Луганская">Луганская</option>
-											<option value="Львовская">Львовская</option>
-											<option value="Николаевская">Николаевская</option>
-											<option value="Одесская">Одесская</option>
-											<option value="Полтавская">Полтавская</option>
-											<option value="Ровенская">Ровенская</option>
-											<option value="Сумская">Сумская</option>
-											<option value="Тернопольская">Тернопольская</option>
-											<option value="Харьковская">Харьковская</option>
-											<option value="Херсонская">Херсонская</option>
-											<option value="Хмельницкая">Хмельницкая</option>
-											<option value="Черкасская">Черкасская</option>
-											<option value="Черновецкая">Черновецкая</option>
-											<option value="Черниговская">Черниговская</option>
-										</select>
+										<label for="{{ form2.anonymous_area.id_for_label }}">{{ form2.anonymous_area.label }}<sup>*</sup></label>
+										{{ form2.anonymous_area|add_class:"form-control" }}
+										{% for error in form2.anonymous_area.errors %}
+											<span class="form-error">{{ error }}</span>
+										{% endfor %}
 									</div>
 									<div class="form-group required">
-										<label for="anonymous_region">Район<sup>*</sup></label>
-										<select class="js-example-basic-single form-control" name="anonymous_region" id="anonymous_region">
-											<option value="">Выберете район</option>
-											<option value="Тестовый">Тестовый район</option>
-										</select>
+										<label for="{{ form2.anonymous_city.id_for_label }}">{{ form2.anonymous_city.label }}<sup>*</sup></label>
+										{{ form2.anonymous_city|add_class:"form-control"|attr:"disabled" }}
+										{% for error in form2.anonymous_city.errors %}
+											<span class="form-error">{{ error }}</span>
+										{% endfor %}
 									</div>
 									<div class="form-group required">
-										<label for="anonymous_city">Населенный пункт<sup>*</sup></label>
-										<select class="js-example-basic-single form-control" name="anonymous_city" id="anonymous_city">
-											<option value="">Выберете населенный пункт</option>
-											<option value="Тестовск">Тестовск</option>
-										</select>
-									</div>
-									<div class="form-group required">
-										<label for="anonymous_additional">Дополнительная информация: <br>укажите номер и адрес отделения склада перевозчика или номер почтового отделения Укрпочты и адрес (не требуется заполнять при самовывозе)</label>
-										<textarea type="textarea" id="anonymous_additional" class="form-control" rows="3" cols="26" value="{{ request.POST.new_user_delivery_address }}"></textarea>
+										<label for="{{ form2.anonymous_additional.id_for_label }}">{{ form2.anonymous_additional.label }}<sup>*</sup></label>
+										{{ form2.anonymous_additional|add_class:"form-control" }}
+										{% for error in form2.anonymous_additional.errors %}
+											<span class="form-error">{{ error }}</span>
+										{% endfor %}
 									</div>
 								</div>
 							</form>

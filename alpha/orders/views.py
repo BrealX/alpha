@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from .models import *
-from .forms import CheckoutFormLeft, CheckoutFormRight
+from .forms import CheckoutFormLeft, CheckoutFormRight, AREAS_LIST
 from django.contrib.auth.models import User
+from decouple import config
+import requests
+import json
 
 
 def add_to_cart(request):
@@ -40,6 +43,10 @@ def add_to_cart(request):
     return JsonResponse(return_dict)
 
 
+def auth(request):
+    return render(request, 'orders/auth.html', locals())
+
+
 def checkout(request):
     session_key = request.session.session_key
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True, order__isnull=True)
@@ -47,24 +54,21 @@ def checkout(request):
     return render(request, 'orders/checkout.html', locals())
 
 
-def auth(request):
-    return render(request, 'orders/auth.html', locals())
-
-
 def checkout1(request):
     user = request.user
-    message = ''
     if request.POST:
-        form1 = CheckoutFormLeft(Request.POST or None)
-        form2 = CheckoutFormRight(Request.POST or None)
-        if form1.is_valid():
-            data = request.POST
-            print(data)
-            new_user_username = data.get('anonymous_email')
-            new_user_email = data.get('anonymous_email')
-            new_user_phone = data.get('anonymous_phone')
-            new_user_firstname = data.get('anonymous_name')
-            new_user_delivery_address = data.get('anonymous_state') + ' область, ' +  data.get('anonymous_region') + 'г. ' + data.get('anonymous_city') + ', ' + data.get('anonymous_additional')
+        form1 = CheckoutFormLeft(request.POST or None)
+        form2 = CheckoutFormRight(request.POST or None)
+        '''if form1.is_valid() and form2.is_valid():
+            print('forms are valid')
+            cd1 = form1.cleaned_data
+            cd2 = form2.cleaned_data
+            print(cd1)
+            new_user_username = cd1['anonymous_email']
+            new_user_email = cd1['anonymous_email']
+            new_user_phone = cd1['anonymous_phone']
+            new_user_firstname = cd1['anonymous_name']
+            new_user_delivery_address = cd2['anonymous_state'] + ' область, ' +  cd2['anonymous_region'] + 'г. ' + cd2['anonymous_city'] + ', ' + cd2['anonymous_additional']
             new_user, created = User.objects.get_or_create(
                     username=new_user_username, 
                     first_name=new_user_firstname,
@@ -86,10 +90,56 @@ def checkout1(request):
             new_user_order.save()
             print(new_user_order.customer_name, new_user_order.customer_phone, new_user_order.customer_address, new_user_order.status)
             return render(request, '/checkout2.html', locals())
-        print('not VALID')
+        print('not VALID')'''
     form1 = CheckoutFormLeft()
     form2 = CheckoutFormRight()
     return render(request, 'orders/checkout1.html', locals())
 
+
 def checkout2(request):
     return render(request, 'orders/checkout2.html', locals())
+
+
+def get_cities(request):
+    '''
+    Gets Cities list from Nova Poshta API 
+    https://api.novaposhta.ua/v2.0/{format}/ [json]
+    '''
+    # Sending request for Cities
+    id_area = request.GET['id_area']
+    print(id_area)
+    if id_area in [city['Ref'] for city in AREAS_LIST]:
+        url = 'https://api.novaposhta.ua/v2.0/json/AddressGeneral/getSettlements'
+        headers = {'Content-Type': 'application/json'}
+        context = {
+            "modelName": "AddressGeneral",
+            "calledMethod": "getSettlements",
+            "methodProperties": {
+                "Area": id_area,
+                "Page": 1
+            },
+            "apiKey": config('NOVA_POSHTA_API_KEY')
+        }
+        context = json.dumps(context, separators=(',', ':'))
+        print(context)
+        answer = requests.post(url, headers=headers, data=context)
+
+        # Getting responce with data
+        data = answer.json()
+        # If response code is 200 --> save data
+        if answer.status_code == requests.codes.ok:
+            if data['success'] == True:
+                context = {
+                    'errors': data['errors'],
+                    'warnings': data['warnings'],
+                    'info': data['info'],
+                    'cities': [{'Ref': city['Ref'], 'Description': city['Description']} for city in data['data']]
+                }
+                if data['data']:
+                    print(context['cities'])
+                    return JsonResponse(context['cities'], safe=False)
+                return JsonResponse({'error': 'No data returned'})
+            else:
+                context = {'errors': data['errors']}
+                return JsonResponse(context['errors'])
+    return JsonResponse({'error': 'Error. No such region'})
