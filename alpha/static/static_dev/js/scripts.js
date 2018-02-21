@@ -336,7 +336,6 @@ $(document).ready(function() {
             success: function(response) {
                 $('select#id_anonymous_city').prop('disabled', false); // Enables element
                 var new_options = response.cities;
-                console.log(new_options);
                 $.each(new_options, function(key, value) {
                     $.each(value, function(k, v) {
                         $('select#id_anonymous_city').append(

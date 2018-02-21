@@ -107,7 +107,6 @@ def get_cities(request):
     '''
     # Sending request for Cities
     id_area = request.GET.get('id_area', None)
-    print(id_area)
     if id_area in [city['Ref'] for city in AREAS_LIST]:
         url = 'https://api.novaposhta.ua/v2.0/json/AddressGeneral/getSettlements'
         headers = {'Content-Type': 'application/json'}
@@ -115,7 +114,7 @@ def get_cities(request):
             "modelName": "AddressGeneral",
             "calledMethod": "getSettlements",
             "methodProperties": {
-                "Area": id_area,
+                "Area": 'dcaadb64-4b33-11e4-ab6d-005056801329',
                 "Page": 1,
                 "Warehouse": 1
             },
