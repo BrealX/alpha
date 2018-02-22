@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from .models import *
 from .forms import CheckoutFormLeft, CheckoutFormRight, AREAS_LIST
@@ -57,54 +57,62 @@ def checkout(request):
 def checkout1(request):
     user = request.user
     if request.POST:
+        data = request.POST
         form1 = CheckoutFormLeft(request.POST or None)
         form2 = CheckoutFormRight(request.POST or None)
-        '''if form1.is_valid() and form2.is_valid():
-            print('forms are valid')
+        if form1.is_valid():
             cd1 = form1.cleaned_data
-            cd2 = form2.cleaned_data
-            print(cd1)
-            new_user_username = cd1['anonymous_email']
-            new_user_email = cd1['anonymous_email']
-            new_user_phone = cd1['anonymous_phone']
-            new_user_firstname = cd1['anonymous_name']
-            new_user_delivery_address = cd2['anonymous_state'] + ' область, ' +  cd2['anonymous_region'] + 'г. ' + cd2['anonymous_city'] + ', ' + cd2['anonymous_additional']
-            new_user, created = User.objects.get_or_create(
-                    username=new_user_username, 
-                    first_name=new_user_firstname,
-                    email=new_user_email,
+            #cd2 = form2.cleaned_data
+            new_order = Order.objects.create(
+                customer_name=cd1['anonymous_name'],
+                customer_email=cd1['anonymous_email'],
+                customer_phone=cd1['anonymous_phone'],
+                customer_address=str(data.get('anonymous_area', 'None')) + ', ' + str(data.get('anonymous_city', 'None')) + ', ' + str(data.get('anonymous_additional', 'None')),
+                status=Status.objects.get(id=1),
+                is_active=False
                 )
-            new_user.save()
-            print(new_user.username, new_user.first_name, new_user.email)
-            new_user.profile.phone = new_user_phone
-            new.user.profile.delivery_address = new_user_delivery_address
-            new_user.save()
-            print(new_user.profile.phone, new_user.profile.delivery_address)
-            new_user_order, created = Order.objects.get_or_create(
-                user=new_user,
-                customer_name=new_user.first_name,
-                customer_phone=new_user.profile.phone,
-                customer_address=new_user.profile.delivery_address,
-                status=Status.objects.filter(id=1)
-                )
-            new_user_order.save()
-            print(new_user_order.customer_name, new_user_order.customer_phone, new_user_order.customer_address, new_user_order.status)
-            return render(request, '/checkout2.html', locals())
-        print('not VALID')'''
+            return redirect('checkout2', order_id=new_order.id)
+        print(form1.errors, form2.errors)
     form1 = CheckoutFormLeft()
     form2 = CheckoutFormRight()
     return render(request, 'orders/checkout1.html', locals())
 
 
-def checkout2(request):
+def checkout2(request, order_id):
+    order_id = order_id
     return render(request, 'orders/checkout2.html', locals())
 
 
 def get_cities(request):
-    '''
+    #Gets Cities list from Delivery Auto API 
+    # Sending request for Cities
+    area_id = request.GET.get('area_id', None)
+    if str(area_id) in [str(area['id']) for area in AREAS_LIST]:
+        url = 'http://www.delivery-auto.com/api/v4/Public/GetAreasList?culture=%s&regionId=%s&country=%s' % ('ru-RU', area_id, '1')
+        headers = {'Content-Type': 'application/json'}
+        answer = requests.get(url, headers=headers)
+        # Getting responce with data
+        data = answer.json()
+        # If response code is 200 --> save data
+        if answer.status_code == requests.codes.ok:
+            if data['status'] == True:
+                context = {
+                    'cities': [{city['id']: city['name']} for city in data['data']]}
+                if data['data']:
+                    return JsonResponse(dict(cities=context['cities']))
+                return JsonResponse({'error': 'No data returned'})
+            else:
+                context = {'errors': data['message']}
+                return JsonResponse(context['errors'])
+    print('No such area')
+    return JsonResponse({'error': 'Error. No such region'})
+
+
+
+
+'''def get_cities(request):
     Gets Cities list from Nova Poshta API 
     https://api.novaposhta.ua/v2.0/{format}/ [json]
-    '''
     # Sending request for Cities
     id_area = request.GET.get('id_area', None)
     if id_area in [city['Ref'] for city in AREAS_LIST]:
@@ -140,4 +148,4 @@ def get_cities(request):
             else:
                 context = {'errors': data['errors']}
                 return JsonResponse(context['errors'])
-    return JsonResponse({'error': 'Error. No such region'})
+    return JsonResponse({'error': 'Error. No such region'})'''

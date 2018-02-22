@@ -7,4 +7,6 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
     path('checkout1/', views.checkout1, name='checkout1'),
     path('checkout2/', views.checkout2, name='checkout2'),
+    path('checkout2/<order_id>/', views.checkout2, name='checkout2'),
+
 ]

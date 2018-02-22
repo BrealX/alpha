@@ -32,7 +32,7 @@ class Order(models.Model):
         null=True, 
         default=None, 
         on_delete=models.CASCADE)
-    total_price = models.DecimalField(
+    total_order_amount = models.DecimalField(
         max_digits=10, 
         decimal_places=2, 
         default=0)
@@ -68,6 +68,8 @@ class Order(models.Model):
     updated = models.DateTimeField(
         auto_now_add=False, 
         auto_now=True)
+    is_active = models.BooleanField(
+        default=True)
 
     def __str__(self):
         return "Заказ %s %s" % (self.id, self.status.name)

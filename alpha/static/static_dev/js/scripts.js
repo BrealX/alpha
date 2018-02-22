@@ -325,16 +325,17 @@ $(document).ready(function() {
         })
     });
 
-    // Ajax request to Nova Poshta API for cities data
+    // Ajax request to /ajax/get_cities/ for Delivery Auto cities API
     $('select#id_anonymous_area').on('change', function() {
-        var id_area = $(this).val();
+        var area_id = $(this).val();
         $.ajax({
             type: 'get',
             url: '/ajax/get_cities/',
-            data: { 'id_area': id_area },
+            data: { 'area_id': area_id },
             cache: true,
             success: function(response) {
                 $('select#id_anonymous_city').prop('disabled', false); // Enables element
+                $('select#id_anonymous_city').html("");
                 var new_options = response.cities;
                 $.each(new_options, function(key, value) {
                     $.each(value, function(k, v) {
@@ -342,12 +343,11 @@ $(document).ready(function() {
                         $('<option>', { value: k }).text(v));
                     });
                 });
-                
-
-                
             }
         });
     });
+
+    // 
 
 });
 

@@ -69,16 +69,25 @@
 								<div class="col-xs-12 col-sm-6">
 									<div class="form-group required">
 										<label for="{{ form1.anonymous_name.auto_id }}">{{ form1.anonymous_name.label }}<sup>*</sup></label>
-										{% render_field form1.anonymous_name|add_class:"form-control"|attr:"autofocus" %}
+										{% render_field form1.anonymous_name|add_class:"form-control"|attr:"autofocus" placeholder="Ваше имя" %}
+										{% for error in form1.anonymous_name.errors %}
+											<span class="form-error">{{ error }}</span>
+										{% endfor %}
 									</div>
 									<div class="form-group required">
 										<label for="{{ form1.anonymous_email.auto_id }}">{{ form1.anonymous_email.label }}<sup>*</sup></label>
-										{% render_field form1.anonymous_email|add_class:"form-control" %}
+										{% render_field form1.anonymous_email|add_class:"form-control" placeholder="Ваш email" %}
+										{% for error in form1.anonymous_email.errors %}
+											<span class="form-error">{{ error }}</span>
+										{% endfor %}
 									</div>
 									<div class="form-group required">
 										<label for="{{ form1.anonymous_phone.auto_id }}">{{ form1.anonymous_phone.label }}<sup>*</sup>
 										</label>
 										{% render_field form1.anonymous_phone|add_class:"form-control phone-mask" placeholder="Номер телефона" %}
+										{% for error in form1.anonymous_phone.errors %}
+											<span class="form-error">{{ error }}</span>
+										{% endfor %}
 									</div>
 								</div>
 								<div class="col-xs-12 col-sm-6">

@@ -10,17 +10,14 @@ class CheckoutFormLeft(forms.Form):
     anonymous_name = forms.CharField(
         required=True,
         label='Ваше имя',
-        initial='Ваше имя'
     )
     anonymous_email = forms.EmailField(
         required=True,
         label='Ваш email',
-        initial='Ваш email'
     )
     anonymous_phone = forms.CharField(
         required=True,
         label='Контактный номер телефона',
-        initial='Номер телефона'
     )
 
     
@@ -31,13 +28,6 @@ class CheckoutFormRight(forms.Form):
         required=True,
         label='Город',
         widget=Select2Widget,
-        #widget=ModelSelect2Widget(
-        #    model=City,
-        #    search_fields=['name__icontains'],
-        #    dependent_fields={'area': 'area'},
-        #    max_results=500,
-        #)
-        #choices={'1': 'Australia', '2': 'USA'}
     )
     anonymous_additional = forms.CharField(
         required=False,
@@ -48,7 +38,8 @@ class CheckoutFormRight(forms.Form):
     def __init__(self, *args, **kwargs):
         super(CheckoutFormRight, self).__init__(*args, **kwargs)
         self.fields['anonymous_area'] = forms.ChoiceField(
-            choices=([("", "--- Выберите область ---")] + [(i['Ref'], i['Description']) for i in AREAS_LIST]),
+            #choices=([("", "--- Выберите область ---")] + [(i['Ref'], i['Description']) for i in AREAS_LIST]),
+            choices=[('', '-- Выберите область --')] + [(area['id'], area['name']) for area in AREAS_LIST],
             required=True,
             label='Область',
             initial='Выберите область',
@@ -57,32 +48,22 @@ class CheckoutFormRight(forms.Form):
 
 def get_areas():
     '''
-    Gets Areas list from Nova Poshta API 
-    https://api.novaposhta.ua/v2.0/{format}/ [json]
+    Gets Areas list from Delivery Auto API 
     '''
     # Sending request for Areas
-    url = 'https://api.novaposhta.ua/v2.0/json/Address/getAreas'
+    url = 'http://www.delivery-auto.com/api/v4/Public/GetRegionList?culture=%s&country=%s' % ('ru-RU', '1')
     headers = {'Content-Type': 'application/json'}
-    context = {
-        'apiKey': config('NOVA_POSHTA_API_KEY'),
-        "modelName": "Address",
-        "calledMethod": "getAreas",
-        "methodProperties": {}
-    }
-    context = json.dumps(context, separators=(',', ':'))
-    answer = requests.post(url, headers=headers, data=context)
-    
+    answer = requests.get(url, headers=headers)
     # Getting responce with data
     data = answer.json()
     # If response code is 200 --> save data
     if answer.status_code == requests.codes.ok:
-        if data['success'] == True:
+        if data['status'] == True:
             context = {
-                'errors': data['errors'],
-                'warnings': data['warnings'],
-                'info': data['info'],
-                'areas': [{'Ref': area['Ref'], 'Description': area['Description']} for area in data['data']]
+                'errors': data['message'],
+                'areas': [{'id': area['id'], 'name': area['name']} for area in data['data'][1:]]
             }
-        return context['areas']
+            return context['areas']
+
 
 AREAS_LIST = get_areas()

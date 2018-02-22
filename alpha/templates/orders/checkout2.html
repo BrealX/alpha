@@ -10,7 +10,10 @@
 					<a href="{% url 'home' %}">На главную</a>
 				</li>
 				<li>
-					<a href="{% url 'checkout' %}">К корзине</a>
+					<a href="{% url 'checkout' %}">Корзина</a>
+				</li>
+				<li>
+					<a href="{% url 'checkout1' %}">Мои данные</a>
 				</li>
 				<li class="active">
 					Оформление заказа
@@ -62,7 +65,7 @@
 					<div class="w100 clearfix">
 						<div class="row userInfo">
 							<div class="col-lg-12">
-								<h2 class="block-title-2">Выберете, пожалуйста, способ доставки</h2>
+								<h2 class="block-title-2">Мы можем отправить посылку одним из перевозчиков, указанных ниже. Выберите, пожалуйста, способ доставки</h2>
 							</div>
 							<div class="col-xs-12 col-sm-12">
 								<div class="w100 row">
@@ -72,19 +75,19 @@
 											<tr>
 												<td>Перевозчик</td>
 												<td>Информация</td>
-												<td>Ориентировочная стоимость</td>
+												<td>Ориентировочная стоимость (рассчет на сайте перевозчика)</td>
 											</tr>
 											<tr>
 												<td>
 													<div class="radio">
 														<input name="ICheck" type="radio" id="novaposhta">
-														<a href="https://novaposhta.ua/" target="_blank" title="Перейти на сайт Нова Пошта">
+														<a href="https://novaposhta.ua/" target="_blank" title="Перейти на сайт Новой Почты">
 															<img src="{% static '/img/nova–poshta-75px.png' %}">
 														</a>
 													</div>
 												</td>
 												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+												<td><a href="https://novaposhta.ua/ru/delivery" target="_blank">Перейти к рассчету</a></td>
 											</tr>
 											<tr>
 												<td>
@@ -96,7 +99,7 @@
 													</div>
 												</td>
 												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+												<td><a href="http://www.delivery-auto.com/ru-RU/CalculateCost" target="_blank">Перейти к рассчету</a></td>
 											</tr>
 											<tr>
 												<td>
@@ -108,7 +111,7 @@
 													</div>
 												</td>
 												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+												<td><a href="https://intime.ua/ru-calc" target="_blank">Перейти к рассчету</a></td>
 											</tr>
 											<tr>
 												<td>
@@ -117,8 +120,8 @@
 														<i class="fas fa-handshake fa-2x"></i>
 													</div>
 												</td>
-												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-												<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+												<td>Ваш заказ Вы можете забрать сами в г. Киев (р-н Дарницкой площади). Детали уточняйте у менеджера.</td>
+												<td>Бесплатно</td>
 											</tr>
 										</tbody>
 									</table>
