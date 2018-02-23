@@ -63,6 +63,9 @@
 					<div class="w100 clearfix">
 						<div class="row userInfo">
 							<div class="col-lg-12">
+								{% if message %}
+								<h2 class="block-title-2 form-error">{{ message }}</h2>
+								{% endif %}
 								<h2 class="block-title-2">Чтобы оформить заказ, пожалуйста, заполните форму ниже</h2>
 							</div>
 							<form action="{% url 'checkout1' %}" role="form" method="post" id="checkout_form">{% csrf_token %}

@@ -325,12 +325,12 @@ $(document).ready(function() {
         })
     });
 
-    // Ajax request to /ajax/get_cities/ for Delivery Auto cities API
+    // Ajax request for chained select Areas/Cities at /orders/checkout1 page
     $('select#id_anonymous_area').on('change', function() {
         var area_id = $(this).val();
         $.ajax({
             type: 'get',
-            url: '/ajax/get_cities/',
+            url: '/ajax/get_chained_cities/',
             data: { 'area_id': area_id },
             cache: true,
             success: function(response) {

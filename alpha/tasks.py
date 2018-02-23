@@ -1,0 +1,91 @@
+# Tasks for Celery here
+import requests, json
+from orders.models import OrderDeliveryArea, OrderDeliveryCity
+
+
+def get_areas():
+    '''
+    Gets Areas list from Delivery-Auto API
+    '''
+    # Sending request for areas
+    areas_queryset = OrderDeliveryArea.objects.all()
+    errors = []
+    url = 'http://www.delivery-auto.com/api/v4/Public/GetRegionList?culture=%s&country=%s' % ('ru-RU', '1')
+    headers = {'Content-Type': 'application/json'}
+    answer = requests.get(url, headers=headers)
+    # Getting responce with data
+    data = answer.json()
+    # If response code is 200 --> save data
+    if answer.status_code == requests.codes.ok:
+        if data['status']:
+            areas_list = [{'id': area['id'], 'name': area['name']} for area in data['data'][1:]]
+            if areas_list:
+                for area in areas_list:
+                    if not areas_queryset:
+                        OrderDeliveryArea.objects.bulk_create([
+                            OrderDeliveryArea(
+                                name=area['name'], 
+                                area_ref=area['id'],
+                            )
+                        ])
+                        return OrderDeliveryArea.objects.all()
+                    else:
+                        obj, created = OrderDeliveryArea.objects.get_or_create(name=area['name'])
+                        obj.name = area['name']
+                        obj.area_ref = area['id']
+                        return OrderDeliveryArea.objects.all()
+        errors.append[data['message']]
+        return errors
+    return errors
+
+
+def get_cities():
+    '''
+    Gets Cities list from Delivery-Auto API
+    '''
+    # Sending request for Cities
+    areas_list = OrderDeliveryArea.objects.all() # Get all Areas in database
+    for area in areas_list:
+        area_ref = area.area_ref # Area reference according to Delivery-Auto codes
+        print(area.id)
+        cities_queryset = OrderDeliveryCity.objects.filter(area_id=area.id) # Get all current area Cities in database
+        print(cities_queryset)
+        url = 'http://www.delivery-auto.com/api/v4/Public/GetAreasList?culture=%s&regionId=%s&country=%s' % ('ru-RU', area.area_ref, '1') # Delivery-Auto API url
+        print(url)
+        headers = {'Content-Type': 'application/json'}
+        answer = requests.get(url, headers=headers)
+        # Getting responce with data
+        data = answer.json()
+        # If response code is 200 --> save or update data
+        if answer.status_code == requests.codes.ok:
+            if data['status']: # Checks if any data was received from Delivery-Auto API
+                cities_list = [{'id': city['id'], 'name': city['name']} for city in data['data']]
+                print(cities_list)
+                if cities_list:
+                    print('cities are in list')
+                    for city in cities_list:
+                        print(city)
+                        if not cities_queryset: # If there were no objects in OrderDeliveryCity model - create them
+                            print('no cities in queryset')
+                            try:
+                                OrderDeliveryCity.objects.bulk_create([
+                                    OrderDeliveryCity(
+                                        area=OrderDeliveryArea.objects.get(id=area.id),
+                                        name=city['name'], 
+                                        city_ref=city['id']
+                                    )
+                                ])
+                                print('cities created succesfully')
+                            except OrderDeliveryArea.DoesNotExist:
+                                return errors
+                        else: # If there were any objects in OrderDeliveryCity model - update them or create new if needed
+                            print('cities are in queryset')
+                            obj, created = OrderDeliveryCity.objects.get_or_create(name=city['name'])
+                            obj.name = city['name']
+                            obj.city_ref = city['id']
+                            obj.save()
+                            print('updated succesfully')
+            print('error, API returned %s' % data['message'])
+        print('Area %s cities succesfully passed' % area.name)
+    print('All job is done')
+    return OrderDeliveryCity.objects.all()

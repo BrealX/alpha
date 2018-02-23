@@ -46,3 +46,27 @@ class ProductInBasketAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ProductInBasket, ProductInBasketAdmin)
+
+
+class OrderDeliveryAreaAdmin(admin.ModelAdmin):
+    class Meta:
+        model = OrderDeliveryArea
+
+    list_display = [field.name for field in OrderDeliveryArea._meta.fields]
+    list_filter = ['name', ]
+    search_fields = ['name', 'id']
+
+
+admin.site.register(OrderDeliveryArea, OrderDeliveryAreaAdmin)
+
+
+class OrderDeliveryCityAdmin(admin.ModelAdmin):
+    class Meta:
+        model = OrderDeliveryCity
+
+    list_display = [field.name for field in OrderDeliveryCity._meta.fields]
+    list_filter = ['area', 'name', ]
+    search_fields = ['area', 'name', 'id', 'city_ref', ]
+
+
+admin.site.register(OrderDeliveryCity, OrderDeliveryCityAdmin)
