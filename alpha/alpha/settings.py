@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'accounts',
     'django_select2',
+    'djcelery',
     'landing',
     'orders',
     'products',
@@ -158,3 +159,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 
 # Close the session when user closes the browser
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# RabbitMQ configuration:
+BROKER_URL = config('RABBITMQ_URL')
+
+# A list of accepted content-types for security purposes
+CELERY_ACCEPT_CONTENT = ['json']
+
+# Specify the task serializer accordingly
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+# Configure Celery to use the django-celery backend:
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+
