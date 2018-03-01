@@ -43,7 +43,7 @@ $(document).ready(function() {
                             <td class=\"miniCartQuantity\" style=\"width: 13%;\">\
                             <a>* '+v.qnty+' шт.</a></td>\
                             <td class=\"miniCartSubtotal\" style=\"width: 20%;\">\
-                            <span>'+parseFloat(v.total_price).toFixed(2)+' UAH</span></td>\
+                            <span class="minicart-item-overall">'+parseFloat(v.total_price).toFixed(2)+' UAH</span></td>\
                             <td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\">x</a>\
                             </td></tr>')
                     });
@@ -54,9 +54,9 @@ $(document).ready(function() {
                     $('.droppingbasket div.miniCartTable div div table tbody').append(
                         '<p class="lead text-center">\
                         ... В Вашей корзине еще нет товаров ...\
-                        </p>'
-                        );
+                        </p>');
                 };
+                calculatingTotalBasketAmount();
                     
             },
             error: function() {
@@ -120,7 +120,7 @@ $(document).ready(function() {
     };
 
 
-    // Show success div when AJAX is OK during cart products adding or removing
+    // Show success div when AJAX is OK during cart products adding or deleting
     $(document).ajaxSuccess(function(event, request, settings) {
     	element = $('.box-footer').children('.pull-left')
     	if (!element.is(':visible')) {
@@ -182,11 +182,16 @@ $(document).ready(function() {
     
     // Show Cart subtotal (at miniCart dropdown & Checkout Page Right Bar)
     function calculatingTotalBasketAmount(){
-        var total_price = 0
-        $(".total-product-in-cart-sum").each(function(){
-            total_price += parseFloat($(this).text());
+        var minicart_overall = 0;
+        var cart_overall = 0;
+        $(".minicart-item-overall").each(function(){
+            minicart_overall += parseFloat($(this).text());
         });
-        $('#total_price, #miniCart_subtotal').text(total_price.toFixed(2) + ' UAH');
+        $(".cart-item-overall").each(function(){
+            cart_overall += parseFloat($(this).text());
+        });
+        $('#miniCart_subtotal').text(minicart_overall.toFixed(2) + ' UAH');
+        $('#total_price').text(cart_overall.toFixed(2) + ' UAH');
     };
 
     

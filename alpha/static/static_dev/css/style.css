@@ -2453,6 +2453,7 @@ p.required,
 .panel-default > .panel-heading
 {
     border-top: 4px solid #4ec67f !important;
+    min-height: 75px;
 }
 
 .panel-title
@@ -2470,7 +2471,7 @@ p.required,
 
 .panel-body
 {
-    min-height: 170px;
+    min-height: 270px;
 }
 
 .panel-footer.panel-footer-address

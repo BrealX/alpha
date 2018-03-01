@@ -39,7 +39,7 @@
 				<div class="w100 clearfix">
 					<div class="col-xs-12 col-sm-6 col-md-4">
 						<div class="panel panel-default">
-							<div class="panel-heading">
+							<div class="panel-heading text-center">
 								<h3 class="panel-title">
 									<strong>Мой адрес доставки</strong>
 								</h3>
@@ -77,11 +77,11 @@
 								</ul>
 							</div>
 							<div class="panel-footer panel-footer-address">
-								<a href="{% url 'add_address' %}" class="btn btn-sm btn-success">
+								<a href="{% url 'add_address' %}" class="btn btn-sm btn-success" style="min-width: 130px; margin: 5px 0 5px 0;">
 									<i class="far fa-edit"></i>
 									Редактировать
 								</a>
-								<a class="btn btn-sm btn-danger" id="my_profile_address_delete">
+								<a class="btn btn-sm btn-danger" style="min-width: 130px; margin: 5px 0 5px 0;" id="my_profile_address_delete">
 									<i class="fas fa-minus-circle"></i>
 									Удалить
 								</a>
@@ -91,7 +91,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-4">	
 						<div class="panel panel-default">
-							<div class="panel-heading">
+							<div class="panel-heading text-center">
 								<h3 class="panel-title">
 									<strong>Личные данные</strong>
 								</h3>
@@ -129,11 +129,11 @@
 								</ul>
 							</div>
 							<div class="panel-footer panel-footer-address">
-								<a href="{% url 'add_personal' %}" class="btn btn-sm btn-success">
+								<a href="{% url 'add_personal' %}" class="btn btn-sm btn-success" style="min-width: 130px; margin: 5px 0 5px 0;">
 									<i class="far fa-edit"></i>
 									Редактировать
 								</a>
-								<a class="btn btn-sm btn-danger" id="my_personal_delete">
+								<a class="btn btn-sm btn-danger" style="min-width: 130px; margin: 5px 0 5px 0;" id="my_personal_delete">
 									<i class="fas fa-minus-circle"></i>
 									Удалить
 								</a>
@@ -164,12 +164,12 @@
 								</ul>
 							</div>
 							<div class="panel-footer panel-footer-address">
-								<a href="{% url 'password_reset' %}" class="btn btn-sm btn-success">
+								<a href="{% url 'password_reset' %}" style="min-width: 130px; margin: 5px 0 5px 0;" class="btn btn-sm btn-success">
 									<i class="far fa-edit"></i>
 									Изменить пароль
 								</a>
 								<!-- Button trigger modal -->
-								<button id="account_delete" type="button" class="btn btn-sm btn-danger" data-href="{% url 'login' %}" data-toggle="modal" data-target="#deleteModalCenter">
+								<button id="account_delete" type="button" style="min-width: 130px; margin: 5px 0 5px 0;" class="btn btn-sm btn-danger" data-href="{% url 'login' %}" data-toggle="modal" data-target="#deleteModalCenter">
 									<i class="fas fa-minus-circle"></i>
 									Удалить аккаунт
 								</button>

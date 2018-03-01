@@ -81,7 +81,7 @@
                                         </div>
                                     </td>
                                     <td>{{ product_in_basket.product.discount }} %</td>
-                                    <td class="price total-product-in-cart-sum">{{ product_in_basket.total_price }}</td>
+                                    <td class="price cart-item-overall">{{ product_in_basket.total_price }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -98,7 +98,7 @@
                             </div>
                             <div class="pull-right">
                                 <a class="btn btn-default" id="cart_refresh" href="{% url 'checkout' %}">
-                                    <i class="fa fa-undo"></i>
+                                    <i class="fas fa-cart-arrow-down"></i>
                                     Внести изменения в корзину
                                 </a>
                             </div>

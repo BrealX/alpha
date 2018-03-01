@@ -70,7 +70,7 @@
                                 <ul class="col-lg-2 col-sm-2 col-md-2 unstyled noMarginLeft">
                                     <li>
                                         <p>
-                                           <a href="/#Микрофоны"><strong>Микрофоны</strong></a>
+                                           <a href="/#microphones"><strong>Микрофоны</strong></a>
                                         </p>
                                     </li>
                                     {% for item in nav_products_microphones %}
@@ -82,7 +82,7 @@
                                 <ul class="col-lg-2 col-sm-2 col-md-2 unstyled noMarginLeft">
                                     <li>
                                         <p>
-                                           <a href="/#Плееры"><strong>Плееры</strong></a>
+                                           <a href="/#multiplayers"><strong>Плееры</strong></a>
                                         </p>
                                     </li>
                                     {% for item in nav_products_players %}
@@ -136,51 +136,50 @@
                             </span>
                                 <b class="caret"></b>
                         </a>
-                        
                         <div class="droppingbasket col-lg-5 col-xs-12 col-md-4 hidden">
                             <div class="w100 miniCartTable pre-scrollable">
                                 <div>
                                     <div>
-                                        {% if products_in_cart %}
                                         <table>
                                             <tbody>
-                                                {% for item_in_cart in products_in_cart %}
-                                                <tr class="miniCartProduct">
-                                                    <td class="miniCartProductThumb" style="width: 20%;">
-                                                        <div>
-                                                            <a href="{% url 'product' item_in_cart.product.id %}">
-                                                                <img src="{{ item_in_cart.product.product_main_image.image.url }}" alt="img">
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                    <td style="width: 40%;">
-                                                        <div class="miniCartDescription">
-                                                            <h4>
-                                                                <a href="{% url 'product' item_in_cart.product.id %}">{{ item_in_cart.product.name }}</a>
-                                                            </h4>
-                                                            <div class="price">
-                                                                <span>{{ item_in_cart.price_per_item }}</span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="miniCartQuantity" style="width: 10%;">
-                                                        <a>* {{ item_in_cart.qnty }} шт.</a>
-                                                    </td>
-                                                    <td class="miniCartSubtotal" style="width: 15%;">
-                                                        <span>{{ item_in_cart.total_price }} <br>UAH</span>
-                                                    </td>
-                                                    <td class="delete" style="width: 5%;">
-                                                        <a class="delete-item" href="" data-product_id="{{ item_in_cart.id }}">x</a>
-                                                    </td>
-                                                </tr>
-                                                {% endfor %}
+                                                {% if products_in_cart %}
+                                                    {% for item_in_cart in products_in_cart %}
+                                                        <tr class="miniCartProduct">
+                                                            <td class="miniCartProductThumb" style="width: 20%;">
+                                                                <div>
+                                                                    <a href="{% url 'product' item_in_cart.product.id %}">
+                                                                        <img src="{{ item_in_cart.product.product_main_image.image.url }}" alt="img">
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                            <td style="width: 40%;">
+                                                                <div class="miniCartDescription">
+                                                                    <h4>
+                                                                        <a href="{% url 'product' item_in_cart.product.id %}">{{ item_in_cart.product.name }}</a>
+                                                                    </h4>
+                                                                    <div class="price">
+                                                                        <span>{{ item_in_cart.price_per_item }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="miniCartQuantity" style="width: 10%;">
+                                                                <a>* {{ item_in_cart.qnty }} шт.</a>
+                                                            </td>
+                                                            <td class="miniCartSubtotal" style="width: 15%;">
+                                                                <span class="minicart-item-overall">{{ item_in_cart.total_price }} <br>UAH</span>
+                                                            </td>
+                                                            <td class="delete" style="width: 5%;">
+                                                                <a class="delete-item" href="" data-product_id="{{ item_in_cart.id }}">x</a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <p class="lead text-center">
+                                                        ... В Вашей корзине еще нет товаров ...
+                                                    </p>
+                                                {% endif %}
                                             </tbody>
                                         </table>
-                                        {% else %}
-                                        <p class="lead text-center">
-                                            ... В Вашей корзине еще нет товаров ...
-                                        </p>
-                                        {% endif %}
                                     </div>
                                 </div>
                             </div>

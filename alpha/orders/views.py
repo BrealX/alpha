@@ -54,44 +54,47 @@ def checkout(request):
 def checkout1(request):
     session_key = request.session.session_key
     cart_products = ProductInBasket.objects.filter(session_key=session_key, is_active=True, order__isnull=True)
-    if request.POST:
-        data = request.POST
-        form1 = CheckoutFormLeft(request.POST or None)
-        form2 = CheckoutFormRight(request.POST or None)
-        if form1.is_valid() and form2.is_valid():
-            cd1 = form1.cleaned_data
-            cd2 = form2.cleaned_data
-            if cart_products:
-                new_order = Order.objects.create(
-                    session_key=session_key,
-                    customer_name=cd1['anonymous_name'],
-                    customer_email=cd1['anonymous_email'],
-                    customer_phone=cd1['anonymous_phone'],
-                    customer_address=str(OrderDeliveryArea.objects.get(id=cd2['anonymous_area'])) + ', ' + str(OrderDeliveryCity.objects.get(id=cd2['anonymous_city'])) + ', ' + str(cd2['anonymous_additional']),
-                    status_id=1,
-                    is_active=False
-                    )
-                for item in cart_products:
-                    item.order = new_order
-                    item.save(force_update=True)
-                
-                    ProductInOrder.objects.create(
+    if cart_products:
+        if request.POST:
+            data = request.POST
+            form1 = CheckoutFormLeft(request.POST or None)
+            form2 = CheckoutFormRight(request.POST or None)
+            if form1.is_valid() and form2.is_valid():
+                cd1 = form1.cleaned_data
+                cd2 = form2.cleaned_data
+                if cart_products:
+                    new_order = Order.objects.create(
                         session_key=session_key,
-                        order=new_order,
-                        product=item.product,
-                        qnty=item.qnty,
-                        price_per_item=item.price_per_item,
-                        total_amount=item.total_price,
+                        customer_name=cd1['anonymous_name'],
+                        customer_email=cd1['anonymous_email'],
+                        customer_phone=cd1['anonymous_phone'],
+                        customer_address=str(OrderDeliveryArea.objects.get(id=cd2['anonymous_area'])) + ', ' + str(OrderDeliveryCity.objects.get(id=cd2['anonymous_city'])) + ', ' + str(cd2['anonymous_additional']),
+                        status_id=1,
+                        is_active=False
                         )
-                    return redirect('checkout2')
-            else:
-                message = 'Ваша корзина пуста. Для оформления заказа необходимо что-то в неё добавить'
-                form1 = CheckoutFormLeft()
-                form2 = CheckoutFormRight()
-                return render(request, 'orders/checkout1.html', { 'message' : message, 'form1': form1, 'form2': form2 })
-    form1 = CheckoutFormLeft()
-    form2 = CheckoutFormRight()
-    return render(request, 'orders/checkout1.html', locals())
+                    for item in cart_products:
+                        item.order = new_order
+                        item.save(force_update=True)
+                
+                        ProductInOrder.objects.create(
+                            session_key=session_key,
+                            order=new_order,
+                            product=item.product,
+                            qnty=item.qnty,
+                            price_per_item=item.price_per_item,
+                            total_amount=item.total_price,
+                            )
+                        return redirect('checkout2')
+                else:
+                    message = 'Ваша корзина пуста. Для оформления заказа необходимо что-то в неё добавить'
+                    form1 = CheckoutFormLeft()
+                    form2 = CheckoutFormRight()
+                    return render(request, 'orders/checkout1.html', { 'message' : message, 'form1': form1, 'form2': form2 })
+        form1 = CheckoutFormLeft()
+        form2 = CheckoutFormRight()
+        return render(request, 'orders/checkout1.html', locals())
+    else:
+        return redirect('checkout')
 
 
 def checkout2(request):
