@@ -79,6 +79,170 @@
                 </div>
             </div>
             <!-- rowEnd -->
+            <div class="special-description-area mt-150">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="special-description-img">
+                                <img class="img-responsive" src="{{ product.product_main_image.image.url }}" alt="img">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="special-description-content">
+                                <h2 class="text-center">Лучшее предложение для Вашей маленькой звезды!</h2>
+                                <p align="justify">
+                                    {{ product.description }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--endContainer-->
+    </section>
+    <section id="landing_features" class="awesome-feature-area bg-white section-padding-0-100 clearfix">
+        <div class="container" style="">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading text-center">
+                        <h2>Характеристики</h2>
+                        <div class="line-shape"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-sm-6">
+                        <div class="single-feature text-center">
+                            <i class="fas fa-cube"></i>
+                            <h5>Размер упаковки:</h5>
+                            <p>13,2х22,8х3,5 см</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="single-feature text-center">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h5>Размер товара:</h5>
+                            <p>5х15 см</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="col-sm-6">
+                        <div class="single-feature text-center">
+                            <i class="fas fa-archive"></i>
+                            <h5>Вид упаковки:</h5>
+                            <p>Картонка с блистером</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="single-feature text-center">
+                            <i class="fas fa-battery-full"></i>
+                            <h5>Батарейки:</h5>
+                            <p>AAA, 2 штуки (в комплекте)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- rowEnd -->
+        </div>
+    </section>
+    <section class="cool-facts-area clearfix">
+        <div class="container">
+            <div class="row">
+                <!--Single Cool Fact-->
+                <div class="col-lg-12">
+                    <div class="col-sm-3 col-md-3">
+                        <div class="single-cool-fact d-flex justify-content-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                            <div class="counter-area">
+                                <h3>
+                                    <span class="counter">90</span>
+                                </h3>
+                            </div>
+                            <div class="cool-facts-content">
+                                <i class="fas fa-cart-arrow-down"></i>
+                                <p>ЗАКАЗОВ</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3">
+                        <div class="single-cool-fact d-flex justify-content-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                            <div class="counter-area">
+                                <h3>
+                                    <span class="counter">87</span>
+                                </h3>
+                            </div>
+                            <div class="cool-facts-content">
+                                <i class="far fa-smile"></i>
+                                <p>ДОВОЛЬНЫХ КЛИЕНТОВ</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3">
+                        <div class="single-cool-fact d-flex justify-content-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                            <div class="counter-area">
+                                <h3>
+                                    <span class="counter">4.9</span>
+                                </h3>
+                            </div>
+                            <div class="cool-facts-content">
+                                <i class="fas fa-star"></i>
+                                <p>СРЕДНИЙ РЕЙТИНГ</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3">
+                        <div class="single-cool-fact d-flex justify-content-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                            <div class="counter-area">
+                                <h3>
+                                    <span class="counter">2</span>
+                                </h3>
+                            </div>
+                            <div class="cool-facts-content">
+                                <i class="fas fa-truck"></i>
+                                <p>МАКСИМАЛЬНОЕ ВРЕМЯ ДОСТАВКИ (ДНЕЙ)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- rowEnd -->
+        </div>
+    </section>
+    <section id="landing_pricing" class="pricing-plane-area section-padding-100-70 clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading text-center">
+                        <h2>Цена</h2>
+                        <div class="line-shape"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="single-price-plan text-center">
+                        <div class="package-plan">
+                            <h5>Цена товара</h5>
+                            <div class="ca-price d-flex justify-content-center">
+                                <h4>{{ product.price_with_discount }}<span> грн.</span></h4>
+                            </div>
+                            <div class="package-description">
+                                {% if product.discount %}
+                                <p>Цена УЖЕ со СКИДКОЙ</p>
+                                <p>Ваша персональная скидка: {{ product.discount }} %</p>
+                                <p>Обычная цена товара: {{ product.price }} грн.</p>
+                                {% endif %}
+                                <p>Наличие товара на складе: {% if product.is_in_stock %} В НАЛИЧИИ {% elif product.is_on_demand %} ПОД ЗАКАЗ {% else %} ОТСУТВУЕТ НА СКЛАДЕ {% endif %}</p>
+                            </div>
+                            <div class="plan-button">
+                                <button type="submit">ЗАКАЗАТЬ!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <div style="clear: both;"></div>
