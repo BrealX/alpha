@@ -2147,6 +2147,7 @@ div.productFilter a.btn-danger:hover
     margin-top: 0;
 }
 
+.single-icon > i,
 .single-icon > svg {
     font-size: 36px;
     color: #fb397d;
@@ -2190,6 +2191,7 @@ div.productFilter a.btn-danger:hover
     margin-bottom: 50px;
 }
 
+.single-feature > i,
 .single-feature > svg {
     color: #fb397d;
     font-size: 30px;
@@ -2237,7 +2239,8 @@ div.productFilter a.btn-danger:hover
     line-height: 1;
 }
 
-.cool-facts-content > svg {
+.cool-facts-content > svg,
+.cool-facts-content > i {
     color: #ffffff;
     font-size: 25px;
 }
@@ -2272,6 +2275,7 @@ div.productFilter a.btn-danger:hover
 
 .single-price-plan .package-plan {
     border-radius: 30px 30px 0 0;
+    padding: 40px 0 0 0;
 }
 
 .single-price-plan .package-plan > h5 {
@@ -2320,10 +2324,21 @@ div.productFilter a.btn-danger:hover
     width: 100%;
     font-weight: 500;
     display: block;
+    border: none;
     -webkit-transition-duration: 500ms;
     -o-transition-duration: 500ms;
     transition-duration: 500ms;
 }
+
+.single-price-plan .plan-button > button:hover {
+    background-color: #a865e1;
+    border: none;
+}
+
+.wow {
+    visibility: hidden;
+}
+
 
 /* =============================================================== */
 /* CART PAGE
