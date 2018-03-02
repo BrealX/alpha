@@ -51,10 +51,7 @@ $(document).ready(function() {
                 else if (data.products_in_cart_total_qnty == 0) {
                     $('#cart_qnty_subtotal').text('(0)');
                     $('.droppingbasket div.miniCartTable div div table tbody').html("");
-                    $('.droppingbasket div.miniCartTable div div table tbody').append(
-                        '<p class="lead text-center">\
-                        ... В Вашей корзине еще нет товаров ...\
-                        </p>');
+                    $('.droppingbasket div.miniCartTable div div table tbody').append('<p class="lead text-center">... В Вашей корзине еще нет товаров ...</p>');
                 };
                 calculatingTotalBasketAmount();
                     

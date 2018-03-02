@@ -6,5 +6,13 @@ def product(request, product_id):
     product = Product.objects.get(id=product_id)
     session_key = request.session.session_key
     if not session_key:
-    	request.session.cycle_key()
+        request.session.cycle_key()
     return render(request, 'products/product.html', locals())
+
+
+def product_land(request, product_id):
+    product = Product.objects.get(id=product_id)
+    session_key = request.session.session_key
+    if not session_key:
+        request.session.cycle_key()
+    return render(request, 'products/product_landing.html', locals())

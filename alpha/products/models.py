@@ -7,6 +7,11 @@ class ProductCategory(models.Model):
         blank=True, 
         null=True, 
         default=None)
+    description = models.CharField(
+        max_length=240,
+        blank=True,
+        null=True,
+        default=None)
     is_active = models.BooleanField(
         default=True)
 

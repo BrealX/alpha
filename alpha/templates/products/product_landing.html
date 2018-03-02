@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section id="product_landing" class="clearfix landing-area" style="padding-top: 300px;">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 col-md">
+                    <div class="landing-heading">
+                        <h4>{{ product.name }}</h4>
+                        <h6>{{ product.name|slice:":1" }}</h6>
+                        <p>{{ product.category.description }}</p>
+                    </div>
+                    <div class="buy-area">
+                        <form method="post" id="landing_page_form" class="form-inline" action="{% url 'add_to_cart' %}">{% csrf_token %}
+                            <div class="input-group bootstrap-touchspin">
+                                <input type="text" class="form-control hidden landing-quantity" id="landing_page_qnty" value="1">
+                                <button type="submit" class="btn btn-success landing-submit form-control" id="landing_page_submit_btn" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price_with_discount }}" data-image="{{ product.product_main_image.image.url }}">КУПИТЬ</button>
+                            </div>
+                        </form>
+                        <!-- FormEnd -->
+                    </div>
+                </div>
+            </div>
+            <!--<div class="landing-thumb wow fadeInDown" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
+                <img class="img-responsive" src="{{ product.product_main_image.image.url }}" alt="img">
+            </div>-->
+        </div>
+    </section>
+    <!-- Section -->
+    <section id="landing_about" class="special-area bg-white section_padding_100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="section-heading text-center">
+                        <h2>Для кого?</h2>
+                        <div class="line-shape"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- rowEnd -->
+            <div class="row">
+                <!-- Single Special Area -->
+                <div class="col-xs-12 col-sm-4">
+                    <div class="single-special text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <div class="single-icon">
+                            <i class="fas fa-male"></i>
+                            <i class="fas fa-female"></i>
+                        </div>
+                        <h4>Пол:</h4>
+                        <p>
+                            Рядом с Вами будущий певец? Или певица? Не важно! Игрушка универсальна и подходит для любого ребенка
+                        </p>
+                    </div>
+                </div>
+                <!-- Single Special Area -->
+                <div class="col-xs-12 col-sm-4">
+                    <div class="single-special text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <div class="single-icon">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <h4>Возраст:</h4>
+                        <p>
+                            Начинать петь никогда не поздно! Равно как и никогда не рано! Игрушка адаптирована для возраста 2-5 лет
+                        </p>
+                    </div>
+                </div>
+                <!-- Single Special Area -->
+                <div class="col-xs-12 col-sm-4">
+                    <div class="single-special text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <div class="single-icon">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <h4>Содержание:</h4>
+                        <p>
+                            В игрушке 12 популярных песенок В. Шаинского, М. Танича и других известных композиторов
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- rowEnd -->
+        </div>
+    </section>
+    <div style="clear: both;"></div>
+{% endblock %}
