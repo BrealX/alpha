@@ -230,6 +230,27 @@ $(document).ready(function() {
     // WOW Effects Initializer
     new WOW().init();
 
+    // CountTo Plugin Initializer (https://stackoverflow.com/questions/43202706/jquery-counto-js-on-scroll-count-numbers-not-onload)
+    function isScrolledIntoView(el) {
+        var elemTop = el.getBoundingClientRect().top;
+        var elemBottom = el.getBoundingClientRect().bottom;
+
+        var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+        return isVisible;
+    }
+    $(window).on('scroll', function() {
+        if (isScrolledIntoView(document.getElementById('counters'))) {
+            $('.counter').countTo();
+            $('.counter-decimal').countTo({
+                formatter: function (value, options) {
+                    return value.toFixed(1);
+                }
+            });
+        // Unbind scroll event
+        $(window).off('scroll');
+        }
+    });
+
     /*// Attach scrollSpy to .wow elements for detect view exit events,
     // then reset elements and add again for animation
     $('.wow').on('scrollSpy:exit', function() {

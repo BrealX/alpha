@@ -435,7 +435,9 @@ input[type='email']
     padding-top: 25px;
 }
 
-
+.owl-carousel .owl-item img {
+    width: auto;
+}
 
 /* ================================================================== */
 /* CUSTOMIZE NAVBAR
