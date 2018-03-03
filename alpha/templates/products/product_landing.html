@@ -15,7 +15,7 @@
                         <form method="post" id="landing_page_form" class="form-inline" action="{% url 'add_to_cart' %}">{% csrf_token %}
                             <div class="input-group bootstrap-touchspin">
                                 <input type="text" class="form-control hidden landing-quantity" id="landing_page_qnty" value="1">
-                                <button type="submit" class="btn btn-success landing-submit form-control" id="landing_page_submit_btn" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price_with_discount }}" data-image="{{ product.product_main_image.image.url }}">КУПИТЬ</button>
+                                <button type="submit" class="btn btn-success landing-submit form-control" id="landing_page_submit_btn" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price_with_discount }}" data-image="{{ product.product_main_image.image.url }}" data-qnty="1">КУПИТЬ</button>
                             </div>
                         </form>
                         <!-- FormEnd -->
@@ -237,10 +237,46 @@
                                 <p>Наличие товара на складе: {% if product.is_in_stock %} В НАЛИЧИИ {% elif product.is_on_demand %} ПОД ЗАКАЗ {% else %} ОТСУТВУЕТ НА СКЛАДЕ {% endif %}</p>
                             </div>
                             <div class="plan-button">
-                                <button type="submit">ЗАКАЗАТЬ!</button>
+                                <button type="submit" form="landing_page_form" class="landing-submit" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price_with_discount }}" data-image="{{ product.product_main_image.image.url }}" data-qnty="1">ЗАКАЗАТЬ!</button>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="landing_contact" class="footer-contact-area section-padding-100 clearfix" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="section-heading">
+                        <h2>Остались вопросы?</h2>
+                        <div class="line-shape"></div>
+                    </div>
+                    <div class="footer-text">
+                        <p>Если у Вас остались какие-либо вопросы - задавайте! Ответим максимально быстро!</p>
+                    </div>
+                    <div class="address-text">
+                        <p>
+                            <span>Адрес: г. Киев, Украина</span>
+                        </p>
+                    </div>
+                    <div class="phone-text">
+                        <p>
+                            <span>Телефон: +38 (050) 777-92-71</span>
+                        </p>
+                    </div>
+                    <div class="email-text">
+                        <p>
+                            <span>Email:</span>
+                            jennyko2006@gmail.com
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form action="#" method="post">
+
+                    </form>
                 </div>
             </div>
         </div>

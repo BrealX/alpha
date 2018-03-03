@@ -77,6 +77,19 @@ $(document).ready(function() {
         cart_updating(product_id, qnty, is_delete=false);
     });
 
+    // Get data from Product Landing Page Form
+    $('button.landing-submit').on('click', function (e) {
+        button = $(this)
+        e.preventDefault();
+        var qnty = button.data('qnty');
+        var product_id = button.data('product_id');
+        var product_name = button.data('name');
+        var product_price = button.data('price');
+        var product_total_price = qnty*product_price;
+        var product_image = button.data('image');
+
+        cart_updating(product_id, qnty, is_delete=false)
+    });
 
     // Get data from Main Page Add-to-cart buttons
     $('div.action-control').on('click', 'button[id^="main_page_submit_id"]', function (e) {

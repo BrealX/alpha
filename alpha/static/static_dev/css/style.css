@@ -2262,6 +2262,11 @@ div.productFilter a.btn-danger:hover
     padding-bottom: 70px;
 }
 
+.section_padding_100 {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
 .no-gutters {
     margin-right: 0;
     margin-left: 0;
@@ -2340,6 +2345,42 @@ div.productFilter a.btn-danger:hover
     visibility: hidden;
 }
 
+.footer-contact-area {
+    background: #f5f9fc;
+}
+
+.footer-contact-area .line-shape {
+    margin-left: 0;
+}
+
+.footer-text {
+    margin-bottom: 15px;
+}
+
+.footer-text > p {
+    margin-bottom: 50px;
+    color: #726a84;
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 0;
+}
+
+.address-text > p,
+.phone-text > p,
+.email-text > p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #726a84;
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 0;
+}
+
+.address-text > p > span,
+.phone-text > p > span,
+.email-text > p > span {
+    color: #5b32b4;
+}
 
 /* =============================================================== */
 /* CART PAGE
