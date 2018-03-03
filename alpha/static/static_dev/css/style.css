@@ -277,6 +277,12 @@ h6
     border-bottom: 1px solid #cecece;
 }
 
+.section-padding-70
+{
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
 
 /* ================================================================== */
 /* CUSTOMIZE THE BOOTSTRAP MODAL + INPUT FORM ELEMENT + BUTTON + ALERT
@@ -3248,4 +3254,107 @@ p.required,
 
         max-height: 24px;
     }
+}
+
+.footer-social-icon
+{
+    font-family: 'Cabin', sans-serif;
+
+    margin-bottom: 30px;
+}
+
+
+.footer-text
+{
+    margin-bottom: 15px;
+}
+
+.footer-text > h2
+{
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1.2;
+
+    color: #5b32b4;
+}
+
+.footer-social-icon.social > a > svg
+{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 40px;
+
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    padding: 10px;
+
+    color: #fff;
+    border-radius: 10px 10px 10px 0;
+    background: #9b69e4;
+}
+
+
+.footer-social-icon.social > a > svg:hover
+{
+    -webkit-transition-duration: 500ms;
+         -o-transition-duration: 500ms;
+            transition-duration: 500ms;
+
+    color: #fff;
+    background: #fb397d;
+}
+
+.footer-menu
+{
+    margin-bottom: 15px;
+}
+
+.footer-menu ul li
+{
+    display: inline-block;
+}
+
+
+.footer-menu ul li a
+{
+    display: block;
+
+    padding: 0 7.5px;
+
+    color: #726a84;
+    border-right: 2px solid #726a84;
+}
+
+.footer-menu ul li:last-child a
+{
+    border-right: 0 solid #ddd;
+}
+
+.copyright-text > p
+{
+    font-size: 16px;
+    font-weight: 300;
+
+    margin-top: 0;
+    margin-bottom: 0;
+
+    color: #726a84;
+}
+
+#scrollUp
+{
+    font-size: 24px;
+    line-height: 50px;
+
+    right: 15px;
+    bottom: 0;
+
+    width: 50px;
+    height: 50px;
+
+    text-align: center;
+
+    color: #fff;
+    background-color: #fb397d;
 }

@@ -240,6 +240,13 @@ $(document).ready(function() {
     wow.addBox(this);
     }).scrollSpy();*/
 
+    // jQuery-ScrollUp Plugin Initializer
+    $(function () {
+        $.scrollUp({
+            scrollText: '<i class="ion-chevron-up"></i>', // Text for element
+        });
+    });
+
     // Home Page Slider Initializer
     $('.owl-carousel').owlCarousel({
     loop:true,
