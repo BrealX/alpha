@@ -245,7 +245,7 @@
             </div>
         </div>
     </section>
-    <section id="landing_contact" class="footer-contact-area section-padding-100 clearfix" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px;">
+    <section id="landing_contact" class="footer-contact-area section_padding_100 clearfix" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -254,16 +254,18 @@
                         <div class="line-shape"></div>
                     </div>
                     <div class="footer-text">
-                        <p>Если у Вас остались какие-либо вопросы - задавайте! Ответим максимально быстро!</p>
+                        <p style="margin-bottom: 50px;">Если у Вас остались какие-либо вопросы - задавайте! Ответим максимально быстро!</p>
                     </div>
                     <div class="address-text">
                         <p>
-                            <span>Адрес: г. Киев, Украина</span>
+                            <span>Адрес:</span>
+                            г. Киев, Украина
                         </p>
                     </div>
                     <div class="phone-text">
                         <p>
-                            <span>Телефон: +38 (050) 777-92-71</span>
+                            <span>Телефон:</span>
+                            +38 (050) 777-92-71
                         </p>
                     </div>
                     <div class="email-text">
@@ -274,9 +276,32 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <form action="#" method="post">
-
-                    </form>
+                    <div class="contact-form">
+                        <form action="#" method="post">
+                            <div class="contact-input-area">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="landing_contact_name" id="landing_contact_name" placeholder="Как Вас зовут?" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" name="landing_contact_email" id="landing_contact_email" placeholder="Ваш Email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="landing_contact_text" id="landing_contact_text" placeholder="Ваше сообщение" cols=30 rows=4 required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn submit-btn">Отправить</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
