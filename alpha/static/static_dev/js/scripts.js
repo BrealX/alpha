@@ -218,18 +218,6 @@ $(document).ready(function() {
 
     calculatingTotalBasketAmount();
 
-
-    /*window.addEventListener('scroll', function(e) {
-        if( $(window).scrollTop() <= 200) {
-            $('.wow').removeClass('animated');
-            $('.wow').removeAttr('style');
-            new WOW().init();
-        }
-    });*/
-
-    // WOW Effects Initializer
-    new WOW().init();
-
     // CountTo Plugin Initializer (https://stackoverflow.com/questions/43202706/jquery-counto-js-on-scroll-count-numbers-not-onload)
     function isScrolledIntoView(el) {
         var elemTop = el.getBoundingClientRect().top;
@@ -251,15 +239,11 @@ $(document).ready(function() {
         }
     });
 
-    /*// Attach scrollSpy to .wow elements for detect view exit events,
-    // then reset elements and add again for animation
-    $('.wow').on('scrollSpy:exit', function() {
-        $(this).css({
-            'visibility': 'hidden',
-            'animation-name': 'none'
-        }).removeClass('animated');
-    wow.addBox(this);
-    }).scrollSpy();*/
+    // AOS Animation Initializer
+    // https://github.com/michalsnik/aos
+    // https://michalsnik.github.io/aos/
+    AOS.init();
+
 
     // jQuery-ScrollUp Plugin Initializer
     $(function () {

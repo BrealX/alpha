@@ -2300,11 +2300,6 @@ div.productFilter a.btn-danger:hover
     padding-bottom: 70px;
 }
 
-.section_padding_100 {
-    padding-top: 100px;
-    padding-bottom: 100px;
-}
-
 .no-gutters {
     margin-right: 0;
     margin-left: 0;
@@ -2377,10 +2372,6 @@ div.productFilter a.btn-danger:hover
 .single-price-plan .plan-button > button:hover {
     background-color: #a865e1;
     border: none;
-}
-
-.wow {
-    visibility: hidden;
 }
 
 .footer-contact-area
@@ -3276,6 +3267,7 @@ p.required,
     font-size: 72px;
     font-weight: 700;
     line-height: 1.2;
+    font-family: 'Amatic SC', cursive;
 
     color: #5b32b4;
 }
