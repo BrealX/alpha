@@ -2090,6 +2090,14 @@ div.productFilter a.btn-danger:hover
     margin-left: 10px;
 }
 
+.buy-area .landing-submit:hover {
+    background: #6f52e5;
+    color: #fff;
+    -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+}
+
 .landing-thumb {
     width: 45%;
     position: absolute;
