@@ -2085,14 +2085,15 @@ div.productFilter a.btn-danger:hover
 .landing-thumb {
     width: 45%;
     position: absolute;
-    bottom: -130px;
     right: 85px;
     z-index: 9;
+    bottom: -50px;
 }
 
 .landing-thumb img {
-    height: auto;
-    width: 100%;
+    max-height: 420px;
+    margin: 0 auto 0 auto;
+
 }
 
 .section_padding_100 {

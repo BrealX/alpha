@@ -205,21 +205,17 @@ $(document).ready(function() {
 
     calculatingTotalBasketAmount();
 
-    /*// Helper function for add element box list in WOW
-    WOW.prototype.addBox = function(element) {
-        this.boxes.push(element);
-    };*/
 
-    window.addEventListener('scroll', function(e) {
-        if( $(window).scrollTop() <= 50) {
+    /*window.addEventListener('scroll', function(e) {
+        if( $(window).scrollTop() <= 200) {
             $('.wow').removeClass('animated');
             $('.wow').removeAttr('style');
             new WOW().init();
         }
-    });
+    });*/
 
-    /*// WOW Effects Initializer
-    new WOW().init();*/
+    // WOW Effects Initializer
+    new WOW().init();
 
     /*// Attach scrollSpy to .wow elements for detect view exit events,
     // then reset elements and add again for animation
