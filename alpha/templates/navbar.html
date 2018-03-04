@@ -3,7 +3,7 @@
 <!-- Preloader Start -->
 <!-- Header Area Start -->
 <!--<header class="header-area animated slideInDown" data-aos="slide-down">-->
-<header class="header-area float-panel" data-top="0" data-scroll="200">
+<header class="header-area float-panel" data-top="0" data-scroll="100">
     <div class="container-fluid">
         <div class="row align-items-center">
             <!-- Menu Area Start -->
@@ -69,8 +69,22 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Оплата и доставка</a>
+                                <li class="nav-item dropdown">
+                                    {% if username %}
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" id="auth_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Покинуть сайт</a>
+                                    <b class="caret"></b>
+                                    {% else %}
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" id="auth_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторизация</a>
+                                    {% endif %}
+                                    <div class="dropdown-menu auth" aria-labelledby="auth_dropdown">
+                                        <a class="dropdown-item" href="{% url 'user_dashboard' %}">Личный кабинет</a>
+                                        {% if username %}
+                                        <a class="dropdown-item" href="{% url 'logout' %}">Выйти ({{ username }})</a>
+                                        {% else %}
+                                        <a class="dropdown-item" href="{% url 'login' %}">Войти</a>
+                                        {% endif %}
+                                        <a class="dropdown-item" href="{% url 'login' %}">Регистрация</a>
+                                    </div>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Контакты</a>
@@ -86,11 +100,11 @@
             <div class="col-12 col-lg-2">
                 <div class="nav navbar-nav">
                     <div class="dropdown minicart-button d-lg-block">
-                        <a href="" class="minicart-toggle">
+                        <a href="#" class="dropdown-toggle" role="button" id="minicart_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="ion-ios-cart-outline"></i>
                             Корзина <span id="cart_qnty_subtotal">{% if products_in_cart_total_qnty %}({{ products_in_cart_total_qnty }}){% else %}(0){% endif %}</span>
                         </a>
-                        <div class="dropcart hide">
+                        <div class="dropdown-menu dropcart" aria-labelledby="minicart_dropdown">
                             <div class="minicarttable pre-scrollable">
                                 <table>
                                     <tbody>

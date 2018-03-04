@@ -119,36 +119,6 @@ $(document).ready(function() {
     		hideCartFooterDiv();
     	};
     });
-    
-
-    // Open menu at Navbar
-    function showingMenu() {
-        $('.dropdown-menu').toggleClass('hidden');
-    };
-
-    $('.dropmenu').mouseover(function() {
-        showingMenu();
-    });
-
-    $('.dropmenu').mouseout(function() {
-        showingMenu();
-    });
-
-    
-    // Open dropdown MiniCart
-    $('.minicart-toggle').on('click', function(e) {
-        e.preventDefault();
-        $(this).next('div.hide').slideDown();
-    });
-
-    // Close dropdown MiniCart on whereever to click
-    $(document).mouseup(function(e) {
-        var div = $('.dropcart');
-        if (!div.is(e.target) && div.has(e.target).length === 0) {
-            div.slideUp();
-        }
-        
-    });     
 
     // Delete items from miniCart
     $('div.minicart-button').on('click', 'a.delete-item', function(e) {

@@ -218,11 +218,6 @@ h6
     width: 100%;
 }
 
-.hide
-{
-    display: none;
-}
-
 /* ================================================================== */
 /* CUSTOMIZE THE BOOTSTRAP MODAL + INPUT FORM ELEMENT + BUTTON + ALERT
 /* ================================================================== */
@@ -430,7 +425,6 @@ input[type='email']
 
     animation: slide-down .7s;
 
-    opacity: .9;
     background-color: #884bdf;
     -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, .1);
             box-shadow: 0 4px 20px rgba(0, 0, 0, .1);
@@ -483,6 +477,29 @@ input[type='email']
 .header-minicart a
 {
     color: #fff !important;
+}
+
+.dropdown-menu.auth.show {
+    font-size: 14px;
+    position: absolute;
+    z-index: 1000;
+    top: 100%;
+    right: 0;
+    left: auto;
+    float: left;
+    margin: 2px 0 0;
+    padding: 5px;
+    list-style: none;
+    text-align: left;
+    border: 2px solid #a883e9;
+    border-radius: 24px 0 24px 24px;
+    background-color: #fff;
+    background-clip: padding-box;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.dropdown-menu.auth.show a {
+    color: #5b32b4;
 }
 
 .minicart-button
@@ -664,160 +681,6 @@ p.lead
 {
     opacity: .9;
 }
-
-/***  ------- Menu ------- ***/
-
-.megamenu .navbar-inner,
-.megamenu .container
-{
-    position: relative;
-}
-
-
-.megamenu .nav,
-.megamenu .dropup,
-.megamenu .dropmenu,
-.megamenu .collapse
-{
-    position: static;
-}
-
-
-.dropdown-menu
-{
-    border-top: solid #27ae60;
-}
-
-
-.megamenu .dropdown-menu
-{
-    left: auto;
-}
-
-
-.megamenu .dropmenu.menu80width .dropdown-menu
-{
-    right: 0;
-    left: 0;
-
-    width: 80%;
-}
-
-
-.megamenu .megamenu-content
-{
-    padding: 20px 30px;
-    display: inherit;
-    opacity: 1;
-}
-
-
-.megamenu .megamenu-content:before,
-.megamenu .megamenu-content:after
-{
-    line-height: 0;
-
-    display: table;
-
-    content: '';
-}
-
-.megamenu .megamenu-content:after
-{
-    clear: both;
-}
-
-.megamenu.navbar .nav > li > .dropdown-menu:after,
-.megamenu.navbar .nav > li > .dropdown-menu:before
-{
-    display: none;
-}
-
-
-.megamenu .dropdown-menu > li
-{
-    display: block;
-}
-
-
-.navbar-tshop ul.nav li.dropmenu ul.dropdown-menu .megamenu-content,
-.navbar-tshop ul.nav li.dropmenu ul.dropdown-menu .megamenu-content
-{
-    display: inherit;
-    visibility: visible;
-
-    -webkit-transition: opacity .35s linear;
-            transition: opacity .35s linear;
-
-    opacity: 1;
-}
-
-
-.megamenu-content ul li
-{
-    margin-bottom: 5px;
-    padding-bottom: 5px;
-
-    border-bottom: 1px solid #ededed;
-}
-
-
-.navbar-tshop ul.nav li.dropmenu:hover ul.dropdown-menu .megamenu-content,
-.navbar-tshop ul.nav li.dropmenu.show ul.dropdown-menu .megamenu-content
-{
-    visibility: visible;
-
-    opacity: 1;
-}
-
-
-.navbar-tshop ul.nav li.dropmenu:hover ul.dropdown-menu,
-.navbar-tshop ul.nav li.dropmenu.show ul.dropdown-menu
-{
-    display: inherit;
-    visibility: visible;
-
-    opacity: 1;
-}
-
-
-.navbar-tshop ul.nav li.dropmenu:hover ul.dropdown-menu,
-div.cartMenu.dropmenu:hover div.dropdown-menu
-{
-    display: block;
-
-    opacity: 1;
-
-    filter: none;
-}
-
-
-.megamenu-content ul li a
-{
-    font-size: 12px;
-}
-
-
-.megamenu-content ul li a
-{
-    display: block;
-
-    -webkit-transition: all .2s ease 0s;
-       -moz-transition: all .2s ease 0s;
-        -ms-transition: all .2s ease 0s;
-         -o-transition: all .2s ease 0s;
-            transition: all .2s ease 0s;
-}
-
-
-.megamenu .dropmenu.megamenu-fullwidth .dropdown-menu
-{
-    right: 0;
-    left: 0;
-
-    width: 100%;
-}
-
 
 .productPopItem .productInfo
 {
