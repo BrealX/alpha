@@ -147,6 +147,7 @@ $(document).ready(function() {
         if (!div.is(e.target) && div.has(e.target).length === 0) {
             div.slideUp();
         }
+        
     });     
 
     // Delete items from miniCart

@@ -18,7 +18,7 @@
 
     overflow: hidden;
 
-    background: linear-gradient(90deg, #ff4e50 10%, #f9d423 90%);
+    background: url(../img/products/product_landing_background.png);
 }
 
 .loader
