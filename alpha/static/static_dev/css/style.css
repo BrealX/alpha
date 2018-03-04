@@ -228,33 +228,6 @@ h6
     margin-left: auto!important;
 }
 
-
-
-
-input[type='text'],
-input[type='password'],
-input[type='email']
-{
-    font-size: 14px;
-
-    height: 38px;
-    margin-bottom: 10px;
-
-    color: #888;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #ddd;
-    -webkit-border-radius: 3px;
-       -moz-border-radius: 3px;
-            border-radius: 3px;
-}
-
-.form-control:focus,
-{
-    outline: 0 none;
-    box-shadow: NONE;
-}
-
 .btn.btn-lg
 {
     font-size: 16px;
@@ -398,6 +371,46 @@ input[type='email']
     border-radius: 50%;
 }
 
+.breadcrumb
+{
+    border: 1px solid #eff2f6;
+    background: #884bdf;
+    border-radius: 24px 24px 24px 0;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.breadcrumb a
+{
+    color: #fff !important;
+}
+
+.breadcrumb > li + li::before {
+    padding: 0 5px;
+    color: #fff;
+    content: "/\00a0";
+}
+
+.section-title-inner
+{
+    font-size: 30px;
+    line-height: 35px;
+
+    margin-top: 30px;
+    padding-bottom: 15px;
+
+    color: #897ceb;
+}
+
+.section-title-inner > a
+{
+    color: #707070;
+}
+
+.section-title-inner > a:hover
+{
+    color: #4ec67f;
+}
 
 /* ================================================================== */
 /* HEADER
@@ -743,6 +756,22 @@ div.miniCartFooter .btn.btn-primary
     z-index: 1;
     background-position: bottom center;
     background-size: cover;
+}
+
+.section-auth {
+    background-color: #f5f9fc;
+}
+
+.section-auth .line-shape {
+    margin-left: 0;
+}
+
+#user_email,
+#user_password {
+    font-size: 18px;
+    padding: 15px 15px !important;
+    width: 70%;
+    border-radius: 25px 25px 25px 0 !important;
 }
 
 #productslider a
@@ -1298,19 +1327,6 @@ h5.parallaxSubtitle
 /* PRODUCT PAGE
 /* =============================================================== */
 
-.headerOffset
-{
-    padding-top: 120px;
-}
-
-
-.breadcrumb
-{
-    border: 1px solid #ddd;
-    background: #f5f5f5 !important;
-}
-
-
 .sp-wrap
 {
     z-index: 10;
@@ -1703,29 +1719,6 @@ div.productFilter a.btn-danger:hover
     text-transform: uppercase;
     width: auto;
     margin: 0 auto;
-}
-
-.section-title-inner
-{
-    font-size: 30px;
-    line-height: 35px;
-
-    margin-top: 30px;
-    padding-bottom: 15px;
-
-    color: #707070;
-}
-
-
-.section-title-inner > a
-{
-    color: #707070;
-}
-
-
-.section-title-inner > a:hover
-{
-    color: #4ec67f;
 }
 
 .description p
@@ -2222,16 +2215,6 @@ div.productFilter a.btn-danger:hover
     background-color: #fff;
     background-image: none;
     background-clip: padding-box;
-}
-
-
-
-.form-control:focus {
-    color: #495057;
-    background-color: #fff;
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
 .btn.submit-btn
