@@ -2,115 +2,132 @@
 {% load static %}
 
 {% block content %}
-    <div class="banner">
-        <div class="full-container">
-            <img src="{% static 'img/banner.jpg' %}" alt="img" class="img-responsive">
-        </div>
-    </div>
-    <!--/.banner-->
-    <div class="container main-container">
-        <div class="row featuredPostContainer globalPadding style2">
-            <h3 class="section-title style2 text-center">
-                <span>Новые поступления</span>
-            </h3>
-            <div id="productslider" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
-                {% for product_image in products_images %}  
-                    {% include 'landing/product_item.html' %}
-                {% endfor %}
+<!-- Section -->
+<section class="clearfix section-main-banner">
+</section>
+<!-- End Section -->
+<!-- Section -->
+<section class="section-main-slider bg-white section-padding-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="section-heading text-center">
+                    <h2>Новые поступления</h2>
+                    <div class="line-shape"></div>
+                </div>
             </div>
-            <!--/.productSlider-->
         </div>
-        <!--/.featuredPostContainer-->
+        <!-- Row End -->
     </div>
-    <!--/.main-container-->
-    <div class="parallax-section parallax-image-1" style="background-position: 50% -14px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="parallax-content clearfix">
-                        <h1 class="parallaxPrice">500 UAH</h1>
-                        <h2 class="uppercase">
-                            получите бесплатную доставку при заказе от указанной суммы
-                        </h2>
-                        <h3>
-                            Детали Вы можете уточнить, связавшись с нами
-                        </h3>
-                    </div>
+    <!-- Container End -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- Product Slider -->
+                <div id="productslider" class="product-slides owl-carousel owl-loaded owl-drag">
+                    {% for product_image in products_images %}  
+                        {% include 'landing/product_item.html' %}
+                    {% endfor %}
+                </div>
+                <!-- End Product Slider -->
+            </div>
+        </div>
+        <!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Main Slider -->
+<!-- Section Parallax 1 -->
+<section class="parallax-section parallax-image-1" style="background-position: 50% -14px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="parallax-content clearfix">
+                    <h1 class="parallaxPrice">500 UAH</h1>
+                    <h2 class="uppercase">получите бесплатную доставку при заказе от указанной суммы</h2>
+                    <h3>Детали Вы можете уточнить у менеджера</h3>
                 </div>
             </div>
         </div>
     </div>
-    <!--/.parallax-image-1-->
-    <div id="microphones"></div>
-    <div class="container main-container">
-        <div class="morePost row featuredPostContainer style2 globalPaddingTop">
-            <h3 class="section-title style2 text-center">
-                <span>Микрофоны-караоке</span>
-            </h3>
-            <div id="productslider" class="owl-carousel owl-theme" style="opacity: 1; display: block;"> <!-- JAVASCRIPT-->
-                {% for product_image in products_images_microphones %}  
-                    {% include 'landing/product_item.html' %}
-                {% endfor %}
-            </div>
-            <!--/.productSlider-->
-        </div>
-        <!--/.featuredPostContainer-->
-    </div>
-    <!--/.main-container-->
-        <hr class="no-margin-top">
-    <div class="parallax-section parallax-image-2" style="background-position: 50% 50px;">
-        <div class="w100 parallax-section-overlay">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="parallax-content clearfix">
-                            <h1 class="xlarge">
-                                Сотрудничество с известными авторами и композиторами
-                            </h1>
-                            <h5 class="parallaxSubtitle">
-                                Такими как Шаинский В.Я., Энтин Ю.С., Танич М.И., Пахмутова А.Н. и многими другими
-                            </h5>
-                        </div>
-                    </div>
+</section>
+<!-- End Section Parallax 1 -->
+<!-- Section Microphones -->
+<section class="section-microphones bg-white section-padding-100" id="microphones">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="section-heading text-center">
+                    <h2>Микрофоны-караоке</h2>
+                    <div class="line-shape"></div>
                 </div>
             </div>
         </div>
+        <!-- Row End -->
     </div>
-    <!--/.parallax-image-2-->
-    <div id="multiplayers"></div>
-    <div class="container main-container">
-        <div class="morePost row featuredPostContainer style2 globalPaddingTop">
-            <h3 class="section-title style2 text-center">
-                <span>Мультиплееры</span>
-            </h3>
-            <div id="productslider" class="owl-carousel owl-theme" style="opacity: 1; display: block;"> <!-- JAVASCRIPT-->
-                {% for product_image in products_images_players %}  
-                    {% include 'landing/product_item.html' %}
-                {% endfor %}
+    <!-- Container End -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- Product Slider -->
+                <div id="productslider" class="product-slides owl-carousel owl-loaded owl-drag">
+                    {% for product_image in products_images_microphones %}  
+                        {% include 'landing/product_item.html' %}
+                    {% endfor %}
+                </div>
+                <!-- End Product Slider -->
             </div>
-            <!--/.productSlider-->
         </div>
-        <!--/.featuredPostContainer-->
+        <!-- End Row -->
     </div>
-    <!--/.main-container-->
-    <div class="parallax-section parallax-image-3" style="background-position: 50% 50px;">
-        <div class="w100 parallax-section-overlay">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="parallax-content clearfix">
-                            <h1 class="xlarge">
-                                Нам доверяют уже более 3 лет
-                            </h1>
-                            <h5 class="parallaxSubtitle">
-                                Все наши игрушки и книги разработаны с 
-                                учётом возрастных и психологических особенностей ребёнка
-                            </h5>
-                        </div>
-                    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Microphones -->
+<!-- Section Parallax 2 -->
+<section class="parallax-section parallax-image-1" style="background-position: 50% -14px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="parallax-content clearfix">
+                    <h1 class="xlarge">Нам доверяют уже более 3 лет</h1>
+                    <h5 class="parallaxSubtitle">Все представленные игрушки и книги разработаны с учётом возрастных и психологических особенностей ребёнка</h5>
                 </div>
             </div>
         </div>
+        <!-- End Row -->
     </div>
-    <!--/.parallax-image-3-->
+    <!-- End Container -->
+</section>
+<!-- End Section Parallax 2 -->
+<!-- Section Multiplayers -->
+<section class="section-multiplayers bg-white section-padding-100" id="microphones" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="section-heading text-center">
+                    <h2>Мультиплееры</h2>
+                    <div class="line-shape"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Row End -->
+    </div>
+    <!-- Container End -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- Product Slider -->
+                <div id="productslider" class="product-slides owl-carousel owl-loaded owl-drag">
+                    {% for product_image in products_images_players %}  
+                        {% include 'landing/product_item.html' %}
+                    {% endfor %}
+                </div>
+                <!-- End Product Slider -->
+            </div>
+        </div>
+        <!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Multiplayers -->
 {% endblock %}

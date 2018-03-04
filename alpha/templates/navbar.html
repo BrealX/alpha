@@ -1,124 +1,113 @@
 {% load static %}
-    <!-- Static navbar -->
-    <nav class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
-        <form class="form-inline hidden" id="navbar_form" action="{% url 'add_to_cart' %}">{% csrf_token %}
-        </form>            
-        <div class="navbar-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6">
-                        <div class="pull-left">
-                            <ul class="userMenu">
-                                <li class="phone-number">
-                                    <a href="tel:+380507779271">
-                                        <span>
-                                            <i class="fas fa-phone"></i>
-                                        </span>
-                                        <span class="hidden-xs" style="margin-left:5px">+38(050)777-92-71
-                                        </span>
-                                    </a>
+
+<!-- Preloader Start -->
+<!-- Header Area Start -->
+<!--<header class="header-area animated slideInDown" data-aos="slide-down">-->
+<header class="header-area animated slideInDown">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <!-- Menu Area Start -->
+            <div class="col-12 col-lg-10">
+                <div class="menu-area">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <!-- Logo -->
+                        <a href="{% url 'home' %}" class="navbar-brand">Ёжик.</a>
+                        <!-- Menu Area -->
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <ul class="navbar-nav ml-auto" id="nav">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{% url 'home' %}">Главная</a>
                                 </li>
-                            </ul>
+                                <li class="nav-item">
+                                    <a class="nav-link dropdown-toggle" href="#">Каталог товаров
+                                    <b class="caret"></b></a>
+                                    <ul class="dropdown-menu hidden">
+                                        <li class="megamenu-content">
+                                        <!--megamenu-content-->
+                                           <ul class="col-lg-2 col-sm-2 col-md-2 unstyled noMarginLeft">
+                                                <li>
+                                                    <p>
+                                                        <a href="/#microphones"><strong>Микрофоны</strong></a>
+                                                    </p>
+                                                </li>
+                                                {% for item in nav_products_microphones %}
+                                                <li>
+                                                    <a href="{% url 'product' item.id %}">{{ item.name }}</a>
+                                                </li> 
+                                                {% endfor %}
+                                            </ul>
+                                            <ul class="col-lg-2 col-sm-2 col-md-2 unstyled noMarginLeft">
+                                                <li>
+                                                    <p>
+                                                        <a href="/#multiplayers"><strong>Плееры</strong></a>
+                                                    </p>
+                                                </li>
+                                                {% for item in nav_products_players %}
+                                                <li>
+                                                    <a href="{% url 'product' item.id %}">{{ item.name }}</a>
+                                                </li> 
+                                                {% endfor %}
+                                            </ul>
+                                            <ul class="col-lg-3 col-sm-3 col-md-3 col-xs-6">
+                                                <li class="no-margin productPopItem">
+                                                    <a href="#">
+                                                        <img class="img-responsive" src="/media/static/products/img/karaoke_shainskii.png" alt="img"></a>
+                                                    <a class="text-center productInfo alpha90" href="/product/1">
+                                                       Хит продаж!
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <ul class="col-lg-3 col-sm-3 col-md-3 col-xs-6">
+                                                <li class="no-margin productPopItem">
+                                                    <a href="#">
+                                                        <img class="img-responsive" src="/media/static/products/img/karaoke_ia_pou.jpg" alt="img"></a>
+                                                    <a class="text-center productInfo alpha90" href="/product/2">
+                                                        Хит продаж!
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Оплата и доставка</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Контакты</a>
+                                </li>
+                            </ul>  
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 no-margin no-padding">
-                        <div class=pull-right>
-                            <ul class="userMenu">
-                                <li>
-                                    <a href="{% url 'user_dashboard' %}">
-                                        <span class="hidden-xs">Мой кабинет</span>
-                                    </a>
-                                </li>
-                                {% if username %}
-                                <li>
-                                    <a href="{% url 'logout' %}">
-                                        <span class="hidden-xs">Выйти ({{ username }})</span>
-                                    </a>
-                                </li>
-                                {% else %}
-                                <li>
-                                    <a href="{% url 'login' %}">
-                                        <span class="hidden-xs">Войти</span>
-                                    </a>
-                                </li>
-                                <li class="hidden-xs">
-                                    <a href="{% url 'login' %}">Зарегистрироваться</a>
-                                </li>
-                                {% endif %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>          
+                    </nav>
+                </div>
+            </div>
+            <!-- Minicart -->
+            <div class="col-12 col-lg-2">
+                <div class="minicart-button d-lg-block">
+                    <a href="" >
+                        <i class="ion-ios-cart-outline"></i>
+                        Корзина <span id="cart_qnty_subtotal">{% if products_in_cart_total_qnty %}({{ products_in_cart_total_qnty }}){% else %}(0){% endif %}</span>
+                    </a>
+                </div>
             </div>
         </div>
-        <!--/.navbar-top-->
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{% url 'home' %}">
-                    <img src="{% static 'img/logo.png' %}" alt="shop">
-                </a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="dropmenu menu80width">
-                        <a class="dropdown-toggle" href="#">Каталог товаров
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu hidden">
-                            <li class="megamenu-content">
-                                <!--megamenu-content-->
-                                <ul class="col-lg-2 col-sm-2 col-md-2 unstyled noMarginLeft">
-                                    <li>
-                                        <p>
-                                           <a href="/#microphones"><strong>Микрофоны</strong></a>
-                                        </p>
-                                    </li>
-                                    {% for item in nav_products_microphones %}
-                                    <li>
-                                        <a href="{% url 'product' item.id %}">{{ item.name }}</a>
-                                    </li> 
-                                    {% endfor %}
-                                </ul>
-                                <ul class="col-lg-2 col-sm-2 col-md-2 unstyled noMarginLeft">
-                                    <li>
-                                        <p>
-                                           <a href="/#multiplayers"><strong>Плееры</strong></a>
-                                        </p>
-                                    </li>
-                                    {% for item in nav_products_players %}
-                                    <li>
-                                        <a href="{% url 'product' item.id %}">{{ item.name }}</a>
-                                    </li> 
-                                    {% endfor %}
-                                </ul>
-                                <ul class="col-lg-3 col-sm-3 col-md-3 col-xs-6">
-                                    <li class="no-margin productPopItem">
-                                        <a href="#">
-                                            <img class="img-responsive" src="/media/static/products/img/karaoke_shainskii.png" alt="img"></a>
-                                        <a class="text-center productInfo alpha90" href="/product/1">
-                                            Хит продаж!
-                                        </a>
-                                    </li>
-                                </ul>
-                                <ul class="col-lg-3 col-sm-3 col-md-3 col-xs-6">
-                                    <li class="no-margin productPopItem">
-                                        <a href="#">
-                                            <img class="img-responsive" src="/media/static/products/img/karaoke_ia_pou.jpg" alt="img"></a>
-                                        <a class="text-center productInfo alpha90" href="/product/2">
-                                            Хит продаж!
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Оплата и доставка</a>
-                    </li>
-                    <li>
-                        <a href="#">Контакты</a>
-                    </li>
-                </ul>
+        <!-- End Row -->
+    </div>
+    <!-- End Container -->
+</header>
+<!-- End Header -->      
+                    
+
+
+                                
+
+
+
+
+
+
+
+                    
+<!--                </ul>
                 <div class="nav navbar-nav navbar-right hidden-xs">
                     <div class="dropdown cartMenu basket-container">
                         <a class="dropdown-toggle">
@@ -183,7 +172,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--/.miniCartTable-->
+                            
                             <div class="miniCartFooter text-right">
                                 <h3 class="text-right subtotal">
                                     ИТОГО: <span id="miniCart_subtotal">0 UAH</span>
@@ -198,15 +187,13 @@
                                     {% endif %}
                             </div>
                         </div>
-                        <!--/.droppingbasket-->
+                    
                         
                     </div>
-                    <!--/.cartMenu-->
+                    
                 </div>
-                <!--/.navbar-nav hidden-xs-->
+                
             </div>
-            <!--/.nav-collapse -->
+            
         </div>
-        <!--/.container-->
-    </nav>
-    <!--/.Fixed navbar-->
+        -->

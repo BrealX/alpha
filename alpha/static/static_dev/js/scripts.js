@@ -220,24 +220,26 @@ $(document).ready(function() {
 
     // CountTo Plugin Initializer (https://stackoverflow.com/questions/43202706/jquery-counto-js-on-scroll-count-numbers-not-onload)
     function isScrolledIntoView(el) {
-        var elemTop = el.getBoundingClientRect().top;
-        var elemBottom = el.getBoundingClientRect().bottom;
+        if (el.getBoundingClientRect().top | el.getBoundingClientRect().bottom) { 
+            var elemTop = el.getBoundingClientRect().top;
+            var elemBottom = el.getBoundingClientRect().bottom;
 
-        var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
-        return isVisible;
-    }
-    $(window).on('scroll', function() {
-        if (isScrolledIntoView(document.getElementById('counters'))) {
-            $('.counter').countTo();
-            $('.counter-decimal').countTo({
-                formatter: function (value, options) {
-                    return value.toFixed(1);
-                }
-            });
-        // Unbind scroll event
-        $(window).off('scroll');
-        }
-    });
+            var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+            return isVisible;
+        $(window).on('scroll', function() {
+            if (isScrolledIntoView(document.getElementById('counters'))) {
+                $('.counter').countTo();
+                $('.counter-decimal').countTo({
+                    formatter: function (value, options) {
+                        return value.toFixed(1);
+                    }
+                });
+            // Unbind scroll event
+            $(window).off('scroll');
+            }
+        });
+    }};
+
 
     // AOS Animation Initializer
     // https://github.com/michalsnik/aos
@@ -256,7 +258,7 @@ $(document).ready(function() {
     $('.owl-carousel').owlCarousel({
     loop:true,
     margin:25,
-    nav:true,
+    nav:false,
     responsive:{
         0:{
             items:1

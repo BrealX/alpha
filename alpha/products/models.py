@@ -94,7 +94,7 @@ class ProductImage(models.Model):
         on_delete=models.CASCADE, 
         related_name='images')
     image = models.ImageField(
-        upload_to='static/products_images/')
+        upload_to='static/products/img/')
     is_main = models.BooleanField(
         default=False)
     is_active = models.BooleanField(
