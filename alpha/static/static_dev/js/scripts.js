@@ -139,8 +139,8 @@ $(document).ready(function() {
 	});
 
     
-    // Show Cart subtotal (at miniCart dropdown & Checkout Page Right Bar)
-    function calculatingTotalBasketAmount(){
+    // Shows Cart subtotal (at miniCart dropdown and Cart Page)
+    function calculatingTotalCartSum(){
         var minicart_overall = 0;
         var cart_overall = 0;
         $(".minicart-item-overall").each(function(){
@@ -149,23 +149,23 @@ $(document).ready(function() {
         $(".cart-item-overall").each(function(){
             cart_overall += parseFloat($(this).text());
         });
-        $('#miniCart_subtotal').text(minicart_overall.toFixed(2) + ' UAH');
-        $('#total_price').text(cart_overall.toFixed(2) + ' UAH');
+        $('#miniCart_subtotal').text(minicart_overall.toFixed(2) + ' грн.');
+        $('#cart_subtotal').text('Ваш заказ на сумму: '+ cart_overall.toFixed(2) + ' грн.');
     };
 
     
-    // Check any quantity changes at Cart Page and make changes to Cart
-    $(document).on('change', '.product-in-cart-qnty', function(){
+    // Checks any quantity changes at Cart Page and make changes at Client side
+    $(document).on('change', '.cart-touchspin', function(){
         var current_qnty = $(this).val();
         var current_tr = $(this).closest('tr');
-        var current_price = parseFloat(current_tr.find('.product-in-basket-price').text()).toFixed(2);
-        var total_amount = parseFloat(current_qnty*current_price).toFixed(2);
-        current_tr.find('.total-product-in-cart-sum').text(total_amount);
+        var current_price = parseFloat(current_tr.find('.cart-item-price').text()).toFixed(2);
+        var item_subtotal = parseFloat(current_qnty*current_price).toFixed(2);
+        current_tr.find('.cart-item-overall').text(item_subtotal+" грн.");
 
-        calculatingTotalBasketAmount();
+        calculatingTotalCartSum()
     });
 
-    calculatingTotalBasketAmount();
+    calculatingTotalCartSum();
 
     // CountTo Plugin Initializer (https://stackoverflow.com/questions/43202706/jquery-counto-js-on-scroll-count-numbers-not-onload)
     /*function isScrolledIntoView(el) {
@@ -243,8 +243,9 @@ $(document).ready(function() {
 
 
     // Bootstrap Touchspin at Cart Page Initializer
-    $(window).on('load', function() {
-        $("input[name='quanitySniper']").TouchSpin();
+    $('.cart-touchspin').TouchSpin({
+        min: 1,
+        step: 1,
     });
 
     // ICheck Initializer

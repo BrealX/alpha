@@ -1414,6 +1414,14 @@ h5.parallaxSubtitle
     border-radius: 23px 23px 23px 0;
 }
 
+.get-back-button > a:hover {
+    background: #5b32b4;
+    color: #fff;
+    -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+}
+
 .CartProduct
 {
     border-bottom: 1px solid #eff2f6;
@@ -1439,11 +1447,34 @@ h5.parallaxSubtitle
     color: #fb397d;
 }
 
-.quanitySniper
+.cart-touchspin
 {
     padding: 0;
     text-align: center;
 }
+
+.section-cart-header > h2 {
+    color: #ffffff;
+    font-size: 36px;
+}
+
+.section-cart-header > p {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+#cart_subtotal
+{
+    min-width: 185px;
+    height: 40px;
+    margin-left: 20px;
+
+    color: #fb397d;
+    border-radius: 22px 25px 22px 0;
+    background: #fff;
+}
+
+
 
 
 
@@ -2215,7 +2246,7 @@ div.productFilter a.btn-danger:hover
     font-weight: 500;
 
     min-width: 185px;
-    height: 48px;
+    height: 40px;
 
     color: #fff;
     border-radius: 22px 25px 22px 0;

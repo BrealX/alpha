@@ -22,7 +22,10 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-8">
-
+                <div class="section-cart-header">
+                    <h2>Корзина</h2>
+                    <p>Здесь можно изменить количество заказанного товара и перейти к оформлению заказа!</p>
+                </div>
             </div>
             <div class="col-md-4">
                 <div class="get-back-button">
@@ -53,12 +56,11 @@
                                         <h4>
                                             <a href="{% url 'product_land' item_in_cart.product.id %}">{{ item_in_cart.product.name }}</a>
                                         </h4>
-                                        <span>{{ item_in_cart.price_per_item }} грн.</span>
+                                        <span class="cart-item-price">{{ item_in_cart.price_per_item }}</span><span> грн.</span>
                                     </div>
                                 </td>
                                 <td class="CartQuantity" style="width: 15%;">
-                                    <!--<a>{{ item_in_cart.qnty }} шт.</a>-->
-                                    <input class="quanitySniper form-control" name="quanitySniper" type="text" value="{{ item_in_cart.qnty }}" data-product_id="{{ item_in_cart.product.id }}">
+                                    <input class="cart-touchspin form-control" name="cart_touchspin" type="text" value="{{ item_in_cart.qnty }}" data-product_id="{{ item_in_cart.product.id }}">
                                 </td>
                                 <td class="CartSubtotal" style="width: 15%;">
                                     <span class="cart-item-overall price">{{ item_in_cart.total_price }} грн.</span>
@@ -79,6 +81,14 @@
         <!-- End Row -->
     </div>
     <!-- End Container -->
+    <div class="container text-center" style="margin-top: 30px;">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <a class="btn submit-btn" href="{% url 'checkout1' %}">Оформить заказ</a>
+                <a class="btn submit-btn" id="cart_subtotal">Ваш заказ на сумму:  грн.</a>
+            </div>
+        </div>
+    </div>
 </section>
 <!-- End Section -->
 
@@ -87,49 +97,6 @@
 <div class="container main-container headerOffset">
     {% if products_in_basket %}
     <div class="row">
-        <div class="col-lg-9 col-md-9 col-sm-7">
-            <div class="row userInfo">
-                <div class="col-xs-12 col-sm-12">
-                    <div class="cartContent w100">
-                        <table class="cartTable table-responsive" style="width:100%">
-                            <tbody>
-
-                                {% for product_in_basket in products_in_basket %}
-                                <tr class="CartProduct">
-                                    <td>
-                                        <div class="input-group bootstrap-touchspin">
-                                            <input class="quanitySniper form-control product-in-cart-qnty" name="quanitySniper" type="text" value="{{ product_in_basket.qnty }}" data-product_id="{{ product_in_basket.product.id }}">
-                                        </div>
-                                    </td>
-                                    <td>{{ product_in_basket.product.discount }} %</td>
-                                    <td class="price cart-item-overall">{{ product_in_basket.total_price }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="cartFooter w100">
-                        <div class="box-footer">
-                            <div class="pull-left" style="display: none;">
-                                <span style="color: #4ec67f">
-                                    <i class="fas fa-cart-arrow-down"></i>
-                                    Ваши изменения успешно внесены!
-                                </span>
-                            </div>
-                            <div class="pull-right">
-                                <a class="btn btn-default" id="cart_refresh" href="{% url 'checkout' %}">
-                                    <i class="fas fa-cart-arrow-down"></i>
-                                    Внести изменения в корзину
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
         <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
             <div class="contentBox">
                 <div class="w100 costDetails">
@@ -139,9 +106,6 @@
                         <div class="w100 cartMiniTable">
                             <table id="cart-summary" class="std table">
                                 <tbody>
-                                    <tr>
-                                        <td class="site-color" style="text-transform: uppercase; font-weight: bolder;">Ваш заказ:</td>
-                                    </tr>
                                     <tr>
                                         <td>Сумма</td>
                                         <td class="price" id="total_price">
