@@ -201,7 +201,6 @@ $(document).ready(function() {
     // https://michalsnik.github.io/aos/
     AOS.init();
 
-
     // jQuery-ScrollUp Plugin Initializer
     $(function () {
         $.scrollUp({
