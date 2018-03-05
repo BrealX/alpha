@@ -793,6 +793,21 @@ div.miniCartFooter .btn.btn-primary
     background-repeat: no-repeat;
 }
 
+.section-checkout
+{
+    position: relative;
+    z-index: auto;
+
+    padding: 100px 0 100px 0;
+
+    background: #a865e1;
+    background: -webkit-linear-gradient(to left, #7873ed, #a865e1);
+    background: -webkit-linear-gradient(right, #7873ed, #a865e1);
+    background: -webkit-gradient(linear, right top, left top, from(#7873ed), to(#a865e1));
+    background:      -o-linear-gradient(right, #7873ed, #a865e1);
+    background:         linear-gradient(to left, #7873ed, #a865e1);
+}
+
 .section-auth .line-shape,
 .section-register .line-shape
 {
@@ -1365,99 +1380,74 @@ h5.parallaxSubtitle
 
 
 /* =============================================================== */
-/* PRODUCT PAGE
+/* CHECKOUT PAGES
 /* =============================================================== */
 
-.sp-wrap
+.cart-area
 {
-    z-index: 10;
-
-    width: 100%;
-    max-width: 100% !important;
-
-    border: none !important;
-    background: none !important;
+    position: relative;
+    z-index: 1;
+    background-color: #fff;
+    background-position: center center;
+    background-size: cover;
+    border: 20px solid #5b32b4;
+    border-radius: 30px;
+    height: 650px;
+    -webkit-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
 }
 
-
-.main-image.sp-wrap
-{
-    background: #fff !important;
+.get-back-button {
+    text-align: right;
+    margin-bottom: 40px;
 }
 
-
-.sp-thumbs
-{
-    text-align: center !important;
-}
-
-
-.main-image:not(.main-image-thumb-list) .sp-thumbs
-{
-    position: absolute;
-    z-index: 70;
-    right: 0 !important;
-    bottom: 20% !important;
-
-    width: 100px !important;
-
-    text-align: left;
-}
-
-
-.main-image.sp-wrap .sp-thumbs
-{
-    right: 10px !important;
-}
-
-
-.sp-thumbs a:hover,
-.sp-thumbs a:active,
-.sp-current,
-.sp-current:visited
-{
-    border: 2px solid #4ec67f !important;
-}
-
-
-.main-image .sp-thumbs a:link,
-.main-image .sp-thumbs a:visited
-{
+.get-back-button > a {
+    background: #ffffff;
+    height: 45px;
+    min-width: 155px;
     display: inline-block;
-    display: inline-block;
-    float: right;
-    float: right;
-
-    width: 70px;
-    height: 70px;
-    margin-right: 0 !important;
-    margin-bottom: 10px;
-
-    transition: margin .2s ease 0s;
-
-    border: 2px solid #eee;
-    border: 2px solid #eee;
+    text-align: center;
+    line-height: 45px;
+    color: #fb397d;
+    font-weight: 500;
+    border-radius: 23px 23px 23px 0;
 }
 
-
-@media (min-width: 768px)
+.CartProduct
 {
-    .sp-large
-    {
-        max-width: calc(100% - 80px);
-    }
-    .main-image:not(.main-image-thumb-list) .sp-thumbs
-    {
-        position: absolute;
-        z-index: 70;
-        right: 0 !important;
-        bottom: 20% !important;
-
-        width: 100px !important;
-
-        text-align: left;
-    }
+    border-bottom: 1px solid #eff2f6;
 }
+
+
+.CartProductThumbnail
+{
+    text-align: center;
+}
+
+.cart-area .CartProduct a,
+.cart-area .CartDescription span
+{
+    color: #5b32b4;
+}
+
+.cart-area .price
+{
+    font-size: 15px;
+    font-weight: 700;
+
+    color: #fb397d;
+}
+
+.quanitySniper
+{
+    padding: 0;
+    text-align: center;
+}
+
+
+
+
 
 
 .product-title
@@ -1633,61 +1623,6 @@ div.productFilter a.btn-danger:hover
     width: 100%;
 }
 
-
-.nav-tabs
-{
-    margin-bottom: 20px;
-
-    border-bottom: 3px solid #bfc9ca;
-}
-
-
-.nav-tabs > li.active,
-.nav-tabs > li
-{
-    background: none;
-}
-
-
-.nav-tabs > li > a
-{
-    border: 0;
-    border-radius: 0;
-}
-
-
-.nav-tabs li a
-{
-    font-size: 14px;
-    font-weight: 200;
-
-    margin: 0 0 0 0;
-
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover,
-.nav-tabs > li.active > a:focus,
-.nav-tabs > li:hover > a
-{
-    color: #fff !important;
-    border: 0;
-    border-radius: 0;
-}
-
-
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover,
-.nav-tabs > li.active > a:focus,
-.nav-tabs > li:hover > a
-{
-    background: #bfc9ca !important;
-}
-
-
 .product-share
 {
     display: inline-block;
@@ -1748,20 +1683,6 @@ div.productFilter a.btn-danger:hover
     background: #ddd;
 }
 
-
-.style2 .section-title span, .section-title.style2 span, {
-    color: #454545;
-    display: table;
-    position: relative;
-    z-index: 2;
-    background: #fff;
-    padding: 5px 15px;
-    text-align: center;
-    text-transform: uppercase;
-    width: auto;
-    margin: 0 auto;
-}
-
 .description p
 {
     font-size: 14px;
@@ -1774,14 +1695,6 @@ div.productFilter a.btn-danger:hover
     max-height: 90px;
 
     color: #888;
-}
-
-
-.add-to-cart-btn
-{
-    position: relative;
-
-    display: inline-block;
 }
 
 /* =============================================================== */
@@ -2313,15 +2226,6 @@ div.productFilter a.btn-danger:hover
 /* =============================================================== */
 /* CART PAGE
 /* =============================================================== */
-
-.quanitySniper
-{
-    width: 40px;
-    height: 30px;
-    padding: 0;
-
-    text-align: center;
-}
 
 
 tr.CartProduct td,

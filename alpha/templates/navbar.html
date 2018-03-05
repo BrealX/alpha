@@ -113,7 +113,7 @@
                             <div class="minicarttable pre-scrollable">
                                 <table>
                                     <tbody>
-                                        {% if not products_in_cart %}
+                                        {% if products_in_cart|length == 0 %}
                                         <p class="lead text-center">... В Вашей корзине еще нет товаров ...</p>
                                         {% else %}
                                             {% for item_in_cart in products_in_cart %}
