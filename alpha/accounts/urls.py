@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     re_path(r'^auth/login/', views.user_login, name="login"),
+    re_path(r'^auth/register/', views.user_register, name="register"),
     re_path(r'^auth/logout/', views.user_logout, name="logout"),
     re_path(r'^user_dashboard/$', views.user_dashboard, name="user_dashboard"),
     re_path(r'^user_dashboard/my_profile/$', views.user_my_profile, name="user_my_profile"),

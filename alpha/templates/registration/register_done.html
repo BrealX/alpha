@@ -2,38 +2,41 @@
 {% load static %}
 
 {% block content %}
-<div class="container main-container headerOffset">
-	<div class="row">
-		<div class="breadcrumbDiv col-lg-12">
-			<ul class="breadcrumb">
-				<li>
-					<a href="{% url 'home' %}">На главную</a>
-				</li>
-				<li>
-					<a href="{% url 'login' %}">Авторизация</a>
-				</li>
-				<li class="active">
-					Создание учетной записи
-				</li>
-			</ul>
+<section id="section_register_done" class="section-register-done section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 80px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+				    <li>
+					    <a href="{% url 'register' %}">Регистрация</a>
+				    </li>
+				    <li class="active">
+					    Создание учетной записи
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-heading" style="text-align: center;">
+					<h2 class="text-white">Создание учетной записи</h2>
+					<div class="line-shape"></div>
+				</div>
+				<div class="footer-text">
+					<p>Ваша новая учетная запись <span>({{ new_user.username }})</span> успешно создана. Для того, чтобы войти на сайт, необходимо активировать новую учетную запись!</p>
+				</div>
+				<div>
+					<a class="btn submit-btn" href="{% url 'after_registration' %}">Активировать</a>
+				</div>
+			</div>
 		</div>
-	</div>
-	<!--/.row-->
-	<div class="row">
-		<div class="col-lg-9 col-md-9 col-sm-7">
-			<h1 class="section-title-inner">
-				<span>
-					<i class="fas fa-user-plus"></i>
-					Ваша новая учетная запись ({{ new_user.username }}) успешно добавлена. <br>
-					Для того, чтобы войти на сайт, <a href="{% url 'after_registration' %}">активируйте Вашу новую учетную запись</a>!
-				</span>
-			</h1>
-		</div>
-		<div class="col-lg-3 col-md-3 col-sm-5"></div>
-	</div>
-	<!--/.row-->
-	<div style="clear:both"></div>
-</div>
-<!--/.main container-->
-<div class="gap"></div>
+		<!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Auth -->
 {% endblock %}

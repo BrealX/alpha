@@ -55,7 +55,7 @@
                                 <tr class="CartProduct">
                                     <td class="CartProductThumb">
                                         <div>
-                                            <a href="{% url 'product' product_in_basket.product.id %}">
+                                            <a href="{% url 'product_land' product_in_basket.product.id %}">
                                                 <img src="{{ product_in_basket.product.product_main_image.image.url }}" alt="img" class="img-responsive">
                                             </a>
                                         </div>
@@ -63,7 +63,7 @@
                                     <td>
                                         <div class="CartDescription">
                                             <h4>
-                                                <a href="{% url 'product' product_in_basket.product.id %}">{{ product_in_basket.product.name }}</a>
+                                                <a href="{% url 'product_land' product_in_basket.product.id %}">{{ product_in_basket.product.name }}</a>
                                             </h4>
                                             <div class="price">
                                                 <span class="product-in-basket-price">{{ product_in_basket.price_per_item }} UAH</span>

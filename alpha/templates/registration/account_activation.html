@@ -2,44 +2,46 @@
 {% load static %}
 
 {% block content %}
-<div class="container main-container headerOffset">
-	<div class="row">
-		<div class="breadcrumbDiv col-lg-12">
-			<ul class="breadcrumb">
-				<li>
-					<a href="{% url 'home' %}">На главную</a>
-				</li>
-				<li>
-					<a href="{% url 'login' %}">Авторизация</a>
-				</li>
-				<li class="active">
-					Учетная запись успешно активирована!
-				</li>
-			</ul>
+<section id="section_activation" class="section-activation section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 120px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+				    <li>
+					    <a href="{% url 'register' %}">Регистрация</a>
+				    </li>
+				    <li class="active">
+					    Учетная запись успешно активирована!
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-heading" style="text-align: center;">
+					<h2 class="text-white">Учетная запись успешно активирована!</h2>
+					<div class="line-shape"></div>
+				</div>
+				{% if error %}
+				<div class="footer-text">
+					<p>К сожалению, активационная ссылка устарела (прошло 48 часов с момента её получения). Вы можете пройти регистрацию заново и получить новую ссылку.</p> 
+				</div>
+				<a class="btn submit-btn" href="{% url 'register' %}">Зарегистрироваться заново!</a>
+				{% else %}
+				<div class="footer-text">
+					<p>Ваша новая учетная запись успешно активирована. Теперь можно войти на сайт!</p>
+				</div>
+				<a class="btn submit-btn" href="{% url 'login' %}">Войти</a>
+				{% endif %}
+			</div>
 		</div>
-	</div>
-	<!--/.row-->
-	<div class="row">
-		<div class="col-lg-9 col-md-9 col-sm-7">
-			<h1 class="section-title-inner">
-				<span>
-					{% if error %}
-					<i class="far fa-calendar-times"></i>
-					К сожалению, активационная ссылка устарела (прошло 48 часов с момента её получения).<br>
-					Вы можете пройти регистрацию заново и получить новую ссылку. <a href="{% url 'login' %}">Зарегистрироваться заново!</a>
-					{% else %}
-					<i class="fas fa-user-plus"></i>
-					Ваша новая учетная запись успешно активирована. <br>
-					Теперь Вы можете <a href="{% url 'login' %}">войти</a> на сайт!
-					{% endif %}
-				</span>
-			</h1>
-		</div>
-		<div class="col-lg-3 col-md-3 col-sm-5"></div>
-	</div>
-	<!--/.row-->
-	<div style="clear:both"></div>
-</div>
-<!--/.main container-->
-<div class="gap"></div>
+		<!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Auth -->
 {% endblock %}

@@ -23,10 +23,8 @@ def user_login(request):
     args = {}
     args.update(csrf(request))
     login_error = None
-    reg_error = None
     if request.POST:
         login_form = LoginForm(request.POST or None)
-        reg_form = UserRegistrationForm(request.POST or None)
         if login_form.is_valid():
             cd = login_form.cleaned_data
             username = cd['user_email'].lower()
@@ -41,6 +39,19 @@ def user_login(request):
             else:
                 login_error = 'Пользователь с таким email не зарегистрирован либо введен неверный пароль. Пожалуйста,' \
                     + ' проверьте введенные данные!'
+    else:
+        login_form = LoginForm()
+    args['login_form'] = login_form
+    args['login_error'] = login_error
+    return render(request, 'accounts/auth.html', args)
+
+
+def user_register(request):
+    args = {}
+    args.update(csrf(request))
+    reg_error = ''
+    if request.POST:
+        reg_form = UserRegistrationForm(request.POST or None)
         if reg_form.is_valid():
             try:
                 data = request.POST
@@ -58,13 +69,10 @@ def user_login(request):
             except Exception:
                 reg_error = 'Пользователь с таким email уже зарегистрирован. Попробуйте другой адрес.'
     else:
-        login_form = LoginForm()
         reg_form = UserRegistrationForm(request.POST or None)
-    args['login_form'] = login_form
     args['reg_form'] = reg_form
-    args['login_error'] = login_error
     args['reg_error'] = reg_error
-    return render(request, 'accounts/auth.html', args)
+    return render(request, 'accounts/register.html', args)
 
 
 def user_logout(request):

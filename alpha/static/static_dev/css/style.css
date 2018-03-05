@@ -782,13 +782,20 @@ div.miniCartFooter .btn.btn-primary
     background-size: cover;
 }
 
-.section-auth {
+.section-auth,
+.section-register,
+.section-register-done,
+.section-after-registration,
+.section-activation
+{
     background: url(../img/header-default.png);
-    background-repeat: no-repeat;
     background-color: #f5f9fc;
+    background-repeat: no-repeat;
 }
 
-.section-auth .line-shape {
+.section-auth .line-shape,
+.section-register .line-shape
+{
     margin-left: 0;
 }
 
@@ -796,7 +803,11 @@ div.miniCartFooter .btn.btn-primary
 #user_password,
 #contact_name,
 #contact_email,
-#contact_content 
+#contact_content,
+#new_user_email,
+#new_user_name,
+#new_user_password,
+#new_user_password_repeat 
 {
     font-size: 18px;
     padding: 15px 15px !important;
@@ -2179,6 +2190,11 @@ div.productFilter a.btn-danger:hover
 {
     margin-bottom: 50px;
     font-size: 25px;
+}
+
+.footer-text > p > span
+{
+    color: #a865e1;
 }
 
 .address-text > p,

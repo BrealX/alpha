@@ -15,6 +15,11 @@
                         <!-- Menu Area -->
                         <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav ml-auto" id="nav">
+                                {% if username %}
+                                <li class="nav-item">
+                                    <a class="nav-link" style="font-style: italic;">Привет, {{ username }}</a>
+                                </li>
+                                {% endif %}
                                 <li class="nav-item active">
                                     <a class="nav-link" href="{% url 'home' %}">Главная</a>
                                 </li>
@@ -83,7 +88,7 @@
                                         {% else %}
                                         <a class="dropdown-item" href="{% url 'login' %}">Войти</a>
                                         {% endif %}
-                                        <a class="dropdown-item" href="{% url 'login' %}">Регистрация</a>
+                                        <a class="dropdown-item" href="{% url 'register' %}">Регистрация</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
@@ -115,7 +120,7 @@
                                             <tr class="miniCartProduct">
                                                 <td class="miniCartProductThumbnail" style="width: 20%;">
                                                     <div>
-                                                        <a href="{% url 'product' item_in_cart.product.id %}">
+                                                        <a href="{% url 'product_land' item_in_cart.product.id %}">
                                                             <img src="{{ item_in_cart.product.product_main_image.image.url }}" alt="img" class="img-responsive" width="100">
                                                         </a>
                                                     </div>
@@ -123,7 +128,7 @@
                                                 <td style="width: 40%;">
                                                     <div class="miniCartDescription">
                                                         <h4>
-                                                            <a href="{% url 'product' item_in_cart.product.id %}">{{ item_in_cart.product.name }}</a>
+                                                            <a href="{% url 'product_land' item_in_cart.product.id %}">{{ item_in_cart.product.name }}</a>
                                                         </h4>
                                                         <span>{{ item_in_cart.price_per_item }} грн.</span>
                                                     </div>
