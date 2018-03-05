@@ -168,7 +168,7 @@ $(document).ready(function() {
     calculatingTotalBasketAmount();
 
     // CountTo Plugin Initializer (https://stackoverflow.com/questions/43202706/jquery-counto-js-on-scroll-count-numbers-not-onload)
-    function isScrolledIntoView(el) {
+    /*function isScrolledIntoView(el) {
         if (el.getBoundingClientRect().top | el.getBoundingClientRect().bottom) { 
             var elemTop = el.getBoundingClientRect().top;
             var elemBottom = el.getBoundingClientRect().bottom;
@@ -187,7 +187,13 @@ $(document).ready(function() {
             $(window).off('scroll');
             }
         });
-    }};
+    }};*/
+    $('.counter').countTo();
+    $('.counter-decimal').countTo({
+        formatter: function (value, options) {
+            return value.toFixed(1);
+        }
+    });
 
 
     // AOS Animation Initializer
@@ -346,7 +352,33 @@ $(document).ready(function() {
         });
     });
 
-    // 
+    // Ajax Landing Page Contact Form sending
+    $('#landing_contact_submit').on('click', function(e) {
+        e.preventDefault();
+        var contact_form = $('#landing_contact_form');
+        var url = contact_form.attr('action');
+        var csfr_token = $('#landing_contact_form [name="csrfmiddlewaretoken"]').val();
+        data = {}
+        data["csrfmiddlewaretoken"] = csfr_token;
+        data['contact_name'] = $('#contact_name').val();
+        data['contact_email'] = $('#contact_email').val();
+        data['form_content'] = $('#contact_content').val();
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            cache: true,
+            success: function(data) {
+                if (!data.error) {
+                    $('#landing_modal_div p').text(data.success);
+                    $('#landing_modal_div').attr('class', 'col-md-12');
+                    $('#landing_contact_form')[0].reset(); // Cleans the form after succesful Ajax
+                }
+                $('#landing_modal_div p').text(data.error);
+                $('#landing_modal_div').attr('class', 'col-md-12');
+            }
+        });
+    });
 
 });
 

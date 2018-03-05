@@ -17,7 +17,7 @@
     </div>
     <div class="slider-description">
         <h4>
-            <a href="{% url 'product' product_image.product.id %}">{{ product_image.product.name }}</a>
+            <a href="{% url 'product_land' product_image.product.id %}">{{ product_image.product.name }}</a>
         </h4>
         <p>{{ product_image.product.short_description|truncatechars_html:70 }}</p>
         <div class="slider-category"><span>{{ product_image.product.category }}</span></div>

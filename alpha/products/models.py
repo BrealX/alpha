@@ -51,6 +51,34 @@ class Product(models.Model):
         blank=True, 
         null=True, 
         default=None)
+    description_age = models.TextField(
+        blank=True, 
+        null=True, 
+        default=None)
+    description_content = models.TextField(
+        blank=True, 
+        null=True, 
+        default=None)
+    description_package_size = models.CharField(
+        max_length=64, 
+        blank=True, 
+        null=True, 
+        default=None)
+    description_product_size = models.CharField(
+        max_length=64, 
+        blank=True, 
+        null=True, 
+        default=None)
+    description_package_type = models.CharField(
+        max_length=64, 
+        blank=True, 
+        null=True, 
+        default=None)
+    description_battery = models.CharField(
+        max_length=64, 
+        blank=True, 
+        null=True, 
+        default=None)
     is_active = models.BooleanField(
         default=True)
     is_new = models.BooleanField(
@@ -82,7 +110,8 @@ class Product(models.Model):
         return (self.images.get(is_main=False),) 
 
     def price_with_discount(self):
-        return float(self.price) - (float(self.price) * float(self.discount) / 100)  
+        price_with_discount = self.price - (self.price * self.discount / 100)  
+        return "%.2f" % price_with_discount
 
 
 class ProductImage(models.Model):

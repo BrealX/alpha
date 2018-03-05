@@ -32,7 +32,7 @@
                                                 </li>
                                                 {% for item in nav_products_microphones %}
                                                 <li>
-                                                    <a href="{% url 'product' item.id %}">{{ item.name }}</a>
+                                                    <a href="{% url 'product_land' item.id %}">{{ item.name }}</a>
                                                 </li> 
                                                 {% endfor %}
                                             </ul>
@@ -44,7 +44,7 @@
                                                 </li>
                                                 {% for item in nav_products_players %}
                                                 <li>
-                                                    <a href="{% url 'product' item.id %}">{{ item.name }}</a>
+                                                    <a href="{% url 'product_land' item.id %}">{{ item.name }}</a>
                                                 </li> 
                                                 {% endfor %}
                                             </ul>

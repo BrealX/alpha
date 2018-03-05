@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <section id="product_landing" class="clearfix landing-area" style="padding-top: 300px;">
+    <section id="product_landing" class="clearfix landing-area">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12 col-md">
@@ -14,8 +14,8 @@
                     <div class="buy-area">
                         <form method="post" id="landing_page_form" class="form-inline" action="{% url 'add_to_cart' %}">{% csrf_token %}
                             <div class="input-group bootstrap-touchspin">
-                                <input type="text" class="form-control hidden landing-quantity" id="landing_page_qnty" value="1">
-                                <button type="submit" class="btn btn-success landing-submit form-control" id="landing_page_submit_btn" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price_with_discount }}" data-image="{{ product.product_main_image.image.url }}" data-qnty="1">КУПИТЬ</button>
+                                <input type="text" class="form-control d-none landing-quantity" id="landing_page_qnty" value="1">
+                                <button type="submit" class="btn btn-success landing-submit form-control" id="landing_page_submit_btn" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price_with_discount }}" data-image="{{ product.product_main_image.image.url }}" data-qnty="1">ЗАКАЗАТЬ</button>
                             </div>
                         </form>
                         <!-- FormEnd -->
@@ -58,7 +58,7 @@
                         </div>
                         <h4>Возраст:</h4>
                         <p>
-                            Начинать петь никогда не поздно! Равно как и никогда не рано! Игрушка адаптирована для возраста 2-5 лет
+                            {{ product.description_age }}
                         </p>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                         </div>
                         <h4>Содержание:</h4>
                         <p>
-                            В игрушке 12 популярных песенок В. Шаинского, М. Танича и других известных композиторов
+                            {{ product.description_content }}
                         </p>
                     </div>
                 </div>
@@ -109,36 +109,32 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="col-sm-6">
-                        <div class="single-feature text-center">
-                            <i class="ion-cube"></i>
-                            <h5>Размер упаковки:</h5>
-                            <p>13,2х22,8х3,5 см</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="single-feature text-center">
-                            <i class="ion-ios-loop"></i>
-                            <h5>Размер товара:</h5>
-                            <p>5х15 см</p>
-                        </div>
+                <div class="col-12 col-sm-6 col-lg-6">
+                    <div class="single-feature text-center">
+                        <i class="ion-cube"></i>
+                        <h5>Размер упаковки:</h5>
+                        <p>{{ product.description_package_size }}</p>
                     </div>
                 </div>
-                <div class="col-lg-12">
-                    <div class="col-sm-6">
-                        <div class="single-feature text-center">
-                            <i class="ion-bag"></i>
-                            <h5>Вид упаковки:</h5>
-                            <p>Картонка с блистером</p>
-                        </div>
+                <div class="col-12 col-sm-6 col-lg-6">
+                    <div class="single-feature text-center">
+                        <i class="ion-ios-loop"></i>
+                        <h5>Размер товара:</h5>
+                        <p>{{ product.description_product_size }}</p>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="single-feature text-center">
-                            <i class="ion-battery-half"></i>
-                            <h5>Батарейки:</h5>
-                            <p>AAA, 2 штуки (в комплекте)</p>
-                        </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-6">
+                    <div class="single-feature text-center">
+                        <i class="ion-bag"></i>
+                        <h5>Вид упаковки:</h5>
+                        <p>{{ product.description_package_type }}</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-6">
+                    <div class="single-feature text-center">
+                        <i class="ion-battery-half"></i>
+                        <h5>Батарейки:</h5>
+                        <p>{{ product.description_battery }}</p>
                     </div>
                 </div>
             </div>
@@ -149,57 +145,55 @@
         <div class="container">
             <div class="row">
                 <!--Single Cool Fact-->
-                <div class="col-lg-12">
-                    <div class="col-sm-3 col-md-3">
-                        <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up">
-                            <div class="counter-area">
-                                <h3>
-                                    <span class="counter" data-from="0" data-to="90" data-speed="3000"></span>
-                                </h3>
-                            </div>
-                            <div class="cool-facts-content">
-                                <i class="ion-arrow-down-a"></i>
-                                <p>ЗАКАЗОВ</p>
-                            </div>
+                <div class="col-12 col-md-3 col-lg-3">
+                    <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up">
+                        <div class="counter-area">
+                            <h3>
+                                <span class="counter" data-from="0" data-to="90" data-speed="3000"></span>
+                            </h3>
+                        </div>
+                        <div class="cool-facts-content">
+                            <i class="ion-arrow-down-a"></i>
+                            <p>ЗАКАЗОВ</p>
                         </div>
                     </div>
-                    <div class="col-sm-3 col-md-3">
-                        <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up">
-                            <div class="counter-area">
-                                <h3>
-                                    <span class="counter" data-from="0" data-to="87" data-speed="3000"></span>
-                                </h3>
-                            </div>
-                            <div class="cool-facts-content">
-                                <i class="ion-happy-outline"></i>
-                                <p>ДОВОЛЬНЫХ КЛИЕНТОВ</p>
-                            </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3">
+                    <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up">
+                        <div class="counter-area">
+                            <h3>
+                                <span class="counter" data-from="0" data-to="87" data-speed="3000"></span>
+                            </h3>
+                        </div>
+                        <div class="cool-facts-content">
+                            <i class="ion-happy-outline"></i>
+                            <p>ДОВОЛЬНЫХ КЛИЕНТОВ</p>
                         </div>
                     </div>
-                    <div class="col-sm-3 col-md-3">
-                        <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up">
-                            <div class="counter-area">
-                                <h3>
-                                    <span class="counter counter-decimal" data-from="0" data-to="4.9" data-speed="3000"></span>
-                                </h3>
-                            </div>
-                            <div class="cool-facts-content">
-                                <i class="ion-ios-star-outline"></i>
-                                <p>СРЕДНИЙ РЕЙТИНГ</p>
-                            </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3">
+                    <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up">
+                        <div class="counter-area">
+                            <h3>
+                                <span class="counter counter-decimal" data-from="0" data-to="4.9" data-speed="3000"></span>
+                            </h3>
+                        </div>
+                        <div class="cool-facts-content">
+                            <i class="ion-ios-star-outline"></i>
+                            <p>СРЕДНИЙ РЕЙТИНГ</p>
                         </div>
                     </div>
-                    <div class="col-sm-3 col-md-3">
-                        <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up">
-                            <div class="counter-area">
-                                <h3>
-                                    <span class="counter" data-from="0" data-to="2" data-speed="1000"></span>
-                                </h3>
-                            </div>
-                            <div class="cool-facts-content">
-                                <i class="ion-model-s"></i>
-                                <p>МАКСИМАЛЬНОЕ ВРЕМЯ ДОСТАВКИ (ДНЕЙ)</p>
-                            </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3">
+                    <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up">
+                        <div class="counter-area">
+                            <h3>
+                                <span class="counter" data-from="0" data-to="2" data-speed="1000"></span>
+                            </h3>
+                        </div>
+                        <div class="cool-facts-content">
+                            <i class="ion-model-s"></i>
+                            <p>ДОСТАВКА (ДНЕЙ)</p>
                         </div>
                     </div>
                 </div>
@@ -262,38 +256,41 @@
                     <div class="phone-text">
                         <p>
                             <span>Телефон:</span>
-                            +38 (050) 777-92-71
+                            {{ shop_tel }}
                         </p>
                     </div>
                     <div class="email-text">
                         <p>
                             <span>Email:</span>
-                            jennyko2006@gmail.com
+                            {{ shop_email }}
                         </p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="contact-form">
-                        <form action="#" method="post">
+                        <form id="landing_contact_form" action="{% url 'contact' %}" method="post">{% csrf_token %}
                             <div class="contact-input-area">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="landing_contact_name" id="landing_contact_name" placeholder="Как Вас зовут?" required>
+                                            <input type="text" class="form-control" name="contact_name" id="contact_name" placeholder="Как Вас зовут?" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" name="landing_contact_email" id="landing_contact_email" placeholder="Ваш Email" required>
+                                            <input type="email" class="form-control" name="contact_email" id="contact_email" placeholder="Ваш Email" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" name="landing_contact_text" id="landing_contact_text" placeholder="Ваше сообщение" cols=30 rows=4 required></textarea>
+                                            <textarea class="form-control" name="contact_content" id="contact_content" placeholder="Ваше сообщение" cols=30 rows=4 required></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn submit-btn">Отправить</button>
+                                        <button id="landing_contact_submit" type="submit" class="btn submit-btn">Отправить</button>
+                                    </div>
+                                    <div id="landing_modal_div" class="col-md-12 d-none">
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
