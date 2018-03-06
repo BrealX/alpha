@@ -34,7 +34,7 @@ $(document).ready(function() {
                     $('.dropcart div.minicarttable table tbody').html("");
                     $('.dropcart div.minicarttable table tbody').append('<p class="lead text-center">... В Вашей корзине еще нет товаров ...</p>');
                 };
-                calculatingTotalBasketAmount();
+                calculatingTotalCartSum();
                     
             },
             error: function() {
@@ -87,7 +87,7 @@ $(document).ready(function() {
     });
 
     
-    // Cart refreshing while Checkout Page touchspin is activated (only after Refresh button is pressed)
+    /*// Cart refreshing while Checkout Page touchspin is activated (only after Refresh button is pressed)
     $('.product-in-cart-qnty').each(function(input) {
     	var checkout_page_input = $(this);
     	var start_checkout_input = parseInt(checkout_page_input.attr('value'));
@@ -102,23 +102,23 @@ $(document).ready(function() {
     		};
     		start_checkout_input = current_checkout_input;
     	});
-    });
+    });*/
 
 
-    // Hide success div (Checkout page footer)
+    /*// Hide success div (Checkout page footer)
     function hideCartFooterDiv() {
     	$('div.box-footer div.pull-left').delay(10000).fadeOut();
-    };
+    };*/
 
 
-    // Show success div when AJAX is OK during cart products adding or deleting
+    /*// Show success div when AJAX is OK during cart products adding or deleting
     $(document).ajaxSuccess(function(event, request, settings) {
     	element = $('.box-footer').children('.pull-left')
     	if (!element.is(':visible')) {
     		element.attr('style', 'display: visible');
     		hideCartFooterDiv();
     	};
-    });
+    });*/
 
     // Delete items from miniCart
     $('div.minicart-button').on('click', 'a.delete-item', function(e) {
@@ -130,7 +130,7 @@ $(document).ready(function() {
 	});
 
     // Delete items from Checkout Page
-    $('div.cartContent').on('click', 'a.delete-item', function(e) {
+    $('.cart-area').on('click', 'a.delete-item', function(e) {
         e.preventDefault();
         product_id = $(this).data("product_id");
         qnty = 0;
@@ -149,6 +149,7 @@ $(document).ready(function() {
         $(".cart-item-overall").each(function(){
             cart_overall += parseFloat($(this).text());
         });
+        console.log(minicart_overall);
         $('#miniCart_subtotal').text(minicart_overall.toFixed(2) + ' грн.');
         $('#cart_subtotal').text('Ваш заказ на сумму: '+ cart_overall.toFixed(2) + ' грн.');
     };
