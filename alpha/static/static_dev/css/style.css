@@ -3114,7 +3114,7 @@ h2.block-title-2,
 
 @media (min-width: 992px) and (max-width: 1199px) {
     .menu-area .navbar-brand {
-        font-size: 42px;
+        font-size: 65px;
     }
     .menu-area #nav .nav-link {
         padding: 35px 7.5px;
@@ -3139,15 +3139,16 @@ h2.block-title-2,
     }
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 979px) {
     .header-area {
         padding: 0;
     }
     .menu-area .navbar-brand {
-        font-size: 48px;
+        font-size: 45px;
+        margin: 0;
     }
     .header-area.fixed {
-        height: 50px;
+        height: 65px;
     }
     .header-area .menu-area #nav .nav-link,
     .header-area.fixed .menu-area #nav .nav-link {
@@ -3158,10 +3159,20 @@ h2.block-title-2,
         border-radius: 3px;
         background-color: #5b32b4;
         text-align: left;
+        margin-top: 10px;
     }
     .minicart-button {
         margin-top: 30px;
         text-align: left;
+        max-width: 115px;
+    }
+    .dropcart {
+    border-radius: 0 24px 24px 24px;
+    }
+    .dropdown-menu.auth.show {
+    border-radius: 0 24px 24px 24px;
+    left: 200px;
+    right: auto;
     }
     .wellcome-heading {
         margin-bottom: 70px;
@@ -3187,6 +3198,11 @@ h2.block-title-2,
     .footer-text > p {
         margin-bottom: 30px;
     }
+
+    .footer-social-icon {
+    margin-bottom: 15px;
+    }
+
     .section-heading {
         margin-bottom: 50px;
     }
@@ -3214,12 +3230,12 @@ h2.block-title-2,
     }
 }
 
-@media (min-width: 320px) and (max-width: 767px) {
+@media (max-width: 767px) {
     .header-area {
         padding: 0;
     }
     .menu-area .navbar-brand {
-        font-size: 48px;
+        font-size: 45px;
     }
     .header-area.fixed {
         height: 50px;
@@ -3233,6 +3249,7 @@ h2.block-title-2,
         border-radius: 3px;
         background-color: #5b32b4;
         text-align: left;
+        margin-top: 10px;
     }
     .minicart-button {
         margin-top: 30px;
@@ -3246,10 +3263,6 @@ h2.block-title-2,
     }
     .wellcome-heading > h2 {
         font-size: 48px;
-    }
-    .get-start-area .email {
-        margin-bottom: 20px;
-        max-width: 100%;
     }
     .welcome-thumb {
         width: 90%;
@@ -3281,20 +3294,6 @@ h2.block-title-2,
     .app-download-btn {
         margin-bottom: 20px;
     }
-    .video-area {
-        border: 10px solid #fff;
-        border-radius: 20px;
-        height: 250px;
-    }
-    .video-area::after {
-        top: -10px;
-        left: -10px;
-        width: calc(100% + 20px);
-        height: calc(100% + 20px);
-        border: 1px solid #f1f4f8;
-        z-index: 2;
-        border-radius: 20px;
-    }
     .clients-feedback-area .client-description > p {
         font-size: 20px;
     }
@@ -3309,7 +3308,7 @@ h2.block-title-2,
     .membership-description > h2 {
         font-size: 32px;
     }
-    .get-started-button {
+    .get-back-button {
         text-align: left;
         margin-top: 20px;
     }
@@ -3330,33 +3329,6 @@ h2.block-title-2,
     }
 }
 
-@media (min-width: 480px) and (max-width: 767px) {
-    .wellcome-heading > h3 {
-        font-size: 284px;
-    }
-    .wellcome-heading > h2 {
-        font-size: 70px;
-    }
-    .welcome-thumb {
-        bottom: -109px;
-        width: 75%;
-    }
-    .wellcome-heading {
-        margin-bottom: 50px;
-    }
-    .wellcome-heading > h3 {
-        top: -139px;
-    }
-    .get-start-area .email {
-        max-width: 370px;
-    }
-}
+@media (max-width: 480px) {
 
-@media (min-width: 576px) and (max-width: 767px) {
-    .wellcome-heading > h3 {
-        font-size: 286px;
-    }
-    .get-start-area .email {
-        margin-bottom: 0;
-    }
 }
