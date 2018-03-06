@@ -23,16 +23,19 @@ $(document).ready(function() {
             cache: true,
             success: function(data) {
                 if (data.products_in_cart_total_qnty) {
-                    $('#cart_qnty_subtotal').text('('+data.products_in_cart_total_qnty+')');
+                    $('.cart-qnty-subtotal').text('('+data.products_in_cart_total_qnty+')');
                     $('.dropcart div.minicarttable table tbody').html("");
+                    $('.cart-area table tbody').html("");
                     $.each(data.products, function(k, v) {
-                        $('.dropcart div.minicarttable table tbody').append('<tr class=\"miniCartProduct\"><td class=\"miniCartProductThumbnail\" style=\"width: 20%;\"><div><a href=\"/product/'+v.id+'\"><img src=\"'+v.image+'\" alt=\"img\" class=\"img-responsive\" width=\"100\"></a></div></td><td style=\"width: 40%;\"><div class=\"miniCartDescription\"><h4><a href=\"/product/'+v.id+'\">'+v.name+'</a></h4><span>'+v.price_per_item+' грн.</span></div></td><td class=\"miniCartQuantity\" style=\"width: 10%;\"><a>* '+v.qnty+' шт.</a></td><td class=\"miniCartSubtotal\" style=\"width: 15%;\"><span class="minicart-item-overall price">'+parseFloat(v.total_price).toFixed(2)+' грн.</span></td><td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\">x</a></td></tr>')
+                        $('div.dropdown-menu.dropcart div.minicarttable.pre-scrollable table tbody').append('<tr class=\"miniCartProduct\"><td class=\"miniCartProductThumbnail\" style=\"width: 20%;\"><div><a href=\"/product-land/'+v.id+'\"><img src=\"'+v.image+'\" alt=\"img\" class=\"img-responsive\" width=\"100\"></a></div></td><td style=\"width: 40%;\"><div class=\"miniCartDescription\"><h4><a href=\"/product-land/'+v.id+'\">'+v.name+'</a></h4><span>'+v.price_per_item+' грн.</span></div></td><td class=\"miniCartQuantity\" style=\"width: 10%;\"><a>* '+v.qnty+' шт.</a></td><td class=\"miniCartSubtotal\" style=\"width: 15%;\"><span class="minicart-item-overall price">'+parseFloat(v.total_price).toFixed(2)+' грн.</span></td><td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\">x</a></td></tr>')
+                        $('div.cart-area table tbody').append('<tr class=\"CartProduct\"><td class=\"CartProductThumbnail\" style=\"width: 20%;\"><div><a href=\"/product-land/'+v.id+'\"><img src=\"'+v.image+'\" alt=\"img\" class=\"img-responsive\" width=\"100\"></a></div></td><td style=\"width: 40%;\"><div class=\"CartDescription\"><h4><a href=\"/product-land/'+v.id+'\">'+v.name+'</a></h4><span class=\"cart-item-price\">'+v.price_per_item+'</span><span> грн.</span></div></td><td class=\"CartQuantity\" style=\"width: 15%;\"><input class=\"cart-touchspin form-control\" name=\"cart_touchspin\" type=\"text\" value=\"'+v.qnty+'\" data-product_id=\"'+v.id+'\"></td><td class=\"CartSubtotal\" style=\"width: 15%;\"><span class=\"cart-item-overall price\">'+parseFloat(v.total_price).toFixed(2)+' грн.</span></td><td class=\"delete\" style=\"width: 5%;\"><a href=\"\" class=\"delete-item\" data-product_id=\"'+v.id+'\"><i class=\"ion-ios-trash-outline\" style=\"font-size: 30px;\"></i></a></td></tr>')
                     });
                 }
                 else if (data.products_in_cart_total_qnty == 0) {
-                    $('#cart_qnty_subtotal').text('(0)');
-                    $('.dropcart div.minicarttable table tbody').html("");
-                    $('.dropcart div.minicarttable table tbody').append('<p class="lead text-center">... В Вашей корзине еще нет товаров ...</p>');
+                    $('.cart-qnty-subtotal').text('(0)');
+                    $('div.dropdown-menu.dropcart div.minicarttable.pre-scrollable table tbody').html("");
+                    $('.cart-area table tbody').html("");
+                    $('div.dropdown-menu.dropcart div.minicarttable.pre-scrollable table tbody').append('<p class="lead text-center">... В Вашей корзине еще нет товаров ...</p>');
                 };
                 calculatingTotalCartSum();
                     
@@ -142,15 +145,19 @@ $(document).ready(function() {
     // Shows Cart subtotal (at miniCart dropdown and Cart Page)
     function calculatingTotalCartSum(){
         var minicart_overall = 0;
+        var collapsed_minicart_overall = 0;
         var cart_overall = 0;
         $(".minicart-item-overall").each(function(){
             minicart_overall += parseFloat($(this).text());
         });
+        $(".collapsed-minicart-item-overall").each(function(){
+            collapsed_minicart_overall += parseFloat($(this).text());
+        });
         $(".cart-item-overall").each(function(){
             cart_overall += parseFloat($(this).text());
         });
-        console.log(minicart_overall);
-        $('#miniCart_subtotal').text(minicart_overall.toFixed(2) + ' грн.');
+        $('#minicart_subtotal').text(minicart_overall.toFixed(2) + ' грн.');
+        $('#collapsed_minicart_subtotal').text(collapsed_minicart_overall.toFixed(2) + ' грн.');
         $('#cart_subtotal').text('Ваш заказ на сумму: '+ cart_overall.toFixed(2) + ' грн.');
     };
 

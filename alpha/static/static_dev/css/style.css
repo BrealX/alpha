@@ -1439,6 +1439,11 @@ h5.parallaxSubtitle
     transition-duration: 500ms;
 }
 
+.get-back-button {
+    text-align: right;
+    margin-bottom: 40px;
+}
+
 .CartProduct
 {
     border-bottom: 1px solid #eff2f6;
@@ -2460,8 +2465,31 @@ p.success div.success
 }
 
 /* =============================================================== */
-/* USER END || Account// Address // Order //  Creation
+/* CHECKOUT PAGES
 /* =============================================================== */
+
+p.required,
+.required sup
+{
+    color: #fb397d;
+}
+
+#id_anonymous_name,
+#id_anonymous_email,
+#id_anonymous_phone,
+#id_anonymous_area,
+#id_anonymous_city
+{
+    font-size: 18px;
+    width: 70%;
+    border-radius: 25px 25px 25px 0 !important;
+}
+
+
+
+
+
+
 
 h2.block-title-2,
 .formBox h3,
@@ -2615,11 +2643,6 @@ h2.block-title-2,
     padding: 5px 0;
 }
 
-p.required,
-.required sup
-{
-    color: #e74c3c;
-}
 
 .select2-hidden-accessible
 {

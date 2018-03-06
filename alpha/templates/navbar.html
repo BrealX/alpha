@@ -97,10 +97,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Контакты</a>
                                 </li>
+                                <!-- Collapsed Minicart Start -->
                                 <div id="collapse_div" class="dropdown minicart-button d-lg-none">
                                     <a href="#" class="dropdown-toggle" role="button" id="minicart_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="ion-ios-cart-outline" style="font-size: 25px;"></i>
-                                        Корзина <span id="cart_qnty_subtotal">{% if products_in_cart_total_qnty %}({{ products_in_cart_total_qnty }}){% else %}(0){% endif %}</span>
+                                        Корзина <span class="cart-qnty-subtotal">{% if products_in_cart_total_qnty %}({{ products_in_cart_total_qnty }}){% else %}(0){% endif %}</span>
                                     </a>
                                     <div class="dropdown-menu dropcart" aria-labelledby="minicart_dropdown">
                                         <div class="minicarttable pre-scrollable">
@@ -130,7 +131,7 @@
                                                             <a>* {{ item_in_cart.qnty }} шт.</a>
                                                         </td>
                                                         <td class="miniCartSubtotal" style="width: 15%;">
-                                                            <span class="minicart-item-overall price">{{ item_in_cart.total_price }} грн.</span>
+                                                            <span class="collapsed-minicart-item-overall price">{{ item_in_cart.total_price }} грн.</span>
                                                         </td>
                                                         <td class="delete" style="width: 5%;">
                                                             <a href="" class="delete-item" data-product_id="{{ item_in_cart.id }}">x</a>
@@ -141,10 +142,10 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <!-- End Minicarttable -->
+                                        <!-- End Collapsed Minicarttable -->
                                         <div class="miniCartFooter text-right">
                                             <h3 class="text-right subtotal">
-                                                ИТОГО: <span id="miniCart_subtotal">0 грн.</span>
+                                                ИТОГО: <span id="collapsed_minicart_subtotal">0 грн.</span>
                                             </h3>
                                             <a class="btn btn-sm minicart-gotocart-button" href="{% url 'checkout' %}">
                                                 <i class="ion-ios-cart-outline"></i>ПЕРЕЙТИ В КОРЗИНУ
@@ -155,9 +156,10 @@
                                             <a class="btn btn-sm minicart-submit-button" href="{% url 'login' %}">ОФОРМИТЬ ЗАКАЗ</a>
                                             {% endif %}
                                         </div>
-                                        <!-- End Minicartfooter -->
+                                        <!-- End Collapsed Minicartfooter -->
                                     </div>
                                 </div>
+                                <!-- End Collapsed Minicart -->
                             </ul>  
                         </div>
                     </nav>
@@ -170,7 +172,7 @@
                 <div class="dropdown minicart-button d-none d-lg-block">
                     <a href="#" class="dropdown-toggle" role="button" id="minicart_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="ion-ios-cart-outline" style="font-size: 25px;"></i>
-                        Корзина <span id="cart_qnty_subtotal">{% if products_in_cart_total_qnty %}({{ products_in_cart_total_qnty }}){% else %}(0){% endif %}</span>
+                        Корзина <span class="cart-qnty-subtotal">{% if products_in_cart_total_qnty %}({{ products_in_cart_total_qnty }}){% else %}(0){% endif %}</span>
                     </a>
                     <div class="dropdown-menu dropcart" aria-labelledby="minicart_dropdown">
                         <div class="minicarttable pre-scrollable">
@@ -214,7 +216,7 @@
                         <!-- End Minicarttable -->
                         <div class="miniCartFooter text-right">
                             <h3 class="text-right subtotal">
-                                ИТОГО: <span id="miniCart_subtotal">0 грн.</span>
+                                ИТОГО: <span id="minicart_subtotal">0 грн.</span>
                             </h3>
                             <a class="btn btn-sm minicart-gotocart-button" href="{% url 'checkout' %}">
                                 <i class="ion-ios-cart-outline"></i>ПЕРЕЙТИ В КОРЗИНУ

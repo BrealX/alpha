@@ -3,63 +3,110 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<div class="container main-container headerOffset">
-	<div class="row">
-		<div class="breadcrumbDiv col-lg-12">
-			<ul class="breadcrumb">
-				<li>
-					<a href="{% url 'home' %}">На главную</a>
-				</li>
-				<li>
-					<a href="{% url 'checkout' %}">Корзина</a>
-				</li>
-				<li class="active">
-					Оформление заказа
-				</li>
-			</ul>
-		</div>
-	</div>
-	<!--/.row end-->
-	<div class="row">
-        <div class="col-lg-9 col-md-9 col-sm-7 col-xs6 col-xxs-12 text-center-xs">
-            <h1 class="section-title-inner">
-                <span>
-                    <i class="fas fa-shopping-basket"></i>
-                        Оформление заказа
-                </span>
-            </h1>
+<section id="section_checkout" class="section-checkout clearfix" style="margin-bottom: 374px; padding-bottom: 50px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb" style="margin-bottom: 40px;">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+                    <li>
+					    <a href="{% url 'checkout' %}">Корзина</a>
+				    </li>
+				    <li class="active">
+					    Оформление заказа (Шаг 1 из 2)
+				    </li>
+			    </ul>
+            </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar col-xs-6 col-xxs-12 text-center-xs">
-            <h4 class="caps section-title-inner">
-                <a href="{% url 'home' %}">
-                    <i class="fas fa-chevron-left"></i>
-                        Продолжить покупки
-                </a>
-            </h4>
+        <!-- End Row -->
+    </div>
+    <!-- End Container -->
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <div class="section-cart-header">
+                    <h2>Оформление заказа</h2>
+                    <p>Пожалуйста, заполните необходимые данные для оформления заказа!</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="get-back-button">
+                    <a href="{% url 'checkout' %}">Назад к корзине</a>
+                </div>
+            </div>
         </div>
     </div>
-	<!--/.row end-->
+    <div class="container">
+        <div class="row">
+            <form action="{% url 'checkout1' %}" role="form" method="post" id="checkout_form">{% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group required">
+                            <label class="text-white" for="{{ form1.anonymous_name.auto_id }}">{{ form1.anonymous_name.label }}<sup>*</sup></label>
+                            {% render_field form1.anonymous_name|add_class:"form-control"|attr:"autofocus" placeholder="Ваше имя" %}
+                            {% for error in form1.anonymous_name.errors %}
+                                <span class="form-error">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group required">
+                            <label class="text-white" for="{{ form1.anonymous_email.auto_id }}">{{ form1.anonymous_email.label }}<sup>*</sup></label>
+                            {% render_field form1.anonymous_email|add_class:"form-control" placeholder="Ваш email" %}
+                            {% for error in form1.anonymous_email.errors %}
+                                <span class="form-error">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group required">
+                            <label class="text-white" for="{{ form1.anonymous_phone.auto_id }}">{{ form1.anonymous_phone.label }}<sup>*</sup></label>
+                            {% render_field form1.anonymous_phone|add_class:"form-control phone-mask" placeholder="Номер телефона" %}
+                            {% for error in form1.anonymous_phone.errors %}
+                                <span class="form-error">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group required">
+                            <label class="text-white" for="{{ form2.anonymous_area.id_for_label }}">{{ form2.anonymous_area.label }}<sup>*</sup></label>
+                            {{ form2.anonymous_area|add_class:"form-control" }}
+                            {% for error in form2.anonymous_area.errors %}
+                                <span class="form-error">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group required">
+                            <label class="text-white" for="{{ form2.anonymous_city.id_for_label }}">{{ form2.anonymous_city.label }}<sup>*</sup></label>
+                            {{ form2.anonymous_city|add_class:"form-control"|attr:"disabled" }}
+                            {% for error in form2.anonymous_city.errors %}
+                                <span class="form-error">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group required">
+                            <label class="text-white" for="{{ form2.anonymous_additional.id_for_label }}">{{ form2.anonymous_additional.label }}<sup>*</sup></label>
+                            {{ form2.anonymous_additional|add_class:"form-control" }}
+                            {% for error in form2.anonymous_additional.errors %}
+                                <span class="form-error">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div style="margin-top: 30px;">
+                            <button class="btn submit-btn" type="submit" form="checkout_form">Оформить</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section -->
+{% endblock %}
+
+<!--
+<div class="container main-container headerOffset">
 	<div class="row">
 		<div class="col-lg-9 col-md-9 col-sm-12">
 			<div class="row userInfo">
 				<div class="col-xs-12 col-sm-12">
-					<div class="w100 clearfix">
-						<ul class="orderStep orderStepLook2">
-							<li class="active">
-								<a href="{% url 'checkout1' %}">
-									<i class="glyphicon glyphicon-map-marker"></i>
-									<span>Адрес доставки</span>
-								</a>
-							</li>
-							<li>
-								<a href="{% url 'checkout2' %}">
-									<i class="glyphicon glyphicon-road"></i>
-									<span>Доставка</span>
-								</a>
-							</li>
-						</ul>
-						<!--/.orderStep end-->
-					</div>
 					<div class="w100 clearfix">
 						<div class="row userInfo">
 							<div class="col-lg-12">
@@ -68,71 +115,14 @@
 								{% endif %}
 								<h2 class="block-title-2">Чтобы оформить заказ, пожалуйста, заполните форму ниже</h2>
 							</div>
-							<form action="{% url 'checkout1' %}" role="form" method="post" id="checkout_form">{% csrf_token %}
-								<div class="col-xs-12 col-sm-6">
-									<div class="form-group required">
-										<label for="{{ form1.anonymous_name.auto_id }}">{{ form1.anonymous_name.label }}<sup>*</sup></label>
-										{% render_field form1.anonymous_name|add_class:"form-control"|attr:"autofocus" placeholder="Ваше имя" %}
-										{% for error in form1.anonymous_name.errors %}
-											<span class="form-error">{{ error }}</span>
-										{% endfor %}
-									</div>
-									<div class="form-group required">
-										<label for="{{ form1.anonymous_email.auto_id }}">{{ form1.anonymous_email.label }}<sup>*</sup></label>
-										{% render_field form1.anonymous_email|add_class:"form-control" placeholder="Ваш email" %}
-										{% for error in form1.anonymous_email.errors %}
-											<span class="form-error">{{ error }}</span>
-										{% endfor %}
-									</div>
-									<div class="form-group required">
-										<label for="{{ form1.anonymous_phone.auto_id }}">{{ form1.anonymous_phone.label }}<sup>*</sup>
-										</label>
-										{% render_field form1.anonymous_phone|add_class:"form-control phone-mask" placeholder="Номер телефона" %}
-										{% for error in form1.anonymous_phone.errors %}
-											<span class="form-error">{{ error }}</span>
-										{% endfor %}
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-6">
-									<div class="form-group required">
-										<label for="{{ form2.anonymous_area.id_for_label }}">{{ form2.anonymous_area.label }}<sup>*</sup></label>
-										{{ form2.anonymous_area|add_class:"form-control" }}
-										{% for error in form2.anonymous_area.errors %}
-											<span class="form-error">{{ error }}</span>
-										{% endfor %}
-									</div>
-									<div class="form-group required">
-										<label for="{{ form2.anonymous_city.id_for_label }}">{{ form2.anonymous_city.label }}<sup>*</sup></label>
-										{{ form2.anonymous_city|add_class:"form-control"|attr:"disabled" }}
-										{% for error in form2.anonymous_city.errors %}
-											<span class="form-error">{{ error }}</span>
-										{% endfor %}
-									</div>
-									<div class="form-group required">
-										<label for="{{ form2.anonymous_additional.id_for_label }}">{{ form2.anonymous_additional.label }}<sup>*</sup></label>
-										{{ form2.anonymous_additional|add_class:"form-control" }}
-										{% for error in form2.anonymous_additional.errors %}
-											<span class="form-error">{{ error }}</span>
-										{% endfor %}
-									</div>
-								</div>
-							</form>
 						</div>
-						<!--/.row end-->
+						<!--/.row end--
 					</div>
 					<div class="cartFooter w100">
 						<div class="box-footer">
-							<div class="pull-left">
-								<a class="btn btn-default" href="{% url 'checkout' %}">
-									<i class="fas fa-arrow-left"></i>
-									Вернуться к корзине
-								</a>
-							</div>
+
 							<div class="pull-right">
-								<button class="btn btn-primary btn-small" type="submit" form="checkout_form">
-									Далее
-									<i class="fas fa-arrow-circle-right"></i>
-								</button>
+
 							</div>
 						</div>
 					</div>
@@ -140,5 +130,4 @@
 			</div>
 		</div>
 	</div>
-</div>
-{% endblock %}
+</div-->

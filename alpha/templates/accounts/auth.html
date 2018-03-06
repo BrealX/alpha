@@ -69,60 +69,22 @@
 		<!-- End Row -->
     </div>
     <!-- End Container -->
-</section>
-<!-- End Section Auth -->
-
-<!--
-<div class="container main-container headerOffset">
-	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12">
-			<div class="row userInfo">
-				<div class="col-xs-12 col-sm-4">
-					<form action="{% url 'login' %}" role="form" method="post">
-						{% csrf_token %}
-						<div class="form-group">
-							<label for="new_user_email">Адрес email (используется в качестве логина)</label>
-							<input type="email" id="new_user_email" class="form-control" placeholder="Введите email" name="{{ reg_form.new_user_email.html_name }}">
-						</div>
-						<div class="form-group">
-							<label for="new_user_name">Ваше имя</label>
-							<input type="text" id="new_user_name" class="form-control" placeholder="Введите имя" name="{{ reg_form.new_user_name.html_name }}">
-						</div>
-						<div class="form-group">
-							<label for="new_user_password">Пароль</label>
-							<input type="password" id="new_user_password" class="form-control" placeholder="Пароль" name="{{ reg_form.password.html_name }}">
-						</div>
-						<div class="form-group">
-							<label for="new_user_password_repeat">Подтвердите пароль</label>
-							<input type="password" id="new_user_password_repeat" class="form-control" placeholder="Пароль еще раз" name="{{ reg_form.password_repeat.html_name }}">
-						</div>
-						{% if reg_error %}
-							<p class="form-error">{{ reg_error }}</p>
-						{% endif %}
-						<button class="btn btn-primary" type="submit" value="Зарегистрироваться">
-							<i class="fas fa-user-plus"></i>
-							Создать аккаунт
-						</button>
-					</form>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="section-heading">
+					<h2>Гостевой режим</h2>
+					<div class="line-shape"></div>
 				</div>
-				<div class="col-xs-12 col-sm-4">
-					<h2 class="block-title-2">
-						<span>Войти как Гость</span>
-					</h2>
-					<p>
-						У Вас нет аккаунта и Вы не желаете регистрироваться? Используйте гостевой режим!
-					</p>
-					<a class="btn btn-primary" href="{% url 'home' %}">
-						<i class="fas fa-sign-in-alt"></i>
-						Продолжить как Гость
-					</a>
-				</div>
+				<div class="footer-text">
+					<p>Если Вы не желаете регистрироваться на сайте, Вы можете оформить заказ в гостевом режиме с ограниченным функционалом магазина!</p>
+				    <div class="get-back-button">
+                        <a href="{% url 'checkout1' %}" style="background: #5b32b4; color: #fff;">Оформить как Гость</a>
+                    </div>
+                </div>
 			</div>
-
 		</div>
 	</div>
-	<div style="clear:both"></div>
-</div>
-
-<div class="gap"></div>-->
+</section>
+<!-- End Section Auth -->
 {% endblock %}
