@@ -40,6 +40,6 @@ class CheckoutFormRight(forms.Form):
         self.fields['anonymous_city'] = forms.ChoiceField(
             choices=[('', '-- Выберите город --')] + [(city.id, city.name) for city in cities_list],
             required=True,
-            label='Область',
+            label='Город',
             initial='Выберите город',
             widget=Select2Widget)

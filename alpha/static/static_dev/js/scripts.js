@@ -48,21 +48,6 @@ $(document).ready(function() {
         });
         };
 
-
-    /*// Get data from Product Page Form
-    product_page_form.on('submit', function(e) {
-        e.preventDefault();
-        var qnty = $('#product_page_qnty').val();
-        var submit_btn = $('#product_page_submit_btn');
-        var product_id = submit_btn.data('product_id');
-        var product_name = submit_btn.data('name');
-        var product_price = submit_btn.data('price');
-        var product_total_price = qnty*product_price;
-        var product_image = submit_btn.data('image');
-
-        cart_updating(product_id, qnty, is_delete=false);
-    });*/
-
     // Get data from Product Landing Page Form
     $('button.landing-submit').on('click', function (e) {
         button = $(this)
@@ -90,25 +75,6 @@ $(document).ready(function() {
 
         cart_updating(product_id, qnty, is_delete=false)
     });
-
-    
-    /*// Cart refreshing while Checkout Page touchspin is activated (only after Refresh button is pressed)
-    $('.product-in-cart-qnty').each(function(input) {
-    	var checkout_page_input = $(this);
-    	var start_checkout_input = parseInt(checkout_page_input.attr('value'));
-    	$('div.cartFooter').on('click', '#cart_refresh', function(e) {
-        	e.preventDefault();
-        	var current_checkout_input = parseInt(checkout_page_input.val());
-    		var qnty = current_checkout_input-start_checkout_input;
-    		var product_id = checkout_page_input.data('product_id');
-
-    		if (qnty != 0) {
-    			cart_updating(product_id, qnty, is_delete=false);
-    		};
-    		start_checkout_input = current_checkout_input;
-    	});
-    });*/
-
 
     /*// Hide success div (Checkout page footer)
     function hideCartFooterDiv() {
@@ -178,32 +144,34 @@ $(document).ready(function() {
     calculatingTotalCartSum();
 
     // CountTo Plugin Initializer (https://stackoverflow.com/questions/43202706/jquery-counto-js-on-scroll-count-numbers-not-onload)
-    /*function isScrolledIntoView(el) {
+    function isScrolledIntoView(el) {
         if (el.getBoundingClientRect().top | el.getBoundingClientRect().bottom) { 
             var elemTop = el.getBoundingClientRect().top;
             var elemBottom = el.getBoundingClientRect().bottom;
 
             var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
-            return isVisible;
-        $(window).on('scroll', function() {
-            if (isScrolledIntoView(document.getElementById('counters'))) {
-                $('.counter').countTo();
-                $('.counter-decimal').countTo({
-                    formatter: function (value, options) {
-                        return value.toFixed(1);
-                    }
-                });
+            return isVisible
+        }
+    };
+
+    $(window).on('scroll', function() {
+        if (isScrolledIntoView(document.getElementById('counters'))) {
+            $('.counter').countTo();
+            $('.counter-decimal').countTo({
+                formatter: function (value, options) {
+                    return value.toFixed(1);
+                }
+            });
             // Unbind scroll event
             $(window).off('scroll');
-            }
-        });
-    }};*/
-    $('.counter').countTo();
+        }
+    });
+    /*$('.counter').countTo();
     $('.counter-decimal').countTo({
         formatter: function (value, options) {
             return value.toFixed(1);
         }
-    });
+    });*/
 
 
     // AOS Animation Initializer
@@ -264,11 +232,6 @@ $(document).ready(function() {
         radioClass: 'iradio_square-green',
         increaseArea: '20%' // optional
     });
-
-    // Select2 Initializer
-    // https://select2.org/getting-started/basic-usage
-    //$('.js-example-basic-single').select2();
-    //$('.django-select2').djangoSelect2();
 
     // My Profile Page address delete button
     $('#my_profile_address_delete').on('click', function(e) {

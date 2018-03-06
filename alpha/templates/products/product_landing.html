@@ -146,7 +146,7 @@
             <div class="row">
                 <!--Single Cool Fact-->
                 <div class="col-12 col-md-3 col-lg-3">
-                    <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up">
+                    <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up" style="min-height: 90px;">
                         <div class="counter-area">
                             <h3>
                                 <span class="counter" data-from="0" data-to="90" data-speed="3000"></span>
@@ -159,7 +159,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-3 col-lg-3">
-                    <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up">
+                    <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up" style="min-height: 90px;">
                         <div class="counter-area">
                             <h3>
                                 <span class="counter" data-from="0" data-to="87" data-speed="3000"></span>
@@ -172,10 +172,10 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-3 col-lg-3">
-                    <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up">
+                    <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up" style="min-height: 90px;">
                         <div class="counter-area">
                             <h3>
-                                <span class="counter counter-decimal" data-from="0" data-to="4.9" data-speed="3000"></span>
+                                <span class="counter-decimal" data-from="0" data-to="4.9" data-speed="3000"></span>
                             </h3>
                         </div>
                         <div class="cool-facts-content">
@@ -185,7 +185,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-3 col-lg-3">
-                    <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up">
+                    <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up" style="min-height: 90px;">
                         <div class="counter-area">
                             <h3>
                                 <span class="counter" data-from="0" data-to="2" data-speed="1000"></span>
@@ -201,7 +201,7 @@
             <!-- rowEnd -->
         </div>
     </section>
-    <section id="landing_pricing" class="pricing-plane-area section-padding-100-70 clearfix" style="margin-top: -100px;">
+    <section id="landing_pricing" class="pricing-plane-area clearfix" style="margin-top: -100px; padding-top: 40px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -217,7 +217,7 @@
                         <div class="package-plan">
                             <h5>Цена товара</h5>
                             <div class="ca-price d-flex justify-content-center">
-                                <h4>{{ product.price_with_discount }}<span> грн.</span></h4>
+                                <h4>{{ product.price_with_discount|floatformat }}<span> грн.</span></h4>
                             </div>
                             <div class="package-description">
                                 {% if product.discount %}
@@ -236,7 +236,7 @@
             </div>
         </div>
     </section>
-    <section id="landing_contact" class="footer-contact-area section-padding-100 clearfix" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px;">
+    <section id="landing_contact" class="footer-contact-area section-padding-100 clearfix" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-top: 50px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
