@@ -22,6 +22,7 @@ $(document).ready(function() {
             data: data,
             cache: true,
             success: function(data) {
+            console.log(data.products_in_cart_total_qnty);
                 if (data.products_in_cart_total_qnty) {
                     $('.cart-qnty-subtotal').text('('+data.products_in_cart_total_qnty+')');
                     $('.dropcart div.minicarttable table tbody').html("");
@@ -35,7 +36,8 @@ $(document).ready(function() {
                     $('.cart-qnty-subtotal').text('(0)');
                     $('div.dropdown-menu.dropcart div.minicarttable.pre-scrollable table tbody').html("");
                     $('.cart-area table tbody').html("");
-                    $('div.dropdown-menu.dropcart div.minicarttable.pre-scrollable table tbody').append('<p class="lead text-center">... В Вашей корзине еще нет товаров ...</p>');
+                    $('div.dropdown-menu.dropcart div.minicarttable.pre-scrollable table tbody').append('<div class=\"text-center\"><p class=\"empty-cart\">Ваша корзина пуста. Чтобы оформить заказ, необходимо добавить товар!</p></div>');
+                    $('.cart-area table tbody').append('<div class=\"text-center\"><p class=\"empty-cart" style=\"font-size: 40px;\">Ваша корзина пуста. Чтобы оформить заказ, необходимо добавить товар!</p></div>');
                 };
                 calculatingTotalCartSum();
                     

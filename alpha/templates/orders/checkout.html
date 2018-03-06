@@ -38,7 +38,7 @@
         <div class="row">
             <div class="col-12">
                 <!-- Cart Page Start -->
-                <div class="cart-area pre-scrollable">
+                <div class="cart-area">
                     <table>
                         <tbody>
                         {% if products_in_cart %}
@@ -72,6 +72,10 @@
                                 </td>
                             </tr>
                         {% endfor %}
+                        {% else %}
+                            <div class="text-center">
+                                <p class="empty-cart" style="font-size: 40px;">{{ message }}</p>
+                            </div>
                         {% endif %}
                         </tbody>
                     </table>
@@ -81,7 +85,7 @@
         <!-- End Row -->
     </div>
     <!-- End Container -->
-    <div class="container text-center" data-aos="fade-down-left" style="margin-top: 30px;">
+    <div class="container text-center" style="margin-top: 30px;">
         <div class="row align-items-center">
             <div class="col-md-12">
                 <a class="btn submit-btn" href="{% url 'checkout1' %}">Оформить заказ</a>

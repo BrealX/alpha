@@ -107,9 +107,7 @@
                                         <div class="minicarttable pre-scrollable">
                                             <table>
                                                 <tbody>
-                                                {% if products_in_cart|length == 0 %}
-                                                    <p class="lead text-center">... В Вашей корзине еще нет товаров ...</p>
-                                                {% else %}
+                                                {% if products_in_cart %}
                                                 {% for item_in_cart in products_in_cart %}
                                                     <tr class="miniCartProduct">
                                                         <td class="miniCartProductThumbnail" style="width: 20%;">
@@ -138,6 +136,10 @@
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
+                                                {% else %}
+                                                <div class="text-center">
+                                                    <p class="empty-cart">Ваша корзина пуста. Чтобы оформить заказ, необходимо добавить товар!</p>
+                                                </div>
                                                 {% endif %}
                                                 </tbody>
                                             </table>
@@ -178,9 +180,7 @@
                         <div class="minicarttable pre-scrollable">
                             <table>
                                 <tbody>
-                                {% if products_in_cart|length == 0 %}
-                                    <p class="lead text-center">... В Вашей корзине еще нет товаров ...</p>
-                                {% else %}
+                                {% if products_in_cart %}
                                 {% for item_in_cart in products_in_cart %}
                                     <tr class="miniCartProduct">
                                         <td class="miniCartProductThumbnail" style="width: 20%;">
@@ -209,6 +209,10 @@
                                         </td>
                                     </tr>
                                 {% endfor %}
+                                {% else %}
+                                    <div class="text-center">
+                                        <p class="empty-cart">Ваша корзина пуста. Чтобы оформить заказ, необходимо добавить товар!</p>
+                                    </div>
                                 {% endif %}
                                 </tbody>
                             </table>

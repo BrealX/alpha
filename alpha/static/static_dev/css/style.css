@@ -252,6 +252,10 @@ p
     margin-left: auto!important;
 }
 
+.pre-scrollable {
+    overflow-y: auto;
+}
+
 .btn.btn-lg
 {
     font-size: 16px;
@@ -624,6 +628,17 @@ p
 
 p.lead
 {
+    font-size: 20px;
+    font-weight: bolder;
+    line-height: 1.4;
+    color: #5b32b4;
+}
+
+p.empty-cart
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Amatic SC', cursive;
     font-size: 20px;
     font-weight: bolder;
     line-height: 1.4;
@@ -1409,7 +1424,6 @@ h5.parallaxSubtitle
     background-size: cover;
     border: 20px solid #5b32b4;
     border-radius: 30px;
-    height: 650px;
     -webkit-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
 }
@@ -2964,11 +2978,6 @@ h2.block-title-2,
     padding-top: 6px;
 }
 
-.paymentMethodImg img
-{
-    margin-left: 5px;
-}
-
 @media (max-width: 767px)
 {
     .footer-bottom
@@ -2993,13 +3002,6 @@ h2.block-title-2,
         text-align: center;
     }
 
-    .paymentMethodImg img
-    {
-        display: inline-block;
-        float: none !important;
-
-        max-height: 24px;
-    }
 }
 
 .footer-social-icon

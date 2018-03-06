@@ -47,7 +47,8 @@ def auth(request):
 def checkout(request):
     session_key = request.session.session_key
     products_in_cart = ProductInBasket.objects.filter(session_key=session_key, is_active=True, order__isnull=True)
-
+    if not products_in_cart:
+        message = "Ваша корзина пуста. Чтобы оформить заказ, необходимо добавить товар!"
     return render(request, 'orders/checkout.html', locals())
 
 
@@ -84,12 +85,12 @@ def checkout1(request):
                             price_per_item=item.price_per_item,
                             total_amount=item.total_price,
                             )
-                        return redirect('checkout2')
+                    return redirect('checkout2')
                 else:
                     message = 'Ваша корзина пуста. Для оформления заказа необходимо что-то в неё добавить'
                     form1 = CheckoutFormLeft()
                     form2 = CheckoutFormRight()
-                    return render(request, 'orders/checkout1.html', { 'message' : message, 'form1': form1, 'form2': form2 })
+                    return render(request, 'orders/checkout1.html', {'message': message, 'form1': form1, 'form2': form2 })
         form1 = CheckoutFormLeft()
         form2 = CheckoutFormRight()
         return render(request, 'orders/checkout1.html', locals())
@@ -99,7 +100,15 @@ def checkout1(request):
 
 def checkout2(request):
     session_key = request.session.session_key
-    ordered_products = ProductInOrder.objects.filter(session_key=session_key, is_active=True)
+    user = request.user
+    order_overall = 0
+    if user.is_authenticated:
+        pass
+    else:
+        ordered_products = ProductInOrder.objects.filter(session_key=session_key, is_active=True)
+        for item in ordered_products:
+            order_overall += item.total_amount
+        delivery_address = ordered_products.latest('id').order.customer_address
     return render(request, 'orders/checkout2.html', locals())
 
 
