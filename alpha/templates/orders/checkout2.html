@@ -93,11 +93,12 @@
     <div class="container text-center" data-aos="fade-down-left" style="margin-top: 30px;">
         <div class="row align-items-center">
             <div class="col-md-12">
-                <a class="btn submit-btn" href="{% url 'checkout2' %}">Подтвердить заказ</a>
+                <a id="order_confirm_button" class="btn submit-btn" href="{% url 'order_confirm' %}">Подтвердить заказ</a>
                 <span class="btn submit-btn" id="cart_subtotal">Ваш заказ на сумму: {{ ordered_products.total_amount }} грн.</span>
             </div>
         </div>
     </div>
+    <input id="checkout2_page_order_id" class="d-none" value="{{ order_id }}">
 </section>
 <!-- End Section -->
 {% endblock %}

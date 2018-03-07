@@ -22,28 +22,27 @@ $(document).ready(function() {
             data: data,
             cache: true,
             success: function(data) {
-            console.log(data.products_in_cart_total_qnty);
+                console.log(data);
                 if (data.products_in_cart_total_qnty) {
                     $('.cart-qnty-subtotal').text('('+data.products_in_cart_total_qnty+')');
-                    $('.dropcart div.minicarttable table tbody').html("");
-                    $('.cart-area table tbody').html("");
+                    $('div#minicarttable table tbody, div#collapsed_minicarttable table tbody').html("");                    $('.cart-area table tbody').html("");
                     $.each(data.products, function(k, v) {
-                        $('div.dropdown-menu.dropcart div.minicarttable.pre-scrollable table tbody').append('<tr class=\"miniCartProduct\"><td class=\"miniCartProductThumbnail\" style=\"width: 20%;\"><div><a href=\"/product-land/'+v.id+'\"><img src=\"'+v.image+'\" alt=\"img\" class=\"img-responsive\" width=\"100\"></a></div></td><td style=\"width: 40%;\"><div class=\"miniCartDescription\"><h4><a href=\"/product-land/'+v.id+'\">'+v.name+'</a></h4><span>'+v.price_per_item+' грн.</span></div></td><td class=\"miniCartQuantity\" style=\"width: 10%;\"><a>* '+v.qnty+' шт.</a></td><td class=\"miniCartSubtotal\" style=\"width: 15%;\"><span class="minicart-item-overall price">'+parseFloat(v.total_price).toFixed(2)+' грн.</span></td><td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\">x</a></td></tr>')
+                        $('div#minicarttable table tbody').append('<tr class=\"miniCartProduct\"><td class=\"miniCartProductThumbnail\" style=\"width: 20%;\"><div><a href=\"/product-land/'+v.id+'\"><img src=\"'+v.image+'\" alt=\"img\" class=\"img-responsive\" width=\"100\"></a></div></td><td style=\"width: 40%;\"><div class=\"miniCartDescription\"><h4><a href=\"/product-land/'+v.id+'\">'+v.name+'</a></h4><span>'+v.price_per_item+' грн.</span></div></td><td class=\"miniCartQuantity\" style=\"width: 10%;\"><a>* '+v.qnty+' шт.</a></td><td class=\"miniCartSubtotal\" style=\"width: 15%;\"><span class="minicart-item-overall price">'+parseFloat(v.total_price).toFixed(2)+' грн.</span></td><td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\"><i class=\"ion-ios-trash-outline\" style=\"font-size: 30px;\"></i></a></td></tr>');
+                        $('div#collapsed_minicarttable table tbody').append('<tr class=\"miniCartProduct\"><td class=\"miniCartProductThumbnail\" style=\"width: 20%;\"><div><a href=\"/product-land/'+v.id+'\"><img src=\"'+v.image+'\" alt=\"img\" class=\"img-responsive\" width=\"100\"></a></div></td><td style=\"width: 40%;\"><div class=\"miniCartDescription\"><h4><a href=\"/product-land/'+v.id+'\">'+v.name+'</a></h4><span>'+v.price_per_item+' грн.</span></div></td><td class=\"miniCartQuantity\" style=\"width: 10%;\"><a>* '+v.qnty+' шт.</a></td><td class=\"miniCartSubtotal\" style=\"width: 15%;\"><span class="collapsed-minicart-item-overall price">'+parseFloat(v.total_price).toFixed(2)+' грн.</span></td><td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\"><i class=\"ion-ios-trash-outline\" style=\"font-size: 30px;\"></i></a></td></tr>');
                         $('div.cart-area table tbody').append('<tr class=\"CartProduct\"><td class=\"CartProductThumbnail\" style=\"width: 20%;\"><div><a href=\"/product-land/'+v.id+'\"><img src=\"'+v.image+'\" alt=\"img\" class=\"img-responsive\" width=\"100\"></a></div></td><td style=\"width: 40%;\"><div class=\"CartDescription\"><h4><a href=\"/product-land/'+v.id+'\">'+v.name+'</a></h4><span class=\"cart-item-price\">'+v.price_per_item+'</span><span> грн.</span></div></td><td class=\"CartQuantity\" style=\"width: 15%;\"><input class=\"cart-touchspin form-control\" name=\"cart_touchspin\" type=\"text\" value=\"'+v.qnty+'\" data-product_id=\"'+v.id+'\"></td><td class=\"CartSubtotal\" style=\"width: 15%;\"><span class=\"cart-item-overall price\">'+parseFloat(v.total_price).toFixed(2)+' грн.</span></td><td class=\"delete\" style=\"width: 5%;\"><a href=\"\" class=\"delete-item\" data-product_id=\"'+v.id+'\"><i class=\"ion-ios-trash-outline\" style=\"font-size: 30px;\"></i></a></td></tr>')
                     });
                 }
                 else if (data.products_in_cart_total_qnty == 0) {
                     $('.cart-qnty-subtotal').text('(0)');
-                    $('div.dropdown-menu.dropcart div.minicarttable.pre-scrollable table tbody').html("");
-                    $('.cart-area table tbody').html("");
-                    $('div.dropdown-menu.dropcart div.minicarttable.pre-scrollable table tbody').append('<div class=\"text-center\"><p class=\"empty-cart\">Ваша корзина пуста. Чтобы оформить заказ, необходимо добавить товар!</p></div>');
+                    $('div#minicarttable table tbody, div#collapsed_minicarttable table tbody, .cart-area table tbody').html("");
+                    $('div#minicarttable table tbody, div#collapsed_minicarttable table tbody').append('<div class=\"text-center\"><p class=\"empty-cart\">Ваша корзина пуста. Чтобы оформить заказ, необходимо добавить товар!</p></div>');
                     $('.cart-area table tbody').append('<div class=\"text-center\"><p class=\"empty-cart" style=\"font-size: 40px;\">Ваша корзина пуста. Чтобы оформить заказ, необходимо добавить товар!</p></div>');
                 };
                 calculatingTotalCartSum();
-                    
+                $('.cart-touchspin').TouchSpin({ min: 1, step: 1, });
             },
             error: function() {
-                    console.log('some error');
+                console.log('There is an error while Ajax proccessing')
             }
         });
         };
@@ -76,20 +75,19 @@ $(document).ready(function() {
         cart_updating(product_id, qnty, is_delete=false)
     });
 
-    /*// Hide success div (Checkout page footer)
-    function hideCartFooterDiv() {
-    	$('div.box-footer div.pull-left').delay(10000).fadeOut();
-    };*/
-
-
-    /*// Show success div when AJAX is OK during cart products adding or deleting
-    $(document).ajaxSuccess(function(event, request, settings) {
-    	element = $('.box-footer').children('.pull-left')
-    	if (!element.is(':visible')) {
-    		element.attr('style', 'display: visible');
-    		hideCartFooterDiv();
-    	};
-    });*/
+    // Changes product in cart quantity when user makes changes at Checkout Page with touchspin plugin
+    $('#checkout_page_submit').on('click', function() {
+        $('.cart-touchspin').each(function(input) {
+    	    var checkout_page_input = $(this);
+    	    var initial_checkout_page_input_qnty = parseInt(checkout_page_input.attr('value'));;
+    	    var current_checkout_page_input_qnty = parseInt(checkout_page_input.val());
+    	    var qnty = current_checkout_page_input_qnty-initial_checkout_page_input_qnty;
+    	    var product_id = checkout_page_input.data('product_id');
+    		if (qnty != 0) {
+    			cart_updating(product_id, qnty, is_delete=false);
+    		};
+    	});
+    });
 
     // Delete items from miniCart
     $('div.minicart-button').on('click', 'a.delete-item', function(e) {
@@ -313,6 +311,28 @@ $(document).ready(function() {
                 $('#landing_modal_div').attr('class', 'col-md-12');
             }
         });
+    });
+
+    // Checkout2 Page order confirmation
+    $('#order_confirm_button').on('click', function(e) {
+        e.preventDefault();
+        var order_confirm_button = $(this);
+        var url = order_confirm_button.attr("href");
+        var data = {};
+        data['order_id'] = $('#checkout2_page_order_id').attr('value');
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: data,
+            cache: true,
+            success: function(data) {
+                console.log(data);
+                if (data.order) {
+                    console.log('do something with order');
+                }
+            }
+        })
     });
 
 });
