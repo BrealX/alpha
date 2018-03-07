@@ -141,7 +141,7 @@ class Order(models.Model):
         verbose_name_plural = "Заказы"
 
     def save(self, *args, **kwargs):
-        super(Order, self).save(*args, **kwargs)    
+        super(Order, self).save(*args, **kwargs)
 
 
 class ProductInOrder(models.Model):
@@ -194,7 +194,7 @@ class ProductInOrder(models.Model):
         self.total_amount = int(self.qnty) * price_per_item
         super(ProductInOrder, self).save(*args, **kwargs)        
         order = self.order
-        all_products_in_order = ProductInOrder.objects.filter(order=order, is_active=True)
+        all_products_in_order = ProductInOrder.objects.filter(order=order)
         order_total_amount = 0
         for item in all_products_in_order:
             order_total_amount += item.total_amount
@@ -240,7 +240,7 @@ class ProductInBasket(models.Model):
         auto_now=True)
     
     def __str__(self):
-        return "%s" % self.product.name
+        return "Товар в корзине %s" % self.product.name
 
     class Meta:
         verbose_name = "Товар в корзине"

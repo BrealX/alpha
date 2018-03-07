@@ -107,9 +107,9 @@ def checkout2(request):
         pass
     else:
         ordered_products = ProductInOrder.objects.filter(session_key=session_key, is_active=True)
-        order_id = ordered_products.first().id
-        for item in ordered_products:
-            order_overall += item.total_amount
+        for order in ordered_products:
+            order_overall += order.total_amount
+        order_id = ordered_products.first().order.id
         delivery_address = ordered_products.latest('id').order.customer_address
     return render(request, 'orders/checkout2.html', locals())
 
@@ -132,16 +132,16 @@ def order_confirm(request):
     order = Order.objects.filter(id=order_id)
     for item in order:
         item.is_active = True
-        item.save(force_update=True)
+        item.save()
         return_dict['order_id'] = item.id
         return_dict['order_status'] = item.status.name
         return_dict['order_overall'] = item.total_order_amount
     products_in_cart = ProductInBasket.objects.filter(order_id=order_id)
     for product in products_in_cart:
         product.is_active = False
-        product.save(force_update=True)
+        product.save()
     products_in_order = ProductInOrder.objects.filter(order_id=order_id)
     for prod_in_order in products_in_order:
         prod_in_order.is_active = False
-        prod_in_order.save(force_update=True)
+        prod_in_order.save()
     return JsonResponse(return_dict)
