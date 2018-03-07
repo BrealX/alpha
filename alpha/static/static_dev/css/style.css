@@ -1869,7 +1869,6 @@ div.productFilter a.btn-danger:hover
     color: #5b32b4;
 }
 
-
 .line-shape
 {
     width: 80px;
@@ -1936,14 +1935,6 @@ div.productFilter a.btn-danger:hover
 .special-description-area.mt-150
 {
     margin-top: 50px;
-}
-
-.special-description-img > img
-{
-    display: block;
-
-    max-height: 400px;
-    margin: 0 auto;
 }
 
 .special-description-content > h2
@@ -2275,7 +2266,7 @@ div.productFilter a.btn-danger:hover
 #landing_modal_div p
 {
     padding-top: 20px;
-    color: #fb397d !important;
+    color: #5b32b4 !important;
 }
 
 .btn.submit-btn

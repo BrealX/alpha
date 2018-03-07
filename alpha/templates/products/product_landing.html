@@ -79,12 +79,19 @@
             <div class="special-description-area mt-150">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="special-description-img">
-                                <img class="img-responsive" src="{{ product.product_main_image.image.url }}" alt="img">
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                            <div class="special-description-img sp-wrap">
+                                <a href="{{ product.product_main_image.image.url }}">
+                                    <img class="img-responsive" src="{{ product.product_main_image.image.url }}" alt="img">
+                                </a>
+                                {% for image in product.product_all_images %}
+                                <a href="{{ image.image.url }}">
+                                    <img class="img-responsive" src="{{ image.image.url }}" alt="img">
+                                </a>
+                                {% endfor %}
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-12 col-sm-12">
                             <div class="special-description-content">
                                 <h2 class="text-center">Лучшее предложение для Вашей маленькой звезды!</h2>
                                 <p align="justify">
@@ -301,4 +308,34 @@
         </div>
     </section>
     <div style="clear: both;"></div>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+    // Product Page Zoomer Initializer
+    $(window).on('load', function() {
+        $('.sp-wrap').smoothproducts();
+    });
+    // CountTo Plugin Initializer (https://stackoverflow.com/questions/43202706/jquery-counto-js-on-scroll-count-numbers-not-onload)
+    function isScrolledIntoView(el) {
+        if (el.getBoundingClientRect().top | el.getBoundingClientRect().bottom) {
+            var elemTop = el.getBoundingClientRect().top;
+            var elemBottom = el.getBoundingClientRect().bottom;
+
+            var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+            return isVisible
+        }
+    };
+    $(window).on('scroll', function() {
+        if (isScrolledIntoView(document.getElementById('counters'))) {
+            $('.counter').countTo();
+            $('.counter-decimal').countTo({
+                formatter: function (value, options) {
+                    return value.toFixed(1);
+                }
+            });
+            // Unbind scroll event
+            $(window).off('scroll');
+        }
+    });
+</script>
 {% endblock %}

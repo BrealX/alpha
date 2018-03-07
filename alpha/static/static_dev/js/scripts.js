@@ -143,37 +143,6 @@ $(document).ready(function() {
 
     calculatingTotalCartSum();
 
-    // CountTo Plugin Initializer (https://stackoverflow.com/questions/43202706/jquery-counto-js-on-scroll-count-numbers-not-onload)
-    function isScrolledIntoView(el) {
-        if (el.getBoundingClientRect().top | el.getBoundingClientRect().bottom) { 
-            var elemTop = el.getBoundingClientRect().top;
-            var elemBottom = el.getBoundingClientRect().bottom;
-
-            var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
-            return isVisible
-        }
-    };
-
-    $(window).on('scroll', function() {
-        if (isScrolledIntoView(document.getElementById('counters'))) {
-            $('.counter').countTo();
-            $('.counter-decimal').countTo({
-                formatter: function (value, options) {
-                    return value.toFixed(1);
-                }
-            });
-            // Unbind scroll event
-            $(window).off('scroll');
-        }
-    });
-    /*$('.counter').countTo();
-    $('.counter-decimal').countTo({
-        formatter: function (value, options) {
-            return value.toFixed(1);
-        }
-    });*/
-
-
     // AOS Animation Initializer
     // https://github.com/michalsnik/aos
     // https://michalsnik.github.io/aos/
@@ -211,13 +180,6 @@ $(document).ready(function() {
         $(this).addClass("active"); // ADD TO WISH LIST BUTTON 
         $(this).attr('data-original-title', 'Понравилось');// Change Tooltip text
     });
-
-
-    // Product Page Zoomer Initializer
-    $(window).on('load', function() {
-        $('.sp-wrap').smoothproducts();
-    }); 
-
 
     // Bootstrap Touchspin at Cart Page Initializer
     $('.cart-touchspin').TouchSpin({
@@ -345,7 +307,7 @@ $(document).ready(function() {
                 if (!data.error) {
                     $('#landing_modal_div p').text(data.success);
                     $('#landing_modal_div').attr('class', 'col-md-12');
-                    $('#landing_contact_form')[0].reset(); // Cleans the form after succesful Ajax
+                    $('#landing_contact_form')[0].reset(); // Cleans the form after successful Ajax
                 }
                 $('#landing_modal_div p').text(data.error);
                 $('#landing_modal_div').attr('class', 'col-md-12');

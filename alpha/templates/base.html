@@ -61,20 +61,30 @@
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <!-- JAVASCRIPT FILES -->
+    <!-- Owl Carousel Slider -->
     <script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <!-- Smoothproducts Zoomer
+    https://github.com/kthornbloom/Smoothproducts -->
     <script type="text/javascript" src="{% static 'js/smoothproducts.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/bootstrap.touchspin.js' %}"></script>  
+    <!-- Bootstrap Touchspin -->
+    <script type="text/javascript" src="{% static 'js/bootstrap.touchspin.js' %}"></script>
+    <!-- Phone number mask -->
     <script type="text/javascript" src="{% static 'js/maskinput.js' %}"></script>
-    <!-- https://markgoodyear.com/2013/01/scrollup-jquery-plugin/ -->
+    <!-- ScrollUp Plugin
+    https://markgoodyear.com/2013/01/scrollup-jquery-plugin/ -->
     <script type="text/javascript" src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
-    <!-- http://verstaemvse.ru/avtomaticheskij-schetchik-countto-js.html -->
+    <!-- CountTo Plugin
+    http://verstaemvse.ru/avtomaticheskij-schetchik-countto-js.html -->
     <script type="text/javascript" src="{% static 'js/jquery.countTo.js' %}"></script>
-    <!-- AOS -->
+    <!-- Animation On Scroll Plugin (AOS) -->
     <script type="text/javascript" src="{% static 'js/aos.js' %}"></script>
-    <!-- Float Panel http://www.menucool.com/ui/animated-sticky-header-on-scroll# -->
+    <!-- Float Panel Plugin
+    http://www.menucool.com/ui/animated-sticky-header-on-scroll# -->
     <script type="text/javascript" src="{% static 'js/float-panel.js' %}"></script>
 
     <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+    {% block javascript %}
+    {% endblock %}
     <script type="text/javascript">$(window).on('load', function () { $preloader = $('.loaderArea'), $loader = $preloader.find('.loader'); $loader.fadeOut(); $preloader.delay(350).fadeOut('slow');});</script>
     <script type="text/javascript">jQuery(function ($) { $(".phone-mask").mask("+38 (099) 999-99-99"); });</script>
     {{ form.media.js }}
