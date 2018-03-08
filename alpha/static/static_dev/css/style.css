@@ -818,7 +818,8 @@ div.miniCartFooter .btn.btn-primary
 .section-register,
 .section-register-done,
 .section-after-registration,
-.section-activation
+.section-activation,
+.section-dashboard
 {
     background: url(../img/header-default.png);
     background-color: #f5f9fc;
@@ -841,7 +842,8 @@ div.miniCartFooter .btn.btn-primary
 }
 
 .section-auth .line-shape,
-.section-register .line-shape
+.section-register .line-shape,
+.section-dashboard .line-shape
 {
     margin-left: 0;
 }
@@ -2366,6 +2368,115 @@ div.cartMiniTable table#cart-summary{
 .innerPage {
     padding-top: 120px;
 }
+
+/* =============================================================== */
+/* DASHBOARD PAGE
+/* =============================================================== */
+
+.single-dashboard-item
+{
+    margin-bottom: 50px;
+}
+
+.single-dashboard-item:hover .dashboard-hover-effects
+{
+    opacity: 1;
+
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
+}
+
+
+.dashboard-image
+{
+    position: relative;
+    z-index: 1;
+
+    margin-bottom: 30px;
+
+    border-radius: 30px 30px 30px 0;
+}
+
+.dashboard-image img
+{
+    border-radius: 30px 30px 30px 0;
+    width: 100%;
+}
+
+.dashboard-hover-effects
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    -webkit-transition: all 500ms;
+         -o-transition: all 500ms;
+            transition: all 500ms;
+
+    opacity: 0;
+    border-radius: 30px 30px 30px 0;
+    background-color: rgba(105, 75, 228, .8);
+
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+}
+
+.dashboard-goto-icon
+{
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    left: 0;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.dashboard-goto-icon > a
+{
+    font-size: 14px;
+    line-height: 40px;
+
+    display: block;
+
+    width: 50%;
+    height: 40px;
+    margin: 2.5px;
+
+    text-align: center;
+
+    color: #fff;
+    border-radius: 10px 10px 10px 0;
+    background: #9a81d7;
+}
+
+.dashboard-text > h4
+{
+    font-size: 22px;
+
+    color: #5b32b4;
+}
+
+.dashboard-text > p
+{
+    margin-bottom: 0;
+
+    color: #b5aec4;
+}
+
+
 
 /* =============================================================== */
 /* Right side bar  //> .rightSidebar //> if needed
