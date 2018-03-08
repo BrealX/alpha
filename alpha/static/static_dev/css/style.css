@@ -819,7 +819,8 @@ div.miniCartFooter .btn.btn-primary
 .section-register-done,
 .section-after-registration,
 .section-activation,
-.section-dashboard
+.section-dashboard,
+.section-profile
 {
     background: url(../img/header-default.png);
     background-color: #f5f9fc;
@@ -843,7 +844,8 @@ div.miniCartFooter .btn.btn-primary
 
 .section-auth .line-shape,
 .section-register .line-shape,
-.section-dashboard .line-shape
+.section-dashboard .line-shape,
+.section-profile .line-shape
 {
     margin-left: 0;
 }
@@ -2373,12 +2375,14 @@ div.cartMiniTable table#cart-summary{
 /* DASHBOARD PAGE
 /* =============================================================== */
 
-.single-dashboard-item
+.single-dashboard-item,
+.single-profile-item
 {
     margin-bottom: 50px;
 }
 
-.single-dashboard-item:hover .dashboard-hover-effects
+.single-dashboard-item:hover .dashboard-hover-effects,
+.single-profile-item:hover .profile-hover-effects
 {
     opacity: 1;
 
@@ -2386,7 +2390,8 @@ div.cartMiniTable table#cart-summary{
 }
 
 
-.dashboard-image
+.dashboard-image,
+.profile-image
 {
     position: relative;
     z-index: 1;
@@ -2396,13 +2401,15 @@ div.cartMiniTable table#cart-summary{
     border-radius: 30px 30px 30px 0;
 }
 
-.dashboard-image img
+.dashboard-image img,
+.profile-image img
 {
     border-radius: 30px 30px 30px 0;
     width: 100%;
 }
 
-.dashboard-hover-effects
+.dashboard-hover-effects,
+.profile-hover-effects
 {
     position: absolute;
     top: 0;
@@ -2422,7 +2429,8 @@ div.cartMiniTable table#cart-summary{
     -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
 }
 
-.dashboard-goto-icon
+.dashboard-goto-icon,
+.profile-goto-icon
 {
     position: absolute;
     z-index: 5;
@@ -2444,7 +2452,9 @@ div.cartMiniTable table#cart-summary{
     justify-content: center;
 }
 
-.dashboard-goto-icon > a
+.dashboard-goto-icon > a,
+.profile-goto-icon > a,
+.profile-goto-icon > button
 {
     font-size: 14px;
     line-height: 40px;
@@ -2462,14 +2472,22 @@ div.cartMiniTable table#cart-summary{
     background: #9a81d7;
 }
 
-.dashboard-text > h4
+#my_profile_address_delete,
+#my_personal_delete
+{
+    color: #fb397d;
+}
+
+.dashboard-text > h4,
+.profile-text > h4
 {
     font-size: 22px;
 
     color: #5b32b4;
 }
 
-.dashboard-text > p
+.dashboard-text > p,
+.profile-text > p
 {
     margin-bottom: 0;
 

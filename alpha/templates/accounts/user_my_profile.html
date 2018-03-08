@@ -2,226 +2,162 @@
 {% load static %}
 
 {% block dashboard %}
-<div class="container main-container headerOffset">
-	<div class="row">
-		<div class="breadcrumbDiv col-lg-12">
-			<ul class="breadcrumb">
-				<li>
-					<a href="{% url 'home' %}">На главную</a>
-				</li>
-				<li>
-					<a href="{% url 'user_dashboard' %}">Мой кабинет</a>
-				</li>
-				<li class="active">
-					Мой профиль
-				</li>
-			</ul>
-		</div>
-	</div>
-	<!--/.row-->
-	<div class="row">
-		<div class="col-lg-12 col-md-9 col-sm-7">
-			<h1 class="section-title-inner">
-				<span>
-					<i class="fas fa-map-marker-alt"></i>
-					Мой профиль
-				</span>
-			</h1>
-			<p>
-				Здесь Вы можете отредактировать Ваши персональные данные, адрес доставки товаров по умолчанию и контактный номер телефона. При необходимости можно также изменить Ваш пароль или удалить аккаунт.
-			</p>
-			<div class="row userInfo">
-				<div class="col-lg-12">
-					<h2 class="block-title-2">
-						Ваши данные указаны ниже 
-					</h2>
+<section id="section_profile" class="section-profile section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 50px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+                    <li>
+					    <a href="{% url 'user_dashboard' %}">Личный кабинет</a>
+				    </li>
+				    <li class="active">
+					    Мой профиль
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-6">
+				<div class="section-heading">
+					<h2 class="text-white">Мой профиль</h2>
+					<div class="line-shape"></div>
 				</div>
-				<div class="w100 clearfix">
-					<div class="col-xs-12 col-sm-6 col-md-4">
-						<div class="panel panel-default">
-							<div class="panel-heading text-center">
-								<h3 class="panel-title">
-									<strong>Мой адрес доставки</strong>
-								</h3>
-							</div>
-							<div class="panel-body">
-								<ul>
-									<li>
-										<span>
-											<strong>Адрес доставки (по умолчанию)</strong>
-										</span>
-									</li>
-									<li style="margin-top: 10px;">
-										<span class="address-line">
-											{% if user.profile.delivery_address %}
-												{{ user.profile.delivery_address }}
-											{% else %}
-												Вы не указали адрес доставки
-											{% endif %}
-										</span>
-									</li>
-									<li style="margin-top: 10px;">
-										<span>
-											<strong>Номер телефона получателя:</strong>
-										</span>
-									</li>
-									<li style="margin-top: 10px;">
-										<span class="profile-phone">
-											{% if user.profile.phone %}
-												{{ user.profile.phone }}
-											{% else %}
-												Вы не указали контактный номер телефона
-											{% endif %}
-										</span>
-									</li>
-								</ul>
-							</div>
-							<div class="panel-footer panel-footer-address">
-								<a href="{% url 'add_address' %}" class="btn btn-sm btn-success" style="min-width: 130px; margin: 5px 0 5px 0;">
-									<i class="far fa-edit"></i>
-									Редактировать
-								</a>
-								<a class="btn btn-sm btn-danger" style="min-width: 130px; margin: 5px 0 5px 0;" id="my_profile_address_delete">
-									<i class="fas fa-minus-circle"></i>
-									Удалить
-								</a>
-								<form id="my_profile_address_delete_form" action="{% url 'delete_address' %}">{% csrf_token %}</form>
+				<div class="footer-text">
+					<p>Редактируйте Ваши персональные данные, адрес доставки товаров по умолчанию или контактный номер телефона. При необходимости можно также изменить Ваш пароль или удалить аккаунт.</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Row -->
+		<div class="row">
+			<div class="col-12 col-md-6 col-lg-3">
+				<div class="single-profile-item">
+					<div class="profile-image">
+						<img src="{% static 'img/accounts/dashboard-orders.jpg' %}" alt="">
+						<div class="profile-hover-effects">
+							<div class="profile-goto-icon">
+                                <a href="{% url 'add_address' %}">Редактировать</a>
+                                <a href="" id="my_profile_address_delete">Удалить</a>
+                                <form id="my_profile_address_delete_form" action="{% url 'delete_address' %}">{% csrf_token %}</form>
 							</div>
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4">	
-						<div class="panel panel-default">
-							<div class="panel-heading text-center">
-								<h3 class="panel-title">
-									<strong>Личные данные</strong>
-								</h3>
-							</div>
-							<div class="panel-body">
-								<ul>
-									<li>
-										<span>
-											<strong>Ф.И.О. (используется для создания накладных при отправке):</strong>
-										</span>
-									</li>
-									<li style="margin-top: 10px;">
-										<span class="profile-firstname">
-											{% if user.first_name %}
-												{{ user.first_name }}
-											{% else %}
-												Вы не указали имя
-											{% endif %}
-										</span>
-									</li>
-									<li style="margin-top: 10px;">
-										<span>
-											<strong>Номер телефона (для уточнения деталей заказа):</strong>
-										</span>
-									</li>
-									<li style="margin-top: 10px;">
-										<span class="profile-phone">
-											{% if user.profile.phone %}
-												{{ user.profile.phone }}
-											{% else %}
-												Вы не указали контактный номер телефона
-											{% endif %}
-										</span>
-									</li>
-								</ul>
-							</div>
-							<div class="panel-footer panel-footer-address">
-								<a href="{% url 'add_personal' %}" class="btn btn-sm btn-success" style="min-width: 130px; margin: 5px 0 5px 0;">
-									<i class="far fa-edit"></i>
-									Редактировать
-								</a>
-								<a class="btn btn-sm btn-danger" style="min-width: 130px; margin: 5px 0 5px 0;" id="my_personal_delete">
-									<i class="fas fa-minus-circle"></i>
-									Удалить
-								</a>
-								<form id="my_personal_delete_form" action="{% url 'delete_personal' %}">{% csrf_token %}</form>
-							</div>
-						</div>	
+					<div class="profile-text">
+						<h4>Адрес доставки</h4>
+						<p style="font-weight: 400;">
+                            {% if user.profile.delivery_address %}
+                                {{ user.profile.delivery_address }}
+                            {% else %}
+                                Вы не указали адрес доставки
+                            {% endif %}
+                        </p>
 					</div>
-					<div class="col-xs-12 col-sm-6 col-md-4">	
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									<strong>Управление учетной записью</strong>
-								</h3>
-							</div>
-							<div class="panel-body">
-								<ul>
-									<li>
-										<span>
-											<strong>Пароль</strong>
-										</span>
-									</li>
-									<li style="margin-top: 10px;">
-										<span class="profile-password">
-												Вы можете при необходимости изменить Ваш текущий пароль.
-												Также Вы можете удалить Вашу учетную запись на нашем сайте.
-										</span>
-									</li>
-								</ul>
-							</div>
-							<div class="panel-footer panel-footer-address">
-								<a href="{% url 'password_reset' %}" style="min-width: 130px; margin: 5px 0 5px 0;" class="btn btn-sm btn-success">
-									<i class="far fa-edit"></i>
-									Изменить пароль
-								</a>
-								<!-- Button trigger modal -->
-								<button id="account_delete" type="button" style="min-width: 130px; margin: 5px 0 5px 0;" class="btn btn-sm btn-danger" data-href="{% url 'login' %}" data-toggle="modal" data-target="#deleteModalCenter">
-									<i class="fas fa-minus-circle"></i>
-									Удалить аккаунт
-								</button>
-								<!-- Modal -->
-								<div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden='true'>
-									<div class="modal-dialog modal-dialog-centered" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="deleteModalCenterTitle"><strong>Внимание! Удаление аккаунта {{ user.username }}!</strong>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">x</span>
-													</button>
-												</h5>
-											</div>
-											<div class="modal-body">
-												<p>
-													Если Вы действительно желаете удалить аккаунт, нажмите кнопку "Удалить". Все Ваши данные будут удалены и восстановить их будет уже нельзя. Удалить?
-												</p>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
-												<button href="" type="button" class="btn btn-danger btn-ok">Удалить</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<form id="my_account_delete_form" action="{% url 'delete_account' %}">{% csrf_token %}</form>
-								<form action="{% url 'home' %}" id="go_home_form"></form>
-							</div>
-						</div>	
-					</div>
-				</div>
-				<!--/.w100-->
-				<div class="col-lg-12 clearfix">
-					<ul class="pager">
-						<li class="next pull-left">
-							<a href="{% url 'user_dashboard' %}">
-								<i class="fas fa-arrow-left"></i>
-								Назад в Мой кабинет
-							</a>
-						</li>
-					</ul>
-				</div>
-					<div class="clear clearfix"></div>
 				</div>
 			</div>
-			<!--/.row end-->
+            <div class="col-12 col-md-6 col-lg-3">
+				<div class="single-profile-item">
+					<div class="profile-image">
+						<img src="{% static 'img/accounts/dashboard-orders.jpg' %}" alt="">
+						<div class="profile-hover-effects">
+							<div class="profile-goto-icon">
+                                <a href="{% url 'add_personal' %}">Редактировать</a>
+                                <a href="" id="my_personal_delete">Удалить</a>
+                                <form id="my_personal_delete_form" action="{% url 'delete_personal' %}">{% csrf_token %}</form>
+							</div>
+						</div>
+					</div>
+					<div class="profile-text">
+						<h4>Личные данные</h4>
+						<p style="font-weight: 400;">
+                            {% if user.first_name %}
+                                {{ user.first_name }}
+                            {% else %}
+                                Вы не указали имя
+                            {% endif %}
+                        </p>
+                        <p style="font-weight: 400;">
+                            {% if user.profile.phone %}
+                                {{ user.profile.phone }}
+                            {% else %}
+                                Вы не указали контактный номер телефона
+                            {% endif %}
+                        </p>
+					</div>
+				</div>
+			</div>
+            <div class="col-12 col-md-6 col-lg-3">
+				<div class="single-profile-item">
+					<div class="profile-image">
+						<img src="{% static 'img/accounts/dashboard-orders.jpg' %}" alt="">
+						<div class="profile-hover-effects">
+							<div class="profile-goto-icon">
+                                <a href="{% url 'password_reset' %}">Сменить пароль</a>
+							</div>
+						</div>
+					</div>
+					<div class="profile-text">
+						<h4>Пароль</h4>
+						<p style="font-weight: 400;">
+                            Вы можете при необходимости изменить Ваш текущий пароль.
+                        </p>
+					</div>
+				</div>
+			</div>
+            <div class="col-12 col-md-6 col-lg-3">
+				<div class="single-profile-item">
+					<div class="profile-image">
+						<img src="{% static 'img/accounts/dashboard-orders.jpg' %}" alt="">
+						<div class="profile-hover-effects">
+							<div class="profile-goto-icon">
+                                <!-- Button trigger modal -->
+                                <button id="account_delete" type="button" data-href="{% url 'login' %}" data-toggle="modal" data-target="#deleteModalCenter">
+									Удалить аккаунт
+								</button>
+                                <form id="my_account_delete_form" action="{% url 'delete_account' %}">{% csrf_token %}</form>
+								<form action="{% url 'home' %}" id="go_home_form"></form>
+							</div>
+						</div>
+					</div>
+					<div class="profile-text">
+						<h4>Удаление аккаунта</h4>
+						<p style="font-weight: 400;">
+                            Полностью удалить Ваш аккаунт на сайте ЁжиК.
+                        </p>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="col-lg-3 col-md-3 col-sm-5"></div>
-	</div>
-	<div style="clear:both"></div>
-</div>
-<!--/.main container-->
-<div class="gap"></div>
+        <!-- End Row -->
+        <div class="row">
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden='true'>
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalCenterTitle"><strong>Внимание! Удаление аккаунта {{ user.username }}!</strong>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">x</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Если Вы действительно желаете удалить аккаунт, нажмите кнопку "Удалить". Все Ваши данные будут удалены и восстановить их будет уже нельзя. Удалить?
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+                            <a href="" type="button" class="btn btn-danger btn-ok">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Auth -->
 {% endblock %}
