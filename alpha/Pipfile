@@ -18,6 +18,8 @@ django-widget-tweaks = "*"
 "django-select2" = "*"
 django-celery = "*"
 celery = "*"
+whitenoise = "*"
+dj-database-url = "*"
 
 
 [dev-packages]
@@ -26,4 +28,4 @@ celery = "*"
 
 [requires]
 
-python_version = "3.5"
+python_version = "3.6"
