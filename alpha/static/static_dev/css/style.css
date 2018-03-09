@@ -1321,28 +1321,6 @@ div.miniCartFooter .btn.btn-primary
             background-size: cover;
 }
 
-
-.parallax-image-2
-{
-    background: url(../img/parallax/parallax2.jpg);
-    background-attachment: fixed; /* IE FIX */
-    -webkit-background-size: cover;
-       -moz-background-size: cover;
-         -o-background-size: cover;
-            background-size: cover;
-            background-size: cover;
-}
-
-
-.parallax-image-3
-{
-    margin-top: 50px;
-
-    background: url(../img/parallax/parallax3.jpg) fixed;
-    background-attachment: fixed; /* IE FIX */
-}
-
-
 .parallax-content
 {
     padding: 100px 0;
