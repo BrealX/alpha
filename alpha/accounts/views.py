@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render
-from django.http import Http404
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, UserRegistrationForm, UserAddAddressForm, UserAddPersonalForm
 from django.contrib.auth.models import User
@@ -13,7 +12,10 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import redirect
-import datetime, hashlib, os
+import datetime
+import hashlib
+import os
+import binascii
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
@@ -162,9 +164,9 @@ def delete_personal(request):
 def delete_account(request):
     '''makes current User inactive and marks his username as deleted in order to
     user can create his profile again with the same username later if needed'''
+    return_dict = {}
     if request.POST:
         user = request.user
-        return_dict = {}
         if user.is_superuser:
             pass
         else:
@@ -177,7 +179,7 @@ def delete_account(request):
 def after_registration(request):
     # Successful account registration alert & activation link creation
     user = User.objects.latest('id')
-    salt = os.urandom(32).hex()
+    salt = binascii.hexlify(os.urandom(32))
     activation_key = hashlib.sha512()
     activation_key.update(('%s%s' % (salt, user.username)).encode('utf-8'))
     activation_key = activation_key.hexdigest()

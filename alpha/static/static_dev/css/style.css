@@ -256,6 +256,36 @@ p
     overflow-y: auto;
 }
 
+.modal-title
+{
+    padding-top: 5px;
+    padding-bottom: 0;
+}
+
+.modal-open .modal
+{
+    overflow-y: hidden !important;
+}
+
+.modal-content
+{
+    border-radius: 24px 24px 24px 0 !important;
+}
+
+.modal
+{
+    top: 20%;
+}
+
+.modal-footer button.btn:nth-child(2)
+{
+    background-color: #5b32b4;
+    color: #fff;
+}
+
+
+
+
 .btn.btn-lg
 {
     font-size: 16px;
@@ -355,22 +385,7 @@ p
     opacity: 0.5 !important;
 }
 
-.modal-dialog-centered
-{
-    width: 600px;
-    margin: 30px auto;
-}
 
-.modal
-{
-    top: 40%;
-}
-
-.modal-title
-{
-    padding-bottom: 0;
-    padding-top: 25px;
-}
 
 .product-slides .owl-dots
 {
@@ -1426,10 +1441,15 @@ h5.parallaxSubtitle
     background-color: #fff;
     background-position: center center;
     background-size: cover;
-    border: 20px solid #5b32b4;
+    border: 10px solid #5b32b4;
     border-radius: 30px;
     -webkit-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
+}
+
+.cart-area > table
+{
+    border-collapse: inherit !important;
 }
 
 .get-back-button {
@@ -3352,6 +3372,12 @@ h2.block-title-2,
 }
 
 @media (max-width: 767px) {
+
+    .section-heading > h2 {
+        font-size: 38px;
+        color: red;
+    }
+
     .header-area {
         padding: 0;
     }
@@ -3448,8 +3474,4 @@ h2.block-title-2,
     .cool_facts_area .col-12:last-of-type .single-cool-fact {
         margin-bottom: 0;
     }
-}
-
-@media (max-width: 480px) {
-
 }

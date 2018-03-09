@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from .models import *
 from .forms import CheckoutFormLeft, CheckoutFormRight
-from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+from django.conf import settings
 
 
 def add_to_cart(request):
@@ -46,6 +49,7 @@ def auth(request):
 
 def checkout(request):
     session_key = request.session.session_key
+    user = request.user
     products_in_cart = ProductInBasket.objects.filter(session_key=session_key, is_active=True, order__isnull=True)
     if not products_in_cart:
         message = "Ваша корзина пуста. Чтобы оформить заказ, необходимо добавить товар!"
@@ -54,6 +58,7 @@ def checkout(request):
 
 def checkout1(request):
     session_key = request.session.session_key
+    user = request.user
     cart_products = ProductInBasket.objects.filter(session_key=session_key, is_active=True, order__isnull=True)
     if cart_products:
         if request.POST:
@@ -64,28 +69,58 @@ def checkout1(request):
                 cd1 = form1.cleaned_data
                 cd2 = form2.cleaned_data
                 if cart_products:
-                    new_order = Order.objects.create(
-                        session_key=session_key,
-                        customer_name=cd1['anonymous_name'],
-                        customer_email=cd1['anonymous_email'],
-                        customer_phone=cd1['anonymous_phone'],
-                        customer_address=str(OrderDeliveryArea.objects.get(id=cd2['anonymous_area'])) + ', ' + str(OrderDeliveryCity.objects.get(id=cd2['anonymous_city'])) + ', ' + str(cd2['anonymous_additional']),
-                        status_id=1,
-                        is_active=False
-                        )
-                    for item in cart_products:
-                        item.order = new_order
-                        item.save(force_update=True)
-                
-                        ProductInOrder.objects.create(
+                    if not user.is_authenticated:
+                        new_order = Order.objects.create(
                             session_key=session_key,
-                            order=new_order,
-                            product=item.product,
-                            qnty=item.qnty,
-                            price_per_item=item.price_per_item,
-                            total_amount=item.total_price,
+                            customer_name=cd1['anonymous_name'],
+                            customer_email=cd1['anonymous_email'],
+                            customer_phone=cd1['anonymous_phone'],
+                            customer_address=str(OrderDeliveryArea.objects.get(id=cd2['anonymous_area'])) + ', ' + str(OrderDeliveryCity.objects.get(id=cd2['anonymous_city'])) + ', ' + str(cd2['anonymous_additional']),
+                            status_id=1,
+                            is_active=False
                             )
-                    return redirect('checkout2')
+                        for item in cart_products:
+                            item.order = new_order
+                            item.save(force_update=True)
+
+                            ProductInOrder.objects.create(
+                                session_key=session_key,
+                                order=new_order,
+                                product=item.product,
+                                qnty=item.qnty,
+                                price_per_item=item.price_per_item,
+                                total_amount=item.total_price,
+                                )
+                        return redirect('checkout2')
+                    else:
+                        if user.profile.delivery_address:
+                            customer_address = user.profile.delivery_address
+                        customer_address = str(OrderDeliveryArea.objects.get(id=cd2['anonymous_area'])) + ', ' + str(
+                                OrderDeliveryCity.objects.get(id=cd2['anonymous_city'])) + ', ' + str(
+                                cd2['anonymous_additional'])
+                        new_order = Order.objects.create(
+                            session_key=session_key,
+                            user=user,
+                            customer_name=data.get('anonymous_name', ''),
+                            customer_email=data.get('anonymous_email', ''),
+                            customer_phone=data.get('anonymous_phone', ''),
+                            customer_address=customer_address,
+                            status_id=1,
+                            is_active=False
+                        )
+                        for item in cart_products:
+                            item.order = new_order
+                            item.save(force_update=True)
+
+                            ProductInOrder.objects.create(
+                                session_key=session_key,
+                                order=new_order,
+                                product=item.product,
+                                qnty=item.qnty,
+                                price_per_item=item.price_per_item,
+                                total_amount=item.total_price,
+                            )
+                        return redirect('checkout2')
                 else:
                     message = 'Ваша корзина пуста. Для оформления заказа необходимо что-то в неё добавить'
                     form1 = CheckoutFormLeft()
@@ -103,14 +138,11 @@ def checkout2(request):
     products_in_cart = ProductInBasket.objects.filter(session_key=session_key, is_active=True, order__session_key=session_key)
     user = request.user
     order_overall = 0
-    if user.is_authenticated:
-        pass
-    else:
-        ordered_products = ProductInOrder.objects.filter(session_key=session_key, is_active=True)
-        for order in ordered_products:
-            order_overall += order.total_amount
-        order_id = ordered_products.first().order.id
-        delivery_address = ordered_products.latest('id').order.customer_address
+    ordered_products = ProductInOrder.objects.filter(session_key=session_key, is_active=True)
+    for order in ordered_products:
+        order_overall += order.total_amount
+        order = order.order
+    delivery_address = ordered_products.latest('id').order.customer_address
     return render(request, 'orders/checkout2.html', locals())
 
 
@@ -124,10 +156,6 @@ def get_chained_cities(request):
 
 def order_confirm(request):
     return_dict = dict()
-    user = request.user
-    if user.is_authenticated:
-        pass
-    session_key = request.session.session_key
     order_id = int(request.GET.get('order_id', ''))
     order = Order.objects.filter(id=order_id)
     for item in order:
@@ -136,6 +164,8 @@ def order_confirm(request):
         return_dict['order_id'] = item.id
         return_dict['order_status'] = item.status.name
         return_dict['order_overall'] = item.total_order_amount
+        return_dict['order_customer_email'] = item.customer_email
+        return_dict['order_customer_name'] = item.customer_name
     products_in_cart = ProductInBasket.objects.filter(order_id=order_id)
     for product in products_in_cart:
         product.is_active = False
@@ -144,4 +174,30 @@ def order_confirm(request):
     for prod_in_order in products_in_order:
         prod_in_order.is_active = False
         prod_in_order.save()
+    return JsonResponse(return_dict)
+
+
+def order_notification(request):
+    # Email settings
+    data = request.GET
+    subject = 'Новый заказ на сайте "ЁжиК."'
+    message = render_to_string(
+        template_name='orders/order_notification.html',
+        context={
+            'order_id': data.get('order_id', ''),
+            'domain': get_current_site(request),
+            'order_overall': data.get('order_overall', ''),
+            'order_customer_name': data.get('order_customer_name'),
+        })
+
+    send_to = [data.get('order_customer_email'), settings.EMAIL_HOST_USER,]
+
+    send_mail(
+        subject,
+        message,
+        settings.EMAIL_HOST_USER,
+        send_to,
+        fail_silently=False)
+
+    return_dict = dict()
     return JsonResponse(return_dict)

@@ -241,9 +241,9 @@ $(document).ready(function() {
 
     // Modal window on account deletion (delete confirmation & delete process)
     $('div#deleteModalCenter').on('show.bs.modal', function(e) {
-        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
     });
-    $('div#deleteModalCenter').on('click', '.btn-ok', function(e) {
+    $('div#deleteModalCenter').on('click', '.btn-delete', function(e) {
         e.preventDefault();
         var account_delete_form = $('#my_account_delete_form');
         var url = account_delete_form.attr('action');
@@ -327,12 +327,36 @@ $(document).ready(function() {
             data: data,
             cache: true,
             success: function(data) {
-                console.log(data);
-                if (data.order) {
-                    console.log('do something with order');
+                if (data.order_id) {
+                    $("#order_info_modal").modal('show');
+                    var order_id = data.order_id;
+                    var order_overall = data.order_overall;
+                    var order_customer_email = data.order_customer_email;
+                    var order_customer_name = data.order_customer_name;
+                    var notification_url = $('#order_notification_form').attr('action');
+                    var data = {};
+                    data['order_id'] = order_id;
+                    data['order_overall'] = order_overall;
+                    data['order_customer_email'] = order_customer_email;
+                    data['order_customer_name'] = order_customer_name;
+                    console.log(data)
+
+                    $.ajax({
+                        url: notification_url,
+                        type: 'GET',
+                        data: data,
+                        cache: true,
+                        }
+                    });
                 }
             }
         })
+    });
+
+    // Redirects to Home Page when Order Info Close Button clicked
+    $('#order_info_modal_close').on('click', function(e) {
+        e.preventDefault();
+        window.location.href = '/';
     });
 
 });
