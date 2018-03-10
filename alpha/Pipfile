@@ -20,6 +20,7 @@ django-celery = "*"
 celery = "*"
 whitenoise = "*"
 dj-database-url = "*"
+django-heroku = "*"
 
 
 [dev-packages]
