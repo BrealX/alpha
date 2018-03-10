@@ -250,7 +250,7 @@ $(document).ready(function() {
         var go_home_form = $('#go_home_form');
         var redirect_url = go_home_form.attr('action');
         var csfr_token = $('#my_account_delete_form [name="csrfmiddlewaretoken"]').val();
-        data = {}
+        data = {};
         data["csrfmiddlewaretoken"] = csfr_token;
         $.ajax({
             url: url,

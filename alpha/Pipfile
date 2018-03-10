@@ -21,6 +21,7 @@ celery = "*"
 whitenoise = "*"
 dj-database-url = "*"
 django-heroku = "*"
+"psycopg2-binary" = "*"
 
 
 [dev-packages]
