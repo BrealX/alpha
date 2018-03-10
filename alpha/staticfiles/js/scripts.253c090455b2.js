@@ -339,18 +339,16 @@ $(document).ready(function() {
                     data['order_overall'] = order_overall;
                     data['order_customer_email'] = order_customer_email;
                     data['order_customer_name'] = order_customer_name;
-                    console.log(data)
 
                     $.ajax({
                         url: notification_url,
                         type: 'GET',
                         data: data,
                         cache: true,
-                        }
                     });
-                }
+                };
             }
-        })
+        });
     });
 
     // Redirects to Home Page when Order Info Close Button clicked
