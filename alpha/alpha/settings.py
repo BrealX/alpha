@@ -28,6 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = ['yozhik.herokuapp.com',
+                 'yozhik.com.ua',
                 'localhost',
                 ]
 
@@ -161,7 +162,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,'static', 'static_dev'),
+    os.path.join(BASE_DIR, 'static', 'static_dev'),
 )
 
 # Simplified static file serving.
