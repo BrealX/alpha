@@ -2,44 +2,71 @@
 {% load static %}
 
 {% block dashboard %}
+<section id="section_profile" class="section-profile section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 50px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+                    <li>
+					    <a href="{% url 'user_dashboard' %}">Личный кабинет</a>
+				    </li>
+					<li>
+					    <a href="{% url 'user_my_profile' %}">Мой профиль</a>
+				    </li>
+				    <li class="active">
+				    	{% if user.profile.delivery_address %}
+					    Редактирование адреса
+					    {% else %}
+					    Добавление адреса
+				    	{% endif %}
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-6">
+				<div class="section-heading">
+					{% if user.profile.delivery_address %}
+					<h2 class="text-white">Редактирование адреса</h2>
+					{% else %}
+					<h2 class="text-white">Добавление адреса</h2>
+				    {% endif %}
+					<div class="line-shape"></div>
+				</div>
+				<div class="footer-text">
+					{% if user.profile.delivery_address %}
+					<p>Вы можете отредактировать адрес доставки, изменив указанные данные в форме ниже!</p>
+					{% else %}
+					<p>Добавьте адрес доставки в Ваш профиль. Тогда при оформлении заказов Вам не нужно будет заполнять адрес доставки. Если же заказ нужно будет отправить не по основному адресу (например, кому-нибудь на подарок, Вы всегда сможете изменить эти данные на этапе оформление нового заказа!</p>
+					{% endif %}
+				</div>
+			</div>
+			<div class="col-md-6">
+				<form action="{% url 'add_address' %}" role="form" method="post">{% csrf_token %}
+					<div class="form-group">
+						<label for="profile_delivery_address"><p>Текущий адрес доставки</p></label>
+						<textarea name="profile_delivery_address" id="profile_delivery_address" cols="26" rows="3" class="form-control" placeholder="{% if user.profile.delivery_address %}{{ user.profile.delivery_address }}{% else %}У вас пока нет сохраненных адресов доставки{% endif %}" autofocus value="{{ request.POST.profile_delivery_address }}"></textarea>	
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Profile -->
+
+
+
 <div class="container main-container headerOffset">
 	<div class="row">
-		<div class="breadcrumbDiv col-lg-12">
-			<ul class="breadcrumb">
-				<li>
-					<a href="{% url 'home' %}">На главную</a>
-				</li>
-				<li>
-					<a href="{% url 'user_dashboard' %}">Мой кабинет</a>
-				</li>
-				<li class="active">
-					Добавление адреса
-				</li>
-			</ul>
-		</div>
-	</div>
-	<!--/.row-->
-	<div class="row">
 		<div class="col-lg-9 col-md-9 col-sm-7">
-			<h1 class="section-title-inner">
-				<span>
-					<i class="fas fa-map-marker-alt"></i>
-					Добавление адреса доставки
-				</span>
-			</h1>
 			<div class="row userInfo">
-				<div class="col-lg-12">
-					<h2 class="block-title-2">
-						Чтобы добавить или изменить Ваш адрес доставки, заполните или отредактируйте форму ниже.
-					</h2>
-				</div>
 				<form action="{% url 'add_address' %}" role="form" method="post">{% csrf_token %}
-					<div class="col-xs-12 col-sm-6">
-						<div class="form-group">
-							<label for="profile_delivery_address">Текущий адрес доставки</label>
-							<textarea name="profile_delivery_address" id="profile_delivery_address" cols="26" rows="3" class="form-control" placeholder="{% if user.profile.delivery_address %}{{ user.profile.delivery_address }}{% else %}У вас пока нет сохраненных адресов доставки{% endif %}" autofocus value="{{ request.POST.profile_delivery_address }}"></textarea>	
-						</div>
-					</div>
 					<div class="col-xs-12 col-sm-6">
 						<div class="form-group">
 							<label>Укажите Ваш основной адрес доставки согласно следующего формата:</label>

@@ -39,7 +39,11 @@
 						<img src="{% static 'img/accounts/dashboard-myaddress.jpg' %}" alt="">
 						<div class="profile-hover-effects">
 							<div class="profile-goto-icon">
+								{% if user.profile.delivery_address %}
                                 <a href="{% url 'add_address' %}">Редактировать</a>
+                                {% else %}
+                                <a href="{% url 'add_address' %}">Добавить</a>
+                                {% endif %}
                                 <a href="" id="my_profile_address_delete">Удалить</a>
                                 <form id="my_profile_address_delete_form" action="{% url 'delete_address' %}">{% csrf_token %}</form>
 							</div>

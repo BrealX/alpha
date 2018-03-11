@@ -873,7 +873,8 @@ div.miniCartFooter .btn.btn-primary
 #new_user_email,
 #new_user_name,
 #new_user_password,
-#new_user_password_repeat 
+#new_user_password_repeat,
+#profile_delivery_address
 {
     font-size: 18px;
     padding: 15px 15px !important;
