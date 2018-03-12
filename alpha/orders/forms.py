@@ -1,6 +1,5 @@
 from django import forms
 from .models import *
-from django_select2.forms import Select2Widget
 
 
 class CheckoutFormLeft(forms.Form):
@@ -19,27 +18,27 @@ class CheckoutFormLeft(forms.Form):
 
     
 class CheckoutFormRight(forms.Form):
-    anonymous_area = forms.ChoiceField()
-    anonymous_city = forms.ChoiceField()
-    anonymous_additional = forms.CharField(
-        required=False,
-        label='Дополнительная информация: укажите номер и адрес отделения склада перевозчика или Ваш полный почтовый адрес (не требуется заполнять при самовывозе)',
-        widget=forms.Textarea,
-    )
-
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         super(CheckoutFormRight, self).__init__(*args, **kwargs)
         areas_list = OrderDeliveryArea.objects.all()
         cities_list = OrderDeliveryCity.objects.all()
+        initial_area = 'Выберите область'
+        initial_city = 'Выберите город'
         self.fields['anonymous_area'] = forms.ChoiceField(
             choices=[('', '-- Выберите область --')] + [(area.id, area.name) for area in areas_list],
             required=True,
             label='Область',
-            initial='Выберите область',
-            widget=Select2Widget)
+            initial=initial_area,
+            )
         self.fields['anonymous_city'] = forms.ChoiceField(
             choices=[('', '-- Выберите город --')] + [(city.id, city.name) for city in cities_list],
             required=True,
             label='Город',
-            initial='Выберите город',
-            widget=Select2Widget)
+            initial=initial_city,
+            )
+        self.fields['anonymous_additional'] = forms.CharField(
+            required=False,
+            label='Дополнительная информация: укажите номер и адрес отделения склада перевозчика или Ваш полный почтовый адрес (не требуется заполнять при самовывозе)',
+            widget=forms.Textarea,
+            initial='Введите адрес'
+            )

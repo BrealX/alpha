@@ -61,76 +61,85 @@ def checkout1(request):
     user = request.user
     cart_products = ProductInBasket.objects.filter(session_key=session_key, is_active=True, order__isnull=True)
     if cart_products:
+        # if there are products in cart
         if request.POST:
+            # if request is POST
             data = request.POST
             form1 = CheckoutFormLeft(request.POST or None)
-            form2 = CheckoutFormRight(request.POST or None)
+            form2 = CheckoutFormRight(request.user, request.POST or None)
             if form1.is_valid() and form2.is_valid():
+                # both forms are valid
                 cd1 = form1.cleaned_data
                 cd2 = form2.cleaned_data
-                if cart_products:
-                    if not user.is_authenticated:
-                        new_order = Order.objects.create(
-                            session_key=session_key,
-                            customer_name=cd1['anonymous_name'],
-                            customer_email=cd1['anonymous_email'],
-                            customer_phone=cd1['anonymous_phone'],
-                            customer_address=str(OrderDeliveryArea.objects.get(id=cd2['anonymous_area'])) + ', ' + str(OrderDeliveryCity.objects.get(id=cd2['anonymous_city'])) + ', ' + str(cd2['anonymous_additional']),
-                            status_id=1,
-                            is_active=False
-                            )
-                        for item in cart_products:
-                            item.order = new_order
-                            item.save(force_update=True)
-
-                            ProductInOrder.objects.create(
-                                session_key=session_key,
-                                order=new_order,
-                                product=item.product,
-                                qnty=item.qnty,
-                                price_per_item=item.price_per_item,
-                                total_amount=item.total_price,
-                                )
-                        return redirect('checkout2')
-                    else:
-                        if user.profile.delivery_address:
-                            customer_address = user.profile.delivery_address
-                        customer_address = str(OrderDeliveryArea.objects.get(id=cd2['anonymous_area'])) + ', ' + str(
-                                OrderDeliveryCity.objects.get(id=cd2['anonymous_city'])) + ', ' + str(
-                                cd2['anonymous_additional'])
-                        new_order = Order.objects.create(
-                            session_key=session_key,
-                            user=user,
-                            customer_name=data.get('anonymous_name', ''),
-                            customer_email=data.get('anonymous_email', ''),
-                            customer_phone=data.get('anonymous_phone', ''),
-                            customer_address=customer_address,
-                            status_id=1,
-                            is_active=False
+                if not user.is_authenticated:
+                    # if user is anonymous logic
+                    new_order = Order.objects.create(
+                        session_key=session_key,
+                        customer_name=cd1['anonymous_name'],
+                        customer_email=cd1['anonymous_email'],
+                        customer_phone=cd1['anonymous_phone'],
+                        customer_address=str(OrderDeliveryArea.objects.get(id=cd2['anonymous_area'])) + ', ' + str(OrderDeliveryCity.objects.get(id=cd2['anonymous_city'])) + ', ' + str(cd2['anonymous_additional']),
+                        status_id=1,
+                        is_active=False
                         )
-                        for item in cart_products:
-                            item.order = new_order
-                            item.save(force_update=True)
+                    for item in cart_products:
+                        item.order = new_order
+                        item.save(force_update=True)
 
-                            ProductInOrder.objects.create(
-                                session_key=session_key,
-                                order=new_order,
-                                product=item.product,
-                                qnty=item.qnty,
-                                price_per_item=item.price_per_item,
-                                total_amount=item.total_price,
+                        ProductInOrder.objects.create(
+                            session_key=session_key,
+                            order=new_order,
+                            product=item.product,
+                            qnty=item.qnty,
+                            price_per_item=item.price_per_item,
+                            total_amount=item.total_price,
                             )
-                        return redirect('checkout2')
+                    return redirect('checkout2')
                 else:
-                    message = 'Ваша корзина пуста. Для оформления заказа необходимо что-то в неё добавить'
-                    form1 = CheckoutFormLeft()
-                    form2 = CheckoutFormRight()
-                    return render(request, 'orders/checkout1.html', {'message': message, 'form1': form1, 'form2': form2 })
-        form1 = CheckoutFormLeft()
-        form2 = CheckoutFormRight()
-        return render(request, 'orders/checkout1.html', locals())
+                    # if user is authenticated logic
+                    customer_address = str(OrderDeliveryArea.objects.get(id=cd2['anonymous_area'])) + ', ' + str(OrderDeliveryCity.objects.get(id=cd2['anonymous_city'])) + ', ' + str(cd2['anonymous_additional'])
+                    new_order = Order.objects.create(
+                        session_key=session_key,
+                        user=user,
+                        customer_name=data.get('anonymous_name', ''),
+                        customer_email=data.get('anonymous_email', ''),
+                        customer_phone=data.get('anonymous_phone', ''),
+                        customer_address=customer_address,
+                        status_id=1,
+                        is_active=False
+                    )
+                    for item in cart_products:
+                        item.order = new_order
+                        item.save(force_update=True)
+
+                        ProductInOrder.objects.create(
+                            session_key=session_key,
+                            order=new_order,
+                            product=item.product,
+                            qnty=item.qnty,
+                            price_per_item=item.price_per_item,
+                            total_amount=item.total_price,
+                        )
+                    return redirect('checkout2')
+            else:
+                # both forms are not valid or one of them is not
+                message1 = form1.errors
+                message2 =  form2.errors
+                return render(request, 'orders/checkout1.html', locals())
+        else:
+            # if request is GET
+            form1 = CheckoutFormLeft()
+            if user.is_authenticated and user.profile.delivery_city:
+                form2 = CheckoutFormRight(request.user, initial={'anonymous_area': user.profile.delivery_area.id, 'anonymous_city': user.profile.delivery_city.id, 'anonymous_additional': user.profile.delivery_address})
+            else:
+                form2 = CheckoutFormRight(request.user)
+            return render(request, 'orders/checkout1.html', locals())
     else:
-        return redirect('checkout')
+        # if not products in cart
+        message = 'Ваша корзина пуста. Для оформления заказа необходимо что-то в неё добавить'
+        form1 = CheckoutFormLeft()
+        form2 = CheckoutFormRight(request.user)
+        return render(request, 'orders/checkout1.html', locals())
 
 
 def checkout2(request):

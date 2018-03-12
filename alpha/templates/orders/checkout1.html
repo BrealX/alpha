@@ -51,7 +51,7 @@
                             {% if user %}
                             {% if user.first_name %}
                             <label class="text-white">Ваше имя</label>
-                            <input name="anonymous_name" class="form-control" id="id_anonymous_name" type="text" value="{{ user.first_name }}">
+                            <input name="anonymous_name" class="form-control" id="id_anonymous_name" type="text" value="{{ user.first_name }}" placeholder="{{ user.first_name }}">
                             {% else %}
                             <label class="text-white">Ваше имя (укажите имя в настройках личного кабинета, чтобы не вводить его повторно при каждом заказе)<sup>*</sup></label>
                             {% render_field form1.anonymous_name|add_class:"form-control"|attr:"autofocus" placeholder="Ваше имя" %}
@@ -109,59 +109,47 @@
                         </div>
                         <div class="form-group required">
                             {% if user %}
-                            {% if not user.profile.delivery_address %}
-                            <label class="text-white" for="{{ form2.anonymous_area.id_for_label }}">{{ form2.anonymous_area.label }}<sup>*</sup></label>
-                            {{ form2.anonymous_area|add_class:"form-control" }}
-                            {% for error in form2.anonymous_area.errors %}
-                                <span class="form-error">{{ error }}</span>
-                            {% endfor %}
-                            {% endif %}
+                                {% if user.profile.delivery_city %}
+                                    <label class="text-white" for="{{ form2.anonymous_area.id_for_label }}">{{ form2.anonymous_area.label }}</label>
+                                    {{ form2.anonymous_area|add_class:"form-control" }}
+                                {% else %}
+                                    <label class="text-white" for="{{ form2.anonymous_area.id_for_label }}">{{ form2.anonymous_area.label }}<sup>*</sup></label>
+                                    {{ form2.anonymous_area|add_class:"form-control" }}
+                                {% endif %}
                             {% else %}
-                            <label class="text-white" for="{{ form2.anonymous_area.id_for_label }}">{{ form2.anonymous_area.label }}<sup>*</sup></label>
-                            {{ form2.anonymous_area|add_class:"form-control" }}
-                            {% for error in form2.anonymous_area.errors %}
-                                <span class="form-error">{{ error }}</span>
-                            {% endfor %}
+                                <label class="text-white" for="{{ form2.anonymous_area.id_for_label }}">{{ form2.anonymous_area.label }}<sup>*</sup></label>
+                                {{ form2.anonymous_area|add_class:"form-control"}}
                             {% endif %}
                         </div>
                         <div class="form-group required">
                             {% if user %}
-                            {% if not user.profile.delivery_address %}
-                            <label class="text-white" for="{{ form2.anonymous_city.id_for_label }}">{{ form2.anonymous_city.label }}<sup>*</sup></label>
-                            {{ form2.anonymous_city|add_class:"form-control"|attr:"disabled" }}
-                            {% for error in form2.anonymous_city.errors %}
-                                <span class="form-error">{{ error }}</span>
-                            {% endfor %}
-                            {% endif %}
+                                {% if user.profile.delivery_city %}
+                                    <label class="text-white" for="{{ form2.anonymous_city.id_for_label }}">{{ form2.anonymous_city.label }}</label>
+                                    {{ form2.anonymous_city|add_class:"form-control" }}
+                                {% else %}
+                                    <label class="text-white" for="{{ form2.anonymous_city.id_for_label }}">{{ form2.anonymous_city.label }}<sup>*</sup></label>
+                                    {{ form2.anonymous_city|add_class:"form-control" }}
+                                {% endif %}
                             {% else %}
-                            <label class="text-white" for="{{ form2.anonymous_city.id_for_label }}">{{ form2.anonymous_city.label }}<sup>*</sup></label>
-                            {{ form2.anonymous_city|add_class:"form-control"|attr:"disabled" }}
-                            {% for error in form2.anonymous_city.errors %}
-                                <span class="form-error">{{ error }}</span>
-                            {% endfor %}
+                                <label class="text-white" for="{{ form2.anonymous_city.id_for_label }}">{{ form2.anonymous_city.label }}<sup>*</sup></label>
+                                {{ form2.anonymous_city|add_class:"form-control"}}
                             {% endif %}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group required">
-                            {% if user %}
+                        {% if user %}
                             {% if user.profile.delivery_address %}
-                            <label class="text-white">Адрес доставки</label>
-                            <textarea name="anonymous_additional" cols="40" rows="10" id="id_anonymous_additional" class="form-control" value="{{ user.profile.delivery_address }}"></textarea>
+                                <label class="text-white" for="{{ form2.anonymous_additional.id_for_label }}">  {{ form2.anonymous_additional.label }}</label>
+                                {{ form2.anonymous_additional|add_class:"form-control" }}
                             {% else %}
-                            <label class="text-white" for="{{ form2.anonymous_additional.id_for_label }}">{{ form2.anonymous_additional.label }}<sup>*</sup></label>
-                            {{ form2.anonymous_additional|add_class:"form-control" }}
-                            {% for error in form2.anonymous_additional.errors %}
-                                <span class="form-error">{{ error }}</span>
-                            {% endfor %}
+                                <label class="text-white" for="{{ form2.anonymous_additional.id_for_label }}">  {{ form2.anonymous_additional.label }}<sup>*</sup></label>
+                                {{ form2.anonymous_additional|add_class:"form-control" }}
                             {% endif %}
-                            {% else %}
+                        {% else %}
                             <label class="text-white" for="{{ form2.anonymous_additional.id_for_label }}">{{ form2.anonymous_additional.label }}<sup>*</sup></label>
-                            {{ form2.anonymous_additional|add_class:"form-control" }}
-                            {% for error in form2.anonymous_additional.errors %}
-                                <span class="form-error">{{ error }}</span>
-                            {% endfor %}
-                            {% endif %}
+                                {{ form2.anonymous_additional|add_class:"form-control" }}
+                        {% endif %}
                         </div>
                         <div style="margin-top: 30px;">
                             <button class="btn submit-btn" type="submit" form="checkout_form">Оформить</button>

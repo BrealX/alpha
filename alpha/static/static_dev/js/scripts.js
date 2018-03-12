@@ -207,7 +207,7 @@ $(document).ready(function() {
             data: data,
             cache: true,
             success: function(data) {
-                if (!data.profile_delivery_address) {
+                if (!data.profile_delivery_city) {
                     $('.address-line').html("");
                     $('.address-line').text("Вы не указали адрес доставки");
                 };

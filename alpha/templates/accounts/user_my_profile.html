@@ -39,7 +39,7 @@
 						<img src="{% static 'img/accounts/dashboard-myaddress.jpg' %}" alt="">
 						<div class="profile-hover-effects">
 							<div class="profile-goto-icon">
-								{% if user.profile.delivery_address %}
+								{% if user.profile.delivery_city %}
                                 <a href="{% url 'add_address' %}">Редактировать</a>
                                 {% else %}
                                 <a href="{% url 'add_address' %}">Добавить</a>
@@ -51,9 +51,9 @@
 					</div>
 					<div class="profile-text">
 						<h4>Адрес доставки</h4>
-						<p style="font-weight: 400;">
-                            {% if user.profile.delivery_address %}
-                                {{ user.profile.delivery_address }}
+						<p class="address-line" style="font-weight: 400;">
+                            {% if user.profile.delivery_city %}
+                                {{ user.profile.delivery_area }}, {{ user.profile.delivery_city }}, {{ user.profile.delivery_address }}
                             {% else %}
                                 Вы не указали адрес доставки
                             {% endif %}

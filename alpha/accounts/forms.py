@@ -43,11 +43,6 @@ class UserRegistrationForm(forms.Form):
 		return cd['password_repeat']
 
 
-class UserAddAddressForm(forms.Form):
-	"""Form for delivery address adding or editing"""
-	profile_delivery_address = forms.CharField()
-
-
 class UserAddPersonalForm(forms.Form):
 	"""Form for User name or phone adding or editing"""
 	user_firstname = forms.CharField()

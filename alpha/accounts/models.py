@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from orders.models import OrderDeliveryArea, OrderDeliveryCity
 
 
 class Profile(models.Model):
@@ -19,6 +20,20 @@ class Profile(models.Model):
 	register_date = models.DateField(
 		auto_now_add=True,
 		null=True
+	)
+	delivery_area = models.OneToOneField(
+		OrderDeliveryArea,
+		on_delete=models.CASCADE,
+		max_length=150,
+		null=True,
+		blank=True
+	)
+	delivery_city = models.OneToOneField(
+		OrderDeliveryCity,
+		on_delete=models.CASCADE,
+		max_length=150,
+		null=True,
+		blank=True
 	)
 	delivery_address = models.CharField(
 		max_length=150,

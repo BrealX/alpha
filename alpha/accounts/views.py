@@ -2,9 +2,11 @@
 
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm, UserRegistrationForm, UserAddAddressForm, UserAddPersonalForm
+from .forms import LoginForm, UserRegistrationForm, UserAddPersonalForm
+from orders.forms import CheckoutFormRight
 from django.contrib.auth.models import User
 from .models import Profile
+from orders.models import OrderDeliveryArea, OrderDeliveryCity
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -95,32 +97,33 @@ def user_my_profile(request):
 
 @login_required(login_url='/auth/login')
 def add_address(request):
+    form = CheckoutFormRight()
     user = request.user
     message = ""
     if request.POST:
-        form = UserAddAddressForm(request.POST or None)
+        form = CheckoutFormRight(request.POST or None)
         if form.is_valid():
-            data = request.POST
-            if data.get('profile_delivery_address'):
-                profile_delivery_address = data.get('profile_delivery_address')
-                user.profile.delivery_address = profile_delivery_address
-                user.save()
-                message = "Данные успешно изменены. Спасибо!"
-            return render(request, 'accounts/user_add_address.html', locals())  
+            cd = form.cleaned_data
+            user.profile.delivery_area = OrderDeliveryArea.objects.get(id=cd['anonymous_area'])
+            user.profile.delivery_city = OrderDeliveryCity.objects.get(id=cd['anonymous_city'])
+            user.profile.delivery_address = str(cd['anonymous_additional'])
+            user.save()
+            return redirect('user_my_profile')  
         else:
             message = "Вы пытаетесь отправить пустую форму. Пожалуйста, заполните " + \
                 "поля формы."    
-    form = UserAddAddressForm()
     return render(request, 'accounts/user_add_address.html', locals())
 
 
 @login_required(login_url='/auth/login')
 def delete_address(request):
     user = request.user
+    user.profile.delivery_area = None
+    user.profile.delivery_city = None
     user.profile.delivery_address = None
     user.save()
     return_dict = {}
-    return_dict['profile_delivery_address'] = user.profile.delivery_address
+    return_dict['profile_delivery_city'] = user.profile.delivery_city
     return JsonResponse(return_dict)
 
 
