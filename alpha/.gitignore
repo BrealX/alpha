@@ -24,7 +24,6 @@ venv/
 alpha_venv/
 
 *.ini
-*.env
 
 *.dump
 
