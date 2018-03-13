@@ -26,11 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['yozhik.herokuapp.com',
-                 'yozhik.com.ua',
-                'localhost',
-                ]
-
+ALLOWED_HOSTS = ['yozhik.com.ua', 'localhost', ]
 
 # Application definition
 
@@ -65,7 +61,7 @@ ROOT_URLCONF = 'alpha.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates',],
+        'DIRS': ['templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -159,10 +155,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static', 'static_dev'),
 )
-
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Close the session when user closes the browser
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
