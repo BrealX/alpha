@@ -1,7 +1,7 @@
 from decouple import config
 
 DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS')
 
 DATABASES = {
     'default': {

@@ -173,7 +173,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
-#try:
-#    from .settings_prod import *
-#except:
-#    pass
+try:
+    from .settings_prod import *
+except:
+    pass
