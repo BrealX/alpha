@@ -210,6 +210,14 @@ SOCIALACCOUNT_PROVIDERS = \
 SOCIAL_AUTH_FACEBOOK_KEY = config('FACEBOOK_KEY')  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = config('FACEBOOK_SECRET') #app key
 
+#site id
+SITE_ID = 1 # for the dev mode, you need to use localhost's id facebook does not support the name 127.0.0.1:8000
+
+#little options for your page's signup.
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQURIED = True
+
 #try:
 #    from .settings_prod import *
 #except:
