@@ -227,14 +227,3 @@ def account_activation(request, activation_key):
     user_profile.activation_key = ""
     user_account.save()
     return render(request, 'registration/account_activation.html')
-
-    #for name, value in data.items():
-    #    if name.startswith('product_in_basket_'):
-    #        product_in_basket_id = name.split('product_in_basket_')[1]
-    #        product_in_basket = ProductInBasket.objects.get(id=product_in_basket_id)
-    #        product_in_basket.nmb = value
-    #        product_in_basket.order = order
-    #        product_in_basket.save(force_update=True)
-    #        ProductInOrder.objects.create(product=product_in_basket.product, nmb=product_in_basket.nmb, price_per_item=product_in_basket.price_per_item, total_price=product_in_basket.total_price, order=order)
-    #    else:
-    #        print('no')
