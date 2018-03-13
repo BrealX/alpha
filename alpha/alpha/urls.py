@@ -22,6 +22,7 @@ admin.autodiscover()
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^', include('accounts.urls')),
+    re_path(r'^accounts/', include('allauth.urls')),
     re_path(r'^', include('landing.urls')),
     re_path(r'^', include('orders.urls')),
     re_path(r'^', include('products.urls')),
