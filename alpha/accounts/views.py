@@ -97,11 +97,11 @@ def user_my_profile(request):
 
 @login_required(login_url='/auth/login')
 def add_address(request):
-    form = CheckoutFormRight()
     user = request.user
+    form = CheckoutFormRight(user)
     message = ""
     if request.POST:
-        form = CheckoutFormRight(request.POST or None)
+        form = CheckoutFormRight(user, request.POST or None)
         if form.is_valid():
             cd = form.cleaned_data
             user.profile.delivery_area = OrderDeliveryArea.objects.get(id=cd['anonymous_area'])
