@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['yozhik.com.ua', 'localhost', ]
 # Application definition
 
 INSTALLED_APPS = [
+    #Default Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,12 +39,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # My User Apps
     'accounts',
     'django_select2',
     'landing',
     'orders',
     'products',
     'widget_tweaks',
+
+    # Django-AllAuth Apps
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
