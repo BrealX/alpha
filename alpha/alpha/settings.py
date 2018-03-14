@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['yozhik.com.ua', 'localhost', ]
+ALLOWED_HOSTS = ['138.68.191.179']
 
 # Application definition
 
