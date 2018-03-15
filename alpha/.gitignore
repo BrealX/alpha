@@ -21,7 +21,8 @@ include/*
 
 env/
 venv/
-alpha_venv/
+logs/
+run/
 
 *.ini
 *.env
