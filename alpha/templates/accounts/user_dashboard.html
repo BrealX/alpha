@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block dashboard %}
+<section id="section_dashboard" class="section-dashboard section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 50px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+				    <li class="active">
+					    Личный кабинет
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-6">
+				<div class="section-heading">
+					<h2 class="text-white">Личный кабинет</h2>
+					<div class="line-shape"></div>
+				</div>
+				<div class="footer-text">
+					<p>Добро пожаловать в личный кабинет! Здесь Вы можете управлять Вашей персональной информацией и Вашими заказами.</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Row -->
+		<div class="row">
+			<div class="col-12 col-md-6 col-lg-3">
+				<div class="single-dashboard-item">
+					<div class="dashboard-image">
+						<img src="{% static 'img/accounts/dashboard-orders.jpg' %}" alt="">
+						<div class="dashboard-hover-effects">
+							<div class="dashboard-goto-icon">
+								<a href="">Перейти</a>
+							</div>
+						</div>
+					</div>
+					<div class="dashboard-text">
+						<h4>Мои заказы</h4>
+						<p style="font-weight: 400;">Посмотреть статус и историю заказов</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-md-6 col-lg-3">
+				<div class="single-dashboard-item">
+					<div class="dashboard-image">
+						<img src="{% static 'img/accounts/dashboard-credentials.jpg' %}" alt="">
+						<div class="dashboard-hover-effects">
+							<div class="dashboard-goto-icon">
+								<a href="{% url 'user_my_profile' %}">Перейти</a>
+							</div>
+						</div>
+					</div>
+					<div class="dashboard-text">
+						<h4>Мой профиль</h4>
+						<p style="font-weight: 400;">Редактировать учетные данные, изменить пароль или удалить аккаунт</p>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Dashboard -->
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="section_after_registration" class="section-after-registration section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 120px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+				    <li>
+					    <a href="{% url 'register' %}">Регистрация</a>
+				    </li>
+				    <li class="active">
+					    Подтверждение создания учетной записи
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-heading" style="text-align: center;">
+					<h2 class="text-white">Подтверждение создания учетной записи</h2>
+					<div class="line-shape"></div>
+				</div>
+				<div class="footer-text">
+					<p>На Ваш email <span>({{ user.username }})</span> отправлена ссылка для активации учетной записи. Проверьте Вашу почту и подтвердите, пожалуйста, регистрационный email!</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Auth -->
+{% endblock %}
