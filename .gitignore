@@ -19,14 +19,14 @@ local/*
 include/
 include/*
 
-env/
-venv/
 logs/
+logs/*
+
 run/
+run/*
 
 *.ini
 *.env
 
-*.dump
-
 celerybeat-schedule.db
+
