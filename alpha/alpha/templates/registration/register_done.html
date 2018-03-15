@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="section_register_done" class="section-register-done section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 80px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+				    <li>
+					    <a href="{% url 'register' %}">Регистрация</a>
+				    </li>
+				    <li class="active">
+					    Создание учетной записи
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-heading" style="text-align: center;">
+					<h2 class="text-white">Создание учетной записи</h2>
+					<div class="line-shape"></div>
+				</div>
+				<div class="footer-text">
+					<p>Ваша новая учетная запись <span>({{ new_user.username }})</span> успешно создана. Для того, чтобы войти на сайт, необходимо активировать новую учетную запись!</p>
+				</div>
+				<div>
+					<a class="btn submit-btn" href="{% url 'after_registration' %}">Активировать</a>
+				</div>
+			</div>
+		</div>
+		<!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Auth -->
+{% endblock %}

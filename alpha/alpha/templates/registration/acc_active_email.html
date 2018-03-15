@@ -1,0 +1,10 @@
+{% autoescape off %}
+
+Здравствуйте, {{ user.username }},
+Пожалуйста, перейдите по ссылке, чтобы подтвердить Вашу регистрацию:
+
+http://{{ domain }}{% url 'account_activation' activation_key %}
+
+Ссылка действительна в течение 48 часов с момента её получения.
+
+{% endautoescape %}

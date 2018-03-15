@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="section_activation" class="section-activation section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 120px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+				    <li>
+					    <a href="{% url 'register' %}">Регистрация</a>
+				    </li>
+				    <li class="active">
+					    Учетная запись успешно активирована!
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-heading" style="text-align: center;">
+					<h2 class="text-white">Учетная запись успешно активирована!</h2>
+					<div class="line-shape"></div>
+				</div>
+				{% if error %}
+				<div class="footer-text">
+					<p>К сожалению, активационная ссылка устарела (прошло 48 часов с момента её получения). Вы можете пройти регистрацию заново и получить новую ссылку.</p> 
+				</div>
+				<a class="btn submit-btn" href="{% url 'register' %}">Зарегистрироваться заново!</a>
+				{% else %}
+				<div class="footer-text">
+					<p>Ваша новая учетная запись успешно активирована. Теперь можно войти на сайт!</p>
+				</div>
+				<a class="btn submit-btn" href="{% url 'login' %}">Войти</a>
+				{% endif %}
+			</div>
+		</div>
+		<!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Auth -->
+{% endblock %}
