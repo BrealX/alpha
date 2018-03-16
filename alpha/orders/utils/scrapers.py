@@ -78,7 +78,7 @@ def get_cities():
                             obj.name = city['name']
                             obj.city_ref = city['id']
                             obj.save()
-            print('error, API returned %s' % data['message'])
-        print('Area %s cities succesfully passed' % area.name)
+            else:
+                print('error, API returned %s' % data['message'])
     print('All job is done')
     return OrderDeliveryCity.objects.all()
