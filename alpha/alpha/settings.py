@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # My User Apps
     'accounts',
     'django_select2',
+    'fixture_magic',
     'landing',
     'orders',
     'products',
@@ -170,7 +171,7 @@ STATICFILES_DIRS = (
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # RabbitMQ configuration:
-#BROKER_URL = config('RABBITMQ_URL')
+BROKER_URL = config('RABBITMQ_URL')
 
 # A list of accepted content-types for security purposes
 CELERY_ACCEPT_CONTENT = ['json']
@@ -180,8 +181,8 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
 # Configure Celery to use the django-celery backend:
-CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
-CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+#CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+#CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 # Setting for AllAuth Facebook auth
 SOCIALACCOUNT_PROVIDERS = \
