@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # My User Apps
     'accounts',
     'django_select2',
+    'fixture_magic',
     'landing',
     'orders',
     'products',
