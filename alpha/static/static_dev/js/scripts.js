@@ -52,7 +52,7 @@ $(document).ready(function() {
 
 
     // Get data from Product Landing Page Form
-    $('button.landing-submit').on('click', function (e) {
+    $('button.landing-submit, #landing_page_submit_btn').on('click', function (e) {
         e.preventDefault();
         button = $(this);
         single_adding(button);

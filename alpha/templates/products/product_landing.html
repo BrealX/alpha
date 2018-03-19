@@ -15,7 +15,7 @@
                         <form method="post" id="landing_page_form" class="form-inline" action="{% url 'add_to_cart' %}">{% csrf_token %}
                             <div class="input-group bootstrap-touchspin">
                                 <input type="text" class="form-control d-none landing-quantity" id="landing_page_qnty" value="1">
-                                <button type="submit" class="btn submit-btn" id="landing_page_submit_btn" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price_with_discount }}" data-image="{{ product.product_main_image.image.url }}" data-qnty="1">ЗАКАЗАТЬ</button>
+                                <button type="submit" class="btn submit-btn" id="landing_page_submit_btn" data-product_id="{{ product.id }}" data-qnty="1">ЗАКАЗАТЬ</button>
                             </div>
                         </form>
                         <!-- FormEnd -->
@@ -238,7 +238,7 @@
                                 <p>Наличие товара на складе: {% if product.is_in_stock %} В НАЛИЧИИ {% elif product.is_on_demand %} ПОД ЗАКАЗ {% else %} ОТСУТВУЕТ НА СКЛАДЕ {% endif %}</p>
                             </div>
                             <div class="plan-button">
-                                <button type="submit" form="landing_page_form" class="landing-submit" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price_with_discount }}" data-image="{{ product.product_main_image.image.url }}" data-qnty="1">ЗАКАЗАТЬ!</button>
+                                <button type="submit" form="landing_page_form" class="landing-submit" data-product_id="{{ product.id }}" data-qnty="1">ЗАКАЗАТЬ!</button>
                             </div>
                         </div>
                     </div>
