@@ -16,6 +16,12 @@ def product_land(request, product_id):
     shop_tel = config('SHOP_TEL')
     if not session_key:
         request.session.cycle_key()
+    product_order_times = Order.objects.filter(orderitem__product__id=product.id).count()
+    if product_order_times <= 100:
+        product_order_times += 100
+    happy_clients = Order.objects.filter(is_active=True).count()
+    if happy_clients <= 300:
+        happy_clients += 300
     return render(request, 'products/product_landing.html', locals())
 
 
