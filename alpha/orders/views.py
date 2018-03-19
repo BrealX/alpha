@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from .models import *
 from .forms import CheckoutFormLeft, CheckoutFormRight
 from django.core.mail import send_mail
@@ -7,7 +7,6 @@ from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 from django.conf import settings
 import json
-
 from carton.cart import Cart
 from products.models import Product
 from django.views.decorators.http import require_POST
@@ -90,6 +89,14 @@ def checkout1(request):
                         status_id=1,
                         is_active=False
                     )
+                    for item in cart_items:
+                        order_item = OrderItem.objects.create(
+                            order=new_order,
+                            product=item.product,
+                            quantity=item.quantity,
+                            price=item.price,
+                            order_item_subtotal=item.subtotal,
+                        )
                     request.session['delivery_address'] = customer_address
                     return redirect('checkout2')
                 else:
@@ -103,6 +110,14 @@ def checkout1(request):
                         customer_address=customer_address,
                         status_id=1,
                         is_active=False
+                        )
+                    for item in cart_items:
+                        order_item = OrderItem.objects.create(
+                            order=new_order,
+                            product=item.product,
+                            quantity=item.quantity,
+                            price=item.price,
+                            order_item_subtotal=item.subtotal,
                         )
                     request.session['delivery_address'] = customer_address
                     return redirect('checkout2')
@@ -128,6 +143,9 @@ def checkout2(request):
     cart_items = cart.items
     order_overall = cart.total
     order = Order.objects.filter(session_key=session_key).latest('id')
+    order_id = order.id
+    order_customer_phone = order.customer_phone
+    order_customer_email = order.customer_email
     delivery_address = request.session['delivery_address']
     return render(request, 'orders/checkout2.html', locals())
 

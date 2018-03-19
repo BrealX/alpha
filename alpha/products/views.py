@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from products.models import Product
+from orders.models import Order
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from alpha.settings import DEFAULT_FROM_EMAIL
 import re
 from alpha.settings import DEFAULT_FROM_EMAIL
 from decouple import config
