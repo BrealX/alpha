@@ -830,7 +830,9 @@ div.miniCartFooter .btn.btn-primary
 .section-after-registration,
 .section-activation,
 .section-dashboard,
-.section-profile
+.section-profile,
+.section-orders,
+.section-order-info
 {
     background: url(../img/header-default.png);
     background-color: #f5f9fc;
@@ -855,7 +857,9 @@ div.miniCartFooter .btn.btn-primary
 .section-auth .line-shape,
 .section-register .line-shape,
 .section-dashboard .line-shape,
-.section-profile .line-shape
+.section-profile .line-shape,
+.section-orders .line-shape,
+.section-order-info .line-shape
 {
     margin-left: 0;
 }
@@ -2561,7 +2565,65 @@ div.cartMiniTable table#cart-summary{
     color: #b5aec4;
 }
 
+.badge {
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 5px;
+}
 
+.button-order-view
+{
+    padding: .25rem .5rem;
+    font-size: .7rem;
+    line-height: 1.5;
+    font-weight: 700;
+    background: none;
+    border: 1px solid #986dbd !important;
+    color: #986dbd;
+    border-radius: 0 !important;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.button-order-view:hover,
+.button-order-view:focus
+{
+    background: #986dbd;
+    color: #fff !important;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.box {
+    margin: 80px 0;
+        margin-top: 80px;
+        margin-bottom: 80px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 20px;
+}
+
+.section-order-info img
+{
+    width: 50px;
+}
+
+.section-order-info a
+{
+    color: #986dbd;
+}
+
+.section-order-info table {
+    font-size: 0.9rem;
+}
+
+.section-order-info tfoot th {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
 
 /* =============================================================== */
 /* Right side bar  //> .rightSidebar //> if needed
@@ -3454,7 +3516,9 @@ h2.block-title-2,
     .section-auth .line-shape,
     .section-register .line-shape,
     .section-dashboard .line-shape,
-    .section-profile .line-shape
+    .section-profile .line-shape,
+    .section-orders .line-shape,
+    .section-order-info .line-shape
     {
         margin-right: auto;
         margin-left: auto;
@@ -3942,7 +4006,9 @@ h2.block-title-2,
     }
 
     .section-auth .breadcrumb,
-    .section-dashboard .breadcrumb
+    .section-dashboard .breadcrumb,
+    .section-orders .breadcrumb,
+    .section-order-info .breadcrumb
     {
         margin-top: 10px;
         margin-bottom: 30px;
@@ -3956,7 +4022,22 @@ h2.block-title-2,
         text-align: center;
     }
 
+    .section-orders .section-heading,
+    .section-order-info .section-heading {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
     .section-auth .row:nth-child(2) .footer-text > p {
+        font-size: 25px;
+        margin-bottom: 25px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .section-orders .footer-text:nth-child(2) > p:nth-child(1),
+    .section-order-info .footer-text:nth-child(2) > p:nth-child(1)
+    {
         font-size: 25px;
         margin-bottom: 25px;
         text-align: center;

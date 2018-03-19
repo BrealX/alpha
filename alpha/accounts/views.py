@@ -6,7 +6,7 @@ from .forms import LoginForm, UserRegistrationForm, UserAddPersonalForm
 from orders.forms import CheckoutFormRight
 from django.contrib.auth.models import User
 from .models import Profile
-from orders.models import OrderDeliveryArea, OrderDeliveryCity
+from orders.models import OrderDeliveryArea, OrderDeliveryCity, Order, OrderItem
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -92,7 +92,23 @@ def user_dashboard(request):
 @login_required(login_url='/auth/login')
 def user_my_profile(request):
     user = request.user
-    return render(request, 'accounts/user_my_profile.html', locals())   
+    return render(request, 'accounts/user_my_profile.html', locals())
+
+
+@login_required(login_url='/auth/login')
+def user_my_orders(request):
+    user = request.user
+    orders = Order.objects.filter(user=user, is_active=True).order_by('-created')
+    return render(request, 'accounts/user_my_orders.html', locals())
+
+
+@login_required(login_url='/auth/login')
+def user_order_info(request, order_id):
+    user = request.user
+    order = Order.objects.get(id=order_id, user=user, is_active=True)
+    order_items = OrderItem.objects.filter(order=order, is_active=True)
+    print(order_items)
+    return render(request, 'accounts/user_order_info.html', locals())
 
 
 @login_required(login_url='/auth/login')
