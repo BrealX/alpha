@@ -225,12 +225,6 @@ p
     padding-bottom: 100px;
 }
 
-
-.bg-white
-{
-    background-color: #fff !important;
-}
-
 .w100
 {
     width: 100%;
@@ -1960,7 +1954,6 @@ div.productFilter a.btn-danger:hover
 
 .special-description-content > h2
 {
-    font-size: 30px;
     font-size: 48px;
     line-height: .8;
 
@@ -2207,11 +2200,6 @@ div.productFilter a.btn-danger:hover
 .footer-contact-area .line-shape
 {
     margin-left: 0;
-}
-
-.footer-text
-{
-    line-height: 1.1;
 }
 
 .footer-text > p
@@ -3215,6 +3203,7 @@ h2.block-title-2,
 .footer-text
 {
     margin-bottom: 15px;
+    line-height: 1.1;
 }
 
 .footer-text > h2
@@ -3650,7 +3639,8 @@ h2.block-title-2,
         background: #fb397d;
     }
 
-    #checkout_page_submit
+    #checkout_page_submit,
+    #order_confirm_button
     {
         font-weight: 500;
 
@@ -3796,33 +3786,143 @@ h2.block-title-2,
         box-shadow: inset 0 4px 7px 1px #fff, inset 0 -5px 20px rgba(173, 186, 204, .25), 0 0 33px rgba(0, 21, 64, .14), 0 10px 20px rgba(0, 21, 64, .05);
     }
 
-
-
-
-
-
-
-
-
-
-
-    .welcome_text .cd-intro > p {
-        font-size: 14px;
+    .product-slides .owl-dot {
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+        margin: 0 4px;
+            margin-top: 0px;
+        margin-top: 50px;
+        border: 2px solid #a49fba;
+        border-radius: 50%;
     }
 
-    .wellcome-heading > h2 {
-        font-size: 48px;
+    .parallax-content {
+        padding: 35px 0;
+        text-align: center;
     }
 
-    .welcome-thumb {
-        width: 90%;
-        bottom: -74px;
-        right: 0;
+    .parallax-image-1 {
+        background: url(../img/parallax/parallax1.jpg);
+            background-repeat: repeat;
+            background-attachment: scroll;
+            background-position-x: 0%;
+            background-position-y: 0%;
+            background-size: auto auto;
+        background-attachment: fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
     }
 
-    .logo_area > a > h2 {
-        font-size: 40px;
-        margin-top: 10px;
+    #microphones {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .footer-social-icon {
+        font-family: 'Cabin', sans-serif;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+    }
+
+    .landing-picture {
+        display: none;
+    }
+
+    .landing-area {
+        background: radial-gradient(rgb(194, 74, 126), rgb(105, 86, 235));
+            background-position-x: 0%;
+            background-position-y: 0%;
+            background-size: auto auto;
+        height: 500px;
+        position: relative;
+        z-index: 1;
+        background-position: bottom center;
+        background-size: cover;
+    }
+
+    .landing-heading {
+        margin-bottom: 60px;
+    }
+
+    #landing_about {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .special-description-content > h2 {
+        font-size: 30px;
+        line-height: 1.1;
+        margin: 30px 0 30px 0;
+        color: #5b32b4;
+    }
+
+    .cool-facts-area {
+        position: relative;
+        z-index: auto;
+        top: -100px;
+        padding: 100px 0 0px 0;
+        background: #a865e1;
+        background: -webkit-linear-gradient(to left, #7873ed, #a865e1);
+        background: -webkit-linear-gradient(right, #7873ed, #a865e1);
+        background: -webkit-gradient(linear, right top, left top, from(#7873ed), to(#a865e1));
+        background: -o-linear-gradient(right, #7873ed, #a865e1);
+        background: linear-gradient(to left, #7873ed, #a865e1);
+    }
+
+    .single-price-plan .package-plan {
+        max-width: 390px;
+        height: auto;
+        margin: auto;
+        padding: 36px 15px 45px;
+        text-align: center;
+        border-radius: 7px;
+        box-shadow: 5px 8.7px 40px rgba(99, 117, 138, .3);
+    }
+
+    .single-price-plan .plan-button {
+        margin-top: 40px;
+    }
+
+    .footer-contact-area
+    {
+        font-family: 'Cabin', sans-serif;
+        background: #f5f9fc;
+        padding-bottom: 50px !important;
+    }
+
+    .footer-contact-area .line-shape {
+        margin-left: calc(50% - 40px);
+    }
+
+    .contact-form {
+        margin-top: 20px;
+    }
+
+    #contact_name,
+    #contact_email,
+    #contact_content,
+    #profile_delivery_address
+    {
+        font-size: 18px;
+        padding: 15px 15px !important;
+        width: 100%;
+        border-radius: 25px 25px 25px 0 !important;
+    }
+
+    #landing_contact_submit, #landing_page_submit_btn {
+        width: 120px;
+        height: 51px;
+        margin-top: 20px;
+        -webkit-transition-duration: .4s;
+        transition-duration: .4s;
+        color: #fff;
+        border-radius: 10px;
+        background-color: #fb397d;
     }
 
     .section-heading > h2 {
@@ -3841,45 +3941,50 @@ h2.block-title-2,
         font-size: 30px;
     }
 
-    .clients-feedback-area .client-description > p {
-        font-size: 20px;
+    .section-auth .breadcrumb,
+    .section-dashboard .breadcrumb
+    {
+        margin-top: 10px;
+        margin-bottom: 30px;
+        border: 1px solid #eff2f6;
+        border-radius: 24px 24px 24px 0;
+        background: none;
     }
 
-    .clients-feedback-area .slick-slide img {
-        width: 60px !important;
-        height: 60px !important;
+    .section-auth .section-heading {
+        margin-bottom: 30px;
+        text-align: center;
     }
 
-    .clients-feedback-area .slick-slide.slick-current img {
-        width: 70px !important;
-        height: 70px !important;
+    .section-auth .row:nth-child(2) .footer-text > p {
+        font-size: 25px;
+        margin-bottom: 25px;
+        text-align: center;
+        color: #fff;
     }
 
-    .membership-description > h2 {
-        font-size: 32px;
+    .section-dashboard,
+    .section-profile
+    {
+        background: radial-gradient(rgb(194, 74, 126), rgb(105, 86, 235));
+        background-color: #f5f9fc;
+        background-repeat: no-repeat;
     }
 
-    .get-back-button {
-        text-align: left;
-        margin-top: 20px;
+    .section-dashboard p,
+    .section-profile p
+    {
+        font-size: 25px;
+        margin-bottom: 25px;
+        text-align: center;
+        line-height: 1.1;
+        color: #fff;
     }
 
-    .contact_from {
-        margin-top: 30px;
-    }
-
-    .wellcome-heading > h3 {
-        font-size: 252px;
-        top: -105px;
-        left: -1px;
-    }
-
-    .wellcome-heading,
-    .single-cool-fact {
-        margin-bottom: 50px;
-    }
-
-    .cool_facts_area .col-12:last-of-type .single-cool-fact {
-        margin-bottom: 0;
+    .dashboard-text > h4,
+    .profile-text > h4 {
+        font-size: 22px;
+        color: #5b32b4;
+        text-align: center;
     }
 }
