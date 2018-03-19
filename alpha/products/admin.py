@@ -30,11 +30,11 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 
 
-class ProductInOrderAdmin(admin.ModelAdmin):
+class ProductIImageAdmin(admin.ModelAdmin):
     class Meta:
         model = ProductImage
 
     list_display = [field.name for field in ProductImage._meta.fields]
 
 
-admin.site.register(ProductImage, ProductInOrderAdmin)
+admin.site.register(ProductImage, ProductImageAdmin)
