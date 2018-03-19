@@ -17,7 +17,6 @@ from django.views.decorators.http import require_POST
 def add_to_cart(request):
     cart = Cart(request.session)
     data = json.loads(request.POST.get('cart_changes'))
-    print(data)
     for k, v in data.items():
         product = Product.objects.get(id=int(k))
         quantity = int(v['qnty'])
@@ -45,7 +44,6 @@ def add_to_cart(request):
         product_dict['image'] = item.product.product_main_image.image.url
         product_dict['total_price'] = item.subtotal
         return_dict['products_in_cart'].append(product_dict)
-    print(return_dict)
     return JsonResponse(return_dict)
 
 
