@@ -41,8 +41,7 @@ INSTALLED_APPS = [
 
     # My User Apps
     'accounts',
-    'django_select2',
-    'fixture_magic',
+    'carton',
     'landing',
     'orders',
     'products',
@@ -218,6 +217,8 @@ SITE_ID = 1 # for the dev mode, you need to use localhost's id facebook does not
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQURIED = True
+
+CART_PRODUCT_MODEL = 'products.models.Product'
 
 #try:
 #    from .settings_prod import *

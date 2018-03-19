@@ -41,32 +41,32 @@
                 <div class="cart-area">
                     <table>
                         <tbody>
-                        {% if products_in_cart %}
-                        {% for item_in_cart in products_in_cart %}
+                        {% if not cart.is_empty %}
+                        {% for item in cart_items %}
                             <tr class="CartProduct">
                                 <td class="CartProductThumbnail" style="width: 20%;">
                                     <div>
-                                        <a href="{% url 'product_land' item_in_cart.product.id %}">
-                                            <img src="{{ item_in_cart.product.product_main_image.image.url }}" alt="img" class="img-responsive" width="100">
+                                        <a href="{% url 'product_land' item.product.id %}">
+                                            <img src="{{ item.product.product_main_image.image.url }}" alt="img" class="img-responsive" width="100">
                                         </a>
                                     </div>
                                 </td>
                                 <td style="width: 40%;">
                                     <div class="CartDescription">
                                         <h4>
-                                            <a href="{% url 'product_land' item_in_cart.product.id %}">{{ item_in_cart.product.name }}</a>
+                                            <a href="{% url 'product_land' item.product.id %}">{{ item.product.name }}</a>
                                         </h4>
-                                        <span class="cart-item-price">{{ item_in_cart.price_per_item }}</span><span> грн.</span>
+                                        <span class="cart-item-price">{{ item.price }}</span><span> грн.</span>
                                     </div>
                                 </td>
                                 <td class="CartQuantity" style="width: 15%;">
-                                    <input class="cart-touchspin form-control" name="cart_touchspin" type="text" value="{{ item_in_cart.qnty }}" data-product_id="{{ item_in_cart.product.id }}">
+                                    <input class="cart-touchspin form-control" name="cart_touchspin" type="text" value="{{ item.quantity }}" data-product_id="{{ item.product.id }}">
                                 </td>
                                 <td class="CartSubtotal" style="width: 15%;">
-                                    <span class="cart-item-overall price">{{ item_in_cart.total_price }} грн.</span>
+                                    <span class="cart-item-overall price">{{ item.subtotal }} грн.</span>
                                 </td>
                                 <td class="delete" style="width: 5%;">
-                                    <a href="" class="delete-item" data-product_id="{{ item_in_cart.id }}">
+                                    <a href="" class="delete-item" data-product_id="{{ item.product.id }}">
                                         <i class="ion-ios-trash-outline" style="font-size: 30px;"></i>
                                     </a>
                                 </td>
@@ -74,7 +74,7 @@
                         {% endfor %}
                         {% else %}
                             <div class="text-center">
-                                <p class="empty-cart" style="font-size: 40px;">{{ message }}</p>
+                                <p class="empty-cart" style="font-size: 40px;">{% if cart.is_empty %}Ваша корзина пуста. Чтобы оформить заказ, необходимо добавить товар!{% endif %}</p>
                             </div>
                         {% endif %}
                         </tbody>
@@ -89,7 +89,7 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <a id="checkout_page_submit" class="btn submit-btn" href="{% url 'checkout1' %}">Оформить заказ</a>
-                <span class="btn submit-btn" id="cart_subtotal">Ваш заказ на сумму:  грн.</span>
+                <span class="btn submit-btn" id="cart_subtotal">Ваш заказ на сумму: {{ cart.total }} грн.</span>
             </div>
         </div>
     </div>

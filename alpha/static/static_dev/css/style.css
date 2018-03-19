@@ -595,6 +595,13 @@ p
     border-radius: 24px 24px 24px 0;
 }
 
+.minicart-button > a:hover
+{
+    border-radius: 20px;
+    box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+}
+
+
 .dropcart
 {
     font-size: 14px;
@@ -1766,7 +1773,7 @@ div.productFilter a.btn-danger:hover
 /* =============================================================== */
 
 .landing-area {
-    background: url(../img/products/product_landing_background.png);
+    background: radial-gradient(rgb(194, 74, 126), rgb(105, 86, 235));
     height: 900px;
     position: relative;
     z-index: 1;
@@ -1779,13 +1786,14 @@ div.productFilter a.btn-danger:hover
 }
 
 .landing-heading > h4 {
-    font-size: 70px;
     color: #ffffff;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 1.1;
     position: relative;
-    z-index: 3;
-    padding-bottom: 40px;
-    line-height: 0.8;
+    max-width: 380px;
+    padding-top: 75px;
+    padding-bottom: 15px;
 }
 
 .landing-heading > h6 {
@@ -1800,10 +1808,47 @@ div.productFilter a.btn-danger:hover
 
 .landing-heading > p {
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 300;
-    margin-top: 0;
+    line-height: 30px;
+    margin: 0;
+    text-align: left;
+    max-width: 290px;
 }
+
+.landing-picture
+{
+    position: absolute;
+    z-index: 1;
+    right: 100px;
+    margin-right: 90px;
+    margin-top: 45px;
+
+    display: block;
+
+    transform: rotate(-6deg);
+
+    border-radius: 25px;
+    background: #fff;
+    box-shadow: inset 0 4px 7px 1px #fff, inset 0 -5px 20px rgba(173, 186, 204, .25), 0 0 33px rgba(0, 21, 64, .14), 0 10px 20px rgba(0, 21, 64, .05);
+}
+
+
+.landing-picture-screen
+{
+    right: 1px;
+
+    display: block;
+
+    margin-top: 19px;
+    padding-bottom: 40px;
+}
+
+.landing-picture-screen.img-fluid
+{
+    max-height: 100%;
+}
+
 
 .buy-area .landing-quantity {
     background: #9572e8;
@@ -1812,27 +1857,6 @@ div.productFilter a.btn-danger:hover
     border: none;
     border-radius: 24px;
     padding: 0px 15px;
-}
-
-.buy-area .landing-submit {
-    background-color: #fb397d;
-    color: #fff;
-    font-weight: 500;
-    display: inline-block;
-    border: none;
-    height: 50px;
-    min-width: 167px;
-    text-align: center;
-    border-radius: 24px 24px 24px 0 !important;
-    margin-left: 10px;
-}
-
-.buy-area .landing-submit:hover {
-    background: #6f52e5;
-    color: #fff;
-    -webkit-transition-duration: 500ms;
-    -o-transition-duration: 500ms;
-    transition-duration: 500ms;
 }
 
 .landing-thumb {
@@ -1964,6 +1988,14 @@ div.productFilter a.btn-danger:hover
 .single-feature
 {
     margin-bottom: 50px;
+    padding: 10px;
+}
+
+.single-feature:hover
+{
+    border-radius: 30px;
+    -webkit-box-shadow: 0 10px 90px rgba(0, 0, 0, .08);
+            box-shadow: 0 10px 90px rgba(0, 0, 0, .08);
 }
 
 .single-feature > i,
@@ -2059,10 +2091,10 @@ div.productFilter a.btn-danger:hover
     color: #fff;
 }
 
-
 .pricing-plane-area {
-    background: #f5f9fc;
+    background: #F8F9F9;
 }
+
 .section-padding-100-70 {
     padding-top: 100px;
     padding-bottom: 70px;
@@ -2073,17 +2105,22 @@ div.productFilter a.btn-danger:hover
     margin-left: 0;
 }
 
-.single-price-plan {
-    background: #ffffff;
-    border: 1px solid #ebebeb;
-    border-radius: 30px 30px 30px 0;
-    max-width: 400px;
+.single-price-plan
+{
     margin: 0 auto 30px auto;
 }
 
-.single-price-plan .package-plan {
-    border-radius: 30px 30px 0 0;
-    padding: 40px 0 0 0;
+.single-price-plan .package-plan
+{
+    max-width: 390px;
+    height: 430px;
+    margin: auto;
+    padding: 36px 15px 45px;
+
+    text-align: center;
+
+    border-radius: 7px;
+    box-shadow: 5px 8.7px 40px rgba(99, 117, 138, .3);
 }
 
 .single-price-plan .package-plan > h5 {
@@ -2123,24 +2160,41 @@ div.productFilter a.btn-danger:hover
     margin-top: 0;
 }
 
-.single-price-plan .plan-button > button {
-    background: #726a84;
-    padding: 10px 0;
-    border-bottom-right-radius: 30px;
-    color: #ffffff;
-    font-size: 16px;
-    width: 100%;
-    font-weight: 500;
-    display: block;
-    border: none;
-    -webkit-transition-duration: 500ms;
-    -o-transition-duration: 500ms;
-    transition-duration: 500ms;
+.single-price-plan .plan-button
+{
+    margin-top: 25px;
 }
 
-.single-price-plan .plan-button > button:hover {
-    background-color: #a865e1;
-    border: none;
+.single-price-plan .plan-button > button
+{
+    position: absolute;
+    bottom: 50px;
+    left: calc(50% - 82px);
+
+    display: block;
+
+    width: 164px;
+    height: 51px;
+    margin: auto;
+    padding: 15px;
+
+    -webkit-transition-duration: .4s;
+            transition-duration: .4s;
+
+    color: white;
+    border: #0abceb;
+    border-radius: 10px;
+    background-color: #0abceb;
+}
+
+.single-price-plan .plan-button > button:hover
+{
+    color: white;
+    border-radius: 20px;
+    background-color: #58d5f7;
+    -webkit-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+       -moz-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+            box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
 }
 
 .footer-contact-area
@@ -2150,9 +2204,14 @@ div.productFilter a.btn-danger:hover
     background: #f5f9fc;
 }
 
-
-.footer-contact-area .line-shape {
+.footer-contact-area .line-shape
+{
     margin-left: 0;
+}
+
+.footer-text
+{
+    line-height: 1.1;
 }
 
 .footer-text > p
@@ -2264,6 +2323,33 @@ div.productFilter a.btn-danger:hover
 {
     padding-top: 20px;
     color: #5b32b4 !important;
+}
+
+#landing_contact_submit,
+#landing_page_submit_btn
+{
+    width: 120px;
+    height: 51px;
+    margin-top: 20px;
+    margin-left: 3px;
+
+    -webkit-transition-duration: .4s;
+            transition-duration: .4s;
+
+    color: #fff;
+    border-radius: 10px;
+    background-color: #fb397d;
+}
+
+#landing_contact_submit:hover,
+#landing_page_submit_btn:hover
+{
+    background-color: #fb397d;
+    color: white;
+    border-radius: 20px;
+    -webkit-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+    -moz-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+    box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
 }
 
 .btn.submit-btn
@@ -3695,7 +3781,20 @@ h2.block-title-2,
         border-radius: 10px;
     }
 
+    .landing-picture
+    {
+        position: absolute;
+        z-index: 1;
+        right: 100px;
 
+        display: block;
+
+        transform: rotate(-6deg);
+
+        border-radius: 25px;
+        background: #fff;
+        box-shadow: inset 0 4px 7px 1px #fff, inset 0 -5px 20px rgba(173, 186, 204, .25), 0 0 33px rgba(0, 21, 64, .14), 0 10px 20px rgba(0, 21, 64, .05);
+    }
 
 
 

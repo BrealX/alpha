@@ -2,16 +2,9 @@ $(document).ready(function() {
     var header_form = $('#header_form');
 
     // MiniCart dynamically update (Ajax) after items adding or removing
-    function cart_updating(product_id, qnty, is_delete) {
-        var data = {};
-        data.product_id = product_id;
-        data.qnty = qnty;
+    function cart_updating(cart_changes) {
         var csfr_token = $('#header_form [name="csrfmiddlewaretoken"]').val();
-        data["csrfmiddlewaretoken"] = csfr_token;
 
-        if (is_delete){
-            data['is_delete'] = true;
-        }
 
         // url address where to send POST
         var url = header_form.attr("action");
@@ -19,17 +12,16 @@ $(document).ready(function() {
         $.ajax({
             url: url,
             type: 'POST',
-            data: data,
+            data: {'csrfmiddlewaretoken': csfr_token, 'cart_changes': JSON.stringify(cart_changes)},
             cache: true,
             success: function(data) {
-                console.log(data);
                 if (data.products_in_cart_total_qnty) {
                     $('.cart-qnty-subtotal').text('('+data.products_in_cart_total_qnty+')');
                     $('div#minicarttable table tbody, div#collapsed_minicarttable table tbody').html("");                    $('.cart-area table tbody').html("");
-                    $.each(data.products, function(k, v) {
-                        $('div#minicarttable table tbody').append('<tr class=\"miniCartProduct\"><td class=\"miniCartProductThumbnail\" style=\"width: 20%;\"><div><a href=\"/product-land/'+v.id+'\"><img src=\"'+v.image+'\" alt=\"img\" class=\"img-responsive\" width=\"100\"></a></div></td><td style=\"width: 40%;\"><div class=\"miniCartDescription\"><h4><a href=\"/product-land/'+v.id+'\">'+v.name+'</a></h4><span>'+v.price_per_item+' грн.</span></div></td><td class=\"miniCartQuantity\" style=\"width: 10%;\"><a>* '+v.qnty+' шт.</a></td><td class=\"miniCartSubtotal\" style=\"width: 15%;\"><span class="minicart-item-overall price">'+parseFloat(v.total_price).toFixed(2)+' грн.</span></td><td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\"><i class=\"ion-ios-trash-outline\" style=\"font-size: 30px;\"></i></a></td></tr>');
-                        $('div#collapsed_minicarttable table tbody').append('<tr class=\"miniCartProduct\"><td class=\"miniCartProductThumbnail\" style=\"width: 20%;\"><div><a href=\"/product-land/'+v.id+'\"><img src=\"'+v.image+'\" alt=\"img\" class=\"img-responsive\" width=\"100\"></a></div></td><td style=\"width: 40%;\"><div class=\"miniCartDescription\"><h4><a href=\"/product-land/'+v.id+'\">'+v.name+'</a></h4><span>'+v.price_per_item+' грн.</span></div></td><td class=\"miniCartQuantity\" style=\"width: 10%;\"><a>* '+v.qnty+' шт.</a></td><td class=\"miniCartSubtotal\" style=\"width: 15%;\"><span class="collapsed-minicart-item-overall price">'+parseFloat(v.total_price).toFixed(2)+' грн.</span></td><td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\"><i class=\"ion-ios-trash-outline\" style=\"font-size: 30px;\"></i></a></td></tr>');
-                        $('div.cart-area table tbody').append('<tr class=\"CartProduct\"><td class=\"CartProductThumbnail\" style=\"width: 20%;\"><div><a href=\"/product-land/'+v.id+'\"><img src=\"'+v.image+'\" alt=\"img\" class=\"img-responsive\" width=\"100\"></a></div></td><td style=\"width: 40%;\"><div class=\"CartDescription\"><h4><a href=\"/product-land/'+v.id+'\">'+v.name+'</a></h4><span class=\"cart-item-price\">'+v.price_per_item+'</span><span> грн.</span></div></td><td class=\"CartQuantity\" style=\"width: 15%;\"><input class=\"cart-touchspin form-control\" name=\"cart_touchspin\" type=\"text\" value=\"'+v.qnty+'\" data-product_id=\"'+v.id+'\"></td><td class=\"CartSubtotal\" style=\"width: 15%;\"><span class=\"cart-item-overall price\">'+parseFloat(v.total_price).toFixed(2)+' грн.</span></td><td class=\"delete\" style=\"width: 5%;\"><a href=\"\" class=\"delete-item\" data-product_id=\"'+v.id+'\"><i class=\"ion-ios-trash-outline\" style=\"font-size: 30px;\"></i></a></td></tr>')
+                    $.each(data.products_in_cart, function(k, v) {
+                        $('div#minicarttable table tbody').append('<tr class=\"miniCartProduct\"><td class=\"miniCartProductThumbnail\" style=\"width: 20%;\"><div><a href=\"/product-land/'+v.id+'\"><img src=\"'+v.image+'\" alt=\"img\" class=\"img-responsive\" width=\"100\"></a></div></td><td style=\"width: 40%;\"><div class=\"miniCartDescription\"><h4><a href=\"/product-land/'+v.id+'\">'+v.name+'</a></h4><span>'+v.price+' грн.</span></div></td><td class=\"miniCartQuantity\" style=\"width: 10%;\"><a>* '+v.qnty+' шт.</a></td><td class=\"miniCartSubtotal\" style=\"width: 15%;\"><span class="minicart-item-overall price">'+parseFloat(v.total_price).toFixed(2)+' грн.</span></td><td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\"><i class=\"ion-ios-trash-outline\" style=\"font-size: 30px;\"></i></a></td></tr>');
+                        $('div#collapsed_minicarttable table tbody').append('<tr class=\"miniCartProduct\"><td class=\"miniCartProductThumbnail\" style=\"width: 20%;\"><div><a href=\"/product-land/'+v.id+'\"><img src=\"'+v.image+'\" alt=\"img\" class=\"img-responsive\" width=\"100\"></a></div></td><td style=\"width: 40%;\"><div class=\"miniCartDescription\"><h4><a href=\"/product-land/'+v.id+'\">'+v.name+'</a></h4><span>'+v.price+' грн.</span></div></td><td class=\"miniCartQuantity\" style=\"width: 10%;\"><a>* '+v.qnty+' шт.</a></td><td class=\"miniCartSubtotal\" style=\"width: 15%;\"><span class="collapsed-minicart-item-overall price">'+parseFloat(v.total_price).toFixed(2)+' грн.</span></td><td class=\"delete\" style=\"width: 5%;\"><a class=\"delete-item\" href=\"\" data-product_id=\"'+v.id+'\"><i class=\"ion-ios-trash-outline\" style=\"font-size: 30px;\"></i></a></td></tr>');
+                        $('div.cart-area table tbody').append('<tr class=\"CartProduct\"><td class=\"CartProductThumbnail\" style=\"width: 20%;\"><div><a href=\"/product-land/'+v.id+'\"><img src=\"'+v.image+'\" alt=\"img\" class=\"img-responsive\" width=\"100\"></a></div></td><td style=\"width: 40%;\"><div class=\"CartDescription\"><h4><a href=\"/product-land/'+v.id+'\">'+v.name+'</a></h4><span class=\"cart-item-price\">'+v.price+'</span><span> грн.</span></div></td><td class=\"CartQuantity\" style=\"width: 15%;\"><input class=\"cart-touchspin form-control\" name=\"cart_touchspin\" type=\"text\" value=\"'+v.qnty+'\" data-product_id=\"'+v.id+'\"></td><td class=\"CartSubtotal\" style=\"width: 15%;\"><span class=\"cart-item-overall price\">'+parseFloat(v.total_price).toFixed(2)+' грн.</span></td><td class=\"delete\" style=\"width: 5%;\"><a href=\"\" class=\"delete-item\" data-product_id=\"'+v.id+'\"><i class=\"ion-ios-trash-outline\" style=\"font-size: 30px;\"></i></a></td></tr>')
                     });
                 }
                 else if (data.products_in_cart_total_qnty == 0) {
@@ -47,64 +39,64 @@ $(document).ready(function() {
         });
         };
 
+    // Adding single product item to cart from Home Page slider or Landing Page buttons
+    function single_adding(button) {
+        button = button;
+        var cart_changes = {};
+        var product_id = button.data('product_id');
+        var qnty = button.data('qnty');
+        cart_changes[product_id] = {qnty: qnty, is_delete: false};
+
+        cart_updating(cart_changes);
+    };
+
+
     // Get data from Product Landing Page Form
     $('button.landing-submit').on('click', function (e) {
-        button = $(this)
         e.preventDefault();
-        var qnty = button.data('qnty');
-        var product_id = button.data('product_id');
-        var product_name = button.data('name');
-        var product_price = button.data('price');
-        var product_total_price = qnty*product_price;
-        var product_image = button.data('image');
-
-        cart_updating(product_id, qnty, is_delete=false)
+        button = $(this);
+        single_adding(button);
     });
 
     // Get data from Home Page slider buttons
     $('div.action-control').on('click', 'button[id^="main_page_submit_id"]', function (e) {
-        button = $(this)
         e.preventDefault();
-        var qnty = button.data('qnty');
-        var product_id = button.data('product_id');
-        var product_name = button.data('name');
-        var product_price = button.data('price');
-        var product_total_price = qnty*product_price;
-        var product_image = button.data('image');
-
-        cart_updating(product_id, qnty, is_delete=false)
+        button = $(this);
+        single_adding(button);
     });
 
     // Changes product in cart quantity when user makes changes at Checkout Page with touchspin plugin
     $('#checkout_page_submit').on('click', function() {
-        $('.cart-touchspin').each(function(input) {
-    	    var checkout_page_input = $(this);
-    	    var initial_checkout_page_input_qnty = parseInt(checkout_page_input.attr('value'));;
-    	    var current_checkout_page_input_qnty = parseInt(checkout_page_input.val());
-    	    var qnty = current_checkout_page_input_qnty-initial_checkout_page_input_qnty;
-    	    var product_id = checkout_page_input.data('product_id');
-    		if (qnty != 0) {
-    			cart_updating(product_id, qnty, is_delete=false);
-    		};
-    	});
+        var inputs = $('.cart-touchspin');
+        var cart_changes = {};
+        for(var i = 0; i < inputs.length; i++) {
+            product_id = $(inputs[i]).data('product_id');
+            qnty = parseInt($(inputs[i]).val());
+            cart_changes[product_id] = {qnty: qnty, is_delete: false};
+        }
+        cart_updating(cart_changes);
     });
 
     // Delete items from miniCart
     $('div.minicart-button').on('click', 'a.delete-item', function(e) {
         e.preventDefault();
+        var cart_changes = {};
         product_id = $(this).data("product_id");
         qnty = 0;
+        cart_changes[product_id] = {qnty: qnty, is_delete: true};
     
-        cart_updating(product_id, qnty, is_delete=true)
+        cart_updating(cart_changes);
 	});
 
     // Delete items from Checkout Page
     $('.cart-area').on('click', 'a.delete-item', function(e) {
         e.preventDefault();
+        var cart_changes = {};
         product_id = $(this).data("product_id");
         qnty = 0;
+        cart_changes[product_id] = {qnty: qnty, is_delete: true};
         
-        cart_updating(product_id, qnty, is_delete=true)
+        cart_updating(cart_changes);
 	});
 
     

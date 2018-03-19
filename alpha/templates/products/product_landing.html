@@ -2,10 +2,10 @@
 {% load static %}
 
 {% block content %}
-    <section id="product_landing" class="clearfix landing-area">
+ <section id="product_landing" class="clearfix landing-area">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
-                <div class="col-12 col-md">
+                <div class="col-sm-6 col-sm-6">
                     <div class="landing-heading">
                         <h4>{{ product.name }}</h4>
                         <h6>{{ product.name|slice:":1" }}</h6>
@@ -15,11 +15,14 @@
                         <form method="post" id="landing_page_form" class="form-inline" action="{% url 'add_to_cart' %}">{% csrf_token %}
                             <div class="input-group bootstrap-touchspin">
                                 <input type="text" class="form-control d-none landing-quantity" id="landing_page_qnty" value="1">
-                                <button type="submit" class="btn btn-success landing-submit form-control" id="landing_page_submit_btn" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price_with_discount }}" data-image="{{ product.product_main_image.image.url }}" data-qnty="1">ЗАКАЗАТЬ</button>
+                                <button type="submit" class="btn submit-btn" id="landing_page_submit_btn" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price_with_discount }}" data-image="{{ product.product_main_image.image.url }}" data-qnty="1">ЗАКАЗАТЬ</button>
                             </div>
                         </form>
                         <!-- FormEnd -->
                     </div>
+                </div>
+                <div class="col-sm-4 col-sm-4 landing-picture">
+                    <img src="{{ product.product_main_image.image.url }}" class="landing-picture-screen img-fluid" alt="Responsive image"">
                 </div>
             </div>
         </div>
