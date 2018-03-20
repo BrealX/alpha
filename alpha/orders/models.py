@@ -144,51 +144,42 @@ class Order(models.Model):
         super(Order, self).save(*args, **kwargs)
 
 
-class ProductInBasket(models.Model):
-    session_key = models.CharField(
-        max_length=128, 
-        blank=True, 
-        null=True, 
-        default=None)
+class OrderItem(models.Model):
     order = models.ForeignKey(
-        Order, 
-        blank=True, 
-        null=True, 
-        default=None, 
+        Order,
+        blank=True,
+        null=True,
+        default=None,
         on_delete=models.CASCADE)
     product = models.ForeignKey(
-        Product, 
-        blank=True, 
-        null=True, 
-        default=None, 
+        Product,
+        blank=True,
+        null=True,
+        default=None,
         on_delete=models.CASCADE)
-    qnty = models.IntegerField(
-        default=1)
-    price_per_item = models.DecimalField(
-        max_digits=10, 
-        decimal_places=2, 
+    quantity = models.IntegerField(
         default=0)
-    total_price = models.DecimalField(
-        max_digits=10, 
-        decimal_places=2, 
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0)
+    order_item_subtotal = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
         default=0)
     is_active = models.BooleanField(
         default=True)
     created = models.DateTimeField(
-        auto_now_add=True, 
+        auto_now_add=True,
         auto_now=False)
     updated = models.DateTimeField(
-        auto_now_add=False, 
+        auto_now_add=False,
         auto_now=True)
-    
+
     def __str__(self):
-        return "Товар в корзине %s" % self.product.name
+        return "Товар в заказе %s" % self.product.name
 
     class Meta:
-        verbose_name = "Товар в корзине"
-        verbose_name_plural = "Товары в корзине"
-
-    def save(self, *args, **kwargs):
-        self.price_per_item = self.product.price - (self.product.price * self.product.discount / 100)
-        self.total_price = float(self.qnty) * float(self.price_per_item)
-        super(ProductInBasket, self).save(*args, **kwargs) 
+        verbose_name = "Товар в заказе"
+        verbose_name_plural = "Товары в заказе"
+        

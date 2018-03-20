@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from products.models import Product
+from orders.models import Order
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from alpha.settings import DEFAULT_FROM_EMAIL
 import re
 from alpha.settings import DEFAULT_FROM_EMAIL
 from decouple import config
@@ -16,6 +16,12 @@ def product_land(request, product_id):
     shop_tel = config('SHOP_TEL')
     if not session_key:
         request.session.cycle_key()
+    product_order_times = Order.objects.filter(orderitem__product__id=product.id).count()
+    if product_order_times <= 100:
+        product_order_times += 100
+    happy_clients = Order.objects.filter(is_active=True).count()
+    if happy_clients <= 300:
+        happy_clients += 300
     return render(request, 'products/product_landing.html', locals())
 
 
@@ -51,3 +57,4 @@ def contact(request):
         return JsonResponse(return_dict)
     return_dict['error'] = "Поле email не должно быть пустым"
     return JsonResponse(return_dict)
+    
