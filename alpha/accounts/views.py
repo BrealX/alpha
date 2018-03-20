@@ -208,7 +208,7 @@ def after_registration(request):
         message, 
         settings.EMAIL_HOST_USER, 
         [send_to], 
-        fail_silently=False)    
+        fail_silently=True)    
 
     args = {}
     args['user'] = user
