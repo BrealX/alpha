@@ -407,8 +407,8 @@ p
     border: 1px solid #eff2f6;
     background: none;
     border-radius: 24px 24px 24px 0;
-    margin-bottom: 70px;
-    margin-top: 100px;
+    margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 .breadcrumb a
@@ -832,7 +832,8 @@ div.miniCartFooter .btn.btn-primary
 .section-dashboard,
 .section-profile,
 .section-orders,
-.section-order-info
+.section-order-info,
+.section-add-personal
 {
     background: url(../img/header-default.png);
     background-color: #f5f9fc;
@@ -858,6 +859,7 @@ div.miniCartFooter .btn.btn-primary
 .section-register .line-shape,
 .section-dashboard .line-shape,
 .section-profile .line-shape,
+.section-add-personal,
 .section-orders .line-shape,
 .section-order-info .line-shape
 {
@@ -2742,7 +2744,9 @@ p.required,
 #id_anonymous_email,
 #id_anonymous_phone,
 #id_anonymous_area,
-#id_anonymous_city
+#id_anonymous_city,
+#user_firstname,
+#user_phone
 {
     font-size: 18px;
     width: 70%;
@@ -3366,10 +3370,13 @@ h2.block-title-2,
 @media (min-width: 992px) and (max-width: 1199px) {
     .menu-area .navbar-brand {
         font-size: 65px;
+        font-family: 'Amatic SC', cursive;
     }
+
     .menu-area #nav .nav-link {
         padding: 35px 7.5px;
     }
+
     .minicart-button > a {
         color: #fff;
         height: 40px;
@@ -3398,6 +3405,7 @@ h2.block-title-2,
     .menu-area .navbar-brand {
         font-size: 45px;
         margin: 0;
+        font-family: 'Amatic SC', cursive;
     }
 
     .header-area.fixed {
@@ -3415,6 +3423,7 @@ h2.block-title-2,
         background-color: #5b32b4;
         text-align: left;
         margin-top: 10px;
+        max-width: 100%;
     }
 
     .minicart-button {
@@ -3517,6 +3526,7 @@ h2.block-title-2,
     .section-register .line-shape,
     .section-dashboard .line-shape,
     .section-profile .line-shape,
+    .section-add-personal .line-shape,
     .section-orders .line-shape,
     .section-order-info .line-shape
     {
@@ -3570,6 +3580,7 @@ h2.block-title-2,
     {
         margin-top: 10px;
         padding: 10px;
+        max-width: 100%;
 
         text-align: left;
 
@@ -3631,6 +3642,27 @@ h2.block-title-2,
     background-color: #fff;
     }
 
+    .miniCartProductThumbnail,
+    .CartProductThumbnail {
+        text-align: center;
+        display: none;
+    }
+
+    .#collapsed_minicarttable > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)
+    {
+        width: 15% !important;
+    }
+
+    .miniCartDescription,
+    .CartDescription
+    {
+        padding: 5px;
+    }
+
+    tr.CartProduct td:nth-child(2) {
+        text-align: center;
+    }
+
     .miniCartDescription h4
     {
         font-size: 15px;
@@ -3640,6 +3672,7 @@ h2.block-title-2,
     .miniCartFooter
     {
     padding: 10px 10px 10px;
+    text-align: center !important;
 
     border-radius: 10px;
     background: #fff;
@@ -3798,7 +3831,9 @@ h2.block-title-2,
     #id_anonymous_email,
     #id_anonymous_phone,
     #id_anonymous_area,
-    #id_anonymous_city
+    #id_anonymous_city,
+    #user_firstname,
+    #user_phone
     {
         font-size: 18px;
         width: 100%;
