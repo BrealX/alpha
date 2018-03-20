@@ -3366,10 +3366,13 @@ h2.block-title-2,
 @media (min-width: 992px) and (max-width: 1199px) {
     .menu-area .navbar-brand {
         font-size: 65px;
+        font-family: 'Amatic SC', cursive;
     }
+
     .menu-area #nav .nav-link {
         padding: 35px 7.5px;
     }
+
     .minicart-button > a {
         color: #fff;
         height: 40px;
@@ -3398,6 +3401,7 @@ h2.block-title-2,
     .menu-area .navbar-brand {
         font-size: 45px;
         margin: 0;
+        font-family: 'Amatic SC', cursive;
     }
 
     .header-area.fixed {

@@ -30,7 +30,7 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 
 
-class ProductIImageAdmin(admin.ModelAdmin):
+class ProductImageAdmin(admin.ModelAdmin):
     class Meta:
         model = ProductImage
 
