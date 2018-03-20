@@ -1,4 +1,8 @@
 {% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% load carton_tags %}
+{% get_cart as cart %}
 
 <!-- Preloader Start -->
 <!-- Header Area Start -->
@@ -81,7 +85,7 @@
                                     <a class="nav-link dropdown-toggle" href="#" role="button" id="auth_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Покинуть сайт</a>
                                     <b class="caret"></b>
                                     {% else %}
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" id="auth_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторизация</a>
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторизация</a>
                                     {% endif %}
                                     <div class="dropdown-menu auth" aria-labelledby="auth_dropdown">
                                         <a class="dropdown-item" href="{% url 'user_dashboard' %}">Личный кабинет</a>
@@ -91,6 +95,10 @@
                                         <a class="dropdown-item" href="{% url 'login' %}">Войти</a>
                                         {% endif %}
                                         <a class="dropdown-item" href="{% url 'register' %}">Регистрация</a>
+                                        <!--<a href="{% provider_login_url 'facebook' method='js_sdk' %}" class="dropdown-item">
+                                            <i class="ion-social-facebook-outline"></i>
+                                                Войти с помощью Facebook
+                                        </a>-->
                                     </div>
                                 </li>
                                 <li class="nav-item">
@@ -100,47 +108,51 @@
                                 <div id="collapse_div" class="dropdown minicart-button d-lg-none">
                                     <a href="#" class="dropdown-toggle" role="button" id="collapsed_minicart_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="ion-ios-cart-outline" style="font-size: 25px;"></i>
-                                        Корзина <span class="cart-qnty-subtotal">{% if products_in_cart_total_qnty %}({{ products_in_cart_total_qnty }}){% else %}(0){% endif %}</span>
+                                        Корзина <span class="cart-qnty-subtotal">{% if not cart.is_empty %}({{ cart.unique_count }}){% else %}(0){% endif %}</span>
                                     </a>
                                     <div class="dropdown-menu dropcart" aria-labelledby="collapsed_minicart_dropdown">
                                         <div class="minicarttable pre-scrollable" id="collapsed_minicarttable">
                                             <table>
                                                 <tbody>
-                                                {% if products_in_cart %}
-                                                {% for item_in_cart in products_in_cart %}
+                                                {% if cart.items %}
+                                                {% for item in cart.items %}
                                                     <tr class="miniCartProduct">
                                                         <td class="miniCartProductThumbnail" style="width: 20%;">
                                                             <div>
-                                                                <a href="{% url 'product_land' item_in_cart.product.id %}">
-                                                                    <img src="{{ item_in_cart.product.product_main_image.image.url }}" alt="img" class="img-responsive" width="100">
+                                                                <a href="{% url 'product_land' item.product.id %}">
+                                                                    <img src="{{ item.product.product_main_image.image.url }}" alt="img" class="img-responsive" width="100">
                                                                 </a>
                                                             </div>
                                                         </td>
                                                         <td style="width: 40%;">
                                                             <div class="miniCartDescription">
                                                                 <h4>
-                                                                    <a href="{% url 'product_land' item_in_cart.product.id %}">{{ item_in_cart.product.name }}</a>
+                                                                    <a href="{% url 'product_land' item.product.id %}">{{ item.product.name }}</a>
                                                                 </h4>
-                                                                <span>{{ item_in_cart.price_per_item }} грн.</span>
+                                                                <span>{{ item.product.price_with_discount }} грн.</span>
                                                             </div>
                                                         </td>
                                                         <td class="miniCartQuantity" style="width: 10%;">
-                                                            <a>* {{ item_in_cart.qnty }} шт.</a>
+                                                            <a>* {{ item.quantity }} шт.</a>
                                                         </td>
                                                         <td class="miniCartSubtotal" style="width: 15%;">
-                                                            <span class="collapsed-minicart-item-overall price">{{ item_in_cart.total_price }}</span><span> грн.</span>
+                                                            <span class="collapsed-minicart-item-overall price">{{ item.subtotal }}</span><span> грн.</span>
                                                         </td>
                                                         <td class="delete" style="width: 5%;">
-                                                            <a href="" class="delete-item" data-product_id="{{ item_in_cart.id }}">
+                                                            <a href="" class="delete-item" data-product_id="{{ item.product.id }}">
                                                                 <i class="ion-ios-trash-outline" style="font-size: 30px;"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
                                                 {% else %}
-                                                <div class="text-center">
-                                                    <p class="empty-cart">Ваша корзина пуста. Чтобы оформить заказ, необходимо добавить товар!</p>
-                                                </div>
+                                                <tr>
+                                                    <td>
+                                                        <div class="text-center">
+                                                            <p class="empty-cart">Ваша корзина пуста. Чтобы оформить заказ, необходимо добавить товар!</p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                                 {% endif %}
                                                 </tbody>
                                             </table>
@@ -175,47 +187,51 @@
                 <div class="dropdown minicart-button d-none d-lg-block">
                     <a href="#" class="dropdown-toggle" role="button" id="minicart_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="ion-ios-cart-outline" style="font-size: 25px;"></i>
-                        Корзина <span class="cart-qnty-subtotal">{% if products_in_cart_total_qnty %}({{ products_in_cart_total_qnty }}){% else %}(0){% endif %}</span>
+                        Корзина <span class="cart-qnty-subtotal">{% if not cart.is_empty %}({{ cart.unique_count }}){% else %}(0){% endif %}</span>
                     </a>
                     <div class="dropdown-menu dropcart" aria-labelledby="minicart_dropdown">
                         <div class="minicarttable pre-scrollable" id="minicarttable">
                             <table>
                                 <tbody>
-                                {% if products_in_cart %}
-                                {% for item_in_cart in products_in_cart %}
+                                {% if cart.items %}
+                                {% for item in cart.items %}
                                     <tr class="miniCartProduct">
                                         <td class="miniCartProductThumbnail" style="width: 20%;">
                                             <div>
-                                                <a href="{% url 'product_land' item_in_cart.product.id %}">
-                                                    <img src="{{ item_in_cart.product.product_main_image.image.url }}" alt="img" class="img-responsive" width="100">
+                                                <a href="{% url 'product_land' item.product.id %}">
+                                                    <img src="{{ item.product.product_main_image.image.url }}" alt="img" class="img-responsive" width="100">
                                                 </a>
                                             </div>
                                         </td>
                                         <td style="width: 40%;">
                                             <div class="miniCartDescription">
                                                 <h4>
-                                                    <a href="{% url 'product_land' item_in_cart.product.id %}">{{ item_in_cart.product.name }}</a>
+                                                    <a href="{% url 'product_land' item.product.id %}">{{ item.product.name }}</a>
                                                 </h4>
-                                                <span>{{ item_in_cart.price_per_item }} грн.</span>
+                                                <span>{{ item.price_per_item }} грн.</span>
                                             </div>
                                         </td>
                                         <td class="miniCartQuantity" style="width: 10%;">
-                                            <a>* {{ item_in_cart.qnty }} шт.</a>
+                                            <a>* {{ item.quantity }} шт.</a>
                                         </td>
                                         <td class="miniCartSubtotal" style="width: 15%;">
-                                            <span class="minicart-item-overall price">{{ item_in_cart.total_price }}</span><span> грн.</span>
+                                            <span class="minicart-item-overall price">{{ item.subtotal }}</span><span> грн.</span>
                                         </td>
                                         <td class="delete" style="width: 5%;">
-                                            <a href="" class="delete-item" data-product_id="{{ item_in_cart.id }}">
+                                            <a href="" class="delete-item" data-product_id="{{ item.product.id }}">
                                                 <i class="ion-ios-trash-outline" style="font-size: 30px;"></i>
                                             </a>
                                         </td>
                                     </tr>
                                 {% endfor %}
                                 {% else %}
-                                    <div class="text-center">
-                                        <p class="empty-cart">Ваша корзина пуста. Чтобы оформить заказ, необходимо добавить товар!</p>
-                                    </div>
+                                    <tr>
+                                        <td>
+                                            <div class="text-center">
+                                                <p class="empty-cart">Ваша корзина пуста. Чтобы оформить заказ, необходимо добавить товар!</p>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 {% endif %}
                                 </tbody>
                             </table>
