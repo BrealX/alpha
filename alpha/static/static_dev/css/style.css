@@ -832,7 +832,8 @@ div.miniCartFooter .btn.btn-primary
 .section-dashboard,
 .section-profile,
 .section-orders,
-.section-order-info
+.section-order-info,
+.section-add-personal
 {
     background: url(../img/header-default.png);
     background-color: #f5f9fc;
@@ -858,6 +859,7 @@ div.miniCartFooter .btn.btn-primary
 .section-register .line-shape,
 .section-dashboard .line-shape,
 .section-profile .line-shape,
+.section-add-personal,
 .section-orders .line-shape,
 .section-order-info .line-shape
 {
@@ -2742,7 +2744,9 @@ p.required,
 #id_anonymous_email,
 #id_anonymous_phone,
 #id_anonymous_area,
-#id_anonymous_city
+#id_anonymous_city,
+#user_firstname,
+#user_phone
 {
     font-size: 18px;
     width: 70%;
@@ -3522,6 +3526,7 @@ h2.block-title-2,
     .section-register .line-shape,
     .section-dashboard .line-shape,
     .section-profile .line-shape,
+    .section-add-personal .line-shape,
     .section-orders .line-shape,
     .section-order-info .line-shape
     {
@@ -3826,7 +3831,9 @@ h2.block-title-2,
     #id_anonymous_email,
     #id_anonymous_phone,
     #id_anonymous_area,
-    #id_anonymous_city
+    #id_anonymous_city,
+    #user_firstname,
+    #user_phone
     {
         font-size: 18px;
         width: 100%;
