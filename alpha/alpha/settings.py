@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # My User Apps
     'accounts',
+    'carton',
     'landing',
     'orders',
     'products',
