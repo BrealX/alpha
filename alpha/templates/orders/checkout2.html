@@ -55,8 +55,8 @@
                 <div class="cart-area" style="max-width: 700px; margin-left: auto; margin-right: auto;">
                     <table>
                         <tbody>
-                        {% if ordered_products %}
-                        {% for item in ordered_products %}
+                        {% if not cart.is_empty %}
+                        {% for item in cart_items %}
                             <tr class="CartProduct">
                                 <td class="CartProductThumbnail" style="width: 20%;">
                                     <div>
@@ -70,14 +70,14 @@
                                         <h4>
                                             <a href="{% url 'product_land' item.product.id %}">{{ item.product.name }}</a>
                                         </h4>
-                                        <span class="cart-item-price">{{ item.price_per_item }}</span><span> грн.</span>
+                                        <span class="cart-item-price">{{ item.product.price_with_discount }}</span><span> грн.</span>
                                     </div>
                                 </td>
                                 <td class="CartQuantity" style="width: 15%;">
-                                    <a>* {{ item.qnty }} шт.</a>
+                                    <a>* {{ item.quantity }} шт.</a>
                                 </td>
                                 <td class="CartSubtotal" style="width: 15%;">
-                                    <span class="cart-item-overall price">{{ item.total_amount }} грн.</span>
+                                    <span class="cart-item-overall price">{{ item.subtotal }} грн.</span>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -103,9 +103,9 @@
                             <p style="font-weight: 400;">
                                 Благодарим Вас за заказ в нашем магазине!
                                 <br>
-                                Ваш заказ № {{ order.id }} на сумму {{ order.total_amount }} грн. создан, мы перезвоним Вам на номер {{ order.customer_phone }} в ближайшее время!
+                                Ваш заказ № {{ order_id }} на сумму {{ order_overall }} грн. создан, мы перезвоним Вам на номер {{ order_customer_phone }} в ближайшее время!
                                 <br>
-                                Также на адрес {{ order.customer_email }} мы отправили информацию о заказе.
+                                Также на адрес {{ order_customer_email }} мы отправили информацию о заказе.
                                 Будем рады видеть Вас снова в нашем магазине!
                             </p>
                         </div>
@@ -122,7 +122,7 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <a id="order_confirm_button" class="btn submit-btn" href="{% url 'order_confirm' %}">Подтвердить заказ</a>
-                <span class="btn submit-btn" id="cart_subtotal">Ваш заказ на сумму: {{ ordered_products.total_amount }} грн.</span>
+                <span class="btn submit-btn" id="cart_subtotal">Ваш заказ на сумму: {{ order_overall }} грн.</span>
             </div>
         </div>
     </div>

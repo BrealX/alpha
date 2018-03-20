@@ -2,10 +2,10 @@
 {% load static %}
 
 {% block content %}
-    <section id="product_landing" class="clearfix landing-area">
+ <section id="product_landing" class="clearfix landing-area">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
-                <div class="col-12 col-md">
+                <div class="col-sm-6 col-sm-6">
                     <div class="landing-heading">
                         <h4>{{ product.name }}</h4>
                         <h6>{{ product.name|slice:":1" }}</h6>
@@ -15,11 +15,14 @@
                         <form method="post" id="landing_page_form" class="form-inline" action="{% url 'add_to_cart' %}">{% csrf_token %}
                             <div class="input-group bootstrap-touchspin">
                                 <input type="text" class="form-control d-none landing-quantity" id="landing_page_qnty" value="1">
-                                <button type="submit" class="btn btn-success landing-submit form-control" id="landing_page_submit_btn" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price_with_discount }}" data-image="{{ product.product_main_image.image.url }}" data-qnty="1">ЗАКАЗАТЬ</button>
+                                <button type="submit" class="btn submit-btn" id="landing_page_submit_btn" data-product_id="{{ product.id }}" data-qnty="1">ЗАКАЗАТЬ</button>
                             </div>
                         </form>
                         <!-- FormEnd -->
                     </div>
+                </div>
+                <div class="col-sm-4 col-sm-4 landing-picture">
+                    <img src="{{ product.product_main_image.image.url }}" class="landing-picture-screen img-fluid" alt="Responsive image"">
                 </div>
             </div>
         </div>
@@ -154,53 +157,53 @@
                 <!--Single Cool Fact-->
                 <div class="col-12 col-md-3 col-lg-3">
                     <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up" style="min-height: 90px;">
-                        <div class="counter-area">
-                            <h3>
-                                <span class="counter" data-from="0" data-to="90" data-speed="3000"></span>
-                            </h3>
-                        </div>
                         <div class="cool-facts-content">
                             <i class="ion-arrow-down-a"></i>
-                            <p>ЗАКАЗОВ</p>
+                            <p>КОЛИЧЕСТВО ЗАКАЗОВ</p>
+                        </div>
+                        <div class="counter-area">
+                            <h3>
+                                <span class="counter" data-from="0" data-to="{{ product_order_times }}" data-speed="3000"></span>
+                            </h3>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-3 col-lg-3">
                     <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up" style="min-height: 90px;">
-                        <div class="counter-area">
-                            <h3>
-                                <span class="counter" data-from="0" data-to="87" data-speed="3000"></span>
-                            </h3>
-                        </div>
                         <div class="cool-facts-content">
                             <i class="ion-happy-outline"></i>
                             <p>ДОВОЛЬНЫХ КЛИЕНТОВ</p>
                         </div>
+                        <div class="counter-area">
+                            <h3>
+                                <span class="counter" data-from="0" data-to="{{ happy_clients }}" data-speed="3000"></span>
+                            </h3>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-3 col-lg-3">
                     <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up" style="min-height: 90px;">
+                        <div class="cool-facts-content">
+                            <i class="ion-ios-star-outline"></i>
+                            <p>СРЕДНИЙ РЕЙТИНГ</p>
+                        </div>
                         <div class="counter-area">
                             <h3>
                                 <span class="counter-decimal" data-from="0" data-to="4.9" data-speed="3000"></span>
                             </h3>
                         </div>
-                        <div class="cool-facts-content">
-                            <i class="ion-ios-star-outline"></i>
-                            <p>СРЕДНИЙ РЕЙТИНГ</p>
-                        </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-3 col-lg-3">
                     <div class="single-cool-fact d-flex justify-content-center" data-aos="fade-up" style="min-height: 90px;">
+                        <div class="cool-facts-content">
+                            <i class="ion-model-s"></i>
+                            <p>ДОСТАВКА (ДНЕЙ)</p>
+                        </div>
                         <div class="counter-area">
                             <h3>
                                 <span class="counter" data-from="0" data-to="2" data-speed="1000"></span>
                             </h3>
-                        </div>
-                        <div class="cool-facts-content">
-                            <i class="ion-model-s"></i>
-                            <p>ДОСТАВКА (ДНЕЙ)</p>
                         </div>
                     </div>
                 </div>
@@ -235,7 +238,7 @@
                                 <p>Наличие товара на складе: {% if product.is_in_stock %} В НАЛИЧИИ {% elif product.is_on_demand %} ПОД ЗАКАЗ {% else %} ОТСУТВУЕТ НА СКЛАДЕ {% endif %}</p>
                             </div>
                             <div class="plan-button">
-                                <button type="submit" form="landing_page_form" class="landing-submit" data-product_id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price_with_discount }}" data-image="{{ product.product_main_image.image.url }}" data-qnty="1">ЗАКАЗАТЬ!</button>
+                                <button type="submit" form="landing_page_form" class="landing-submit" data-product_id="{{ product.id }}" data-qnty="1">ЗАКАЗАТЬ!</button>
                             </div>
                         </div>
                     </div>

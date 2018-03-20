@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block dashboard %}
+<section id="section_orders" class="section-orders section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 50px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+                    <li>
+					    <a href="{% url 'user_dashboard' %}">Личный кабинет</a>
+				    </li>
+				    <li class="active">
+					    Мои заказы
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-6">
+				<div class="section-heading">
+					<h2 class="text-white">Мои заказы</h2>
+					<div class="line-shape"></div>
+				</div>
+				<div class="footer-text">
+					<p>В этом разделе Вы можете получить доступ к истории заказов.</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Row -->
+        <div class="row">
+            <div class="col-12 box mt-0 mb-lg-0">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                               <th class="border-top-0">Номер</th>
+                               <th class="border-top-0">Дата</th>
+                               <th class="border-top-0">Сумма заказа</th>
+                               <th class="border-top-0">Статус</th>
+                               <th class="border-top-0">Действие</th>
+                            </tr>
+                        </thead>
+                        {% for order in orders %}
+                        <tbody>
+                            <th>{{ order.id }}</th>
+                            <td>{{ order.created }}</td>
+                            <td>{{ order.total_order_amount }} грн.</td>
+                            <td>
+                                {% if order.status.id == 1 %}
+                                <span class="badge badge-warning">{{ order.status.name }}</span>
+                                {% elif order.status.id == 2 %}
+                                <span class="badge badge-info">{{ order.status.name }}</span>
+                                {% elif order.status.id == 3 %}
+                                <span class="badge badge-danger">{{ order.status.name }}</span>
+                                {% else %}
+                                <span class="badge badge-success">{{ order.status.name }}</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a class="button-order-view" href="{% url 'user_order_info' order.id %}">Подробнее</a>
+                            </td>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Orders -->
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block dashboard %}
+<section id="section_order_info" class="section-order-info section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 50px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+                    <li>
+					    <a href="{% url 'user_dashboard' %}">Личный кабинет</a>
+				    </li>
+                    <li>
+					    <a href="{% url 'user_my_orders' %}">Мои заказы</a>
+				    </li>
+				    <li class="active">
+					    Информация по заказу №{{ order.id }}
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-6">
+				<div class="section-heading">
+					<h2 class="text-white">Информация по заказу №{{ order.id }}</h2>
+					<div class="line-shape"></div>
+				</div>
+				<div class="footer-text">
+					<p>Детальная информация по заказу представлена ниже.</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Row -->
+        <div class="row">
+            <div class="col-12 box mt-0 mb-lg-0">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                               <th class="border-top-0" colspan="2">Товар</th>
+                               <th class="border-top-0">Количество</th>
+                               <th class="border-top-0">Цена</th>
+                            </tr>
+                        </thead>
+                        {% for item in order_items %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href="{% url 'product_land' item.product.id %}">
+                                        <img src="{{ item.product.product_main_image.image.url }}" class="img-fluid">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'product_land' item.product.id %}">{{ item.product.name }}</a>
+                                </td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.price }}</td>
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+                        <tfoot>
+                            <tr>
+                                <th class="text-left" colspan="2">Итого по заказу:</th>
+                                <th>{{ order.total_order_amount }}</th>
+                            </tr>
+                            <tr>
+                                <th class="text-left" colspan="2">Адрес доставки:</th>
+                                <th colspan="2">{{ order.customer_address }}</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Order Info -->
+{% endblock %}
