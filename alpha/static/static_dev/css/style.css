@@ -3419,6 +3419,7 @@ h2.block-title-2,
         background-color: #5b32b4;
         text-align: left;
         margin-top: 10px;
+        max-width: 100%;
     }
 
     .minicart-button {
@@ -3574,6 +3575,7 @@ h2.block-title-2,
     {
         margin-top: 10px;
         padding: 10px;
+        max-width: 100%;
 
         text-align: left;
 
@@ -3635,6 +3637,27 @@ h2.block-title-2,
     background-color: #fff;
     }
 
+    .miniCartProductThumbnail,
+    .CartProductThumbnail {
+        text-align: center;
+        display: none;
+    }
+
+    .#collapsed_minicarttable > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)
+    {
+        width: 15% !important;
+    }
+
+    .miniCartDescription,
+    .CartDescription
+    {
+        padding: 5px;
+    }
+
+    tr.CartProduct td:nth-child(2) {
+        text-align: center;
+    }
+
     .miniCartDescription h4
     {
         font-size: 15px;
@@ -3644,6 +3667,7 @@ h2.block-title-2,
     .miniCartFooter
     {
     padding: 10px 10px 10px;
+    text-align: center !important;
 
     border-radius: 10px;
     background: #fff;
