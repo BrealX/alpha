@@ -2,17 +2,11 @@ from django.contrib import admin
 from .models import *
 
 
-class ProductInOrderInline(admin.TabularInline):
-    model = ProductInOrder
-    extra = 0
-
-
 class OrderAdmin(admin.ModelAdmin):
     class Meta:
         model = Order
 
     list_display = [field.name for field in Order._meta.fields]
-    inlines = [ProductInOrderInline]
 
 
 admin.site.register(Order, OrderAdmin)
@@ -28,24 +22,14 @@ class StatusAdmin(admin.ModelAdmin):
 admin.site.register(Status, StatusAdmin)
 
 
-class ProductInOrderAdmin(admin.ModelAdmin):
+class OrderItemAdmin(admin.ModelAdmin):
     class Meta:
-        model = ProductInOrder
+        model = OrderItem
 
-    list_display = [field.name for field in ProductInOrder._meta.fields]
-
-
-admin.site.register(ProductInOrder, ProductInOrderAdmin)
+    list_display = [field.name for field in OrderItem._meta.fields]
 
 
-class ProductInBasketAdmin(admin.ModelAdmin):
-    class Meta:
-        model = ProductInBasket
-
-    list_display = [field.name for field in ProductInBasket._meta.fields]
-
-
-admin.site.register(ProductInBasket, ProductInBasketAdmin)
+admin.site.register(OrderItem, OrderItemAdmin)
 
 
 class OrderDeliveryAreaAdmin(admin.ModelAdmin):
