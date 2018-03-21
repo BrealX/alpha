@@ -22,4 +22,8 @@ include/*
 *.ini
 *.env
 
+__pycache__/
+__pycache__/*
+
+
 celerybeat-schedule.db
