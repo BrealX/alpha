@@ -520,18 +520,22 @@ p
 .menu-area #nav .nav-link
 {
     font-size: 16px;
-    font-weight: 500;
-
     display: block;
-
-    padding: 35px 15px;
-
+    padding: 10px;
     -webkit-transition-duration: 500ms;
          -o-transition-duration: 500ms;
             transition-duration: 500ms;
-
     color: #fff;
-    border-radius: 30px;
+    text-decoration: none;
+}
+
+.menu-area #nav .nav-link:hover
+{
+    color: #58d5f7;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px;
 }
 
 .menu-area #nav .nav-link a,
@@ -574,19 +578,16 @@ p
 
 .minicart-button > a
 {
-    font-weight: 500;
     line-height: 46px;
-
     display: inline-block;
-
-    min-width: 178px;
-    height: 50px;
-
+    min-width: 195px;
+    height: 51px;
     text-align: center;
-
     color: #fff !important;
-    border: 2px solid #a883e9;
-    border-radius: 24px 24px 24px 0;
+    border: #0ABCEB;
+    border-radius: 10px;
+    background-color: #0ABCEB;
+    transition-duration: 0.4s;
 }
 
 .minicart-button > a:hover
@@ -3377,6 +3378,14 @@ h2.block-title-2,
         padding: 35px 7.5px;
     }
 
+    .menu-area #nav .nav-link:hover {
+        color: #58d5f7;
+        text-decoration: none;
+        font-size: 16px;
+        display: block;
+        padding: 35px 7.5px;
+    }
+
     .minicart-button > a {
         color: #fff;
         height: 40px;
@@ -3427,7 +3436,7 @@ h2.block-title-2,
     }
 
     .minicart-button {
-        margin-top: 30px;
+        margin-top: 10px;
         text-align: left;
         max-width: 115px;
     }
@@ -3481,13 +3490,10 @@ h2.block-title-2,
     }
 
     .minicart-button > a {
-        margin-top: 4px;
         display: inline-block;
-        border: 2px solid #a883e9;
-        height: 40px;
+        height: 50px;
         min-width: 160px;
-        line-height: 36px;
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .counter-area {
@@ -3597,10 +3603,10 @@ h2.block-title-2,
 
     .minicart-button > a
     {
-        line-height: 25px;
-
+        line-height: 0.8;
         min-width: 140px;
         height: 35px;
+        padding: 3px;
     }
 
     .header-area
