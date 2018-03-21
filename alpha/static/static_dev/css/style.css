@@ -610,7 +610,7 @@ p
     float: left;
 
     min-width: 500px;
-    margin: 2px 0 0;
+    margin: 15px 0 0;
     padding: 5px;
 
     list-style: none;
@@ -618,7 +618,7 @@ p
     text-align: left;
 
     border: 2px solid #a883e9;
-    border-radius: 24px 24px 24px 0;
+    border-radius: 24px 0 24px 24px;
     background-color: #fff;
     background-clip: padding-box;
     box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
@@ -684,7 +684,7 @@ p.empty-cart
 .miniCartFooter
 {
     padding: 10px 10px 10px;
-
+    border-radius: 24px;
     background: #fff;
 }
 
@@ -704,18 +704,33 @@ p.empty-cart
 .miniCartFooter .minicart-gotocart-button
 {
     color: #fff;
-    border-radius: 22px 25px 0 22px;
+    border-radius: 10px;
     background-color: #5b32b4;    
+}
+
+.miniCartFooter .minicart-gotocart-button:hover
+{
+    color: #fff;
+    border-radius: 20px;
+    background-color: #5b32b4;
+    box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
 }
 
 .miniCartFooter .btn:last-child
 {
     margin-left: 5px;
     color: #fff;
-    border-radius: 22px 25px 22px 0;
+    border-radius: 10px;
     background-color: #fb397d;    
 }
 
+.miniCartFooter .btn:last-child:hover
+{
+    margin-left: 5px;
+    color: #fff;
+    border-radius: 20px;
+    background-color: #fb397d;
+}
 
 
 
@@ -1124,13 +1139,14 @@ div.miniCartFooter .btn.btn-primary
 
     color: #fff;
     border: none;
-    border-radius: 24px 24px 24px 0 !important;
+    border-radius: 10px;
     background-color: #5b32b4;
 }
 
 #productslider .slider-submit:hover
 {
     background-color: #fb397d;
+    border-radius: 20px;
 }
 
 .main-container
@@ -3428,7 +3444,7 @@ h2.block-title-2,
 
     #navbar {
         padding: 30px;
-        border-radius: 3px;
+        border-radius: 3px 30px 30px 3px;
         background-color: #5b32b4;
         text-align: left;
         margin-top: 10px;
@@ -3590,7 +3606,7 @@ h2.block-title-2,
 
         text-align: left;
 
-        border-radius: 3px;
+        border-radius: 3px 30px 30px 3px;
         background-color: #5b32b4;
     }
 
@@ -3630,7 +3646,7 @@ h2.block-title-2,
         text-align: left;
 
         border: 2px solid #a883e9;
-        border-radius: 24px 24px 24px 0;
+        border-radius: 0px 24px 24px 24px;
         background-color: #fff;
         background-clip: padding-box;
         box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
@@ -3657,6 +3673,17 @@ h2.block-title-2,
     .#collapsed_minicarttable > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)
     {
         width: 15% !important;
+    }
+
+    #collapsed_minicartfooter h3
+    {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: normal;
+        margin-bottom: 0;
+        text-transform: uppercase;
+        text-align: center !important;
+        color: #726a84;
     }
 
     .miniCartDescription,
@@ -3700,10 +3727,34 @@ h2.block-title-2,
     .miniCartFooter .minicart-gotocart-button
     {
         margin: 0 auto 10px auto;
-
         color: #fff;
-        border-radius: 22px 25px 0 22px;
+        border-radius: 10px;
         background-color: #5b32b4;
+    }
+
+    .miniCartFooter .minicart-gotocart-button:hover
+    {
+        margin: 0 auto 10px auto;
+        color: #fff;
+        border-radius: 20px;
+        background-color: #5b32b4;
+        box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+    }
+
+    .miniCartFooter .btn:last-child {
+        margin: 0px auto 10px auto;
+        color: #fff;
+        border-radius: 10px;
+        background-color: #fb397d;
+    }
+
+    .miniCartFooter .btn:last-child:hover
+    {
+        margin-left: 5px;
+        color: #fff;
+        border-radius: 20px;
+        background-color: #fb397d;
+        box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
     }
 
     .footer-text > p
