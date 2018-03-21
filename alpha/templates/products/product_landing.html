@@ -41,40 +41,46 @@
             <!-- rowEnd -->
             <div class="row">
                 <!-- Single Special Area -->
-                <div class="col-xs-12 col-sm-4">
-                    <div class="single-special text-center" data-aos="fade-up">
-                        <div class="single-icon">
-                            <i class="ion-man"></i>
-                            <i class="ion-woman"></i>
+                <div class="col-sm-4">
+                    <div class="single-special text-center card" data-aos="fade-up">
+                        <div class="card-body">
+                            <div class="single-icon card-title">
+                                <i class="ion-man"></i>
+                                <i class="ion-woman"></i>
+                            </div>
+                            <h4 class="card-subtitle mb-2 text-muted">Пол:</h4>
+                            <p class="card-text">
+                                Рядом с Вами будущий певец? Или певица? Не важно! Игрушка универсальна и подходит для любого ребенка
+                            </p>
                         </div>
-                        <h4>Пол:</h4>
-                        <p>
-                            Рядом с Вами будущий певец? Или певица? Не важно! Игрушка универсальна и подходит для любого ребенка
-                        </p>
                     </div>
                 </div>
                 <!-- Single Special Area -->
-                <div class="col-xs-12 col-sm-4">
-                    <div class="single-special text-center" data-aos="fade-up">
-                        <div class="single-icon">
-                            <i class="ion-ios-time-outline"></i>
+                <div class="col-sm-4">
+                    <div class="single-special text-center card" data-aos="fade-up">
+                        <div class="card-body">
+                            <div class="single-icon card-title">
+                                <i class="ion-ios-time-outline"></i>
+                            </div>
+                            <h4 class="card-subtitle mb-2 text-muted">Возраст:</h4>
+                            <p class="card-text">
+                                {{ product.description_age }}
+                            </p>
                         </div>
-                        <h4>Возраст:</h4>
-                        <p>
-                            {{ product.description_age }}
-                        </p>
                     </div>
                 </div>
                 <!-- Single Special Area -->
-                <div class="col-xs-12 col-sm-4">
-                    <div class="single-special text-center" data-aos="fade-up">
-                        <div class="single-icon">
-                            <i class="ion-music-note"></i>
+                <div class="col-sm-4">
+                    <div class="single-special text-center card" data-aos="fade-up">
+                        <div class="card-body">
+                            <div class="single-icon card-title">
+                                <i class="ion-music-note"></i>
+                            </div>
+                            <h4 class="card-subtitle mb-2 text-muted">Содержание:</h4>
+                            <p class="card-text">
+                                {{ product.description_content }}
+                            </p>
                         </div>
-                        <h4>Содержание:</h4>
-                        <p>
-                            {{ product.description_content }}
-                        </p>
                     </div>
                 </div>
             </div>
