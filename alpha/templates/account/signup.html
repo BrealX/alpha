@@ -8,7 +8,7 @@
 {% block auth %}
 {% get_providers as socialaccount_providers %}
 
-<section id="section_auth" class="section-auth section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 120px;">
+<section id="section_register" class="section-register section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 80px;">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -17,7 +17,7 @@
 					    <a href="{% url 'home' %}">На главную</a>
 				    </li>
 				    <li class="active">
-					    Войти
+					    Регистрация
 				    </li>
 			    </ul>
             </div>
@@ -26,25 +26,23 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="section-heading">
-					<h2 class="text-white">Войти</h2>
+					<h2 class="text-white">Регистрация</h2>
 					<div class="line-shape"></div>
 				</div>
 				<div class="footer-text">
-                {% if socialaccount_providers %}
-                    <p>Вы можете войти, используя социальную сеть из списка ниже:
-                    </p>
-                    <ul class="socialaccount_providers">
-                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-                    </ul>
-                {% else %}
-                    <p>Если у Вас еще нет созданного аккаунта на нашем сайте, то можно зарегистрироваться
-                    <a href="{{ signup_url }}">ЗДЕСЬ</a></p>
-                {% endif %}
+                    <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
 				</div>
 			</div>
 			<div class="col-md-6 section-auth-right">
-                {% include "socialaccount/snippets/login_extra.html" %}
-                <p>Или войдите, используя логин и пароль, введенные при регистрации:</p>
+                <p>Введите регистрационные данные:</p>
+                <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  {% if redirect_field_value %}
+                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                  {% endif %}
+                  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+                </form>
                 <form method="POST" action="{% url 'account_login' %}">
                   {% csrf_token %}
                     <div class="contact-input-area">
