@@ -873,6 +873,80 @@ div.miniCartFooter .btn.btn-primary
     margin-left: 0;
 }
 
+.section-auth .breadcrumb
+{
+    border: 1px solid #eff2f6;
+    background: none;
+    border-radius: 24px 24px 24px 0;
+    margin-bottom: 85px;
+    margin-top: 75px;
+}
+
+.section-auth .section-heading
+{
+    margin-bottom: 40px;
+}
+
+.socialaccount_providers li
+{
+    margin-bottom: 40px;
+}
+
+.socialaccount_provider
+{
+    padding: .84rem 2.14rem;
+    font-size: .81rem;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    border-radius: 10px;
+    text-transform: uppercase;
+    white-space: normal;
+    word-wrap: break-word;
+    color: #fff !important;
+}
+
+.socialaccount_provider.facebook
+{
+    background-color: #3b5998;
+}
+
+.socialaccount_provider.google
+{
+    background-color: #dd4b39;
+}
+
+.socialaccount_provider.instagram
+{
+    background-color: #2e5e86;
+}
+
+.socialaccount_provider.vk
+{
+    background-color: #4c75a3;
+}
+
+.socialaccount_provider.facebook:hover,
+.socialaccount_provider.google:hover,
+.socialaccount_provider.instagram:hover,
+.socialaccount_provider.vk:hover
+{
+    border-radius: 20px;
+    -webkit-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+    -moz-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+    box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+}
+
+.section-auth-right
+{
+    margin-top: 115px;
+}
+
+.section-auth-right p
+{
+    font-size: 20px;
+    line-height: 1.1;
+}
+
 #user_email,
 #user_password,
 #contact_name,
