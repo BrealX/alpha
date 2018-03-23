@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block dashboard %}
-<section id="section_orders" class="section-orders section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 50px;">
+<section class="section-orders section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 50px;">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -26,17 +26,22 @@
 					<h2 class="text-white">Мои заказы</h2>
 					<div class="line-shape"></div>
 				</div>
-				<div class="footer-text">
-					<p>В этом разделе Вы можете получить доступ к истории заказов.</p>
-				</div>
 			</div>
+            <div class="col-12">
+                <div class="footer-text">
+                    <p>В этом разделе Вы можете получить доступ к истории заказов.</p>
+                    {% if not orders %}
+                    <p>Пока Вы еще ничего не заказывали в нашем магазине. Пора это исправить!</p>
+                    {% endif %}
+                </div>
+            </div>
 		</div>
 		<!-- End Row -->
         <div class="row">
             <div class="col-12 box mt-0 mb-lg-0">
                 <div class="table-responsive">
                     <table class="table table-hover">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                                <th class="border-top-0">Номер</th>
                                <th class="border-top-0">Дата</th>
