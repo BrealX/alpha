@@ -181,10 +181,10 @@ CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 # Setting for AllAuth Facebook auth
-SOCIALACCOUNT_PROVIDERS = \
-    {'facebook':
-       {'METHOD': 'oauth2',
-        'SCOPE': ['email', ],
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SCOPE': ['email', 'public_profile',],
         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
         'FIELDS': [
             'id',
@@ -195,7 +195,13 @@ SOCIALACCOUNT_PROVIDERS = \
         'EXCHANGE_TOKEN': True,
         'LOCALE_FUNC': lambda request: 'en_US',
         'VERIFIED_EMAIL': False,
-        'VERSION': 'v2.12'}}
+        'VERSION': 'v2.12'
+    },
+    'google': {
+        'SCOPE': ['email', 'profile',],
+        'AUTH_PARAMS': {'access_type': 'offline',},
+    },
+}
 
 SITE_ID = 1
 

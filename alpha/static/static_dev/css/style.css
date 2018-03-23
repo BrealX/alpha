@@ -1403,13 +1403,34 @@ div.miniCartFooter .btn.btn-primary
 #id_email
 {
     font-size: 18px;
+    line-height: 1.5;
+
+    display: block;
 
     width: 100%;
     padding: 15px 15px !important;
 
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
     color: #808080;
+    border: 1px solid #ced4da;
     border-radius: 10px;
-    background-color: white;
+    background-color: #fff;
+    background-clip: padding-box;
+}
+
+#id_email:focus
+{
+    color: #495057;
+    border-color: #80bdff;
+    outline: 0;
+    background-color: #fff;
+    box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+}
+
+.section-activation .contact-input-area .form-group label
+{
+    color: #fff;
 }
 
 #id_remember
@@ -1529,6 +1550,11 @@ ul.socialaccount_providers li a:hover i.fa-vk::after
     background-color: #4c75a3;
 }
 
+.section-activation .errorlist
+{
+    color: #fff;
+}
+
 @media (min-width: 300px) and (max-width: 767px) {
     .section-auth
     {
@@ -1583,6 +1609,12 @@ ul.socialaccount_providers li a:hover i.fa-vk::after
         text-align: center;
     }
 }
+
+/* =============================================================== */
+/* USER PROFILE PAGES (DASHBOARD, ETC.)
+/* =============================================================== */
+
+
 
 /* =============================================================== */
 /* PARALLAX CONTENT 1
@@ -1904,48 +1936,6 @@ h5.parallaxSubtitle
     background: none !important;
 }
 
-
-.filterBox
-{
-    display: inline-block;
-}
-
-
-.productFilterLook2 .filterBox
-{
-    display: block;
-    float: left;
-
-    width: 100%;
-    margin-right: 0;
-}
-
-div.productFilter button.btn-success
-{
-    width: 100%;
-    padding: 7px 20px;
-
-    border: 2px solid #27ae60;
-    background: none repeat scroll 0 0 #4ec67f;
-}
-
-
-div.productFilter button.btn-success:hover
-{
-    color: #303030;
-    border: solid 2px #4ec67f;
-    background: #fff;
-}
-
-
-div.productFilter a.btn-danger
-{
-    width: 100%;
-    padding: 7px 20px;
-
-    border: 2px solid #d9534f;
-}
-
 div.productFilter a.btn-danger:hover
 {
     color: #303030;
@@ -1956,24 +1946,6 @@ div.productFilter a.btn-danger:hover
 {
     font-size: 20px;
 }
-
-.color-in
-{
-    color: #4cc94a;
-}
-
-
-.color-out
-{
-    color: #f00c0c;
-}
-
-
-.color-demand
-{
-    color: #f00c0c;
-}
-
 
 .product-tab
 {
@@ -2029,6 +2001,10 @@ div.productFilter a.btn-danger:hover
     font-weight: bold;
 }
 
+.errorlist
+{
+    color: #fb397d;
+}
 
 .style2 .section-title:after,
 .section-title-style2:after,
