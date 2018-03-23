@@ -404,9 +404,7 @@ p
 
 .breadcrumb
 {
-    border: 1px solid #eff2f6;
     background: none;
-    border-radius: 24px 24px 24px 0;
     margin-bottom: 50px;
     margin-top: 50px;
 }
@@ -845,10 +843,7 @@ div.miniCartFooter .btn.btn-primary
     background-size: cover;
 }
 
-.section-auth,
-.section-register,
 .section-register-done,
-.section-after-registration,
 .section-checkout,
 .section-activation,
 .section-dashboard,
@@ -862,8 +857,6 @@ div.miniCartFooter .btn.btn-primary
     background-repeat: no-repeat;
 }
 
-.section-auth .line-shape,
-.section-register .line-shape,
 .section-dashboard .line-shape,
 .section-profile .line-shape,
 .section-add-personal,
@@ -871,89 +864,6 @@ div.miniCartFooter .btn.btn-primary
 .section-order-info .line-shape
 {
     margin-left: 0;
-}
-
-.section-auth .breadcrumb,
-.section-register .breadcrumb
-{
-    border: 1px solid #eff2f6;
-    background: none;
-    border-radius: 24px 24px 24px 0;
-    margin-bottom: 85px;
-    margin-top: 75px;
-}
-
-.section-auth .section-heading,
-.section-register .section-heading
-{
-    margin-bottom: 40px;
-}
-
-.socialaccount_providers li
-{
-    margin-bottom: 40px;
-}
-
-.socialaccount_provider
-{
-    padding: .84rem 2.14rem;
-    font-size: .81rem;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-    border-radius: 10px;
-    text-transform: uppercase;
-    white-space: normal;
-    word-wrap: break-word;
-    color: #fff !important;
-}
-
-.socialaccount_provider.facebook
-{
-    background-color: #3b5998;
-}
-
-.socialaccount_provider.google
-{
-    background-color: #dd4b39;
-}
-
-.socialaccount_provider.instagram
-{
-    background-color: #2e5e86;
-}
-
-.socialaccount_provider.vk
-{
-    background-color: #4c75a3;
-}
-
-.socialaccount_provider.facebook:hover,
-.socialaccount_provider.google:hover,
-.socialaccount_provider.instagram:hover,
-.socialaccount_provider.vk:hover
-{
-    border-radius: 20px;
-    -webkit-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
-    -moz-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
-    box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
-}
-
-.section-auth-right,
-.section-register-right
-{
-    margin-top: 115px;
-}
-
-.section-auth-right p,
-.section-register p
-{
-    font-size: 20px;
-    line-height: 1.1;
-}
-
-#id_remember
-{
-    margin-left: 10px;
 }
 
 #user_email,
@@ -965,9 +875,7 @@ div.miniCartFooter .btn.btn-primary
 #new_user_name,
 #new_user_password,
 #new_user_password_repeat,
-#profile_delivery_address,
-#id_login,
-#id_password
+#profile_delivery_address
 {
     font-size: 18px;
     padding: 15px 15px !important;
@@ -1395,6 +1303,267 @@ div.miniCartFooter .btn.btn-primary
             transition: all .4s ease 0s;
 }
 
+/* =============================================================== */
+/* AUTHENTIFICATION PAGES
+/* =============================================================== */
+
+.section-auth
+{
+    margin-bottom: 374px;
+    padding-bottom: 120px;
+
+    background: url(../img/header-default.png);
+    background-color: #f5f9fc;
+    background-repeat: no-repeat;
+    box-shadow: rgba(0, 0, 0, .5) 0 20px 30px -20px;
+}
+
+.section-register
+{
+    margin-bottom: 374px;
+    padding-bottom: 80px;
+
+    background: url(../img/header-default.png);
+    background-color: #f5f9fc;
+    background-repeat: no-repeat;
+    box-shadow: rgba(0, 0, 0, .5) 0 20px 30px -20px;
+}
+
+.section-after-registration
+{
+    box-shadow: rgba(0, 0, 0, 1) 0px 20px 30px -20px;
+    margin-bottom: 374px;
+    padding-bottom: 80px;
+    overflow: hidden;
+    position: relative;
+    background: radial-gradient(rgb(194, 74, 126), rgb(105, 86, 235));
+}
+
+.section-auth .breadcrumb,
+.section-register .breadcrumb
+{
+    background: none;
+    margin-bottom: 85px;
+    margin-top: 75px;
+}
+
+.section-auth .line-shape,
+.section-register .line-shape
+{
+    margin-left: 0;
+}
+
+.section-auth .section-heading,
+.section-register .section-heading
+{
+    margin-bottom: 40px;
+}
+
+.section-auth-right,
+.section-register-right
+{
+    margin-top: 115px;
+}
+
+.section-auth-right p,
+.section-register p
+{
+    font-size: 20px;
+    line-height: 1.1;
+}
+
+.section-after-registration .footer-text p
+{
+    color: #fff !important;
+    text-align: center;
+}
+
+#id_login,
+#id_password,
+#id_password1,
+#id_password2,
+#id_email
+{
+    font-size: 18px;
+
+    width: 100%;
+    padding: 15px 15px !important;
+
+    color: #808080;
+    border-radius: 10px;
+    background-color: white;
+}
+
+#id_remember
+{
+    margin-left: 10px;
+}
+
+.section-auth .btn.submit-btn,
+.section-register .btn.submit-btn
+{
+    line-height: 40px;
+    height: 51px;
+    text-align: center;
+}
+
+ul.socialaccount_providers
+{
+    display: inline-block;
+    overflow: hidden;
+
+    margin: 0;
+
+    border-radius: 5px;
+    background-color: #884bdf;
+}
+
+ul.socialaccount_providers li
+{
+    display: inline-block;
+}
+
+ul.socialaccount_providers li a i.fab
+{
+    line-height: 30px;
+
+    position: relative;
+    z-index: 2;
+
+    display: inline-block;
+
+    width: auto;
+    height: auto;
+    margin: 10px;
+    padding: 10px;
+
+    text-align: center;
+
+    color: #ccc;
+    border: 1px solid transparent;
+    border-radius: 50px;
+}
+
+ul.socialaccount_providers li a i.fab::after
+{
+    position: absolute;
+    z-index: -1;
+    top: -500%;
+    right: -500%;
+    bottom: -500%;
+    left: -500%;
+
+    width: 0;
+    height: 0;
+    margin: auto;
+
+    content: '';
+    transition: all ease .5s;
+
+    opacity: 0;
+    border: 0 solid transparent;
+    border-radius: 200px;
+}
+
+ul.socialaccount_providers li a:hover i.fab::before
+{
+    color: #fff;
+}
+
+ul.socialaccount_providers li a:hover i.fa-facebook::after
+{
+    width: 200%;
+    height: 200%;
+
+    opacity: 1;
+    border-radius: 0;
+    background-color: #3b5998;
+}
+
+ul.socialaccount_providers li a:hover i.fa-google::after
+{
+    width: 200%;
+    height: 200%;
+
+    opacity: 1;
+    border-radius: 0;
+    background-color: #d34836;
+}
+
+ul.socialaccount_providers li a:hover i.fa-instagram::after
+{
+    width: 200%;
+    height: 200%;
+
+    opacity: 1;
+    border-radius: 0;
+    background-color: #8a3ab9;
+}
+
+ul.socialaccount_providers li a:hover i.fa-vk::after
+{
+    width: 200%;
+    height: 200%;
+
+    opacity: 1;
+    border-radius: 0;
+    background-color: #4c75a3;
+}
+
+@media (min-width: 300px) and (max-width: 767px) {
+    .section-auth
+    {
+        margin-bottom: 400px;
+        padding-bottom: 50px;
+
+        background: url(../img/header-default.png);
+        background-color: #f5f9fc;
+        background-repeat: no-repeat;
+        box-shadow: rgba(0, 0, 0, .5) 0 20px 30px -20px;
+    }
+
+    .section-auth .footer-text
+    {
+        line-height: 1.1;
+
+        margin-top: 70px;
+        margin-bottom: 15px;
+    }
+
+    ul.socialaccount_providers
+    {
+        display: inline-block;
+        overflow: hidden;
+
+        margin-top: 50px;
+
+        border-radius: 5px;
+        background-color: #884bdf;
+    }
+
+    .section-auth .line-shape,
+    .section-register .line-shape
+    {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .section-auth-right
+    {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .section-auth .btn.submit-btn
+    {
+        line-height: 40px;
+
+        height: 51px;
+        margin-top: 30px;
+
+        text-align: center;
+    }
+}
 
 /* =============================================================== */
 /* PARALLAX CONTENT 1
@@ -2461,6 +2630,8 @@ div.productFilter a.btn-danger:hover
     min-width: 185px;
     height: 40px;
 
+    transition-duration: .4s;
+
     color: #fff;
     border-radius: 10px;
     background: #fb397d;
@@ -2469,8 +2640,8 @@ div.productFilter a.btn-danger:hover
 .btn.submit-btn:hover
 {
     border-radius: 20px;
+    box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
 }
-
 
 /* =============================================================== */
 /* CART PAGE
@@ -3250,12 +3421,6 @@ h2.block-title-2,
         -ms-border-radius: 3px;
 }
 
-.newsLatterBox .btn:hover
-{
-    background: #27ae60;
-}
-
-
 .newsLatterBox
 {
     overflow: hidden;
@@ -3395,16 +3560,14 @@ h2.block-title-2,
     color: #5b32b4;
 }
 
-.footer-social-icon.social > a > svg
+.footer-social-icon.social > a > i
 {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 40px;
+    font-size: 25px;
+    line-height: 41px;
 
     width: 40px;
     height: 40px;
     margin-right: 10px;
-    padding: 10px;
 
     color: #fff;
     border-radius: 10px 10px 10px 0;
@@ -3412,7 +3575,7 @@ h2.block-title-2,
 }
 
 
-.footer-social-icon.social > a > svg:hover
+.footer-social-icon.social > a > i:hover
 {
     -webkit-transition-duration: 500ms;
          -o-transition-duration: 500ms;
@@ -3639,8 +3802,6 @@ h2.block-title-2,
         font-size: 38px;
     }
 
-    .section-auth .line-shape,
-    .section-register .line-shape,
     .section-dashboard .line-shape,
     .section-profile .line-shape,
     .section-add-personal .line-shape,
@@ -3872,7 +4033,6 @@ h2.block-title-2,
         border-radius: 25px 25px 25px 0 !important;
     }
 
-    .contact-input-area button.submit-btn,
     #checkout_form button.submit-btn
     {
         font-weight: 500;
@@ -3932,48 +4092,11 @@ h2.block-title-2,
         background: #fff;
     }
 
-    .section-auth
-    {
-        background: url(../img/header-default.png);
-        background-color: #f5f9fc;
-        background-repeat: no-repeat;
-        padding-bottom: 50px !important;
-        margin-bottom: 400px !important;
-    }
-
-
-    #section_auth > div:nth-child(2) > div > div > div.section-heading
-    {
-        margin-bottom: 30px;
-
-        text-align: center;
-    }
-
-    #section_auth div.footer-text div.get-back-button > a
-    {
-        font-weight: 500;
-        line-height: 45px;
-
-        display: block;
-
-        min-width: 155px;
-        height: 45px;
-        margin: 0 auto 0 auto;
-
-        text-align: center;
-
-        color: #fb397d;
-        border-radius: 23px 23px 23px 0;
-        background: #fff;
-    }
-
     .breadcrumb
     {
         margin-top: 35px;
         margin-bottom: 70px;
 
-        border: 1px solid #eff2f6;
-        border-radius: 24px 24px 24px 0;
         background: none;
     }
 

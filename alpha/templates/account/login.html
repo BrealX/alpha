@@ -8,7 +8,7 @@
 {% block auth %}
 {% get_providers as socialaccount_providers %}
 
-<section id="section_auth" class="section-auth section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 120px;">
+<section class="section-auth section-padding-100">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -33,9 +33,11 @@
                 {% if socialaccount_providers %}
                     <p>Вы можете войти, используя социальную сеть из списка ниже:
                     </p>
-                    <ul class="socialaccount_providers">
-                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-                    </ul>
+                    <div class="container text-center">
+                        <ul class="socialaccount_providers">
+                            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                        </ul>
+                    </div>
                 {% else %}
                     <p>Если у Вас еще нет созданного аккаунта на нашем сайте, то можно зарегистрироваться
                     <a href="{{ signup_url }}">ЗДЕСЬ</a></p>

@@ -212,8 +212,3 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 LOGIN_REDIRECT_URL = '/'
 
 CART_PRODUCT_MODEL = 'products.models.Product'
-
-#try:
-#    from .settings_prod import *
-#except:
-#    pass
