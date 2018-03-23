@@ -845,7 +845,6 @@ div.miniCartFooter .btn.btn-primary
 
 .section-register-done,
 .section-checkout,
-.section-activation,
 .section-dashboard,
 .section-profile,
 .section-orders,
@@ -1339,8 +1338,19 @@ div.miniCartFooter .btn.btn-primary
     background: radial-gradient(rgb(194, 74, 126), rgb(105, 86, 235));
 }
 
+.section-activation
+{
+    box-shadow: rgba(0, 0, 0, 1) 0px 20px 30px -20px;
+    margin-bottom: 374px;
+    padding-bottom: 80px;
+    overflow: hidden;
+    position: relative;
+    background: radial-gradient(rgb(194, 74, 126), rgb(105, 86, 235));
+}
+
 .section-auth .breadcrumb,
-.section-register .breadcrumb
+.section-register .breadcrumb,
+.section-activation .breadcrumb
 {
     background: none;
     margin-bottom: 85px;
@@ -1372,10 +1382,18 @@ div.miniCartFooter .btn.btn-primary
     line-height: 1.1;
 }
 
-.section-after-registration .footer-text p
+.section-after-registration .footer-text p,
+.section-activation .footer-text p
 {
     color: #fff !important;
     text-align: center;
+}
+
+.section-activation .footer-text p a
+{
+    text-decoration: none;
+
+    color: #58d5f7;
 }
 
 #id_login,
@@ -1400,7 +1418,8 @@ div.miniCartFooter .btn.btn-primary
 }
 
 .section-auth .btn.submit-btn,
-.section-register .btn.submit-btn
+.section-register .btn.submit-btn,
+.section-activation .btn.submit-btn
 {
     line-height: 40px;
     height: 51px;

@@ -57,7 +57,12 @@
                                 <div class="form-error">
                                     <p>Ошибки:</p>
                                     <ul>
-                                    {% for error in form.errors %}
+                                    {% for field in form %}
+                                    {% for error in field.errors %}    
+                                        <li>{% blocktrans %}{{ error }}{% endblocktrans %}</li>
+                                    {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}    
                                         <li>{% blocktrans %}{{ error }}{% endblocktrans %}</li>
                                     {% endfor %}
                                     </ul>
