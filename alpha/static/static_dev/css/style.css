@@ -799,8 +799,7 @@ div.miniCartFooter .btn.btn-primary
 }
 
 .section-register-done,
-.section-checkout,
-.section-order-info,
+.section-order-info
 {
     background: url(../img/header-default.png);
     background-color: #f5f9fc;
@@ -1938,6 +1937,192 @@ ul.socialaccount_providers li a:hover i.fa-vk::after
 }
 
 /* =============================================================== */
+/* CHECKOUT PAGES
+/* =============================================================== */
+
+.section-checkout,
+.section-checkout1,
+.section-checkout2
+{
+    margin-bottom: 374px;
+
+    background: url(../img/header-default.png);
+    background-color: #fff;
+    background-repeat: no-repeat;
+    box-shadow: rgba(0, 0, 0, .3) 0 20px 30px -20px;
+}
+
+.section-checkout .section-heading,
+.section-checkout1 .section-heading,
+.section-checkout2 .section-heading
+{
+    font-size: 36px;
+
+    margin-top: 70px;
+
+    color: #fff;
+}
+
+.section-checkout1 .section-heading h2,
+.section-checkout2 .section-heading h2
+{
+    color: #fff;   
+}
+
+.section-checkout1 .footer-text,
+.section-checkout2 .footer-text
+{
+    margin-top: 60px;
+    text-align: center;
+}
+
+.section-checkout .line-shape,
+.section-checkout1 .line-shape,
+.section-checkout2 .line-shape
+{
+    margin-left: 0;
+}
+
+.cart-area
+{
+    position: relative;
+    z-index: 1;
+
+    margin-top: 50px;
+
+    border: 5px solid #5b32b4;
+    border-radius: 30px;
+    background-color: #fff;
+    background-position: center center;
+    background-size: cover;
+    -webkit-box-shadow: 0 10px 50px rgba(0, 0, 0, .08);
+            box-shadow: 0 10px 50px rgba(0, 0, 0, .08);
+}
+
+.cart-area > table
+{
+    border-collapse: inherit !important;
+}
+
+.CartProduct
+{
+    border-bottom: 1px solid #eff2f6;
+}
+
+.CartProductThumbnail
+{
+    text-align: center;
+}
+
+.cart-area .CartProduct a,
+.cart-area .CartDescription span
+{
+    color: #5b32b4;
+}
+
+.cart-area .price
+{
+    font-size: 15px;
+    font-weight: 700;
+
+    color: #fb397d;
+}
+
+.cart-touchspin
+{
+    padding: 0;
+    text-align: center;
+}
+
+#cart_subtotal
+{
+    min-width: 185px;
+    height: 40px;
+    margin-left: 20px;
+
+    color: #fb397d;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.section-checkout .section-checkout-delivery-address
+{
+    margin-top: 100px;
+}
+
+.section-checkout .form-control
+{
+    color: #9F81F7;
+    border: 1px solid #9F81F7;
+}
+
+.section-checkout .bootstrap-touchspin-down,
+.section-checkout .bootstrap-touchspin-up
+{
+    color: #5b32b4;
+    background-color: #9f81f7;
+}
+
+.section-checkout1 label
+{
+    color: #884bdf;
+}
+
+@media (min-width: 300px) and (max-width: 767px) {
+    .section-checkout .line-shape,
+    .section-checkout1 .line-shape,
+    .section-checkout2 .line-shape
+    {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .section-checkout .section-heading 
+    {
+        font-size: 36px;
+        margin-top: 0;
+        margin-bottom: 55px;
+        color: #fff;
+    }
+
+    .section-checkout1 .section-heading
+    {
+        font-size: 36px;
+        margin-top: 0;
+        margin-bottom: 0;
+        color: #fff;
+    }
+
+    .section-checkout1 .footer-text
+    {
+        margin-top: 15px;
+        text-align: center;
+        margin-bottom: 60px;
+        line-height: 1.1;
+    }
+
+    .section-checkout1 .footer-text > p 
+    {
+        font-size: 25px;
+        margin-bottom: 25px;
+        text-align: center;
+        color: #fff;
+    }
+
+    #id_anonymous_name,
+    #id_anonymous_email,
+    #id_anonymous_phone,
+    #id_anonymous_area,
+    #id_anonymous_city
+    {
+        font-size: 18px;
+        width: 100%;
+
+        border-radius: 10px;
+    }
+}
+
+/* =============================================================== */
 /* PARALLAX CONTENT 1
 /* =============================================================== */
 
@@ -2049,114 +2234,6 @@ h5.parallaxSubtitle
 }
 
 
-/* =============================================================== */
-/* CHECKOUT PAGES
-/* =============================================================== */
-
-.cart-area
-{
-    position: relative;
-    z-index: 1;
-    background-color: #fff;
-    background-position: center center;
-    background-size: cover;
-    border: 10px solid #5b32b4;
-    border-radius: 30px;
-    -webkit-box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
-}
-
-.cart-area > table
-{
-    border-collapse: inherit !important;
-}
-
-.get-back-button {
-    text-align: right;
-    margin-bottom: 40px;
-}
-
-.get-back-button > a {
-    background: #ffffff;
-    height: 45px;
-    min-width: 155px;
-    display: inline-block;
-    text-align: center;
-    line-height: 45px;
-    color: #fb397d;
-    font-weight: 500;
-    border-radius: 23px 23px 23px 0;
-}
-
-.get-back-button > a:hover {
-    background: #5b32b4;
-    color: #fff;
-    -webkit-transition-duration: 500ms;
-    -o-transition-duration: 500ms;
-    transition-duration: 500ms;
-}
-
-.get-back-button {
-    text-align: right;
-    margin-bottom: 40px;
-}
-
-.CartProduct
-{
-    border-bottom: 1px solid #eff2f6;
-}
-
-
-.CartProductThumbnail
-{
-    text-align: center;
-}
-
-.cart-area .CartProduct a,
-.cart-area .CartDescription span
-{
-    color: #5b32b4;
-}
-
-.cart-area .price
-{
-    font-size: 15px;
-    font-weight: 700;
-
-    color: #fb397d;
-}
-
-.cart-touchspin
-{
-    padding: 0;
-    text-align: center;
-}
-
-.section-cart-header > h2 {
-    color: #ffffff;
-    font-size: 36px;
-}
-
-.section-cart-header > p {
-    color: #ffffff;
-    margin-bottom: 20px;
-}
-
-#cart_subtotal
-{
-    min-width: 185px;
-    height: 40px;
-    margin-left: 20px;
-
-    color: #fb397d;
-    border-radius: 22px 25px 22px 0;
-    background: #fff;
-}
-
-.section-checkout .section-checkout-delivery-address
-{
-    margin-top: 100px;
-}
 
 
 
@@ -4235,18 +4312,6 @@ h2.block-title-2,
 
     .section-checkout .section-checkout-delivery-address {
         margin-top: 0;
-    }
-
-    #id_anonymous_name,
-    #id_anonymous_email,
-    #id_anonymous_phone,
-    #id_anonymous_area,
-    #id_anonymous_city
-    {
-        font-size: 18px;
-        width: 100%;
-
-        border-radius: 25px 25px 25px 0 !important;
     }
 
     .cart-area
