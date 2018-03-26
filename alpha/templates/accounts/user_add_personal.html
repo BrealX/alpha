@@ -57,6 +57,20 @@
   					<div class="form-group mx-auto mt-2">
   						<button type="submit" class="btn submit-btn">Сохранить</button>
   					</div>
+  				{% if message_error %}
+                <div class="form-error text-center">
+                    <p>Ошибки:</p>
+                    <ul>
+                        <li>{{ message_error }}</li>
+                    </ul>
+                </div>
+                {% elif message_success %}
+				<div class="text-center" style="color: #5b32b4; margin-top: 30px;">
+                    <ul>
+                        <li>{{ message_success }}</li>
+                    </ul>
+                </div>
+                {% endif %}
 				</form>
 			</div>
 		</div>

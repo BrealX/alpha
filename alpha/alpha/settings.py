@@ -163,9 +163,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static', 'static_dev'),
 )
 
-# Close the session when user closes the browser
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
 # RabbitMQ configuration:
 #BROKER_URL = config('RABBITMQ_URL')
 

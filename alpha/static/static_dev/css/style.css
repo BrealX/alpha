@@ -296,6 +296,11 @@ p
     top: 20%;
 }
 
+.modal-footer .btn.submit-btn
+{
+    min-width: auto;
+}
+
 .modal-footer button.btn:nth-child(2)
 {
     background-color: #5b32b4;
@@ -517,6 +522,7 @@ p
 
 .dropdown-menu.auth.show a {
     color: #5b32b4;
+    border-radius: 10px;
 }
 
 .minicart-button
@@ -1247,7 +1253,8 @@ div.miniCartFooter .btn.btn-primary
 /* AUTHENTIFICATION PAGES
 /* =============================================================== */
 
-.section-auth
+.section-auth,
+.section-email
 {
     margin-bottom: 374px;
     padding-bottom: 120px;
@@ -1269,17 +1276,11 @@ div.miniCartFooter .btn.btn-primary
     box-shadow: rgba(0, 0, 0, .5) 0 20px 30px -20px;
 }
 
-.section-after-registration
-{
-    box-shadow: rgba(0, 0, 0, 1) 0px 20px 30px -20px;
-    margin-bottom: 374px;
-    padding-bottom: 80px;
-    overflow: hidden;
-    position: relative;
-    background: radial-gradient(rgb(194, 74, 126), rgb(105, 86, 235));
-}
-
-.section-activation
+.section-after-registration,
+.section-password-set,
+.section-activation,
+.section-password-change,
+.section-password-reset
 {
     box-shadow: rgba(0, 0, 0, 1) 0px 20px 30px -20px;
     margin-bottom: 374px;
@@ -1299,7 +1300,8 @@ div.miniCartFooter .btn.btn-primary
 }
 
 .section-auth .line-shape,
-.section-register .line-shape
+.section-register .line-shape,
+.section-email .line-shape
 {
     margin-left: 0;
 }
@@ -1316,6 +1318,12 @@ div.miniCartFooter .btn.btn-primary
     margin-top: 115px;
 }
 
+.section-email .section-heading
+{
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
 .section-auth-right p,
 .section-register p
 {
@@ -1324,7 +1332,10 @@ div.miniCartFooter .btn.btn-primary
 }
 
 .section-after-registration .footer-text p,
-.section-activation .footer-text p
+.section-activation .footer-text p,
+.section-password-set .footer-text p,
+.section-password-change .footer-text p,
+.section-password-reset .footer-text p
 {
     color: #fff !important;
     text-align: center;
@@ -1496,8 +1507,29 @@ ul.socialaccount_providers li a:hover i.fa-vk::after
     color: #fff;
 }
 
+.section-email .ctrlHolder
+{
+    color: #5b32b4;
+}
+
+.section-email .ctrlHolder span
+{
+    margin-left: 20px;
+}
+
+.section-email .primaryAction
+{
+    transition-duration: .4s;
+
+    color: #fff !important;
+    border: #0abceb;
+    border-radius: 10px;
+    background-color: #0abceb;
+}
+
 @media (min-width: 300px) and (max-width: 767px) {
-    .section-auth
+    .section-auth,
+    .section-email
     {
         margin-bottom: 400px;
         padding-bottom: 50px;
@@ -1528,7 +1560,8 @@ ul.socialaccount_providers li a:hover i.fa-vk::after
     }
 
     .section-auth .line-shape,
-    .section-register .line-shape
+    .section-register .line-shape,
+    .section-email .line-shape
     {
         margin-right: auto;
         margin-left: auto;
@@ -1549,6 +1582,37 @@ ul.socialaccount_providers li a:hover i.fa-vk::after
 
         text-align: center;
     }
+
+    .section-email .buttonHolder,
+    .section-email .contact-input-area
+    {
+        text-align: center;
+    }
+
+    .section-email .primaryAction
+    {
+        margin-top: 15px;
+
+        transition-duration: .4s;
+
+        color: #fff !important;
+        border: #0abceb;
+        border-radius: 10px;
+        background-color: #0abceb;
+    }
+
+    .section-email .secondaryAction
+    {
+        font-weight: 500;
+        min-width: auto;
+        height: 40px;
+        transition-duration: .4s;
+        color: #fff;
+        border-radius: 10px;
+        background: #fb397d;
+        margin-top: 15px;
+    }
+
 }
 
 /* =============================================================== */
