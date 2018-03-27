@@ -84,25 +84,25 @@ def user_logout(request):
     return redirect('home')
 
 
-@login_required(login_url='/auth/login')
+@login_required(login_url='account_login')
 def user_dashboard(request):
     return render(request, 'accounts/user_dashboard.html', locals())
 
 
-@login_required(login_url='/auth/login')
+@login_required(login_url='account_login')
 def user_my_profile(request):
     user = request.user
     return render(request, 'accounts/user_my_profile.html', locals())
 
 
-@login_required(login_url='/auth/login')
+@login_required(login_url='account_login')
 def user_my_orders(request):
     user = request.user
     orders = Order.objects.filter(user=user, is_active=True).order_by('-created')
     return render(request, 'accounts/user_my_orders.html', locals())
 
 
-@login_required(login_url='/auth/login')
+@login_required(login_url='account_login')
 def user_order_info(request, order_id):
     user = request.user
     order = Order.objects.get(id=order_id, user=user, is_active=True)
@@ -111,7 +111,7 @@ def user_order_info(request, order_id):
     return render(request, 'accounts/user_order_info.html', locals())
 
 
-@login_required(login_url='/auth/login')
+@login_required(login_url='account_login')
 def add_address(request):
     user = request.user
     form = CheckoutFormRight(user)
@@ -131,7 +131,7 @@ def add_address(request):
     return render(request, 'accounts/user_add_address.html', locals())
 
 
-@login_required(login_url='/auth/login')
+@login_required(login_url='account_login')
 def delete_address(request):
     user = request.user
     user.profile.delivery_area = None
@@ -143,10 +143,11 @@ def delete_address(request):
     return JsonResponse(return_dict)
 
 
-@login_required(login_url='/auth/login')
+@login_required(login_url='account_login')
 def add_personal(request):
     user = request.user
-    message = ""
+    message_error = ""
+    message_success = ""
     if request.POST:
         form = UserAddPersonalForm(request.POST or None)
         if form.is_valid():
@@ -156,16 +157,15 @@ def add_personal(request):
             user.profile.phone = profile_phone
             user.first_name = user_firstname
             user.save()
-            message = "Данные успешно изменены. Спасибо!"
+            message_success = "Данные успешно изменены. Спасибо!"
             return render(request, 'accounts/user_add_personal.html', locals())  
         else:
-            message = "Вы пытаетесь отправить пустую форму. Пожалуйста, заполните " + \
-                "поля формы."    
+            message_error = "Вы пытаетесь отправить пустую форму, либо заполнили не все поля."    
     form = UserAddPersonalForm()
     return render(request, 'accounts/user_add_personal.html', locals())
 
 
-@login_required(login_url='/auth/login')
+@login_required(login_url='account_login')
 def delete_personal(request):
     user = request.user
     user.first_name = ''
@@ -179,7 +179,7 @@ def delete_personal(request):
     return JsonResponse(return_dict)
 
 
-@login_required(login_url='/auth/login')
+@login_required(login_url='account_login')
 def delete_account(request):
     '''makes current User inactive and marks his username as deleted in order to
     user can create his profile again with the same username later if needed'''

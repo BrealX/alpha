@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block dashboard %}
-<section id="section_profile" class="section-profile section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 50px;">
+<section class="section-profile section-padding-100">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -21,13 +21,15 @@
         </div>
         <!-- End Row -->
 		<div class="row">
-			<div class="col-12 text-center">
+			<div class="col-md-6">
 				<div class="section-heading">
 					<h2 class="text-white">Мой профиль</h2>
 					<div class="line-shape"></div>
 				</div>
+			</div>
+			<div class="col-12">
 				<div class="footer-text">
-					<p>Редактируйте Ваши персональные данные, адрес доставки товаров по умолчанию или контактный номер телефона. При необходимости можно также изменить Ваш пароль или удалить аккаунт.</p>
+					<p>Здесь можно отредактировать Ваши персональные данные. При необходимости можно также изменить Ваш пароль или удалить аккаунт.</p>
 				</div>
 			</div>
 		</div>
@@ -77,14 +79,14 @@
 						<h4>Личные данные</h4>
 						<p style="font-weight: 400;">
                             {% if user.first_name %}
-                                {{ user.first_name }}
+                                Имя: {{ user.first_name }}
                             {% else %}
                                 Вы не указали имя
                             {% endif %}
                         </p>
                         <p style="font-weight: 400;">
                             {% if user.profile.phone %}
-                                {{ user.profile.phone }}
+                                Телефон: {{ user.profile.phone }}
                             {% else %}
                                 Вы не указали контактный номер телефона
                             {% endif %}
@@ -98,7 +100,10 @@
 						<img src="{% static 'img/accounts/dashboard-password.jpg' %}" alt="">
 						<div class="profile-hover-effects">
 							<div class="profile-goto-icon">
-                                <a href="{% url 'password_reset' %}">Сменить пароль</a>
+								{% if not user.has_usable_password %}
+								<a href="{% url 'account_set_password' %}">Установить</a>
+								{% endif %}
+                                <a href="{% url 'account_reset_password' %}">Сменить пароль</a>
 							</div>
 						</div>
 					</div>

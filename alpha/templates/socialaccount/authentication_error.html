@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<section class="section-activation section-padding-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+				    <li class="active">
+					    {% trans "Social Network Login Failure" %}
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-heading" style="text-align: center;">
+					<h2 class="text-white">{% trans "Social Network Login Failure" %}</h2>
+					<div class="line-shape"></div>
+				</div>
+				<div class="footer-text text-center">
+					<p>{% trans "An error occurred while attempting to login via your social network account." %}</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section -->
+{% endblock %}

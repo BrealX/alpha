@@ -2,39 +2,33 @@
 {% load static %}
 
 {% block content %}
-<section id="section_checkout" class="section-checkout section-padding-100 clearfix" style="margin-bottom: 374px; box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px;">
+<section id="section_checkout" class="section-checkout section-padding-100 clearfix">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <ul class="breadcrumb" style="margin-bottom: 40px;">
-                    <li>
-                        <a href="{% url 'home' %}">На главную</a>
-                    </li>
-                    <li class="active">
-                        Корзина
-                    </li>
-                </ul>
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+				    <li class="active">
+					    Корзина
+				    </li>
+			    </ul>
             </div>
         </div>
         <!-- End Row -->
     </div>
     <!-- End Container -->
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-8">
-                <div class="section-cart-header">
-                    <h2>Корзина</h2>
-                    <p>Здесь можно изменить количество заказанного товара и перейти к оформлению заказа!</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="get-back-button">
-                    <a href="{% url 'home' %}">Продолжить покупки</a>
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h2 class="text-white">Корзина</h2>
+                    <div class="line-shape"></div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container">
+        <!-- End Row -->
         <div class="row">
             <div class="col-12">
                 <!-- Cart Page Start -->

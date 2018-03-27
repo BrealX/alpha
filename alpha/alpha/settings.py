@@ -31,15 +31,14 @@ ALLOWED_HOSTS = ['yozhik.com.ua', 'localhost', ]
 # Application definition
 
 INSTALLED_APPS = [
-    #Default Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
-    # My User Apps
     'accounts',
     'carton',
     'landing',
@@ -47,12 +46,13 @@ INSTALLED_APPS = [
     'products',
     'widget_tweaks',
 
-    # Django-AllAuth Apps
-    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.instagram',
+    'allauth.socialaccount.providers.vk',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +70,7 @@ ROOT_URLCONF = 'alpha.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'templates', 'allauth')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,6 +79,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 
+                'orders.context_processors.getting_cart_info',
                 'landing.context_processors.navigation_bar',
             ],
         },
@@ -118,8 +119,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-        'allauth.account.auth_backends.AuthenticationBackend',
         'django.contrib.auth.backends.ModelBackend',
+        'allauth.account.auth_backends.AuthenticationBackend',
     )
 
 # settings for Email
@@ -166,10 +167,10 @@ STATICFILES_DIRS = (
 )
 
 # Close the session when user closes the browser
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+#SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # RabbitMQ configuration:
-BROKER_URL = config('RABBITMQ_URL')
+#BROKER_URL = config('RABBITMQ_URL')
 
 # A list of accepted content-types for security purposes
 CELERY_ACCEPT_CONTENT = ['json']
@@ -193,29 +194,31 @@ SOCIALACCOUNT_PROVIDERS = \
             'email',
             'name',
             'first_name',
-            'last_name',
-            'verified',
-            'locale',
-            'timezone',
-            'link',
-            'gender',
-            'updated_time'],
+            'last_name',],
         'EXCHANGE_TOKEN': True,
-        'LOCALE_FUNC': lambda request: 'kr_KR',
+        'LOCALE_FUNC': lambda request: 'en_US',
         'VERIFIED_EMAIL': False,
-        'VERSION': 'v2.4'}}
+        'VERSION': 'v2.12'
+    },
+    'google': {
+        'SCOPE': ['email', 'profile',],
+        'AUTH_PARAMS': {'access_type': 'offline',},
+    },
+}
+
+SITE_ID = 1
 
 #facebook
 SOCIAL_AUTH_FACEBOOK_KEY = config('FACEBOOK_KEY')  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = config('FACEBOOK_SECRET') #app key
 
-#site id
-SITE_ID = 1 # for the dev mode, you need to use localhost's id facebook does not support the name 127.0.0.1:8000
-
-#little options for your page's signup.
-
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQURIED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+LOGIN_REDIRECT_URL = '/'
 
 CART_PRODUCT_MODEL = 'products.models.Product'
 

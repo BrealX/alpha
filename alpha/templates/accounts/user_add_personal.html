@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block dashboard %}
-<section id="section_add_personal" class="section-add-personal section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 50px;">
+<section class="section-add-personal section-padding-100">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -37,25 +37,40 @@
 				    {% endif %}
 					<div class="line-shape"></div>
 				</div>
+			</div>
+			<div class="col-12">
 				<div class="footer-text" style="line-height: 30px;">
 					<p>Чтобы добавить или изменить Вашу личную информацию, заполните или отредактируйте форму.</p>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<form action="{% url 'add_personal' %}" role="form" method="post">{% csrf_token %}
-                    <div class="form-group required">
-                        <label for="user_firstname" style="color: #5b32b4;">Текущее имя<sup>*</sup></label>
-                        <input type="text" name="user_firstname" id="user_firstname" class="form-control" placeholder="{% if user.first_name %}{{ user.first_name }}{% else %}Вы еще не сообщили нам своё имя{% endif %}" autofocus value="{{ request.POST.user_firstname }}"></input>
-                    </div>
-                    <div class="form-group required">
-                        <label for="user_phone" style="color: #5b32b4;">Текущий контактный номер телефона<sup>*</sup></label>
-                        <input type="tel" name="profile_phone" id="user_phone" class="form-control phone-mask" placeholder="{% if user.profile.phone %}{{ user.profile.phone }}{% else %}Вы еще не сообщили нам свой номер телефона{% endif %}" value="{{ request.POST.profile_phone }}"></input>
-                    </div>
-                    <p class="form-error">{% if message %}{{ message }}{% endif %}</p>
-                    <button type="submit" class="btn submit-btn">
-                        <i class="fas fa-map-marker-alt"></i>
-                        Сохранить
-                    </button>
+			<div class="col-12">
+				<form class="form-inline" action="{% url 'add_personal' %}" role="form" method="post">
+				{% csrf_token %}
+  					<div class="form-group mx-auto mt-2">
+    					<label for="user_firstname" class="sr-only" style="color: #5b32b4;">Имя</label>
+    					<input type="text" name="user_firstname" id="user_firstname" class="form-control" placeholder="{% if user.first_name %}{{ user.first_name }}{% else %}Вы еще не сообщили нам своё имя{% endif %}" autofocus value="{{ request.POST.user_firstname }}"></input>
+  					</div>
+  					<div class="form-group mx-auto mt-2">
+    					<label class="sr-only" for="user_phone" style="color: #5b32b4;">Номер телефона</label>
+    					<input type="tel" name="profile_phone" id="user_phone" class="form-control phone-mask" placeholder="{% if user.profile.phone %}{{ user.profile.phone }}{% else %}Вы еще не сообщили нам свой номер телефона{% endif %}" value="{{ request.POST.profile_phone }}"></input>
+  					</div>
+  					<div class="form-group mx-auto mt-2">
+  						<button type="submit" class="btn submit-btn">Сохранить</button>
+  					</div>
+  				{% if message_error %}
+                <div class="form-error text-center">
+                    <p>Ошибки:</p>
+                    <ul>
+                        <li>{{ message_error }}</li>
+                    </ul>
+                </div>
+                {% elif message_success %}
+				<div class="text-center" style="color: #5b32b4; margin-top: 30px;">
+                    <ul>
+                        <li>{{ message_success }}</li>
+                    </ul>
+                </div>
+                {% endif %}
 				</form>
 			</div>
 		</div>
@@ -63,5 +78,5 @@
     </div>
     <!-- End Container -->
 </section>
-<!-- End Section Profile -->
+<!-- End Section -->
 {% endblock dashboard %}

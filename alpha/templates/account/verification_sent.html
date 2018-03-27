@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<section class="section-after-registration section-padding-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+				    <li>
+					    <a href="{% url 'account_signup' %}">Регистрация</a>
+				    </li>
+				    <li class="active">
+					    Подтвердите email
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-heading" style="text-align: center;">
+					<h2 class="text-white">Подтвердите email</h2>
+					<div class="line-shape"></div>
+				</div>
+				<div class="footer-text">
+					<p>На Ваш email отправлена ссылка для подтверждения электронной почты. Пожалуйста, перейдите по ссылке и завершите процесс регистрации! Если вы не получили верификационное письмо в течение нескольких минут, пожалуйста, свяжитесь с нами.</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section -->
+{% endblock %}

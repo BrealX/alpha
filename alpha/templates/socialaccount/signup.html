@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block content %}
+<section class="section-activation section-padding-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+				    <li class="active">
+					    {% trans "Sign Up" %}
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-heading" style="text-align: center;">
+					<h2 class="text-white">{% trans "Sign Up" %}</h2>
+					<div class="line-shape"></div>
+				</div>
+				<div class="footer-text text-center">
+					<p>
+						Вы авторизируетесь на сайте ЁжиК. с помощью аккаунта в {{ account.get_provider.name }}.
+						Для завершения, пожалуйста, заполните следующие поля:
+					</p>
+					<form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
+  					{% csrf_token %}
+  						<div class="contact-input-area">
+                        	<div class="row">
+                            	<div class="col-md-12">
+  									<div class="form-group">
+  										{{ form }}
+  									</div>
+  									{% if redirect_field_value %}
+  										<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  									{% endif %}
+  									<button class="btn submit-btn" type="submit">{% trans "Sign Up" %}</button>
+  								</div>
+  							</div>
+  						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section -->
+{% endblock %}

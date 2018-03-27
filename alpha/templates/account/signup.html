@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load widget_tweaks %}
+
+{% block auth %}
+{% get_providers as socialaccount_providers %}
+
+<section class="section-register section-padding-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+				    <li class="active">
+					    {% trans "Sign Up" %}
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-6">
+				<div class="section-heading">
+					<h2 class="text-white">{% trans "Sign Up" %}</h2>
+					<div class="line-shape"></div>
+				</div>
+				<div class="footer-text">
+                    <p>Если у Вас уже есть зарегистрированный аккаунт, тогда, пожалуйста, <a href="{{ login_url }}">войдите</a> в свою учетную запись!</p>
+				</div>
+			</div>
+			<div class="col-md-6 section-auth-right">
+                <p>Введите регистрационные данные:</p>
+                <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                {% csrf_token %}
+                    <div class="contact-input-area">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {% render_field form.email|add_class:"form-control"|attr:"autofocus" placeholder="Ваш email" %}
+                                </div>                          
+                                <div class="form-group">
+                                    {% render_field form.password1|add_class:"form-control" placeholder="Пароль" %}
+                                </div>
+                                <div class="form-group">
+                                    {% render_field form.password2|add_class:"form-control" placeholder="Пароль еще раз" %}
+                                </div>
+                                {% if redirect_field_value %}
+                                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                {% endif %}
+                                <button class="btn submit-btn" type="submit">Зарегистрироваться</button>
+                                {% if form.errors %}
+                                <div class="form-error">
+                                    <p>Ошибки:</p>
+                                    <ul>
+                                    {% for field in form %}
+                                    {% for error in field.errors %}    
+                                        <li>{% blocktrans %}{{ error }}{% endblocktrans %}</li>
+                                    {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}    
+                                        <li>{% blocktrans %}{{ error }}{% endblocktrans %}</li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>                                      
+                </form>                            
+			</div>
+		</div>
+		<!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Auth -->
+{% endblock %}

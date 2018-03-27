@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<section id="section_checkout" class="section-checkout clearfix" style="margin-bottom: 374px;">
+<section class="section-checkout2 section-padding-100 clearfix">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -23,30 +23,19 @@
     </div>
     <!-- End Container -->
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-8">
-                <div class="section-cart-header">
-                    <h2>Подтверждение заказа</h2>
-                    <p>Пожалуйста, проверьте Ваш заказ и подтвердите его!</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="get-back-button">
-                    <a href="{% url 'checkout1' %}">Назад к оформлению</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="section-heading text-center" style="margin-top: 20px;">
-                    <h2 class="text-white">Ваш заказ</h2>
+            <div class="col-12">
+                <div class="section-heading">
+                    <h2>Подтверждение заказа</h2>
                     <div class="line-shape"></div>
-                    <h2 class="text-white" style="font-size: 20px; margin-top: 30px;">Адрес доставки: {{ delivery_address }}</h2>
+                </div>
+                <div class="footer-text">
+                    <p>Пожалуйста, проверьте Ваш заказ и подтвердите его!</p>
+                    <p>Адрес доставки: {{ delivery_address }}</p>
                 </div>
             </div>
         </div>
+        <!-- End Row -->
     </div>
     <div class="container">
         <div class="row">
