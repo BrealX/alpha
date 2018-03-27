@@ -231,7 +231,7 @@ p
 }
 
 /* ================================================================== */
-/* CUSTOMIZE THE BOOTSTRAP MODAL + INPUT FORM ELEMENT + BUTTON + ALERT
+/* CUSTOMIZE THE BOOTSTRAP MODAL
 /* ================================================================== */
 
 .ml-auto,
@@ -443,6 +443,11 @@ p
     color: #4ec67f;
 }
 
+.text-chameleon
+{
+    color: #fff !important;
+}
+
 /* ================================================================== */
 /* HEADER
 /* ================================================================== */
@@ -520,18 +525,22 @@ p
 .menu-area #nav .nav-link
 {
     font-size: 16px;
-    font-weight: 500;
-
     display: block;
-
-    padding: 35px 15px;
-
+    padding: 10px;
     -webkit-transition-duration: 500ms;
          -o-transition-duration: 500ms;
             transition-duration: 500ms;
-
     color: #fff;
-    border-radius: 30px;
+    text-decoration: none;
+}
+
+.menu-area #nav .nav-link:hover
+{
+    color: #58d5f7;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px;
 }
 
 .menu-area #nav .nav-link a,
@@ -574,19 +583,16 @@ p
 
 .minicart-button > a
 {
-    font-weight: 500;
     line-height: 46px;
-
     display: inline-block;
-
-    min-width: 178px;
-    height: 50px;
-
+    min-width: 195px;
+    height: 51px;
     text-align: center;
-
     color: #fff !important;
-    border: 2px solid #a883e9;
-    border-radius: 24px 24px 24px 0;
+    border: #0ABCEB;
+    border-radius: 10px;
+    background-color: #0ABCEB;
+    transition-duration: 0.4s;
 }
 
 .minicart-button > a:hover
@@ -609,7 +615,7 @@ p
     float: left;
 
     min-width: 500px;
-    margin: 2px 0 0;
+    margin: 15px 0 0;
     padding: 5px;
 
     list-style: none;
@@ -617,7 +623,7 @@ p
     text-align: left;
 
     border: 2px solid #a883e9;
-    border-radius: 24px 24px 24px 0;
+    border-radius: 24px 0 24px 24px;
     background-color: #fff;
     background-clip: padding-box;
     box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
@@ -683,7 +689,7 @@ p.empty-cart
 .miniCartFooter
 {
     padding: 10px 10px 10px;
-
+    border-radius: 24px;
     background: #fff;
 }
 
@@ -703,18 +709,33 @@ p.empty-cart
 .miniCartFooter .minicart-gotocart-button
 {
     color: #fff;
-    border-radius: 22px 25px 0 22px;
+    border-radius: 10px;
     background-color: #5b32b4;    
+}
+
+.miniCartFooter .minicart-gotocart-button:hover
+{
+    color: #fff;
+    border-radius: 20px;
+    background-color: #5b32b4;
+    box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
 }
 
 .miniCartFooter .btn:last-child
 {
     margin-left: 5px;
     color: #fff;
-    border-radius: 22px 25px 22px 0;
+    border-radius: 10px;
     background-color: #fb397d;    
 }
 
+.miniCartFooter .btn:last-child:hover
+{
+    margin-left: 5px;
+    color: #fff;
+    border-radius: 20px;
+    background-color: #fb397d;
+}
 
 
 
@@ -828,6 +849,7 @@ div.miniCartFooter .btn.btn-primary
 .section-register,
 .section-register-done,
 .section-after-registration,
+.section-checkout,
 .section-activation,
 .section-dashboard,
 .section-profile,
@@ -838,21 +860,6 @@ div.miniCartFooter .btn.btn-primary
     background: url(../img/header-default.png);
     background-color: #f5f9fc;
     background-repeat: no-repeat;
-}
-
-.section-checkout
-{
-    position: relative;
-    z-index: auto;
-
-    padding: 100px 0 100px 0;
-
-    background: #a865e1;
-    background: -webkit-linear-gradient(to left, #7873ed, #a865e1);
-    background: -webkit-linear-gradient(right, #7873ed, #a865e1);
-    background: -webkit-gradient(linear, right top, left top, from(#7873ed), to(#a865e1));
-    background:      -o-linear-gradient(right, #7873ed, #a865e1);
-    background:         linear-gradient(to left, #7873ed, #a865e1);
 }
 
 .section-auth .line-shape,
@@ -879,7 +886,7 @@ div.miniCartFooter .btn.btn-primary
 {
     font-size: 18px;
     padding: 15px 15px !important;
-    width: 70%;
+    width: 100%;
     border-radius: 25px 25px 25px 0 !important;
 }
 
@@ -911,6 +918,11 @@ div.miniCartFooter .btn.btn-primary
 
     border: 1px solid #eff2f6;
     border-radius: 40px 40px 40px 0;
+}
+
+.slider-element:hover {
+    -webkit-box-shadow: 0 10px 90px rgba(0, 0, 0, .08);
+    box-shadow: 0 10px 90px rgba(0, 0, 0, .08);
 }
 
 .slider-element > h4
@@ -1123,13 +1135,14 @@ div.miniCartFooter .btn.btn-primary
 
     color: #fff;
     border: none;
-    border-radius: 24px 24px 24px 0 !important;
+    border-radius: 10px;
     background-color: #5b32b4;
 }
 
 #productslider .slider-submit:hover
 {
     background-color: #fb397d;
+    border-radius: 20px;
 }
 
 .main-container
@@ -1514,7 +1527,10 @@ h5.parallaxSubtitle
     background: #fff;
 }
 
-
+.section-checkout .section-checkout-delivery-address
+{
+    margin-top: 100px;
+}
 
 
 
@@ -1874,7 +1890,7 @@ div.productFilter a.btn-danger:hover
 }
 
 .section-heading {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
 
 .section-heading > h2
@@ -1902,7 +1918,7 @@ div.productFilter a.btn-danger:hover
 
 .single-special
 {
-    min-height: 280px;
+    min-height: 100%;
     margin-bottom: 30px;
     padding: 40px;
 
@@ -2112,7 +2128,7 @@ div.productFilter a.btn-danger:hover
 .single-price-plan .package-plan
 {
     max-width: 390px;
-    height: 430px;
+    height: auto;
     margin: auto;
     padding: 36px 15px 45px;
 
@@ -2161,7 +2177,7 @@ div.productFilter a.btn-danger:hover
 
 .single-price-plan .plan-button
 {
-    margin-top: 25px;
+    margin-top: 40px;
 }
 
 .single-price-plan .plan-button > button
@@ -2354,8 +2370,13 @@ div.productFilter a.btn-danger:hover
     height: 40px;
 
     color: #fff;
-    border-radius: 22px 25px 22px 0;
+    border-radius: 10px;
     background: #fb397d;
+}
+
+.btn.submit-btn:hover
+{
+    border-radius: 20px;
 }
 
 
@@ -3377,6 +3398,14 @@ h2.block-title-2,
         padding: 35px 7.5px;
     }
 
+    .menu-area #nav .nav-link:hover {
+        color: #58d5f7;
+        text-decoration: none;
+        font-size: 16px;
+        display: block;
+        padding: 35px 7.5px;
+    }
+
     .minicart-button > a {
         color: #fff;
         height: 40px;
@@ -3419,7 +3448,7 @@ h2.block-title-2,
 
     #navbar {
         padding: 30px;
-        border-radius: 3px;
+        border-radius: 3px 30px 30px 3px;
         background-color: #5b32b4;
         text-align: left;
         margin-top: 10px;
@@ -3427,7 +3456,7 @@ h2.block-title-2,
     }
 
     .minicart-button {
-        margin-top: 30px;
+        margin-top: 10px;
         text-align: left;
         max-width: 115px;
     }
@@ -3477,17 +3506,14 @@ h2.block-title-2,
     }
 
     .section-heading {
-        margin-bottom: 50px;
+        margin-bottom: 20px;
     }
 
     .minicart-button > a {
-        margin-top: 4px;
         display: inline-block;
-        border: 2px solid #a883e9;
-        height: 40px;
+        height: 50px;
         min-width: 160px;
-        line-height: 36px;
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .counter-area {
@@ -3512,8 +3538,7 @@ h2.block-title-2,
 
     .section-heading
     {
-        margin-bottom: 60px;
-
+        margin-bottom: 10px;
         text-align: center;
     }
 
@@ -3584,7 +3609,7 @@ h2.block-title-2,
 
         text-align: left;
 
-        border-radius: 3px;
+        border-radius: 3px 30px 30px 3px;
         background-color: #5b32b4;
     }
 
@@ -3597,10 +3622,10 @@ h2.block-title-2,
 
     .minicart-button > a
     {
-        line-height: 25px;
-
+        line-height: 0.8;
         min-width: 140px;
         height: 35px;
+        padding: 3px;
     }
 
     .header-area
@@ -3624,7 +3649,7 @@ h2.block-title-2,
         text-align: left;
 
         border: 2px solid #a883e9;
-        border-radius: 24px 24px 24px 0;
+        border-radius: 0px 24px 24px 24px;
         background-color: #fff;
         background-clip: padding-box;
         box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
@@ -3651,6 +3676,17 @@ h2.block-title-2,
     .#collapsed_minicarttable > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)
     {
         width: 15% !important;
+    }
+
+    #collapsed_minicartfooter h3
+    {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: normal;
+        margin-bottom: 0;
+        text-transform: uppercase;
+        text-align: center !important;
+        color: #726a84;
     }
 
     .miniCartDescription,
@@ -3694,10 +3730,34 @@ h2.block-title-2,
     .miniCartFooter .minicart-gotocart-button
     {
         margin: 0 auto 10px auto;
-
         color: #fff;
-        border-radius: 22px 25px 0 22px;
+        border-radius: 10px;
         background-color: #5b32b4;
+    }
+
+    .miniCartFooter .minicart-gotocart-button:hover
+    {
+        margin: 0 auto 10px auto;
+        color: #fff;
+        border-radius: 20px;
+        background-color: #5b32b4;
+        box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+    }
+
+    .miniCartFooter .btn:last-child {
+        margin: 0px auto 10px auto;
+        color: #fff;
+        border-radius: 10px;
+        background-color: #fb397d;
+    }
+
+    .miniCartFooter .btn:last-child:hover
+    {
+        margin-left: 5px;
+        color: #fff;
+        border-radius: 20px;
+        background-color: #fb397d;
+        box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
     }
 
     .footer-text > p
@@ -3732,8 +3792,16 @@ h2.block-title-2,
         margin: 0 auto 35px auto;
 
         color: #fff;
-        border-radius: 22px 25px 22px 0;
+        border-radius: 10px;
         background: #fb397d;
+    }
+
+    #checkout_form button.submit-btn:hover
+    {
+        border-radius: 20px;
+        -webkit-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+        -moz-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+        box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
     }
 
     #checkout_page_submit,
@@ -3748,15 +3816,24 @@ h2.block-title-2,
         margin: 0 auto 35px auto;
 
         color: #fff;
-        border-radius: 22px 25px 22px 0;
+        border-radius: 10px;
         background: #fb397d;
+    }
+
+    #checkout_page_submit:hover,
+    #order_confirm_button:hover
+    {
+        border-radius: 20px;
+        -webkit-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+        -moz-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+        box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
     }
 
     #cart_subtotal
     {
         min-width: 185px;
         height: 40px;
-        margin-left: 20px;
+        margin: 0 auto 35px auto;
 
         color: #fb397d;
         border-radius: 22px 25px 22px 0;
@@ -3808,7 +3885,7 @@ h2.block-title-2,
         background: none;
     }
 
-    #section_checkout div.section-cart-header
+    #section_checkout .section-cart-header
     {
         text-align: center;
     }
@@ -3825,6 +3902,15 @@ h2.block-title-2,
     {
         margin-right: 0;
         margin-left: 0;
+    }
+
+    .text-chameleon
+    {
+        color: #884bdf;
+    }
+
+    .section-checkout .section-checkout-delivery-address {
+        margin-top: 0;
     }
 
     #id_anonymous_name,
@@ -3950,7 +4036,16 @@ h2.block-title-2,
 
     #landing_about {
         padding-top: 50px;
-        padding-bottom: 50px;
+        padding-bottom: 20px;
+    }
+
+    #landing_about .section-heading {
+        margin-bottom: 25px;
+    }
+
+    .single-feature {
+        margin-bottom: 20px;
+        padding: 10px;
     }
 
     .special-description-content > h2 {
@@ -3964,7 +4059,7 @@ h2.block-title-2,
         position: relative;
         z-index: auto;
         top: -100px;
-        padding: 100px 0 0px 0;
+        padding: 50px 0 30px 0;
         background: #a865e1;
         background: -webkit-linear-gradient(to left, #7873ed, #a865e1);
         background: -webkit-linear-gradient(right, #7873ed, #a865e1);
@@ -3998,6 +4093,13 @@ h2.block-title-2,
         margin-left: calc(50% - 40px);
     }
 
+    .address-text,
+    .phone-text,
+    .email-text
+    {
+        text-align: center;
+    }
+
     .contact-form {
         margin-top: 20px;
     }
@@ -4013,10 +4115,23 @@ h2.block-title-2,
         border-radius: 25px 25px 25px 0 !important;
     }
 
-    #landing_contact_submit, #landing_page_submit_btn {
+    #landing_page_submit_btn
+    {
         width: 120px;
         height: 51px;
         margin-top: 20px;
+        -webkit-transition-duration: .4s;
+        transition-duration: .4s;
+        color: #fff;
+        border-radius: 10px;
+        background-color: #fb397d;
+    }
+
+    #landing_contact_submit
+    {
+        width: 120px;
+        height: 51px;
+        margin: 20px auto;
         -webkit-transition-duration: .4s;
         transition-duration: .4s;
         color: #fff;
@@ -4029,7 +4144,14 @@ h2.block-title-2,
     }
 
     .single-special {
+        min-height: 100%;
         margin-bottom: 30px;
+        padding: 0;
+        -webkit-transition-duration: 800ms;
+        -o-transition-duration: 800ms;
+        transition-duration: 800ms;
+        border: 1px solid #eff2f6;
+        border-radius: 40px 40px 40px 0;
     }
 
     .special_description_area.mt-150 {
