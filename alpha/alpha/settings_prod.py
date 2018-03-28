@@ -26,3 +26,6 @@ CACHES = {
 
 AXES_CACHE = 'axes_cache'
 AXES_FAILURE_LIMIT = 5
+
+#allauth
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'

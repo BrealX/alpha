@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'accounts',
+    'axes',
     'carton',
     'landing',
     'orders',
@@ -222,7 +223,7 @@ LOGIN_REDIRECT_URL = '/'
 
 CART_PRODUCT_MODEL = 'products.models.Product'
 
-#try:
-#    from .settings_prod import *
-#except:
-#    pass
+try:
+    from .settings_prod import *
+except:
+    pass

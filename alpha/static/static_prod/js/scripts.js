@@ -177,14 +177,6 @@ $(document).ready(function() {
         step: 1,
     });
 
-    // ICheck Initializer
-    // https://github.com/fronteed/iCheck/
-    $('input').iCheck({
-        checkboxClass: 'icheckbox_square-green',
-        radioClass: 'iradio_square-green',
-        increaseArea: '20%' // optional
-    });
-
     // My Profile Page address delete button
     $('#my_profile_address_delete').on('click', function(e) {
         e.preventDefault();
