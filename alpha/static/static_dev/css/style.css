@@ -796,6 +796,7 @@ div.miniCartFooter .btn.btn-primary
     z-index: 1;
     background-position: bottom center;
     background-size: cover;
+    background-color: #fff;
 }
 
 .section-register-done,
@@ -1539,12 +1540,29 @@ ul.socialaccount_providers li a:hover i.fa-vk::after
         box-shadow: rgba(0, 0, 0, .5) 0 20px 30px -20px;
     }
 
+    .section-auth .breadcrumb,
+    .section-register .breadcrumb
+    {
+        margin-top: 10px;
+        margin-bottom: 30px;
+        border: none;
+        background: none;
+    }
+
     .section-auth .footer-text
     {
         line-height: 1.1;
 
         margin-top: 70px;
         margin-bottom: 15px;
+    }
+
+    .section-register .footer-text > p 
+    {
+        font-size: 25px;
+        margin-bottom: 25px;
+        text-align: center;
+        color: #fff;
     }
 
     ul.socialaccount_providers
@@ -2139,11 +2157,11 @@ ul.socialaccount_providers li a:hover i.fa-vk::after
 .parallax-image-1
 {
     background: url(../img/parallax/parallax1.jpg);
+    background-color: #fff;
     background-attachment: fixed; /* IE FIX */
     -webkit-background-size: cover;
        -moz-background-size: cover;
          -o-background-size: cover;
-            background-size: cover;
             background-size: cover;
 }
 
@@ -4278,14 +4296,6 @@ h2.block-title-2,
         background: #fff;
     }
 
-    .breadcrumb
-    {
-        margin-top: 35px;
-        margin-bottom: 70px;
-
-        background: none;
-    }
-
     #section_checkout .section-cart-header
     {
         text-align: center;
@@ -4547,16 +4557,6 @@ h2.block-title-2,
 
     .special_description_content > h2 {
         font-size: 30px;
-    }
-
-    .section-auth .breadcrumb,
-    .section-order-info .breadcrumb
-    {
-        margin-top: 10px;
-        margin-bottom: 30px;
-        border: 1px solid #eff2f6;
-        border-radius: 24px 24px 24px 0;
-        background: none;
     }
 
     .section-auth .section-heading {

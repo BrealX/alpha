@@ -222,7 +222,7 @@ LOGIN_REDIRECT_URL = '/'
 
 CART_PRODUCT_MODEL = 'products.models.Product'
 
-try:
-    from .settings_prod import *
-except:
-    pass
+#try:
+#    from .settings_prod import *
+#except:
+#    pass
