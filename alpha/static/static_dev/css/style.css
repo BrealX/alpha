@@ -1402,104 +1402,48 @@ div.miniCartFooter .btn.btn-primary
 ul.socialaccount_providers
 {
     display: inline-block;
-    overflow: hidden;
 
-    margin: 0;
+    height: 90px;
+    margin: -20px 0 0 -20px;
+    padding: 0;
 
-    border-radius: 5px;
-    background-color: #884bdf;
+    list-style: none;
+
+    text-align: center;;
 }
 
 ul.socialaccount_providers li
 {
     display: inline-block;
+
+    margin: auto 10px;
 }
 
-ul.socialaccount_providers li a i.fab
+ul.socialaccount_providers li a
 {
-    line-height: 30px;
-
-    position: relative;
-    z-index: 2;
+    font-size: 4rem;
+    line-height: 100px;
 
     display: inline-block;
 
-    width: auto;
-    height: auto;
-    margin: 10px;
-    padding: 10px;
+    width: 100px;
+    height: 100px;
 
+    transition: all .5s ease;
+    transform: rotateY(-30deg);
+    transform-origin: left;
     text-align: center;
 
-    color: #ccc;
-    border: 1px solid transparent;
-    border-radius: 50px;
+    color: #9b69e4;
+    text-shadow: 10px 0 1px #131313, 10px 0 1px #070707, 10px 0 1px black, 10px 0 10px black;
 }
 
-ul.socialaccount_providers li a i.fab::after
+ul.socialaccount_providers li a:hover
 {
-    position: absolute;
-    z-index: -1;
-    top: -500%;
-    right: -500%;
-    bottom: -500%;
-    left: -500%;
+    transform: rotate(0deg);
 
-    width: 0;
-    height: 0;
-    margin: auto;
-
-    content: '';
-    transition: all ease .5s;
-
-    opacity: 0;
-    border: 0 solid transparent;
-    border-radius: 200px;
-}
-
-ul.socialaccount_providers li a:hover i.fab::before
-{
-    color: #fff;
-}
-
-ul.socialaccount_providers li a:hover i.fa-facebook::after
-{
-    width: 200%;
-    height: 200%;
-
-    opacity: 1;
-    border-radius: 0;
-    background-color: #3b5998;
-}
-
-ul.socialaccount_providers li a:hover i.fa-google::after
-{
-    width: 200%;
-    height: 200%;
-
-    opacity: 1;
-    border-radius: 0;
-    background-color: #d34836;
-}
-
-ul.socialaccount_providers li a:hover i.fa-instagram::after
-{
-    width: 200%;
-    height: 200%;
-
-    opacity: 1;
-    border-radius: 0;
-    background-color: #8a3ab9;
-}
-
-ul.socialaccount_providers li a:hover i.fa-vk::after
-{
-    width: 200%;
-    height: 200%;
-
-    opacity: 1;
-    border-radius: 0;
-    background-color: #4c75a3;
+    color: #5b32b4;
+    text-shadow: 0 0 1px #131313, 0 0 1px #070707, 0 0 1px black, 0 0 1px black;
 }
 
 .section-activation .errorlist
@@ -1568,12 +1512,14 @@ ul.socialaccount_providers li a:hover i.fa-vk::after
     ul.socialaccount_providers
     {
         display: inline-block;
-        overflow: hidden;
 
-        margin-top: 50px;
+        height: 90px;
+        margin: 30px 0 0 0;
+        padding: 0;
 
-        border-radius: 5px;
-        background-color: #884bdf;
+        list-style: none;
+
+        text-align: center;
     }
 
     .section-auth .line-shape,
