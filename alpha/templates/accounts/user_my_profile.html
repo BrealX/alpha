@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n avatar_tags %}
 
 {% block dashboard %}
 <section class="section-profile section-padding-100">
@@ -140,6 +141,28 @@
 			</div>
 		</div>
         <!-- End Row -->
+        <div class="row">
+        	<div class="col-12 col-md-6 col-lg-3">
+				<div class="single-profile-item">
+					<div class="profile-image">
+						<img src="{% static 'img/accounts/dashboard-myaddress.jpg' %}" alt="">
+						<div class="profile-hover-effects">
+							<div class="profile-goto-icon">
+								{% if request.user|has_avatar %}
+                                <a href="{% url 'avatar_change' %}">Изменить</a>
+                                <a href="{% url 'avatar_delete' %}" id="my_avatar_delete">Удалить</a>
+                                {% else %}
+                                <a href="{% url 'avatar_add' %}">Добавить</a>
+                                {% endif %}
+							</div>
+						</div>
+					</div>
+					<div class="profile-text">
+						<h4>Аватар</h4>
+					</div>
+				</div>
+			</div>
+        </div>
         <div class="row">
             <!-- Modal -->
             <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden='true'>

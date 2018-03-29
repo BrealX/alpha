@@ -15,6 +15,6 @@
 {% endif %}
 <li>
   <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}}" 
-     href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><i class="fab fa-{{provider.name|lower}} fa-3x"></i></a>
+     href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><i class="fab fa-{{provider.name|lower}}"></i></a>
 </li>
 {% endfor %}

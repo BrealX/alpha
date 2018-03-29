@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'accounts',
+    'avatar',
     'carton',
     'landing',
     'orders',
@@ -216,3 +217,11 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 LOGIN_REDIRECT_URL = '/'
 
 CART_PRODUCT_MODEL = 'products.models.Product'
+
+AVATAR_MAX_AVATARS_PER_USER = 1
+AVATAR_CLEANUP_DELETED = True
+AVATAR_DEFAULT_URL = 'img/accounts/default-avatar.jpg'
+AVATAR_PROVIDERS = (
+    'avatar.providers.PrimaryAvatarProvider',
+    'avatar.providers.DefaultAvatarProvider',
+)

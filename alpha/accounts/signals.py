@@ -8,7 +8,6 @@ from utils.decorators import disable_for_loaddata
 User = get_user_model()
 
 
-@disable_for_loaddata
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
 	if created:
