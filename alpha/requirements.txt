@@ -8,6 +8,7 @@ dj-database-url==0.5.0
 Django==2.0.3
 django-allauth==0.35.0
 django-appconf==1.0.2
+django-avatar==4.1.0
 django-axes==4.1.0
 django-carton==1.2.1
 django-ipware==2.0.1
