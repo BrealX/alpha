@@ -450,12 +450,6 @@ p
     }
 }
 
-.navbar-brand:hover,
-.navbar-brand:focus
-{
-    color: #fff !important;
-}
-
 .menu-area
 {
     position: relative;
@@ -473,6 +467,11 @@ p
     padding: 0;
 
     color: #fff;
+}
+
+.menu-area .navbar-brand:hover
+{
+    color: #58d5f7;
 }
 
 .menu-area #nav .nav-link
@@ -3012,6 +3011,88 @@ div.productFilter a.btn-danger:hover
     -webkit-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
        -moz-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
             box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+}
+
+.clients-feedback-area
+{
+    padding: 30px 0;
+}
+
+.clients-feedback-area .client > i {
+    font-size: 48px;
+    color: #897ceb;
+    margin-bottom: 30px;
+}
+
+.clients-feedback-area .client-description > p {
+    max-width: 1010px;
+    margin: auto;
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #726a84;
+    font-weight: 300;
+    line-height: 1.1;
+}
+
+.clients-feedback-area .star-icon > i {
+    font-size: 18px;
+    color: #f1b922;
+}
+
+.clients-feedback-area .client-name > h5 {
+    color: #5b32b4;
+    font-size: 22px;
+    margin-top: 5px;
+}
+
+.clients-feedback-area .slick-arrow {
+    position: absolute;
+    width: 30px;
+    background-color: #fff;
+    height: 100%;
+    text-align: center;
+    font-size: 24px;
+    color: #b5aec4;
+    display: block;
+    line-height: 550%;
+    left: 0;
+    z-index: 90;
+    cursor: pointer;
+}
+
+.clients-feedback-area .slick-arrow.fa-angle-right {
+    left: auto;
+    right: 0;
+    top: 0;
+}
+
+element {
+    width: 129px;
+}
+.clients-feedback-area .slick-slide.client-thumbnail {
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 129px;
+}
+
+.clients-feedback-area .slider img {
+    display: block;
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    -webkit-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .footer-contact-area
