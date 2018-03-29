@@ -97,6 +97,7 @@ body
 
     color: #454545;
     background-color: #edeef0 !important;
+    overflow-x: hidden;
 }
 
 
@@ -795,6 +796,11 @@ div.miniCartFooter .btn.btn-primary
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-full-slider/blob/master/LICENSE)
  */
 
+.carousel-inner
+{
+    overflow: visible;
+}
+
 .carousel-item
 {
     height: 100vh;
@@ -805,6 +811,61 @@ div.miniCartFooter .btn.btn-primary
        -moz-background-size: cover;
          -o-background-size: cover;
             background-size: cover;
+}
+
+div.carousel-item:nth-child(1) > div:nth-child(1)
+{
+    position: relative;
+    width: 50%;
+    bottom: 0;
+    top: 30%;
+    font-family: 'Amatic SC', cursive;
+}
+
+.carousel-caption h3
+{
+    font-size: 45px;
+    line-height: 1.1;
+}
+
+.carousel-caption p
+{
+    font-size: 20px;
+    color: #fff;
+    line-height: 1.1;
+}
+
+div.carousel-item:nth-child(2) > div:nth-child(1)
+{
+    position: relative;
+    left: 0;
+    bottom: 0;
+    top: 30%;
+    font-family: 'Amatic SC', cursive;
+}
+
+div.carousel-item:nth-child(3) > div:nth-child(1)
+{
+    position: relative;
+    left: 20%;
+    bottom: 0;
+    top: 65%;
+    font-family: 'Amatic SC', cursive;
+}
+
+.mouse
+{
+    position: relative;
+    margin: auto;
+    padding-bottom: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform .4s ease;
+}
+
+.mouse:hover
+{
+    transform: translateY(5px);
 }
 
 .section-main-banner {
