@@ -23,6 +23,36 @@ from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 
 
+''' hack to make Django Allauth Set Password working.
+
+Initially when loggin in or signing up with social account user has no password. 
+He should set it manually. This view doesn't work properly because user gets a default
+non usable password with value '!' by Django. The User model's save() method is overriden 
+and it checks if the password is usable. If it isn't, it means that a staff member has 
+changed it and it must be hashed calling make_password() Django function. So as a result
+the user signed up via social account has already usable password (hashed '!').
+Then when Allauth SetPassword View checks if user has usable_password (allauth views.py line 597)
+it redirects the User to ChangePassword View, where he should change the password that he doesn't
+know actually.
+
+To fix this, I have added some code to the standard Django User model.
+So: at django.contrib.auth.models
+
+add line 'from django.contrib.auth.hashers import is_password_usable, make_password' to the top
+then add:
+
+def save(self, *args, **kwargs):
+    if self.password != '!' and not is_password_usable(self.password):
+        self.password = make_password(self.password)
+        super(User, self).save(*args, **kwargs)
+
+to the class User(AbstractUser) (line 357 Django 2.0.3)
+
+After that fix Allauth Set password View works correctly.
+https://github.com/pennersr/django-allauth/issues/373'''
+
+
+
 def user_login(request):
     args = {}
     args.update(csrf(request))

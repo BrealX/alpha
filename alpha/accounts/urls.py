@@ -3,6 +3,7 @@ from django.contrib.auth.views import password_reset, password_reset_done, passw
 from . import views
 
 urlpatterns = [
+    path('avatar/', include('avatar.urls')),
     path('auth/login/', views.user_login, name="login"),
     path('auth/register/', views.user_register, name="register"),
     path('auth/logout/', views.user_logout, name="logout"),

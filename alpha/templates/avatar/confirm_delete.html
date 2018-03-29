@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load i18n avatar_tags %}
+
+{% block content %}
+<section class="section-avatar section-padding-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{% url 'home' %}">На главную</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'user_my_profile' %}">Личный кабинет</a>
+                    </li>
+                    <li class="active">
+                        Изменение аватара
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading" style="text-align: center;">
+                    <h2 class="text-white">{% trans "Your current avatar: " %}</h2>
+                    <div class="line-shape"></div>
+                    {% if request.user|has_avatar %}
+                    <p>Пожалуйста, подтвердите удаление аватара</p>
+                    {% endif %}
+                </div>
+                <div class="footer-text">
+                    <img class="rounded-circle img-fluid" src="{% avatar_url user 150 %}" alt="">
+                    {% if not request.user|has_avatar %}
+                    {% url 'avatar_change' as avatar_change_url %}
+                    <p>У вас нет аватаров, удалять нечего. Пожалуйста, <a href="{{ avatar_change_url }}">загрузите</a> аватар.</p>
+                    {% else %}
+                    <form method="POST" action="{% url 'avatar_delete' %}">
+                    {% csrf_token %}
+                        <ul>
+                        {{ delete_avatar_form.as_ul }}
+                        </ul>
+                        <input class="btn submit-btn" type="submit" value="Удалить" />
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section -->
+{% endblock %}

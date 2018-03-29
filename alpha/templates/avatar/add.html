@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n avatar_tags %}
+
+{% block content %}
+<section class="section-avatar section-padding-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+				    <li>
+					    <a href="{% url 'user_my_profile' %}">Личный кабинет</a>
+				    </li>
+				    <li class="active">
+					    Добавление аватара
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-heading" style="text-align: center;">
+					<h2 class="text-white">{% trans "Your current avatar: " %}</h2>
+					<div class="line-shape"></div>
+				</div>
+				<div class="footer-text">
+					<img class="rounded-circle img-fluid" src="{% avatar_url user 150 %}" alt="">
+    				{% if not request.user|has_avatar %}
+        			<p>{% trans "You haven't uploaded an avatar yet. Please upload one now." %}</p>
+    				{% endif %}
+    				<form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}">
+    				{% csrf_token %}
+        				<label class="btn submit-btn" for={{ upload_avatar_form.avatar.auto_id }}>
+							<i class="fas fa-cloud-upload-alt"></i>Выберите изображение
+        				</label>
+        				{% render_field upload_avatar_form.avatar %}
+        				<br>
+        				<input class="btn submit-btn" type="submit" value="Загрузить" />
+        				{% if upload_avatar_form.errors %}
+                        <!-- Error messaging -->
+                        <div class="error-container">
+                            <div class="form-error">
+                                <p>В процессе загрузки произошли ошибки. Пожалуйста, исправьте их:</p>
+                                {{ upload_avatar_form.non_field_errors }}
+                                <ul>
+                                {% for field in upload_avatar_form %}
+                                    {% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
+                                {% endfor %}
+                                </ul>
+                            </div>
+                        <!-- /Error messaging -->
+                        </div>
+                        {% endif %}
+    				</form>
+				</div>
+			</div>
+		</div>
+		<!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section -->
+{% endblock %}
