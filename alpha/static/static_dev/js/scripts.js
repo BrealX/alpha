@@ -341,6 +341,14 @@ $(document).ready(function() {
         window.location.href = '/';
     });
 
+    // Shows full feedback text at modal window when 'Read more' button is clicked at Landing Page
+    $('#feedbackModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var username = button.data('username');
+        var feedback_text = button.data('feedback_text');
+        var modal = $(this);
+        modal.find('.modal-title').text('Отзыв от пользователя ' + username);
+        modal.find('.modal-body .review-form-container').text(feedback_text);
+    });
+
 });
-
-
