@@ -201,8 +201,6 @@ def delete_personal(request):
     user.first_name = ''
     user.profile.phone = ''
     user.save()
-    print(user.first_name)
-    print(user.profile.phone)
     return_dict = {}
     return_dict['user_firstname'] = user.first_name
     return_dict['profile_phone'] = user.profile.phone
