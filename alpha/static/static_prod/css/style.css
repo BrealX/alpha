@@ -1399,51 +1399,58 @@ div.miniCartFooter .btn.btn-primary
     text-align: center;
 }
 
-ul.socialaccount_providers
+.socialaccount_providers
 {
-    display: inline-block;
-
-    height: 90px;
-    margin: -20px 0 0 -20px;
-    padding: 0;
-
     list-style: none;
+}
+  
+.socialaccount_providers li
+{
+    position: relative;
 
-    text-align: center;;
+    float: left;
+
+    width: 75px;
+    height: 70px;
+    margin-right: 36px;
+    margin-left: 20px;
+
+    cursor: pointer;
+    transition: all .5s linear;
+
+    border: 3px solid #f5f9fc;
+    border-radius: 25px;
 }
 
-ul.socialaccount_providers li
+.socialaccount_providers li:last-child
 {
-    display: inline-block;
-
-    margin: auto 10px;
+    margin-right: 0;
 }
 
-ul.socialaccount_providers li a
+.socialaccount_providers li .fab
 {
-    font-size: 4rem;
-    line-height: 100px;
+    font-size: 30px;
 
-    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
 
-    width: 100px;
-    height: 100px;
-
-    transition: all .5s ease;
-    transform: rotateY(-30deg);
-    transform-origin: left;
-    text-align: center;
-
-    color: #9b69e4;
-    text-shadow: 10px 0 1px #131313, 10px 0 1px #070707, 10px 0 1px black, 10px 0 10px black;
-}
-
-ul.socialaccount_providers li a:hover
-{
-    transform: rotate(0deg);
+    transition: all .5s linear;
+    transform: translate(-50%,-50%);
 
     color: #5b32b4;
-    text-shadow: 0 0 1px #131313, 0 0 1px #070707, 0 0 1px black, 0 0 1px black;
+}
+
+.socialaccount_providers li:hover
+{
+    border: 3px solid #5b32b4;
+    background: #5b32b4;
+    box-shadow: 0 0 30px 3px #726a84;
+}
+
+.socialaccount_providers li:hover .fab
+{
+    color: #fff;
 }
 
 .section-activation .errorlist
@@ -1514,13 +1521,32 @@ ul.socialaccount_providers li a:hover
         display: inline-block;
 
         height: 90px;
-        margin: 30px 0 0 0;
+        margin: 30px 0 auto 0;
         padding: 0;
 
         list-style: none;
 
         text-align: center;
     }
+
+    .socialaccount_providers li
+    {
+        position: relative;
+
+        float: left;
+
+        width: 75px;
+        height: 70px;
+        margin-right: 0;
+
+        cursor: pointer;
+        transition: all .5s linear;
+
+        border: 3px solid #f5f9fc;
+        border-radius: 25px;
+        margin-left: 0;
+    }
+
 
     .section-auth .line-shape,
     .section-register .line-shape,
@@ -1607,6 +1633,16 @@ ul.socialaccount_providers li a:hover
     box-shadow: rgba(0, 0, 0, .3) 0 20px 30px -20px;
 }
 
+.section-avatar
+{
+    box-shadow: rgba(0, 0, 0, 1) 0px 20px 30px -20px;
+    margin-bottom: 374px;
+    padding-bottom: 80px;
+    overflow: hidden;
+    position: relative;
+    background: radial-gradient(rgb(194, 74, 126), rgb(105, 86, 235));
+}
+
 .section-dashboard .line-shape,
 .section-orders .line-shape,
 .section-profile .line-shape,
@@ -1631,15 +1667,52 @@ ul.socialaccount_providers li a:hover
     margin-bottom: 55px;
 }
 
+.section-avatar .section-heading p
+{
+    font-size: 16px;
+    font-weight: 300;
+
+    margin-top: 0;
+    margin-top: 20px;
+
+    color: #fff;
+}
+
+.section-avatar .footer-text label
+{
+    color: #fff;
+}
+
+.section-avatar .footer-text > p > a
+{
+    color: #0abceb;
+}
+
 .section-orders .footer-text,
 .section-profile .footer-text,
-.section-add-personal .footer-text
+.section-add-personal .footer-text,
+.section-avatar .footer-text
 {
     line-height: 1.1;
 
     margin-bottom: 15px;
 
     text-align: center;
+}
+
+.section-avatar .footer-text > p
+{
+    font-size: 25px;
+
+    margin-top: 20px;
+    margin-bottom: 50px;
+
+    color: #fff;
+}
+
+.section-avatar input[type='file']
+{
+    display: none;
 }
 
 .section-profile-address .footer-text
@@ -1649,6 +1722,13 @@ ul.socialaccount_providers li a:hover
     margin-bottom: 15px;
 
     text-align: justify;
+}
+
+.section-avatar img
+{
+    border: 5px solid #0abceb;
+    background-position: top center;
+    margin-bottom: 30px;
 }
 
 .single-dashboard-item,
@@ -1764,7 +1844,8 @@ ul.socialaccount_providers li a:hover
 }
 
 #my_profile_address_delete,
-#my_personal_delete
+#my_personal_delete,
+#my_avatar_delete
 {
     color: #fb397d;
 }
@@ -2351,6 +2432,18 @@ div.productFilter a.btn-danger:hover
     background: #ccc;
 }
 
+.error-container
+{
+    margin: 20px 0;
+    padding-bottom: 10px;
+
+    text-align: center;
+
+    border: 2px solid #fb397d;
+    border-radius: 10px;
+    background-color: #fff;;
+}
+
 .form-error
 {
     color: #fb397d;
@@ -2366,6 +2459,18 @@ div.productFilter a.btn-danger:hover
 .errorlist
 {
     color: #fb397d;
+}
+
+.form-success
+{
+    color: #fff;
+}
+
+.form-success p
+{
+    margin-top: 15px;
+    color: #fff;
+    font-weight: bold;
 }
 
 .style2 .section-title:after,
