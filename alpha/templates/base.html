@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ЁжиК.</title>
+    <title>Title</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -24,7 +24,9 @@
 
     <!--Owl Carousel slider & Smoothproducts Zoomer -->
     <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
-    <link rel="stylesheet" href="{% static 'css/smoothproducts.css' %}">
+
+    {% block header %}
+    {% endblock header %}
 
     <!-- Custom styles -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -34,7 +36,7 @@
     <script type="text/javascript">
         window.fbAsyncInit = function() {
             FB.init({
-                appId      : '147950469368548',
+                appId      : '170422530271788',
                 cookie     : true,
                 xfbml      : true,
                 version    : 'v2.12'
@@ -74,9 +76,6 @@
     <!-- JAVASCRIPT FILES -->
     <!-- Owl Carousel Slider -->
     <script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
-    <!-- Smoothproducts Zoomer
-    https://github.com/kthornbloom/Smoothproducts -->
-    <script type="text/javascript" src="{% static 'js/smoothproducts.min.js' %}"></script>
     <!-- Bootstrap Touchspin -->
     <script type="text/javascript" src="{% static 'js/bootstrap.touchspin.js' %}"></script>
     <!-- Phone number mask -->
@@ -84,9 +83,6 @@
     <!-- ScrollUp Plugin
     https://markgoodyear.com/2013/01/scrollup-jquery-plugin/ -->
     <script type="text/javascript" src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
-    <!-- CountTo Plugin
-    http://verstaemvse.ru/avtomaticheskij-schetchik-countto-js.html -->
-    <script type="text/javascript" src="{% static 'js/jquery.countTo.js' %}"></script>
     <!-- Animation On Scroll Plugin (AOS) -->
     <script type="text/javascript" src="{% static 'js/aos.js' %}"></script>
     <!-- Float Panel Plugin

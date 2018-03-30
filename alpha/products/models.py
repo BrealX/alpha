@@ -1,9 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class ProductCategory(models.Model):
     name = models.CharField(
-        max_length=64, 
+        max_length=128, 
         blank=True, 
         null=True, 
         default=None)
@@ -21,6 +23,9 @@ class ProductCategory(models.Model):
     class Meta:
         verbose_name = "Категория товара"
         verbose_name_plural = "Категория товаров"
+
+    def get_related_products(self):
+        return self.product_set.filter(is_active=True)
 
 
 class Product(models.Model):
@@ -141,3 +146,36 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name = "Картинка"
         verbose_name_plural = "Картинки"
+
+
+class Review(models.Model):
+    user = models.ForeignKey(
+        User, 
+        blank=True, 
+        null=True, 
+        on_delete=models.SET_NULL)
+    product = models.ForeignKey(
+        Product, 
+        blank=True, 
+        null=True, 
+        on_delete=models.SET_NULL)
+    order = models.ForeignKey(
+        'orders.Order', 
+        blank=True, 
+        null=True, 
+        on_delete=models.SET_NULL)
+    text = models.TextField()
+    score = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=1)
+
+    is_featured = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return "%s: оценен на %s пользователем %s" % (self.product.name, self.score, self.user.username)
+
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
+        

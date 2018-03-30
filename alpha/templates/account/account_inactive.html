@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<section class="section-activation section-padding-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+				    <li>
+					    <a href="{% url 'account_login' %}">Авторизация</a>
+				    </li>
+				    <li class="active">
+					    {% trans "Account Inactive" %}
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="section-heading" style="text-align: center;">
+					<h2 class="text-white">{% trans "Account Inactive" %}</h2>
+					<div class="line-shape"></div>
+				</div>
+				<div class="footer-text text-center">
+					<p>{% trans "This account is inactive." %}</p>
+					<p>Если у Вас возникли какие-либо вопросы, свяжитесь с нами для уточнения деталей.</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Row -->
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section -->
+{% endblock %}

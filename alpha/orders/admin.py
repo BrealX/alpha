@@ -2,10 +2,18 @@ from django.contrib import admin
 from .models import *
 
 
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    extra = 0
+
+    fields = ["product", "quantity", "price", "order_item_subtotal", "is_active"]
+
+
 class OrderAdmin(admin.ModelAdmin):
     class Meta:
         model = Order
 
+    inlines = [OrderItemInline]
     list_display = [field.name for field in Order._meta.fields]
 
 

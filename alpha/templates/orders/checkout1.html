@@ -66,9 +66,9 @@
                         </div>
                         <div class="form-group required">
                             {% if user %}
-                            {% if user.username %}
+                            {% if user.email %}
                             <label>Ваш email</label>
-                            <input name="anonymous_email" id="id_anonymous_email" class="form-control" type="email" value="{{ user.username }}">
+                            <input name="anonymous_email" id="id_anonymous_email" class="form-control" type="email" value="{{ user.email }}">
                             {% else %}
                             <label>Ваш email (укажите email в настройках личного кабинета, чтобы не вводить его повторно при каждом заказе)<sup>*</sup></label>
                             {% render_field form1.anonymous_email|add_class:"form-control" placeholder="Ваш email" %}

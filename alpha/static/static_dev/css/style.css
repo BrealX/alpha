@@ -97,6 +97,7 @@ body
 
     color: #454545;
     background-color: #edeef0 !important;
+    overflow-x: hidden;
 }
 
 
@@ -261,6 +262,11 @@ p
     box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
 }
 
+.btn.submit-btn:focus
+{
+    box-shadow: none;
+}
+
 /* ================================================================== */
 /* CUSTOMIZE THE BOOTSTRAP MODAL
 /* ================================================================== */
@@ -294,6 +300,7 @@ p
 .modal
 {
     top: 20%;
+    color: #884bdf;
 }
 
 .modal-footer .btn.submit-btn
@@ -449,12 +456,6 @@ p
     }
 }
 
-.navbar-brand:hover,
-.navbar-brand:focus
-{
-    color: #fff !important;
-}
-
 .menu-area
 {
     position: relative;
@@ -472,6 +473,11 @@ p
     padding: 0;
 
     color: #fff;
+}
+
+.menu-area .navbar-brand:hover
+{
+    color: #58d5f7;
 }
 
 .menu-area #nav .nav-link
@@ -788,6 +794,84 @@ div.miniCartFooter .btn.btn-primary
 /* =============================================================== */
 /* HOME PAGE
 /* =============================================================== */
+
+/*!
+ * Start Bootstrap - Full Slider (https://startbootstrap.com/template-overviews/full-slider)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-full-slider/blob/master/LICENSE)
+ */
+
+.carousel-inner
+{
+    overflow: visible;
+}
+
+.carousel-item
+{
+    height: 100vh;
+    min-height: 300px;
+
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+       -moz-background-size: cover;
+         -o-background-size: cover;
+            background-size: cover;
+}
+
+div.carousel-item:nth-child(1) > div:nth-child(1)
+{
+    position: relative;
+    width: 50%;
+    bottom: 0;
+    top: 30%;
+    font-family: 'Amatic SC', cursive;
+}
+
+.carousel-caption h3
+{
+    font-size: 45px;
+    line-height: 1.1;
+}
+
+.carousel-caption p
+{
+    font-size: 20px;
+    color: #fff;
+    line-height: 1.1;
+}
+
+div.carousel-item:nth-child(2) > div:nth-child(1)
+{
+    position: relative;
+    left: 0;
+    bottom: 0;
+    top: 30%;
+    font-family: 'Amatic SC', cursive;
+}
+
+div.carousel-item:nth-child(3) > div:nth-child(1)
+{
+    position: relative;
+    left: 20%;
+    bottom: 0;
+    top: 65%;
+    font-family: 'Amatic SC', cursive;
+}
+
+.mouse
+{
+    position: relative;
+    margin: auto;
+    padding-bottom: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform .4s ease;
+}
+
+.mouse:hover
+{
+    transform: translateY(5px);
+}
 
 .section-main-banner {
     background: url(../img/products/product_landing_background.png);
@@ -2935,6 +3019,109 @@ div.productFilter a.btn-danger:hover
             box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
 }
 
+.clients-feedback-area
+{
+    padding: 30px 0;
+}
+
+.clients-feedback-area .client > i {
+    font-size: 48px;
+    color: #897ceb;
+    margin-bottom: 30px;
+}
+
+.clients-feedback-area .client-description > p {
+    max-width: 1010px;
+    margin: auto;
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #726a84;
+    font-weight: 300;
+    line-height: 1.1;
+}
+
+.clients-feedback-area .star-icon > i {
+    font-size: 18px;
+    color: #f1b922;
+}
+
+.clients-feedback-area .client-name > h5 {
+    color: #5b32b4;
+    font-size: 22px;
+    margin-top: 5px;
+}
+
+.clients-feedback-area .slick-arrow {
+    position: absolute;
+    width: 30px;
+    background-color: #fff;
+    height: 100%;
+    text-align: center;
+    font-size: 24px;
+    color: #b5aec4;
+    display: block;
+    line-height: 550%;
+    left: 0;
+    z-index: 90;
+    cursor: pointer;
+}
+
+.clients-feedback-area .slick-arrow.fa-angle-right {
+    left: auto;
+    right: 0;
+    top: 0;
+}
+
+element {
+    width: 129px;
+}
+
+.clients-feedback-area .slick-slide.client-thumbnail {
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 129px;
+}
+
+.clients-feedback-area .slider img {
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 50%;
+    border: 2px solid #897ceb;
+    -webkit-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.clients-feedback-area .client-description .submit-btn
+{
+    min-width: 165px;
+    height: 30px;
+    transition-duration: .4s;
+    color: #fff;
+    border-radius: 10px;
+    background: #fb397d;
+    line-height: 1.0;
+}
+
+.clients-feedback-area .client-description .submit-btn:hover
+{
+    border-radius: 20px;
+}
+
+#feedbackModal .review-form-container
+{
+    color: #726a84;
+}
+
 .footer-contact-area
 {
     font-family: 'Cabin', sans-serif;
@@ -3083,6 +3270,17 @@ div.productFilter a.btn-danger:hover
     -webkit-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
     -moz-box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
     box-shadow: -1px 9px 46px -17px rgba(43, 43, 43, 1);
+}
+
+.review-form-container
+{
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#id_text
+{
+    width: 100%;
 }
 
 /* =============================================================== */
