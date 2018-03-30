@@ -137,7 +137,6 @@ def user_order_info(request, order_id):
     user = request.user
     order = Order.objects.get(id=order_id, user=user, is_active=True)
     order_items = OrderItem.objects.filter(order=order, is_active=True)
-    print(order_items)
     return render(request, 'accounts/user_order_info.html', locals())
 
 
@@ -201,8 +200,6 @@ def delete_personal(request):
     user.first_name = ''
     user.profile.phone = ''
     user.save()
-    print(user.first_name)
-    print(user.profile.phone)
     return_dict = {}
     return_dict['user_firstname'] = user.first_name
     return_dict['profile_phone'] = user.profile.phone

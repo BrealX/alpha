@@ -78,14 +78,14 @@
 					</div>
 					<div class="profile-text">
 						<h4>Личные данные</h4>
-						<p style="font-weight: 400;">
+						<p class="profile-firstname" style="font-weight: 400;">
                             {% if user.first_name %}
                                 Имя: {{ user.first_name }}
                             {% else %}
                                 Вы не указали имя
                             {% endif %}
                         </p>
-                        <p style="font-weight: 400;">
+                        <p class="profile-phone" style="font-weight: 400;">
                             {% if user.profile.phone %}
                                 Телефон: {{ user.profile.phone }}
                             {% else %}

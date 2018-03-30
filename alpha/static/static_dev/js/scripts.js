@@ -214,8 +214,7 @@ $(document).ready(function() {
             cache: true,
             success: function(data) {
                 if (!data.user_firstname && !data.profile_phone) {
-                    $('.profile-firstname').html("");
-                    $('.profile-phone').html("");
+                    $('.profile-firstname, .profile_phone').html("");
                     $('.profile-firstname').text("Вы не указали имя");
                     $('.profile-phone').text("Вы не указали контактный номер телефона");
                 };
