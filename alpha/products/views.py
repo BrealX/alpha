@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from products.models import Product, Review
 from orders.models import Order, OrderItem
+from products.forms import ReviewForm
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
