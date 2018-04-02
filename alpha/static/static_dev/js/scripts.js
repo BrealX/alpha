@@ -145,25 +145,6 @@ $(document).ready(function() {
         });
     });
 
-    // Home Page Slider Initializer
-    $('.owl-carousel').owlCarousel({
-    loop:true,
-    margin:25,
-    nav:false,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:3
-        },
-        1000:{
-            items:4
-        }
-    }
-    });
-
-
     // Add to Wishlist Click Event
     $('.add-fav').click(function (e) {
         e.preventDefault();
@@ -218,6 +199,28 @@ $(document).ready(function() {
                     $('.profile-firstname').text("Вы не указали имя");
                     $('.profile-phone').text("Вы не указали контактный номер телефона");
                 };
+            }
+        });
+    });
+
+    // My Profile Reviews Page review delete button
+    $('#deletefeedbackModal .btn-delete').on('click', function(e) {
+        e.preventDefault();
+        var form = $('#review_delete_form');
+        var url = form.attr('action');
+        var csfr_token = $('#review_delete_form [name="csrfmiddlewaretoken"]').val();
+        var feedback_id = $('#delete_input').val();
+        var redirect_url = $('#go_back_form').attr('action');
+        data = {}
+        data["csrfmiddlewaretoken"] = csfr_token;
+        data["feedback_id"] = feedback_id;
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            cache: true,
+            success: function(data) {
+                window.location.href = redirect_url;
             }
         });
     });

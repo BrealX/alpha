@@ -7,6 +7,8 @@ from orders.forms import CheckoutFormRight
 from django.contrib.auth.models import User
 from .models import Profile
 from orders.models import OrderDeliveryArea, OrderDeliveryCity, Order, OrderItem
+from products.models import Review
+from products.forms import ReviewForm
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -137,8 +139,24 @@ def user_order_info(request, order_id):
     user = request.user
     order = Order.objects.get(id=order_id, user=user, is_active=True)
     order_items = OrderItem.objects.filter(order=order, is_active=True)
-    print(order_items)
     return render(request, 'accounts/user_order_info.html', locals())
+
+
+@login_required(login_url='account_login')
+def user_my_reviews(request):
+    user = request.user
+    feedbacks = Review.objects.filter(user=user, is_active=True).order_by('-created')
+    form = ReviewForm(request.POST or None)
+    if request.POST and form.is_valid():
+        data = request.POST
+        review_id = data.get('review_id')
+        review_to_update = Review.objects.filter(
+            user=user,
+            is_active=True,
+            id=review_id).update(
+            text=data.get('text'),
+            score=data.get('score'))
+    return render(request, 'accounts/user_my_reviews.html', locals())
 
 
 @login_required(login_url='account_login')
@@ -204,6 +222,19 @@ def delete_personal(request):
     return_dict = {}
     return_dict['user_firstname'] = user.first_name
     return_dict['profile_phone'] = user.profile.phone
+    return JsonResponse(return_dict)
+
+
+@login_required(login_url='account_login')
+def delete_review(request):
+    user = request.user
+    review_id = request.POST.get('feedback_id')
+    review_to_delete = Review.objects.filter(
+        user=user,
+        is_active=True,
+        id=review_id).update(
+        is_active=False)
+    return_dict = dict()
     return JsonResponse(return_dict)
 
 

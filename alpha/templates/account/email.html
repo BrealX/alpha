@@ -53,29 +53,12 @@
                         </div>
                     {% endfor %}
                         <div class="buttonHolder">
-                            <button class="secondaryAction btn submit-btn" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
                             <button class="secondaryAction btn submit-btn" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
-                            <button class="primaryAction btn submit-btn" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
+                            <button class="primaryAction btn submit-btn" type="submit" name="action_change" >{% trans 'Change' %}</button>
                         </div>
                     </fieldset>
                 </form>
             {% endif %}
-            </div>
-            <div class="col-12">
-                <h2 style="margin-top: 20px; color: #5b32b4;">Добавить e-mail</h2>
-                <form method="post" action="{% url 'account_email' %}" class="add_email">
-                {% csrf_token %}
-                    <div class="contact-input-area">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    {% render_field form.email|add_class:"form-control" placeholder="Добавить email" %}
-                                </div>
-                                <button class="btn submit-btn" name="action_add" type="submit">{% trans "Add E-mail" %}</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
         <!-- End Row -->
@@ -83,20 +66,4 @@
     <!-- End Container -->
 </section>
 <!-- End Section -->
-{% endblock %}
-
-{% block javascript %}
-<script type="text/javascript">
-(function() {
-  var message = "{% trans 'Do you really want to remove the selected e-mail address?' %}";
-  var actions = document.getElementsByName('action_remove');
-  if (actions.length) {
-    actions[0].addEventListener("click", function(e) {
-      if (! confirm(message)) {
-        e.preventDefault();
-      }
-    });
-  }
-})();
-</script>
 {% endblock %}
