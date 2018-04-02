@@ -162,11 +162,7 @@
                                             <a class="btn btn-sm minicart-gotocart-button" href="{% url 'checkout' %}">
                                                 <i class="ion-ios-cart-outline"></i>ПЕРЕЙТИ В КОРЗИНУ
                                             </a>
-                                            {% if username %}
                                             <a class="btn btn-sm minicart-submit-button" href="{% url 'checkout1' %}">ОФОРМИТЬ ЗАКАЗ</a>
-                                            {% else %}
-                                            <a class="btn btn-sm minicart-submit-button" href="{% url 'login' %}">ОФОРМИТЬ ЗАКАЗ</a>
-                                            {% endif %}
                                         </div>
                                         <!-- End Collapsed Minicartfooter -->
                                     </div>
@@ -241,11 +237,7 @@
                             <a class="btn btn-sm minicart-gotocart-button" href="{% url 'checkout' %}">
                                 <i class="ion-ios-cart-outline"></i>ПЕРЕЙТИ В КОРЗИНУ
                             </a>
-                            {% if username %}
                             <a class="btn btn-sm minicart-submit-button" href="{% url 'checkout1' %}">ОФОРМИТЬ ЗАКАЗ</a>
-                            {% else %}
-                            <a class="btn btn-sm minicart-submit-button" href="{% url 'login' %}">ОФОРМИТЬ ЗАКАЗ</a>
-                            {% endif %}
                         </div>
                         <!-- End Minicartfooter -->
                     </div>
