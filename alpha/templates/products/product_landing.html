@@ -2,6 +2,7 @@
 {% load static %}
 {% load widget_tweaks %}
 {% load products_tags %}
+{% load avatar_tags %}
 
 {% block header %}
     <link rel="stylesheet" href="{% static 'css/smoothproducts.css' %}" type="text/css" />
@@ -263,11 +264,11 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-10">
-                    <div class="carousel slider">
-                        <!-- Client Feedback Text -->
+                    <!-- Client Feedback Text -->
+                    {% if feedbacks %}
+                    <div class="owl-carousel slider">
+                        {% for feedback in feedbacks %}
                         <div class="client-feedback-text">
-                            {% if feedbacks %}
-                            {% for feedback in feedbacks %}
                             <div class="client text-center">
                                 <i class="fa fa-quote-left" aria-hidden="true"></i>
                             </div>
@@ -289,28 +290,33 @@
                                 <h5>{% if feedback.user.first_name %}{{ feedback.user.first_name }}{% else %}{{ feedback.user.username }}{% endif %}</h5>
                             </div>
                             <div class="client-thumbnail text-center">
-                                <img src="{{ feedback.user.avatar_set.last.avatar.url }}" alt="">
+                                <img src="{% avatar_url feedback.user %}">
                             </div>
-                            {% endfor %}
-                            {% else %}
-                            <div class="section-heading text-center">
-                                <h2>Отзывы</h2>
-                                <div class="line-shape"></div>
-                            </div>
-                            {{ form.errors }}
-                            {{ form.non_field_errors }}
+                            {% if user.is_authenticated and user_ordered_products and not user_product_reviews %}
                             <div class="footer-text text-center">
-                                <p>К данному товару еще никто не оставлял отзывы</p>
-                                {% if user.is_authenticated and not user_ordered_products %}
-                                <p>Чтобы оставить отзыв, нужно сначала приобрести товар</p>
-                                {% elif user.is_authenticated and user_ordered_products %}
-                                <button id="feedback_button" type="button" class="btn submit-btn" data-toggle="modal" data-target="#addfeedbackModal">Оставить отзыв</button>    
-                                {% endif %}
+                                <button id="feedback_button" type="button" class="btn feedback-btn" data-toggle="modal" data-target="#addfeedbackModal">Оставить отзыв</button>
                             </div>
                             {% endif %}
                         </div>
-                        <!-- End Feedback -->
+                        {% endfor %}
                     </div>
+                    <!-- End Feedback -->
+                    {% else %}
+                    <div class="section-heading text-center">
+                        <h2>Отзывы</h2>
+                            <div class="line-shape"></div>
+                    </div>
+                    {{ form.errors }}
+                    {{ form.non_field_errors }}
+                    <div class="footer-text text-center">
+                        <p>К данному товару еще никто не оставлял отзывы</p>
+                        {% if user.is_authenticated and not user_ordered_products %}
+                        <p>Чтобы оставить отзыв, нужно сначала приобрести товар</p>
+                        {% elif user.is_authenticated and user_ordered_products %}
+                        <button id="feedback_button" type="button" class="btn feedback-btn" data-toggle="modal" data-target="#addfeedbackModal">Оставить отзыв</button>
+                        {% endif %}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -447,7 +453,7 @@
                                     <div class="feedback-item">
                                         <div class="row">
                                             <div class="col-lg-4">
-                                                <img src="{{ feedback.user.avatar.url }}" class="img-fluid">
+                                                <img src="{% avatar_url feedback.user %}" class="img-fluid">
                                                 <div class="user-name">
                                                     {{ feedback.user.username }}
                                                 </div>
@@ -455,7 +461,11 @@
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="rating text-left">
-                                                    <div class="star-rating" data-score="{{ feedback.score }}"></div>
+                                                    <div class="star-rating">
+                                                        {% for item in feedback.score|times %}
+                                                            <i class="ion-ios-star"></i>
+                                                        {% endfor %}
+                                                    </div>
                                                 </div>
                                                 <div class="feedback-text text-left">
                                                     {{ feedback.text }}
@@ -468,6 +478,9 @@
                                     <p>На этот товар еще никто не написал отзыв. Будьте первым!</p>
                                     {% endif %}
                                 </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn submit" data-dismiss="modal">Закрыть</button>
                             </div>
                         </div>
                     </div>
@@ -540,6 +553,28 @@
             $(window).scrollTop(localStorage.getItem('scrollPosition'));
             localStorage.setItem('scrollPosition', '0');
         });
+    </script>
+
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop:true,
+            nav:false,
+            autoplay:true,
+            /*autoplayTimeout:3000,*/
+            /*autoplayHoverPause:true,*/
+            responsiveClass:true,
+            responsive:{
+                0:{
+                    items:1,
+                },
+                600:{
+                    items:1,
+                },
+                1000:{
+                    items:1,
+                }
+            }
+        })
     </script>
 
 {% endblock %}

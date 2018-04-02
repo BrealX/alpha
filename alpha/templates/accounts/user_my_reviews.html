@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load products_tags %}
+
+{% block content %}
+<section class="section-reviews section-padding-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+                    <li>
+					    <a href="{% url 'user_dashboard' %}">Личный кабинет</a>
+				    </li>
+                    <li>
+                        <a href="{% url 'user_my_profile' %}">Мой профиль</a>
+                    </li>
+				    <li class="active">
+					    Мои отзывы
+				    </li>
+			    </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+		<div class="row">
+			<div class="col-md-6">
+				<div class="section-heading">
+					<h2 class="text-white">Мои отзывы</h2>
+					<div class="line-shape"></div>
+				</div>
+			</div>
+            <div class="col-12">
+                <div class="footer-text">
+                    <p>В этом разделе Вы можете получить доступ ко всем Вашим отзывам на товары. Вы можете изменить их текст или удалить их.</p>
+                    {% if not feedbacks %}
+                    <p>Пока Вы еще не оставляли отзывов о наших товарах.</p>
+                    {% endif %}
+                </div>
+            </div>
+		</div>
+		<!-- End Row -->
+        <div class="row">
+            <div class="col-12 order-box mt-0 mb-lg-0">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-center">
+                            <tr>
+                               <th class="border-top-0">Товар</th>
+                               <th class="border-top-0">Дата</th>
+                               <th class="border-top-0">Оценка</th>
+                               <th class="border-top-0">Отзыв</th>
+                               <th class="border-top-0">Действие</th>
+                            </tr>
+                        </thead>
+                        {% for feedback in feedbacks %}
+                        <tbody>
+                            <th><a href="{% url 'product_land' feedback.product.id %}">{{ feedback.product.name }}</a></th>
+                            <td>{{ feedback.created }}</td>
+                            <td class="text-center star-rating">{% for item in feedback.score|times %}
+                                    <i class="ion-ios-star"></i>
+                                {% endfor %}</td>
+                            <td class="text-justify">
+                                {{ feedback.text }}
+                                {% if feedback.updated %}
+                                <br><i>(Отредактировано: {{ feedback.updated }})</i>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="" class="button-review-view" id="change_feedback_button" data-toggle="modal" data-target="#changefeedbackModal" data-review_id="{{ feedback.id }}" data-feedback_score="{{ feedback.score }}" data-feedback_text="{{ feedback.text }}" data-feedback_product="{{ feedback.product.name }}">Изменить</a>
+                                <a class="button-review-view" href="" data-toggle="modal" data-target="#deletefeedbackModal" data-feedback_id="{{ feedback.id }}">Удалить</a>
+                            </td>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Container -->
+</section>
+<!-- End Section Orders -->
+<!-- Modal Change Feedback -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                <div class="modal fade" id="changefeedbackModal" tabindex="-1" role="dialog" aria-labelledby="addfeedbackModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="changefeedbackModalLabel">Редактирование отзыва</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-12">
+                                    <div class="review-form-container">
+                                        <form method="POST" action=".">
+                                        {% csrf_token %}
+                                            <p class="change-feedback-product"></p>
+                                            <input type="hidden" id="review_id" />
+                                            <p>
+                                                <label for="{{ form.score.id_for_label }}">{{ form.score.label }}</label>
+                                                {% render_field form.score|add_class:"form-control" %}
+                                            </p>
+                                            <p>
+                                                <label for="{{ form.text.id_for_label }}">{{ form.text.label }}</label>
+                                            </p>
+                                            <p>
+                                                {% render_field form.text|add_class:"form-control" %}
+                                            </p>
+                                            <p class="text-center">
+                                                <button class="btn submit-btn" type="submit">Редактировать</button>
+                                            </p>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn submit-btn" data-dismiss="modal">Закрыть</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Modal Delete Feedback -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                <div class="modal fade" id="deletefeedbackModal" tabindex="-1" role="dialog" aria-labelledby="addfeedbackModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deletefeedbackModalLabel">Удаление отзыва</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="review_delete_form" action="{% url 'delete_review' %}">{% csrf_token %}
+                                    <input id="delete_input" type="hidden" />
+                                </form>
+                                <form action="{% url 'user_my_reviews' %}" id="go_back_form"></form>
+                                <p>Вы действительно желаете удалить данный отзыв? (После этого возможно будет оставить новый отзыв на странице товара)</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn submit-btn" data-dismiss="modal">Отменить</button>
+                                <button type="submit" class="btn submit-btn btn-delete">Удалить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+
+    <script>
+        $('#changefeedbackModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var review_id = button.data('review_id');
+            var product = button.data('feedback_product');
+            var score = button.data('feedback_score');
+            var text = button.data('feedback_text');
+            var modal = $(this);
+            modal.find('#review_id').attr('value', review_id);
+            modal.find('#review_id').attr('name', 'review_id');
+            modal.find('.change-feedback-product').text('Товар: ' + product);
+            modal.find('#id_text').attr('value', text);
+            modal.find('#id_text').text(text);
+            modal.find('#id_score').attr('value', score);
+            modal.find('#id_score').text(score);
+        })
+    </script>
+
+    <script>
+        $('#deletefeedbackModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var feedback_id = button.data('feedback_id');
+            var modal = $(this);
+            modal.find('#delete_input').attr('value', feedback_id);
+        })
+    </script>
+
+{% endblock javascript %}

@@ -44,7 +44,6 @@
     </div>
 </section>
 <!-- End Section -->
-<!-- End Section -->
 <!-- Section -->
 <section class="section-main-slider bg-white section-padding-100">
     <div class="container">
@@ -82,7 +81,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="parallax-content clearfix">
-                    <h1 class="parallaxPrice">500 UAH</h1>
+                    <h1 class="parallaxPrice">1000 UAH</h1>
                     <h2 class="uppercase">получите бесплатную доставку при заказе от указанной суммы</h2>
                     <h3>Детали Вы можете уточнить у менеджера</h3>
                 </div>
@@ -172,12 +171,32 @@
 {% endblock %}
 
 {% block javascript %}
-<script>
-    //Mouse click scroll
-    $(document).ready(function () {
-        $(".mouse").click(function () {
-            $('html, body').animate({scrollTop: '+=900px'}, 1200);
+    <script>
+        //Mouse click scroll
+        $(document).ready(function () {
+            $(".mouse").click(function () {
+                $('html, body').animate({scrollTop: '+=900px'}, 1200);
+            });
         });
-    });
-</script>
+    </script>
+
+    <script>
+        // Home Page Slider Initializer
+        $('.owl-carousel').owlCarousel({
+            loop:true,
+            margin:25,
+            nav:false,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items:4
+                }
+            }
+        });
+    </script>
 {% endblock %}
