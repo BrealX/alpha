@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 
     'accounts',
     'avatar',
-    #'axes',
+    'axes',
     'carton',
     'landing',
     'orders',
@@ -232,7 +232,7 @@ AVATAR_PROVIDERS = (
     'avatar.providers.DefaultAvatarProvider',
 )
 
-#try:
-#    from .settings_prod import *
-#except:
-#    pass
+try:
+    from .settings_prod import *
+except:
+    pass
