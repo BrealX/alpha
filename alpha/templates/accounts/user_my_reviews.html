@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load widget_tweaks %}
+{% load products_tags %}
 
 {% block content %}
 <section class="section-reviews section-padding-100">
@@ -49,6 +50,7 @@
                             <tr>
                                <th class="border-top-0">Товар</th>
                                <th class="border-top-0">Дата</th>
+                               <th class="border-top-0">Оценка</th>
                                <th class="border-top-0">Отзыв</th>
                                <th class="border-top-0">Действие</th>
                             </tr>
@@ -57,10 +59,18 @@
                         <tbody>
                             <th><a href="{% url 'product_land' feedback.product.id %}">{{ feedback.product.name }}</a></th>
                             <td>{{ feedback.created }}</td>
-                            <td>{{ feedback.text }}</td>
+                            <td class="text-center star-rating">{% for item in feedback.score|times %}
+                                    <i class="ion-ios-star"></i>
+                                {% endfor %}</td>
+                            <td class="text-justify">
+                                {{ feedback.text }}
+                                {% if feedback.updated %}
+                                <br><i>(Отредактировано: {{ feedback.updated }})</i>
+                                {% endif %}
+                            </td>
                             <td>
-                                <a href="" class="button-review-view" id="change_feedback_button" data-toggle="modal" data-target="#changefeedbackModal" data-feedback_product_id="{{ feedback.product.id }}" data-feedback_score="{{ feedback.score }}" data-feedback_text="{{ feedback.text }}" data-feedback_product="{{ feedback.product.name }}">Изменить</a>
-                                <a class="button-review-view" href="" id="delete_review" data-toggle="modal" data-target="#deletefeedbackModal">Удалить</a>
+                                <a href="" class="button-review-view" id="change_feedback_button" data-toggle="modal" data-target="#changefeedbackModal" data-review_id="{{ feedback.id }}" data-feedback_score="{{ feedback.score }}" data-feedback_text="{{ feedback.text }}" data-feedback_product="{{ feedback.product.name }}">Изменить</a>
+                                <a class="button-review-view" href="" data-toggle="modal" data-target="#deletefeedbackModal" data-feedback_id="{{ feedback.id }}">Удалить</a>
                             </td>
                         </tbody>
                         {% endfor %}
@@ -91,7 +101,7 @@
                                         <form method="POST" action=".">
                                         {% csrf_token %}
                                             <p class="change-feedback-product"></p>
-                                            <input type="hidden" id="id_product" />
+                                            <input type="hidden" id="review_id" />
                                             <p>
                                                 <label for="{{ form.score.id_for_label }}">{{ form.score.label }}</label>
                                                 {% render_field form.score|add_class:"form-control" %}
@@ -126,17 +136,21 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="changefeedbackModalLabel">Удаление отзыва</h5>
+                                <h5 class="modal-title" id="deletefeedbackModalLabel">Удаление отзыва</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
+                                <form id="review_delete_form" action="{% url 'delete_review' %}">{% csrf_token %}
+                                    <input id="delete_input" type="hidden" />
+                                </form>
+                                <form action="{% url 'user_my_reviews' %}" id="go_back_form"></form>
                                 <p>Вы действительно желаете удалить данный отзыв? (После этого возможно будет оставить новый отзыв на странице товара)</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn submit-btn" data-dismiss="modal">Отменить</button>
-                                <button type="button" class="btn submit-btn btn-delete">Удалить</button>
+                                <button type="submit" class="btn submit-btn btn-delete">Удалить</button>
                             </div>
                         </div>
                     </div>
@@ -151,18 +165,27 @@
     <script>
         $('#changefeedbackModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
+            var review_id = button.data('review_id');
             var product = button.data('feedback_product');
-            var product_id = button.data('feedback_product_id');
             var score = button.data('feedback_score');
             var text = button.data('feedback_text');
             var modal = $(this);
-            modal.find('#id_product').attr('value', product_id);
-            modal.find('#id_product').attr('name', 'product_id');
+            modal.find('#review_id').attr('value', review_id);
+            modal.find('#review_id').attr('name', 'review_id');
             modal.find('.change-feedback-product').text('Товар: ' + product);
             modal.find('#id_text').attr('value', text);
             modal.find('#id_text').text(text);
             modal.find('#id_score').attr('value', score);
             modal.find('#id_score').text(score);
+        })
+    </script>
+
+    <script>
+        $('#deletefeedbackModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var feedback_id = button.data('feedback_id');
+            var modal = $(this);
+            modal.find('#delete_input').attr('value', feedback_id);
         })
     </script>
 

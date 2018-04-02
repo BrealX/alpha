@@ -54,7 +54,6 @@ After that fix Allauth Set password View works correctly.
 https://github.com/pennersr/django-allauth/issues/373'''
 
 
-
 def user_login(request):
     args = {}
     args.update(csrf(request))
@@ -148,14 +147,14 @@ def user_my_reviews(request):
     feedbacks = Review.objects.filter(user=user, is_active=True).order_by('-created')
     form = ReviewForm(request.POST or None)
     if request.POST and form.is_valid():
-        review_product_id = request.POST.get('product_id')
-        review_text = request.POST.get('text')
-        review_score = int(request.POST.get('score'))
-        review = Review.objects.get(user=user, product_id=review_product_id)
-        review, created = Review.objects.update_or_create(
-            user=user, 
-            product_id=review_product_id,
-            defaults={'text': review_text, 'score': review_score}) 
+        data = request.POST
+        review_id = data.get('review_id')
+        review_to_update = Review.objects.filter(
+            user=user,
+            is_active=True,
+            id=review_id).update(
+            text=data.get('text'),
+            score=data.get('score'))
     return render(request, 'accounts/user_my_reviews.html', locals())
 
 
@@ -222,6 +221,19 @@ def delete_personal(request):
     return_dict = {}
     return_dict['user_firstname'] = user.first_name
     return_dict['profile_phone'] = user.profile.phone
+    return JsonResponse(return_dict)
+
+
+@login_required(login_url='account_login')
+def delete_review(request):
+    user = request.user
+    review_id = request.POST.get('feedback_id')
+    review_to_delete = Review.objects.filter(
+        user=user,
+        is_active=True,
+        id=review_id).update(
+        is_active=False)
+    return_dict = dict()
     return JsonResponse(return_dict)
 
 

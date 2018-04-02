@@ -264,9 +264,9 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-10">
+                    <!-- Client Feedback Text -->
+                    {% if feedbacks %}
                     <div class="owl-carousel slider">
-                        <!-- Client Feedback Text -->
-                        {% if feedbacks %}
                         {% for feedback in feedbacks %}
                         <div class="client-feedback-text">
                             <div class="client text-center">
@@ -299,25 +299,24 @@
                             {% endif %}
                         </div>
                         {% endfor %}
-                        {% else %}
-                            <div class="section-heading text-center">
-                                <h2>Отзывы</h2>
-                                <div class="line-shape"></div>
-                            </div>
-                            {{ form.errors }}
-                            {{ form.non_field_errors }}
-                            <div class="footer-text text-center">
-                                <p>К данному товару еще никто не оставлял отзывы</p>
-                                {% if user.is_authenticated and not user_ordered_products %}
-                                <p>Чтобы оставить отзыв, нужно сначала приобрести товар</p>
-                                {% elif user.is_authenticated and user_ordered_products %}
-                                <button id="feedback_button" type="button" class="btn feedback-btn" data-toggle="modal" data-target="#addfeedbackModal">Оставить отзыв</button>    
-                                {% endif %}
-                            </div>
-                        {% endif %}
-                        </div>
-                        <!-- End Feedback -->
                     </div>
+                    <!-- End Feedback -->
+                    {% else %}
+                    <div class="section-heading text-center">
+                        <h2>Отзывы</h2>
+                            <div class="line-shape"></div>
+                    </div>
+                    {{ form.errors }}
+                    {{ form.non_field_errors }}
+                    <div class="footer-text text-center">
+                        <p>К данному товару еще никто не оставлял отзывы</p>
+                        {% if user.is_authenticated and not user_ordered_products %}
+                        <p>Чтобы оставить отзыв, нужно сначала приобрести товар</p>
+                        {% elif user.is_authenticated and user_ordered_products %}
+                        <button id="feedback_button" type="button" class="btn feedback-btn" data-toggle="modal" data-target="#addfeedbackModal">Оставить отзыв</button>
+                        {% endif %}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

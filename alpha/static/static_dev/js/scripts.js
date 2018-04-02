@@ -203,6 +203,28 @@ $(document).ready(function() {
         });
     });
 
+    // My Profile Reviews Page review delete button
+    $('#deletefeedbackModal .btn-delete').on('click', function(e) {
+        e.preventDefault();
+        var form = $('#review_delete_form');
+        var url = form.attr('action');
+        var csfr_token = $('#review_delete_form [name="csrfmiddlewaretoken"]').val();
+        var feedback_id = $('#delete_input').val();
+        var redirect_url = $('#go_back_form').attr('action');
+        data = {}
+        data["csrfmiddlewaretoken"] = csfr_token;
+        data["feedback_id"] = feedback_id;
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            cache: true,
+            success: function(data) {
+                window.location.href = redirect_url;
+            }
+        });
+    });
+
     // Modal window on account deletion (delete confirmation & delete process)
     $('div#deleteModalCenter').on('show.bs.modal', function(e) {
         $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));

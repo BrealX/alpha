@@ -17,6 +17,7 @@ urlpatterns = [
     path('user_dashboard/add_personal/', views.add_personal, name="add_personal"),
     path('user_dashboard/delete_personal/', views.delete_personal, name="delete_personal"),
     path('user_dashboard/delete_account/', views.delete_account, name="delete_account"),
+    path('ajax/delete-review/', views.delete_review, name="delete_review"),
 
     # restore password urls
     re_path(r'^password-reset/$', password_reset, name='password_reset'),

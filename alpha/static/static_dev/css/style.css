@@ -1414,6 +1414,11 @@ div.carousel-item:nth-child(3) > div:nth-child(1)
     text-align: center;
 }
 
+.section-password-reset a
+{
+    color: #5b32b4;
+}
+
 .section-activation .footer-text p a
 {
     text-decoration: none;
@@ -3120,6 +3125,12 @@ div.productFilter a.btn-danger:hover
 #addfeedbackModal .rating.text-left > .star-rating > i
 {
     font-size: 18px;
+    color: #f1b922;
+}
+
+.section-reviews .star-rating
+{
+    font-size: 13px;
     color: #f1b922;
 }
 

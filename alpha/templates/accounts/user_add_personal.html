@@ -48,11 +48,11 @@
 				{% csrf_token %}
   					<div class="form-group mx-auto mt-2">
     					<label for="user_firstname" class="sr-only" style="color: #5b32b4;">Имя</label>
-    					<input type="text" name="user_firstname" id="user_firstname" class="form-control" placeholder="{% if user.first_name %}{{ user.first_name }}{% else %}Вы еще не сообщили нам своё имя{% endif %}" autofocus value="{{ request.POST.user_firstname }}"></input>
+    					<input type="text" name="user_firstname" id="user_firstname" class="form-control" placeholder="{% if user.first_name %}{{ user.first_name }}{% else %}Вы еще не сообщили нам своё имя{% endif %}" value="{{ user.first_name }}"></input>
   					</div>
   					<div class="form-group mx-auto mt-2">
     					<label class="sr-only" for="user_phone" style="color: #5b32b4;">Номер телефона</label>
-    					<input type="tel" name="profile_phone" id="user_phone" class="form-control phone-mask" placeholder="{% if user.profile.phone %}{{ user.profile.phone }}{% else %}Вы еще не сообщили нам свой номер телефона{% endif %}" value="{{ request.POST.profile_phone }}"></input>
+    					<input type="tel" name="profile_phone" id="user_phone" class="form-control phone-mask" placeholder="{% if user.profile.phone %}{{ user.profile.phone }}{% else %}Вы еще не сообщили нам свой номер телефона{% endif %}" value="{{ user.profile.phone }}"></input>
   					</div>
   					<div class="form-group mx-auto mt-2">
   						<button type="submit" class="btn submit-btn">Сохранить</button>
