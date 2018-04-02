@@ -169,13 +169,34 @@
 </section>
 <!-- End Section Multiplayers -->
 {% endblock %}
+
 {% block javascript %}
-<script>
-    //Mouse click scroll
-    $(document).ready(function () {
-        $(".mouse").click(function () {
-            $('html, body').animate({scrollTop: '+=900px'}, 1200);
+    <script>
+        //Mouse click scroll
+        $(document).ready(function () {
+            $(".mouse").click(function () {
+                $('html, body').animate({scrollTop: '+=900px'}, 1200);
+            });
         });
-    });
-</script>
+    </script>
+
+    <script>
+        // Home Page Slider Initializer
+        $('.owl-carousel').owlCarousel({
+            loop:true,
+            margin:25,
+            nav:false,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items:4
+                }
+            }
+        });
+    </script>
 {% endblock %}

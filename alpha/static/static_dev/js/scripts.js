@@ -145,25 +145,6 @@ $(document).ready(function() {
         });
     });
 
-    // Home Page Slider Initializer
-    $('.owl-carousel').owlCarousel({
-    loop:true,
-    margin:25,
-    nav:false,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:3
-        },
-        1000:{
-            items:4
-        }
-    }
-    });
-
-
     // Add to Wishlist Click Event
     $('.add-fav').click(function (e) {
         e.preventDefault();

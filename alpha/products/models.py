@@ -178,3 +178,7 @@ class Review(models.Model):
     class Meta:
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
+        ordering = ['-created']
+
+    def get_user(self):
+        return self.user

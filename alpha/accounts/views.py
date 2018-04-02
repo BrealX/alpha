@@ -7,6 +7,8 @@ from orders.forms import CheckoutFormRight
 from django.contrib.auth.models import User
 from .models import Profile
 from orders.models import OrderDeliveryArea, OrderDeliveryCity, Order, OrderItem
+from products.models import Review
+from products.forms import ReviewForm
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -138,6 +140,23 @@ def user_order_info(request, order_id):
     order = Order.objects.get(id=order_id, user=user, is_active=True)
     order_items = OrderItem.objects.filter(order=order, is_active=True)
     return render(request, 'accounts/user_order_info.html', locals())
+
+
+@login_required(login_url='account_login')
+def user_my_reviews(request):
+    user = request.user
+    feedbacks = Review.objects.filter(user=user, is_active=True).order_by('-created')
+    form = ReviewForm(request.POST or None)
+    if request.POST and form.is_valid():
+        review_product_id = request.POST.get('product_id')
+        review_text = request.POST.get('text')
+        review_score = int(request.POST.get('score'))
+        review = Review.objects.get(user=user, product_id=review_product_id)
+        review, created = Review.objects.update_or_create(
+            user=user, 
+            product_id=review_product_id,
+            defaults={'text': review_text, 'score': review_score}) 
+    return render(request, 'accounts/user_my_reviews.html', locals())
 
 
 @login_required(login_url='account_login')

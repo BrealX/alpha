@@ -29,6 +29,7 @@ def product_land(request, product_id):
 
     if user.is_authenticated:
         user_ordered_products = OrderItem.objects.filter(order__user=user, order__is_active=True, is_active=True, order__status__id=4)
+        user_product_reviews = feedbacks.filter(user=user)
         if product in user_ordered_products:
             product_is_purchased = True
         if request.POST and form.is_valid():

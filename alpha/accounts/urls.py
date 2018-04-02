@@ -11,6 +11,7 @@ urlpatterns = [
     path('user_dashboard/my_profile/', views.user_my_profile, name="user_my_profile"),
     path('user_dashboard/my-orders/', views.user_my_orders, name="user_my_orders"),
     path('user_dashboard/my-orders/order<order_id>-info/', views.user_order_info, name="user_order_info"),
+    path('user_dashboard/my-reviews/', views.user_my_reviews, name="user_my_reviews"),
     path('user_dashboard/add_address/', views.add_address, name="add_address"),
     path('user_dashboard/delete_address/', views.delete_address, name="delete_address"),
     path('user_dashboard/add_personal/', views.add_personal, name="add_personal"),
