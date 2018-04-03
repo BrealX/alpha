@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block dashboard %}
 <section class="section-add-personal section-padding-100">
@@ -43,38 +44,51 @@
 					<p>Чтобы добавить или изменить Вашу личную информацию, заполните или отредактируйте форму.</p>
 				</div>
 			</div>
-			<div class="col-12">
-				<form class="form-inline" action="{% url 'add_personal' %}" role="form" method="post">
-				{% csrf_token %}
-  					<div class="form-group mx-auto mt-2">
-    					<label for="user_firstname" class="sr-only" style="color: #5b32b4;">Имя</label>
-    					<input type="text" name="user_firstname" id="user_firstname" class="form-control" placeholder="{% if user.first_name %}{{ user.first_name }}{% else %}Вы еще не сообщили нам своё имя{% endif %}" value="{{ user.first_name }}"></input>
-  					</div>
-  					<div class="form-group mx-auto mt-2">
-    					<label class="sr-only" for="user_phone" style="color: #5b32b4;">Номер телефона</label>
-    					<input type="tel" name="profile_phone" id="user_phone" class="form-control phone-mask" placeholder="{% if user.profile.phone %}{{ user.profile.phone }}{% else %}Вы еще не сообщили нам свой номер телефона{% endif %}" value="{{ user.profile.phone }}"></input>
-  					</div>
-  					<div class="form-group mx-auto mt-2">
-  						<button type="submit" class="btn submit-btn">Сохранить</button>
-  					</div>
-  				{% if message_error %}
-                <div class="form-error text-center">
-                    <p>Ошибки:</p>
-                    <ul>
-                        <li>{{ message_error }}</li>
-                    </ul>
-                </div>
-                {% elif message_success %}
-				<div class="text-center" style="color: #5b32b4; margin-top: 30px;">
-                    <ul>
-                        <li>{{ message_success }}</li>
-                    </ul>
-                </div>
-                {% endif %}
-				</form>
-			</div>
-		</div>
+        </div>
 		<!-- End Row -->
+        <form action="{% url 'add_personal' %}" role="form" method="post">
+        {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
+                    <div class="wrap-input100 validate-input">
+                    {% for error in user_form.first_name.errors %}
+                        <span class="label-input100 form-error text-center">{{ error }}</span>
+                    {% endfor %}
+                    </div>
+                    <div class="wrap-input100 validate-input">
+                        <label for="{{ user_form.first_name.auto_id }}" class="label-input100">{{ user_form.first_name.label }}</label>
+                        {% render_field user_form.first_name class="input100" %}
+                        <span class="focus-input100"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
+                    <div class="wrap-input100 validate-input">
+                        {% for error in profile_form.phone.errors %}
+                        <span class="label-input100 form-error text-center">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="wrap-input100 validate-input">
+                        <label for="{{ profile_form.phone.auto_id }}" class="label-input100">{{ profile_form.phone.label }}</label>
+                        {% render_field profile_form.phone class="input100 phone-mask" type="tel" %}
+                    </div>
+                </div>
+                <div class="col-12">
+                    {% if message_success %}
+                    <div class="text-center" style="color: #5b32b4; margin-top: 30px;">
+                        <ul>
+                            <li>{{ message_success }}</li>
+                        </ul>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="col-12">
+                    <div class="container-addpersonal100-form-btn">
+                        <button type="submit" class="addpersonal100-form-btn">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+            <!-- End Row -->
+        </form>
     </div>
     <!-- End Container -->
 </section>
