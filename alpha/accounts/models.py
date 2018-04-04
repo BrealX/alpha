@@ -15,7 +15,7 @@ class Profile(models.Model):
         null=True,
         blank=True,
         max_length=40, )
-	register_date = models.DateField(
+    register_date = models.DateField(
         auto_now_add=True,
         null=True, )
     delivery_area = models.OneToOneField(
