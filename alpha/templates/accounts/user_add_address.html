@@ -43,9 +43,9 @@
 				<div class="footer-text" style="line-height: 30px;">
 					<p>
 						{% if user.profile.delivery_city %}
-							Вы можете отредактировать адрес доставки, изменив указанные в форме данные! Выберите область и город. Если желаете забирать товар самостоятельно, то поле "Дополнительная информация" можно оставить пустым. Если потребуется доставка, то укажите в этом поле номер и адрес отделения перевозчика или полной почтовый адрес, если отправка будет Укрпочтой!
+							Вы можете отредактировать адрес доставки, изменив указанные в форме данные! Выберите область и город. Если желаете забирать товар самостоятельно, то поле "Дополнительная информация" можно оставить пустым. Если потребуется доставка, то укажите в этом поле номер и адрес отделения перевозчика или полной почтовый адрес для отправки Укрпочтой!
 						{% else %}
-							Добавьте адрес доставки в Ваш профиль. Тогда при оформлении заказов Вам не нужно будет заполнять адрес доставки. Если же заказ нужно будет отправить не по основному адресу (например, кому-нибудь на подарок, Вы всегда сможете изменить эти данные на этапе оформление нового заказа! Выберите область и город. Если желаете забирать товар самостоятельно, то поле "Дополнительная информация" можно оставить пустым. Если потребуется доставка, то укажите в этом поле номер и адрес отделения перевозчика или полной почтовый адрес, если отправка будет Укрпочтой!
+							Добавьте адрес доставки в Ваш профиль. Тогда при оформлении заказов Вам не нужно будет заполнять его вручную. Если же заказ нужно будет отправить не по основному адресу (например, кому-нибудь на подарок, Вы всегда сможете изменить эти данные на этапе оформление нового заказа! Выберите область и город. Если желаете забирать товар самостоятельно, то поле "Дополнительная информация" можно оставить пустым. Если потребуется доставка, то укажите в этом поле номер и адрес отделения перевозчика или полной почтовый адрес для отправки Укрпочтой!
 						{% endif %}
 					</p>
 				</div>
@@ -53,34 +53,61 @@
 			<div class="col-12">
 				<div class="footer-text">
 					{% if user.profile.delivery_city %}
-					<p>Текущий адрес доставки: {{ user.profile.delivery_address }}</p>
-					{% else %}
-					<p class=text-center>Текущий адрес доставки не заполнен!</p>
+					<p>Текущий адрес доставки: {{ user.profile.delivery_area }}, {{ user.profile.delivery_city }}, {{ user.profile.delivery_address }}</p>
 					{% endif %}
+                    {% if message_success %}
+                    <p style="color: #5b32b4;">{{ message }}</p>
+                    {% endif %}
 				</div>
 			</div>
-			<div class="col-12">
-				<form action="{% url 'add_address' %}" role="form" method="post">{% csrf_token %}
-					<p style="color: #5b32b4; font-weight: bolder;">{% if user.profile.delivery_city %}Изменить адрес доставки{% else %}Добавить адрес доставки{% endif %}</p>
-					<div class="form-group required">
-                        <label style="color: #5b32b4;" for="{{ form.anonymous_area.id_for_label }}">{{ form.anonymous_area.label }}<sup>*</sup></label>
-                        {{ form.anonymous_area|add_class:"form-control" }}
+        </div>
+        <!-- End Row -->
+        <form action="{% url 'add_address' %}" role="form" method="post">
+        {% csrf_token %}
+            <div class="row">
+			    <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
+					<div class="wrap-input100 validate-input">
+                    {% for error in form.delivery_area.errors %}
+                        <span class="label-input100 form-error text-center">{{ error }}</span>
+                    {% endfor %}
+                    </div>
+                    <div class="wrap-input100">
+                        <label for="{{ form.delivery_area.auto_id }}" class="label-input100">{{ form.delivery_area.label }}</label>
+                        {% render_field form.delivery_area class="select-container input100" %}
+                        <span class="focus-input100"></span>
 					</div>
-					<div class="form-group required">
-                        <label style="color: #5b32b4;" for="{{ form.anonymous_city.id_for_label }}">{{ form.anonymous_city.label }}<sup>*</sup></label>
-                        {{ form.anonymous_city|add_class:"form-control"|attr:"disabled" }}
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
+                    <div class="wrap-input100 validate-input">
+                    {% for error in form.delivery_city.errors %}
+                        <span class="label-input100 form-error text-center">{{ error }}</span>
+                    {% endfor %}
                     </div>
-                    <div class="form-group">
-                        <label style="color: #5b32b4;" for="{{ form.anonymous_additional.id_for_label }}">{{ form.anonymous_additional.label }}</label>
-                        {{ form.anonymous_additional|add_class:"form-control" }}
+					<div class="wrap-input100">
+                        <label for="{{ form.delivery_city.auto_id }}" class="label-input100">{{ form.delivery_city.label }}</label>
+                        {% render_field form.delivery_city class="select-container input100" disabled=true %}
+                        <span class="focus-input100"></span>
                     </div>
-                    <div style="margin-top: 30px; text-align: center">
-                        <button class="btn submit-btn" type="submit">{% if user.profile.delivery_city %}Изменить{% else %}Добавить{% endif %}</button>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
+                    <div class="wrap-input100 validate-input">
+                    {% for error in form.delivery_address.errors %}
+                        <span class="label-input100 form-error text-center">{{ error }}</span>
+                    {% endfor %}
                     </div>
-				</form>
-			</div>
-		</div>
-		<!-- End Row -->
+                    <div class="wrap-input100">
+                        <label for="{{ form.delivery_address.auto_id }}" class="label-input100">{{ form.delivery_address.label }}</label>
+                        {% render_field form.delivery_address class="input100" %}
+                        <span class="focus-input100"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
+                    <div class="container-addpersonal100-form-btn">
+                        <button class="addpersonal100-form-btn" type="submit">{% if user.profile.delivery_city %}Изменить{% else %}Добавить{% endif %}</button>
+                    </div>
+			    </div>
+            </div>
+        </form>
     </div>
     <!-- End Container -->
 </section>

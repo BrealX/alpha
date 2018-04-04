@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
+from accounts.models import Profile
+from orders.models import OrderDeliveryArea, OrderDeliveryCity
 
 
 class LoginForm(forms.Form):
@@ -36,7 +38,50 @@ class UserRegistrationForm(forms.Form):
         return cd['password_repeat']
 
 
-class UserAddPersonalForm(forms.Form):
-    """Form for User name or phone adding or editing"""
-    user_firstname = forms.CharField()
-    profile_phone = forms.CharField()
+class UserChangeFirstnameForm(forms.ModelForm):
+    first_name = forms.CharField(label="Имя")
+
+    class Meta:
+        model = User
+        fields = ('first_name', )
+
+    def clean_first_name(self):
+        data = self.cleaned_data['first_name']
+        if not data:
+            raise forms.ValidationError("Это поле не должно быть пустым!")
+        return data
+
+
+class ProfileChangePhoneForm(forms.ModelForm):
+    phone = forms.CharField(label="Телефон")
+
+    class Meta:
+        model = Profile
+        fields = ('phone',)
+
+    def clean_phone(self):
+        data = self.cleaned_data['phone']
+        if not data:
+            raise forms.ValidationError("Это поле не должно быть пустым!")
+        return data
+
+
+class ProfileChangeAddressForm(forms.ModelForm):
+    areas_list = OrderDeliveryArea.objects.all()
+    cities_list = OrderDeliveryCity.objects.all()
+
+    delivery_area = forms.ChoiceField(
+        choices=[('', '-- Выберите область --')] + [(area.id, area.name) for area in areas_list],
+        label="Область",
+        initial='Выберите область', )
+    delivery_city = forms.ChoiceField(
+        choices=[('', '-- Выберите город --')] + [(city.id, city.name) for city in cities_list],
+        label="Город",
+        initial='Выберите город', )
+    delivery_address = forms.CharField(
+        label="Дополнительная информация: укажите номер и адрес отделения склада перевозчика или Ваш полный почтовый адрес (не требуется заполнять при самовывозе)",
+        widget=forms.Textarea, )
+
+    class Meta:
+        model = Profile
+        fields = ('delivery_address',)

@@ -2,8 +2,7 @@
 
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm, UserRegistrationForm, UserAddPersonalForm
-from orders.forms import CheckoutFormRight
+from .forms import LoginForm, UserRegistrationForm, UserChangeFirstnameForm, ProfileChangePhoneForm, ProfileChangeAddressForm
 from django.contrib.auth.models import User
 from .models import Profile
 from orders.models import OrderDeliveryArea, OrderDeliveryCity, Order, OrderItem
@@ -52,7 +51,6 @@ to the class User(AbstractUser) (line 357 Django 2.0.3)
 
 After that fix Allauth Set password View works correctly.
 https://github.com/pennersr/django-allauth/issues/373'''
-
 
 
 def user_login(request):
@@ -162,20 +160,27 @@ def user_my_reviews(request):
 @login_required(login_url='account_login')
 def add_address(request):
     user = request.user
-    form = CheckoutFormRight(user)
-    message = ""
+    profile = user.profile
+    form = ProfileChangeAddressForm(request.POST or None, instance=profile)
+    message_error = ""
+    message_success = ""
     if request.POST:
-        form = CheckoutFormRight(user, request.POST or None)
         if form.is_valid():
-            cd = form.cleaned_data
-            user.profile.delivery_area = OrderDeliveryArea.objects.get(id=cd['anonymous_area'])
-            user.profile.delivery_city = OrderDeliveryCity.objects.get(id=cd['anonymous_city'])
-            user.profile.delivery_address = str(cd['anonymous_additional'])
-            user.save()
-            return redirect('user_my_profile')  
+            data = request.POST
+            profile_delivery_area_id = data.get('delivery_area')
+            delivery_area = OrderDeliveryArea.objects.get(id=profile_delivery_area_id)
+            profile_delivery_city_id = data.get('delivery_city')
+            delivery_city = OrderDeliveryCity.objects.get(id=profile_delivery_city_id)
+            profile_delivery_address = data.get('delivery_address')
+            profile_to_change = form.save(commit=False)
+            profile_to_change.delivery_area = delivery_area
+            profile_to_change.delivery_city = delivery_city
+            profile_to_change.delivery_address = profile_delivery_address
+            profile_to_change.save()
+            message_success = "Данные успешно изменены. Спасибо!"
+            return render(request, 'accounts/user_add_address.html', locals())
         else:
-            message = "Вы пытаетесь отправить пустую форму. Пожалуйста, заполните " + \
-                "поля формы."    
+            message_error = "Вы пытаетесь отправить пустую форму, либо заполнили не все поля."
     return render(request, 'accounts/user_add_address.html', locals())
 
 
@@ -194,22 +199,28 @@ def delete_address(request):
 @login_required(login_url='account_login')
 def add_personal(request):
     user = request.user
+    user_form = UserChangeFirstnameForm(request.POST or None, instance=user)
+    profile = user.profile
+    profile_form = ProfileChangePhoneForm(request.POST or None, instance=profile)
     message_error = ""
     message_success = ""
     if request.POST:
-        form = UserAddPersonalForm(request.POST or None)
-        if form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid():
             data = request.POST
-            profile_phone = data.get('profile_phone')
-            user_firstname = data.get('user_firstname')
+            profile_phone = data.get('phone')
+            profile_to_change = profile_form.save(commit=False)
+            profile_to_change.phone = profile_phone
+            profile_to_change.save()
+
+            user_firstname = data.get('first_name')
             user.profile.phone = profile_phone
-            user.first_name = user_firstname
-            user.save()
+            user_to_change = user_form.save(commit=False)
+            user_to_change.first_name = user_firstname
+            user_to_change.save()
             message_success = "Данные успешно изменены. Спасибо!"
-            return render(request, 'accounts/user_add_personal.html', locals())  
+            return render(request, 'accounts/user_add_personal.html', locals())
         else:
-            message_error = "Вы пытаетесь отправить пустую форму, либо заполнили не все поля."    
-    form = UserAddPersonalForm()
+            message_error = "Вы пытаетесь отправить пустую форму, либо заполнили не все поля."
     return render(request, 'accounts/user_add_personal.html', locals())
 
 
