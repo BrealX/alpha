@@ -3,3 +3,12 @@ Invalid HTTP_HOST header: '/home/yozhik/alpha/alpha/run/gunicorn.sock:'. The dom
 Not Found: /favicon.ico
 Not Found: /ccvv
 Not Found: /favicon.ico
+
+
+
+
+
+
+Attempt to authenticate with a custom backend failed.
+Attempt to authenticate with a custom backend failed.
+Not Found: /favicon.ico

@@ -4,8 +4,8 @@ from orders.models import OrderDeliveryArea, OrderDeliveryCity
 
 
 class Profile(models.Model):
-	# this field is required
-	user = models.OneToOneField(
+    #this field is required
+    user = models.OneToOneField(
         User,
         on_delete=models.SET_NULL,
         blank=True,
@@ -42,18 +42,15 @@ class Profile(models.Model):
         null=True,
         blank=True, )
 
-	def __str__(self):
-		return "Клиент %s" % self.user.username
+    def __str__(self):
+        return "Клиент %s" % self.user.username
 
+    def user_email(self):
+        return self.user.email
 
-	def user_email(self):
-		return self.user.email
+    def user_username(self):
+        return self.user.username
 
-
-	def user_username(self):
-		return self.user.username
-
-
-	class Meta:
-		verbose_name = "Клиент"
-		verbose_name_plural = "Клиенты"
+    class Meta:
+        verbose_name = "Клиент"
+        verbose_name_plural = "Клиенты"

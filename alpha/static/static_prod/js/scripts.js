@@ -145,25 +145,6 @@ $(document).ready(function() {
         });
     });
 
-    // Home Page Slider Initializer
-    $('.owl-carousel').owlCarousel({
-    loop:true,
-    margin:25,
-    nav:false,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:3
-        },
-        1000:{
-            items:4
-        }
-    }
-    });
-
-
     // Add to Wishlist Click Event
     $('.add-fav').click(function (e) {
         e.preventDefault();
@@ -214,11 +195,32 @@ $(document).ready(function() {
             cache: true,
             success: function(data) {
                 if (!data.user_firstname && !data.profile_phone) {
-                    $('.profile-firstname').html("");
-                    $('.profile-phone').html("");
+                    $('.profile-firstname, .profile_phone').html("");
                     $('.profile-firstname').text("Вы не указали имя");
                     $('.profile-phone').text("Вы не указали контактный номер телефона");
                 };
+            }
+        });
+    });
+
+    // My Profile Reviews Page review delete button
+    $('#deletefeedbackModal .btn-delete').on('click', function(e) {
+        e.preventDefault();
+        var form = $('#review_delete_form');
+        var url = form.attr('action');
+        var csfr_token = $('#review_delete_form [name="csrfmiddlewaretoken"]').val();
+        var feedback_id = $('#delete_input').val();
+        var redirect_url = $('#go_back_form').attr('action');
+        data = {}
+        data["csrfmiddlewaretoken"] = csfr_token;
+        data["feedback_id"] = feedback_id;
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            cache: true,
+            success: function(data) {
+                window.location.href = redirect_url;
             }
         });
     });
@@ -341,6 +343,14 @@ $(document).ready(function() {
         window.location.href = '/';
     });
 
+    // Shows full feedback text at modal window when 'Read more' button is clicked at Landing Page
+    $('#feedbackModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var username = button.data('username');
+        var feedback_text = button.data('feedback_text');
+        var modal = $(this);
+        modal.find('.modal-title').text('Отзыв от пользователя ' + username);
+        modal.find('.modal-body .review-form-container').text(feedback_text);
+    });
+
 });
-
-
