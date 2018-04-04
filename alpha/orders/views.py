@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import *
-from .forms import CheckoutFormLeft, CheckoutFormRight
+from .forms import UserCheckoutForm, ProfileCheckoutForm, AnonymousCheckoutForm
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
@@ -61,79 +61,73 @@ def checkout1(request):
     cart_items = cart.items
     session_key = request.session.session_key
     user = request.user
+    if user.is_authenticated:
+        profile = user.profile
+        user_form = UserCheckoutForm(request.POST or None, instance=user)
+        profile_form = ProfileCheckoutForm(request.POST or None, instance=profile)
+    else:
+        form = AnonymousCheckoutForm(request.POST or None)
     if cart.is_empty:
         message = 'Ваша корзина пуста. Для оформления заказа необходимо что-то в неё добавить'
-        form1 = CheckoutFormLeft()
-        form2 = CheckoutFormRight(request.user)
         return render(request, 'orders/checkout1.html', locals())
-    else:
-        if request.POST:
-            # if request is POST
-            data = request.POST
-            form1 = CheckoutFormLeft(request.POST or None)
-            form2 = CheckoutFormRight(request.user, request.POST or None)
-            if form1.is_valid() and form2.is_valid():
-                # if both forms are valid
-                cd1 = form1.cleaned_data
-                cd2 = form2.cleaned_data
-                if user.is_authenticated:
-                    # order creation for identified User
-                    customer_address = str(OrderDeliveryArea.objects.get(id=cd2['anonymous_area'])) + ', ' + str(OrderDeliveryCity.objects.get(id=cd2['anonymous_city'])) + ', ' + str(cd2['anonymous_additional'])
-                    new_order = Order.objects.create(
-                        session_key=session_key,
-                        user=user,
-                        customer_name=data.get('anonymous_name', ''),
-                        customer_email=data.get('anonymous_email', ''),
-                        customer_phone=data.get('anonymous_phone', ''),
-                        customer_address=customer_address,
-                        status_id=1,
-                        is_active=False
-                    )
-                    for item in cart_items:
-                        order_item = OrderItem.objects.create(
-                            order=new_order,
-                            product=item.product,
-                            quantity=item.quantity,
-                            price=item.price,
-                            order_item_subtotal=item.subtotal,
-                        )
-                    request.session['delivery_address'] = customer_address
-                    return redirect('checkout2')
-                else:
-                    # order creation for anonymous User
-                    customer_address = str(OrderDeliveryArea.objects.get(id=cd2['anonymous_area'])) + ', ' + str(OrderDeliveryCity.objects.get(id=cd2['anonymous_city'])) + ', ' + str(cd2['anonymous_additional'])
-                    new_order = Order.objects.create(
-                        session_key=session_key,
-                        customer_name=cd1['anonymous_name'],
-                        customer_email=cd1['anonymous_email'],
-                        customer_phone=cd1['anonymous_phone'],
-                        customer_address=customer_address,
-                        status_id=1,
-                        is_active=False
-                        )
-                    for item in cart_items:
-                        order_item = OrderItem.objects.create(
-                            order=new_order,
-                            product=item.product,
-                            quantity=item.quantity,
-                            price=item.price,
-                            order_item_subtotal=item.subtotal,
-                        )
-                    request.session['delivery_address'] = customer_address
-                    return redirect('checkout2')
-            else:
-                # both forms are not valid or one of them is not
-                message1 = form1.errors
-                message2 =  form2.errors
+    if request.POST:
+        data = request.POST
+        print(data)
+        if user.is_authenticated:
+            if user_form.is_valid() and profile_form.is_valid():
+                order_area_id = data.get('delivery_area')
+                order_area = OrderDeliveryArea.objects.get(id=order_area_id)
+                order_city_id = data.get('delivery_city')
+                order_city = OrderDeliveryCity.objects.get(id=order_city_id)
+                order_address = data.get('delivery_address')
+                order_full_address = str(order_area) + ', ' + str(order_city) + ', ' + str(order_address)
+                new_order = Order.objects.create(
+                    user=user,
+                    customer_name=data.get('first_name'),
+                    customer_email=data.get('email'),
+                    customer_phone=data.get('phone'),
+                    customer_address=order_full_address,
+                    status_id=1,
+                    is_active=False)
+                for item in cart_items:
+                    order_item = OrderItem.objects.create(
+                        order=new_order,
+                        product=item.product,
+                        quantity=item.quantity,
+                        price=item.price,
+                        order_item_subtotal=item.subtotal)
+                request.session['delivery_address'] = order_full_address
+                return redirect('checkout2')
+            else:  # if forms are not valid
                 return render(request, 'orders/checkout1.html', locals())
         else:
-            # if request is GET
-            form1 = CheckoutFormLeft()
-            if user.is_authenticated and user.profile.delivery_city:
-                form2 = CheckoutFormRight(request.user, initial={'anonymous_area': user.profile.delivery_area.id, 'anonymous_city': user.profile.delivery_city.id, 'anonymous_additional': user.profile.delivery_address})
-            else:
-                form2 = CheckoutFormRight(request.user)
-            return render(request, 'orders/checkout1.html', locals())
+            if form.is_valid():
+                order_area_id = data.get('anonymous_area')
+                order_area = OrderDeliveryArea.objects.get(id=order_area_id)
+                order_city_id = data.get('anonymous_city')
+                order_city = OrderDeliveryCity.objects.get(id=order_city_id)
+                order_address = data.get('anonymous_additional')
+                order_full_address = str(order_area) + ', ' + str(order_city) + ', ' + str(order_address)
+                new_order = Order.objects.create(
+                    session_key=session_key,
+                    customer_name=data.get('anonymous_name'),
+                    customer_email=data.get('anonymous_email'),
+                    customer_phone=data.get('anonymous_phone'),
+                    customer_address=order_full_address,
+                    status_id=1,
+                    is_active=False)
+                for item in cart_items:
+                    order_item = OrderItem.objects.create(
+                        order=new_order,
+                        product=item.product,
+                        quantity=item.quantity,
+                        price=item.price,
+                        order_item_subtotal=item.subtotal)
+                request.session['delivery_address'] = order_full_address
+                return redirect('checkout2')
+            else:  # if form is not valid
+                return render(request, 'orders/checkout1.html', locals())
+    return render(request, 'orders/checkout1.html', locals())
 
 
 def checkout2(request):
@@ -142,7 +136,10 @@ def checkout2(request):
     cart = Cart(request.session)
     cart_items = cart.items
     order_overall = cart.total
-    order = Order.objects.filter(session_key=session_key).latest('id')
+    if user.is_authenticated:
+        order = Order.objects.filter(user=user, is_active=False).latest('id')
+    else:
+        order = Order.objects.filter(session_key=session_key).latest('id')
     order_id = order.id
     order_customer_phone = order.customer_phone
     order_customer_email = order.customer_email

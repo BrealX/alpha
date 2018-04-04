@@ -167,7 +167,6 @@ def add_address(request):
     if request.POST:
         if form.is_valid():
             data = request.POST
-            print(data)
             profile_delivery_area_id = data.get('delivery_area')
             delivery_area = OrderDeliveryArea.objects.get(id=profile_delivery_area_id)
             profile_delivery_city_id = data.get('delivery_city')
