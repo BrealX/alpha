@@ -102,9 +102,10 @@
 						<div class="profile-hover-effects">
 							<div class="profile-goto-icon">
 								{% if not user.has_usable_password %}
-								<a href="{% url 'account_set_password' %}">Установить</a>
-								{% endif %}
-                                <a href="{% url 'account_reset_password' %}">Сменить пароль</a>
+								<a href="{% url 'password_set' %}">Установить</a>
+								{% else %}
+                                <a href="{% url 'password_change' %}">Сменить пароль</a>
+                                {% endif %}
 							</div>
 						</div>
 					</div>
@@ -123,7 +124,7 @@
 						<div class="profile-hover-effects">
 							<div class="profile-goto-icon">
                                 <!-- Button trigger modal -->
-                                <button id="account_delete" type="button" data-href="{% url 'login' %}" data-toggle="modal" data-target="#deleteModalCenter">
+                                <button id="account_delete" type="button" data-href="{% url 'account_login' %}" data-toggle="modal" data-target="#deleteModalCenter">
 									Удалить аккаунт
 								</button>
                                 <form id="my_account_delete_form" action="{% url 'delete_account' %}">{% csrf_token %}</form>
