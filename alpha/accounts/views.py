@@ -2,7 +2,7 @@
 
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
-from .forms import LoginForm, UserRegistrationForm, UserChangeFirstnameForm, ProfileChangePhoneForm, ProfileChangeAddressForm
+from .forms import LoginForm, UserRegistrationForm, UserChangeFirstnameForm, ProfileChangePhoneForm, ProfileChangeAddressForm, UserEmailChangeForm
 from django.contrib.auth.models import User
 from .models import Profile
 from orders.models import OrderDeliveryArea, OrderDeliveryCity, Order, OrderItem
@@ -24,6 +24,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
+from allauth.account.models import EmailAddress
 
 
 ''' hack to make Django Allauth Set Password working.
@@ -353,3 +354,21 @@ def set_password(request):
             else:
                 messages.error(request, 'Пожалуйста, устраните ошибки.')
     return render(request, 'accounts/set_password.html', locals())
+
+
+@login_required(login_url='account_login')
+def email_change(request):
+    user = request.user
+    form = UserEmailChangeForm(user, request.POST or None)
+    if request.POST:
+        if form.is_valid():
+            data = request.POST
+            new_email = data.get('new_email1')
+            form.save()
+            allauth_email = EmailAddress.objects.get(user=user)
+            allauth_email.change(request, new_email)
+            return redirect('user_dashboard')
+        message_error = "Форма заполнена не верно. Введенные адреса не совпадают либо не являются email адресами"
+        return render(request, 'accounts/change_email.html', locals())
+    else:
+        return render(request, 'accounts/change_email.html', locals())

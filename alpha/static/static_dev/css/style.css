@@ -1544,7 +1544,9 @@ div.carousel-item:nth-child(3) > div:nth-child(1)
 #id_login,
 #id_old_password,
 #id_new_password1,
-#id_new_password2
+#id_new_password2,
+#id_new_email1,
+#id_new_email2
 {
     font-size: 18px;
     line-height: 1.5;

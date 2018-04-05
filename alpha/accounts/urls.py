@@ -27,6 +27,9 @@ urlpatterns = [
     re_path(r'^password-reset/confirm/(?P<uidb64>[-\w]+)/(?P<token>[-\w]+)/$', password_reset_confirm, name='password_reset_confirm'),
     path('password-reset/complete/', password_reset_complete, name='password_reset_complete'),
 
+    # email handling urls
+    path('accounts/email-change/', views.email_change, name='email_change'),
+
     # after registering new account
     #re_path(r'^registration/', views.after_registration, name="after_registration"),
     #re_path(r'^activation/(?P<activation_key>.+)/$', views.account_activation, name="account_activation"),
