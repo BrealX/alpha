@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block content %}
+<section class="section-email section-padding-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{% url 'home' %}">На главную</a>
+                    </li>
+                    <li class="active">
+                        E-mail адреса
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- End Row -->
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h2 class="text-white">E-mail адреса</h2>
+                    <div class="line-shape"></div>
+                </div>
+                <div class="footer-text">
+                    {% if user.email %}
+                    <p>Следующий e-mail адрес прикреплен к Вашему аккаунту: <span style="color: #5b32b4; font-weight: bolder;">{{ user.email }}</span></p>
+                    {% else %}
+                    <p>Внимание! На данный момент у Вас нет привязанных e-mail адресов. Чтобы получать уведомления сайта при оформлении заказов, а также для сброса/восстановления вашего пароля, необходимо добавить электронный адрес!</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- End Row -->
+        <div class="row">
+            <div class="col-12">
+                {% if user.email %}
+                <form action="{% url 'email_change' %}" method="post">
+                {% csrf_token %}
+                    {% if message_error %}
+                    <div class="form-error" role="alert">
+                        <p>{{ message_error }}</p>
+                    </div>
+                    {% endif %}
+                    <div class="form-group">
+                        {% render_field form.new_email1|add_class:"form-control" placeholder="Новый email" %}
+                    </div>
+                    <div class="form-group">
+                        {% render_field form.new_email2|add_class:"form-control" placeholder="Новый email еще раз" %}
+                    </div>
+                    <div class="text-center">
+                        <button class="btn submit-btn" type="submit" name="action" value="{% trans 'Change Email' %}"/>Изменить email</button>
+                    </div>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+<!--            
+              
+
+                        <div class="buttonHolder">
+                            <button class="secondaryAction btn submit-btn" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
+                            <button class="primaryAction btn submit-btn" type="submit" name="action_change" >{% trans 'Change' %}</button>
+                        </div>
+                
+ -->

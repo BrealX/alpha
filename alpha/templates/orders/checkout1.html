@@ -8,16 +8,16 @@
         <div class="row">
             <div class="col-12">
                 <ul class="breadcrumb" style="margin-bottom: 40px;">
+				    <li>
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
                     <li>
-                        <a href="{% url 'home' %}">На главную</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'checkout' %}">Корзина</a>
-                    </li>
-                    <li class="active">
-                        Оформление заказа (Шаг 1 из 2)
-                    </li>
-                </ul>
+					    <a href="{% url 'checkout' %}">Корзина</a>
+				    </li>
+				    <li class="active">
+					    Оформление заказа (Шаг 1 из 2)
+				    </li>
+			    </ul>
             </div>
         </div>
         <!-- End Row -->

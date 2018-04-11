@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm, UserRegistrationForm, UserChangeFirstnameForm, ProfileChangePhoneForm, ProfileChangeAddressForm
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from .forms import LoginForm, UserRegistrationForm, UserChangeFirstnameForm, ProfileChangePhoneForm, ProfileChangeAddressForm, UserEmailChangeForm
 from django.contrib.auth.models import User
 from .models import Profile
 from orders.models import OrderDeliveryArea, OrderDeliveryCity, Order, OrderItem
@@ -20,8 +20,11 @@ import hashlib
 import os
 import binascii
 from django.utils import timezone
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import JsonResponse
+from django.contrib import messages
+from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
+from allauth.account.models import EmailAddress
 
 
 ''' hack to make Django Allauth Set Password working.
@@ -53,7 +56,8 @@ After that fix Allauth Set password View works correctly.
 https://github.com/pennersr/django-allauth/issues/373'''
 
 
-def user_login(request):
+# now using allauth login views, this view was written for backup
+'''def user_login(request):
     args = {}
     args.update(csrf(request))
     login_error = None
@@ -77,10 +81,11 @@ def user_login(request):
         login_form = LoginForm()
     args['login_form'] = login_form
     args['login_error'] = login_error
-    return render(request, 'accounts/auth.html', args)
+    return render(request, 'accounts/auth.html', args)'''
 
 
-def user_register(request):
+# now using allauth login views, this view was written for backup
+'''def user_register(request):
     args = {}
     args.update(csrf(request))
     reg_error = ''
@@ -106,7 +111,7 @@ def user_register(request):
         reg_form = UserRegistrationForm(request.POST or None)
     args['reg_form'] = reg_form
     args['reg_error'] = reg_error
-    return render(request, 'accounts/register.html', args)
+    return render(request, 'accounts/register.html', args)'''
 
 
 def user_logout(request):
@@ -313,3 +318,57 @@ def account_activation(request, activation_key):
     user_profile.activation_key = ""
     user_account.save()
     return render(request, 'registration/account_activation.html')
+
+
+@login_required(login_url='account_login')
+def change_password(request):
+    if request.POST:
+        form = PasswordChangeForm(request.user, request.POST or None)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Пароль был успешно обновлён!')
+            return redirect('password_change')
+        else:
+            messages.error(request, 'Пожалуйста, устраните ошибки.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/change_password.html', {
+        'form': form
+    })
+
+
+@login_required(login_url='account_login')
+def set_password(request):
+    user = request.user
+    form = SetPasswordForm(request.POST or None)
+    if user.has_usable_password():
+        return redirect('password_change')
+    else:
+        if request.POST:
+            form = SetPasswordForm(user, request.POST or None)
+            if form.is_valid():
+                form.save(commit=True)
+                update_session_auth_hash(request, user)
+                messages.success(request, 'Пароль был успешно установлен!')
+            else:
+                messages.error(request, 'Пожалуйста, устраните ошибки.')
+    return render(request, 'accounts/set_password.html', locals())
+
+
+@login_required(login_url='account_login')
+def email_change(request):
+    user = request.user
+    form = UserEmailChangeForm(user, request.POST or None)
+    if request.POST:
+        if form.is_valid():
+            data = request.POST
+            new_email = data.get('new_email1')
+            form.save()
+            allauth_email = EmailAddress.objects.get(user=user)
+            allauth_email.change(request, new_email)
+            return redirect('user_dashboard')
+        message_error = "Форма заполнена не верно. Введенные адреса не совпадают либо не являются email адресами"
+        return render(request, 'accounts/change_email.html', locals())
+    else:
+        return render(request, 'accounts/change_email.html', locals())

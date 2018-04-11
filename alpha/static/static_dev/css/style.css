@@ -585,7 +585,7 @@ label
     color: #fff;
 }
 
-.menu-area .navbar-brand:hover
+.navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover
 {
     color: #58d5f7;
 }
@@ -1542,9 +1542,11 @@ div.carousel-item:nth-child(3) > div:nth-child(1)
 }
 
 #id_login,
-#id_password,
-#id_password1,
-#id_password2
+#id_old_password,
+#id_new_password1,
+#id_new_password2,
+#id_new_email1,
+#id_new_email2
 {
     font-size: 18px;
     line-height: 1.5;
@@ -1567,6 +1569,20 @@ div.carousel-item:nth-child(3) > div:nth-child(1)
 {
     color: #fff;
 }
+
+.section-password-change .alert
+{
+    position: relative;
+
+    margin-bottom: 1rem;
+    padding: 15px 10px;
+
+    color: #0abceb;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: #fff;
+}
+
 
 #id_remember
 {
