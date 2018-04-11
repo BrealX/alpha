@@ -18,3 +18,4 @@ Attempt to authenticate with a custom backend failed.
 Attempt to authenticate with a custom backend failed.
 Attempt to authenticate with a custom backend failed.
 Attempt to authenticate with a custom backend failed.
+<QueryDict: {'anonymous_email': ['sveta1984@mail.ru'], 'anonymous_phone': ['+38 (066) 755-43-43'], 'anonymous_name': ['Светлана'], 'anonymous_city': ['92'], 'anonymous_area': ['10'], 'anonymous_additional': ['самовывоз'], 'csrfmiddlewaretoken': ['sOUgVGYy6ORP2kEDF8UXSCKQPKgkdmkz7veonWo2tIoUU20yA1muddWuJgP4qzrG']}>

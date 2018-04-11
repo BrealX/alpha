@@ -250,7 +250,7 @@ $(document).ready(function() {
     });
 
     // Ajax request for chained select Areas/Cities at /orders/checkout1 page
-    $('select#id_anonymous_area').on('change', function() {
+    $('select#id_anonymous_area, select#id_delivery_area').on('change', function() {
         var area_id = $(this).val();
         $.ajax({
             type: 'get',
@@ -258,12 +258,12 @@ $(document).ready(function() {
             data: { 'area_id': area_id },
             cache: true,
             success: function(response) {
-                $('select#id_anonymous_city').prop('disabled', false); // Enables element
-                $('select#id_anonymous_city').html("");
+                $('select#id_anonymous_city, select#id_delivery_city').prop('disabled', false); // Enables element
+                $('select#id_anonymous_city, select#id_delivery_city').html("");
                 var new_options = response.cities;
                 $.each(new_options, function(key, value) {
                     $.each(value, function(k, v) {
-                        $('select#id_anonymous_city').append(
+                        $('select#id_anonymous_city, select#id_delivery_city').append(
                         $('<option>', { value: k }).text(v));
                     });
                 });
