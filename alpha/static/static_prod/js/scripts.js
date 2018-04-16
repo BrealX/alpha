@@ -41,7 +41,7 @@ $(document).ready(function() {
 
     // Adding single product item to cart from Home Page slider or Landing Page buttons
     function single_adding(button) {
-        button = button;
+        var button = button;
         var cart_changes = {};
         var product_id = button.data('product_id');
         var qnty = button.data('qnty');
