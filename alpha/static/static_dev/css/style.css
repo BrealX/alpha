@@ -2004,6 +2004,11 @@ div.carousel-item:nth-child(3) > div:nth-child(1)
     margin-bottom: 50px;
 }
 
+.section-avatar button.submit-btn
+{
+    margin-top: 20px;
+}
+
 .single-dashboard-item:hover .dashboard-hover-effects,
 .single-profile-item:hover .profile-hover-effects
 {

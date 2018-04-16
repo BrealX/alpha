@@ -63,8 +63,10 @@
             <div class="col-12">
                 <!-- Product Slider -->
                 <div id="productslider" class="product-slides owl-carousel owl-loaded owl-drag">
-                    {% for product_image in products_images %}  
+                    {% for product in new_arrivals %}
+
                         {% include 'landing/product_item.html' %}
+                    
                     {% endfor %}
                 </div>
                 <!-- End Product Slider -->
@@ -109,8 +111,10 @@
             <div class="col-12">
                 <!-- Product Slider -->
                 <div id="productslider" class="product-slides owl-carousel owl-loaded owl-drag">
-                    {% for product_image in products_images_microphones %}  
+                    {% for product in nav_products_microphones %}  
+
                         {% include 'landing/product_item.html' %}
+                    
                     {% endfor %}
                 </div>
                 <!-- End Product Slider -->
@@ -156,7 +160,7 @@
             <div class="col-12">
                 <!-- Product Slider -->
                 <div id="productslider" class="product-slides owl-carousel owl-loaded owl-drag">
-                    {% for product_image in products_images_players %}  
+                    {% for product in nav_products_players %}  
                         {% include 'landing/product_item.html' %}
                     {% endfor %}
                 </div>

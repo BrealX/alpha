@@ -35,7 +35,7 @@ class ProductAdmin(admin.ModelAdmin):
     class Meta:
         model = Product
 
-    inlines = [ReviewInline]
+    inlines = [ReviewInline, ProductImageInline]
     list_display = [field.name for field in Product._meta.fields]
     list_filter = ['name', ]
     search_fields = ['name', 'id']
