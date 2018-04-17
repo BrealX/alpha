@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-header"></section>
+<section class="section-navigation">
+	<div class="container">
+		<div class="row d-flex">
+			<div class="col-lg-9 order-2 order-lg-1">
+				<div class="section-heading justify-content-lg-start justify-content-center">
+					<h2>Контакты</h1>
+				</div>
+			</div>
+			<div class="col-lg-3 text-right order-1 order-lg-2">
+				<ul class="breadcrumb justify-content-lg-end justify-content-center">
+					<li class="breadcrumb-item">
+					    <a href="{% url 'home' %}">На главную</a>
+				    </li>
+				    <li class="breadcrumb-item active">
+					    Контакты
+				    </li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+<main class="contact-page">
+	<section class="section-contacts">
+		<div class="container">
+			<div class="footer-text">
+				<p class="text-center">
+					У вас возник какой-либо вопрос касательно нашего сервиса или товаров? Пожалуйста, свяжитесь с нами по указанным контактам и мы с радостью поможем вам!
+				</p>
+			</div>
+			<div class="row d-flex">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-12 text-center">
+					<div class="contact-icon">
+						<i class="far fa-map d-none d-sm-block d-md-block d-lg-block d-xl-block"></i>
+						<h3>Адрес</h3>
+						<p>Дарницкая площадь, г. Киев, Украина</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-12 text-center">
+					<div class="contact-icon">
+						<i class="fas fa-headphones d-none d-sm-block d-md-block d-lg-block d-xl-block"></i>
+						<h3>Телефон</h3>
+						<p>{{ shop_tel }}</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-12 text-center">
+					<div class="contact-icon">
+						<i class="fas fa-at d-none d-sm-block d-md-block d-lg-block d-xl-block"></i>
+						<h3>Email</h3>
+						<p>{{ shop_email }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div id="map"></div>
+	<section id="landing_contact" class="footer-contact-area section-padding-100 clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="section-heading justify-content-lg-start justify-content-center">
+                        <h2>Обратная связь</h2>
+                    </div>
+                    <div class="footer-text justify-content-lg-start justify-content-center">
+                        <p style="margin-bottom: 50px;">Вы можете написать нам свой вопрос через форму обратной связи! Мы постараемся ответить как можно скорее.</p>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="contact-form">
+                        <form id="landing_contact_form" action="{% url 'contact' %}" method="post">{% csrf_token %}
+                            <div class="contact-input-area">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="wrap-input100">
+                                        	<label for="contact_name" class="label-input100">Имя</label>
+                                            <input type="text" class="input100" name="contact_name" id="contact_name" required>
+                                            <span class="focus-input100"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="wrap-input100">
+                                        	<label for="contact_email" class="label-input100">Email</label>
+                                            <input type="email" class="input100" name="contact_email" id="contact_email" required>
+                                            <span class="focus-input100"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="wrap-input100">
+                                        	<label for="contact_content" class="label-input100">Ваше сообщение</label>
+                                            <textarea class="input100" name="contact_content" id="contact_content" cols=30 rows=4 required></textarea>
+                                            <span class="focus-input100"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 text-center">
+                                        <button id="landing_contact_submit" type="submit" class="btn submit-btn">Отправить</button>
+                                    </div>
+                                    <div id="landing_modal_div" class="col-md-12 d-none">
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div style="clear: both;"></div>
+</main>
+{% endblock content %}
+
+{% block javascript %}
+
+	<script>
+      function initMap() {
+        var uluru = {lat: 50.442217, lng: 30.625872};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALkQ_8TosPnykdtCk4x65E2DKnW9-vnqE&callback=initMap">
+    </script>
+
+{% endblock javascript %}
