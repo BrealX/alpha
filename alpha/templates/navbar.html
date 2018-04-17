@@ -29,56 +29,13 @@
                                 <li class="nav-item active">
                                     <a class="nav-link" href="{% url 'home' %}">Главная</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link dropdown-toggle" href="#">Каталог товаров
-                                    <b class="caret"></b></a>
-                                    <ul class="dropdown-menu hidden">
-                                        <li class="megamenu-content">
-                                        <!--megamenu-content-->
-                                           <ul class="col-lg-2 col-sm-2 col-md-2 unstyled noMarginLeft">
-                                                <li>
-                                                    <p>
-                                                        <a href="/#microphones"><strong>Микрофоны</strong></a>
-                                                    </p>
-                                                </li>
-                                                {% for item in nav_products_microphones %}
-                                                <li>
-                                                    <a href="{% url 'product_land' item.id %}">{{ item.name }}</a>
-                                                </li> 
-                                                {% endfor %}
-                                            </ul>
-                                            <ul class="col-lg-2 col-sm-2 col-md-2 unstyled noMarginLeft">
-                                                <li>
-                                                    <p>
-                                                        <a href="/#multiplayers"><strong>Плееры</strong></a>
-                                                    </p>
-                                                </li>
-                                                {% for item in nav_products_players %}
-                                                <li>
-                                                    <a href="{% url 'product_land' item.id %}">{{ item.name }}</a>
-                                                </li> 
-                                                {% endfor %}
-                                            </ul>
-                                            <ul class="col-lg-3 col-sm-3 col-md-3 col-xs-6">
-                                                <li class="no-margin productPopItem">
-                                                    <a href="#">
-                                                        <img class="img-responsive" src="/media/static/products/img/karaoke_shainskii.jpg" alt="img"></a>
-                                                    <a class="text-center productInfo alpha90" href="/product/1">
-                                                       Хит продаж!
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <ul class="col-lg-3 col-sm-3 col-md-3 col-xs-6">
-                                                <li class="no-margin productPopItem">
-                                                    <a href="#">
-                                                        <img class="img-responsive" src="/media/static/products/img/karaoke_ia_pou.jpg" alt="img"></a>
-                                                    <a class="text-center productInfo alpha90" href="/product/2">
-                                                        Хит продаж!
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Каталог товаров</a>
+                                    <b class="caret"></b>
+                                    <div class="dropdown-menu auth" aria-labelledby="cat_dropdown" id="cat_dropdown">
+                                        <a class="dropdown-item" href="#microphones">Микрофоны</a>
+                                        <a class="dropdown-item" href="#multiplayers">Мультиплееры</a>
+                                    </div>
                                 </li>
                                 <li class="nav-item dropdown">
                                     {% if user.is_authenticated %}
@@ -88,7 +45,7 @@
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Авторизация</a>
                                     {% endif %}
                                     <div class="dropdown-menu auth" aria-labelledby="auth_dropdown">
-                                        <a class="dropdown-item" href="{% url 'user_dashboard' %}">Личный кабинет</a>
+                                        <a class="dropdown-item" href="{% url 'my_profile' %}">Личный кабинет</a>
                                         {% if user.is_authenticated %}
                                         <a class="dropdown-item" href="{% url 'logout' %}">Выйти ({{ username }})</a>
                                         <a class="dropdown-item" href="{% url 'email_change' %}">Изменить email</a>
@@ -99,7 +56,7 @@
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Контакты</a>
+                                    <a class="nav-link" href="{% url 'contacts' %}">Контакты</a>
                                 </li>
                                 <!-- Collapsed Minicart Start -->
                                 <div id="collapse_div" class="dropdown minicart-button d-lg-none">

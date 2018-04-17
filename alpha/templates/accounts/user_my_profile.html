@@ -3,34 +3,38 @@
 {% load i18n avatar_tags %}
 
 {% block dashboard %}
-<section class="section-profile section-padding-100">
+
+<section class="section-header"></section>
+<section class="section-navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb">
-				    <li>
-					    <a href="{% url 'home' %}">На главную</a>
-				    </li>
-                    <li>
-					    <a href="{% url 'user_dashboard' %}">Личный кабинет</a>
-				    </li>
-				    <li class="active">
-					    Мой профиль
-				    </li>
-			    </ul>
+        <div class="row d-flex">
+            <div class="col-lg-7 order-2 order-lg-1">
+                <div class="section-heading justify-content-lg-start justify-content-center">
+                    <h2>Профиль</h1>
+                </div>
+            </div>
+            <div class="col-lg-5 text-right order-1 order-lg-2">
+                <ul class="breadcrumb justify-content-lg-end justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'home' %}">На главную</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'my_profile' %}">Профиль</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Профиль
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End Row -->
+    </div>
+</section>
+<section class="section-profile">
+    <div class="container">
 		<div class="row">
-			<div class="col-md-6">
-				<div class="section-heading">
-					<h2 class="text-white">Мой профиль</h2>
-					<div class="line-shape"></div>
-				</div>
-			</div>
 			<div class="col-12">
-				<div class="footer-text">
-					<p>Здесь можно отредактировать Ваши персональные данные. При необходимости можно также изменить Ваш пароль или удалить аккаунт.</p>
+				<div class="footer-text text-center">
+					<p>Здесь можно отредактировать персональные данные (адрес доставки, имя и телефон), а также изменить или удалить оставленные отзывы на товары. При необходимости возможно также изменить пароль или удалить аккаунт.</p>
 				</div>
 			</div>
 		</div>
@@ -172,7 +176,7 @@
 								{% if request.user.review_set.all %}
                                 <a href="{% url 'user_my_reviews' %}">Изменить</a>
                                 {% else %}
-                                <a>Вы еще не оставляли отзывы</a>
+                                <a href="">Нет отзывов</a>
                                 {% endif %}
 							</div>
 						</div>

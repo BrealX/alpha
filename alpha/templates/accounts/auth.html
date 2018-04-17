@@ -2,21 +2,30 @@
 {% load static %}
 
 {% block auth %}
-<section id="section_auth" class="section-auth section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 120px;">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb">
-				    <li>
+<section class="section-header"></section>
+<section class="section-navigation">
+	<div class="container">
+		<div class="row d-flex">
+			<div class="col-lg-9 order-2 order-lg-1">
+				<div class="section-heading">
+					<h2>Авторизация</h1>
+				</div>
+			</div>
+			<div class="col-lg-3 text-right order-1 order-lg-2">
+				<ul class="breadcrumb justify-content-lg-end">
+					<li class="breadcrumb-item">
 					    <a href="{% url 'home' %}">На главную</a>
 				    </li>
-				    <li class="active">
+				    <li class="breadcrumb-item active">
 					    Авторизация
 				    </li>
-			    </ul>
-            </div>
-        </div>
-        <!-- End Row -->
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section-auth section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px; padding-bottom: 120px;">
+    <div class="container">
 		<div class="row">
 			<div class="col-md-6">
 				<div class="section-heading">

@@ -120,8 +120,8 @@ def user_logout(request):
 
 
 @login_required(login_url='account_login')
-def user_dashboard(request):
-    return render(request, 'accounts/user_dashboard.html', locals())
+def my_profile(request):
+    return render(request, 'accounts/my_profile.html', locals())
 
 
 @login_required(login_url='account_login')
@@ -367,7 +367,7 @@ def email_change(request):
             form.save()
             allauth_email = EmailAddress.objects.get(user=user)
             allauth_email.change(request, new_email)
-            return redirect('user_dashboard')
+            return redirect('my_profile')
         message_error = "Форма заполнена не верно. Введенные адреса не совпадают либо не являются email адресами"
         return render(request, 'accounts/change_email.html', locals())
     else:

@@ -8,51 +8,67 @@
 {% block auth %}
 {% get_providers as socialaccount_providers %}
 
-<section class="section-register section-padding-100">
+<section class="section-header"></section>
+<section class="section-navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb">
-				    <li>
-					    <a href="{% url 'home' %}">На главную</a>
-				    </li>
-				    <li class="active">
-					    {% trans "Sign Up" %}
-				    </li>
-			    </ul>
+        <div class="row d-flex">
+            <div class="col-lg-9 order-2 order-lg-1">
+                <div class="section-heading justify-content-lg-start justify-content-center">
+                    <h2>Регистрация</h1>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right order-1 order-lg-2">
+                <ul class="breadcrumb justify-content-lg-end justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'home' %}">На главную</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Регистрация
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End Row -->
+    </div>
+</section>
+<section class="section-register">
+    <div class="container">
 		<div class="row">
-			<div class="col-md-6">
-				<div class="section-heading">
-					<h2 class="text-white">{% trans "Sign Up" %}</h2>
-					<div class="line-shape"></div>
-				</div>
-				<div class="footer-text">
+			<div class="col-12">
+				<div class="footer-text text-center">
                     <p>Если у Вас уже есть зарегистрированный аккаунт, тогда, пожалуйста, <a href="{{ login_url }}">войдите</a> в свою учетную запись!</p>
 				</div>
 			</div>
-			<div class="col-md-6 section-auth-right">
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3"></div>
+			<div class="col-lg-6 col-md-6 col-sm-12" style="margin-top: 40px;">
                 <p>Введите регистрационные данные:</p>
                 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                 {% csrf_token %}
                     <div class="contact-input-area">
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    {% render_field form.email|add_class:"form-control"|attr:"autofocus" placeholder="Ваш email" %}
+                            <div class="col-12">
+                                <div class="wrap-input100">
+                                    <label for="{{ form.email.auto_id }}" class="label-input100">{{ form.email.label }}</label>
+                                    {% render_field form.email|add_class:"input100" %}
+                                    <span class="focus-input100"></span>
                                 </div>                          
-                                <div class="form-group">
-                                    {% render_field form.password1|add_class:"form-control" placeholder="Пароль" %}
+                                <div class="wrap-input100">
+                                    <label for="{{ form.password1.auto_id }}" class="label-input100">{{ form.password1.label }}</label>
+                                    {% render_field form.password1|add_class:"input100" %}
+                                    <span class="focus-input100"></span>
                                 </div>
-                                <div class="form-group">
-                                    {% render_field form.password2|add_class:"form-control" placeholder="Пароль еще раз" %}
+                                <div class="wrap-input100">
+                                    <label for="{{ form.password2.auto_id }}" class="label-input100">{{ form.password2.label }}</label>
+                                    {% render_field form.password2|add_class:"input100" %}
+                                    <span class="focus-input100"></span>
                                 </div>
                                 {% if redirect_field_value %}
                                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                                 {% endif %}
-                                <button class="btn submit-btn" type="submit">Зарегистрироваться</button>
+                                <div class="text-center">
+                                    <button class="btn submit-btn" type="submit">Зарегистрироваться</button>
+                                </div>
                                 {% if form.errors %}
                                 <div class="form-error">
                                     <p>Ошибки:</p>
@@ -73,6 +89,7 @@
                     </div>                                      
                 </form>                            
 			</div>
+            <div class="col-lg-3 col-md-3"></div>
 		</div>
 		<!-- End Row -->
     </div>

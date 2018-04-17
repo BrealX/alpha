@@ -8,33 +8,38 @@
 {% block auth %}
 {% get_providers as socialaccount_providers %}
 
-<section class="section-auth section-padding-100">
+<section class="section-header"></section>
+<section class="section-navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb">
-				    <li>
-					    <a href="{% url 'home' %}">На главную</a>
-				    </li>
-				    <li class="active">
-					    Войти
-				    </li>
-			    </ul>
+        <div class="row d-flex">
+            <div class="col-lg-9 order-2 order-lg-1">
+                <div class="section-heading justify-content-lg-start justify-content-center">
+                    <h2>Авторизация</h1>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right order-1 order-lg-2">
+                <ul class="breadcrumb justify-content-lg-end justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'home' %}">На главную</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Авторизация
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End Row -->
+    </div>
+</section>
+<section class="section-auth">
+    <div class="container">
 		<div class="row">
-			<div class="col-md-6">
-				<div class="section-heading">
-					<h2 class="text-white">Войти</h2>
-					<div class="line-shape"></div>
-				</div>
-				<div class="footer-text">
+			<div class="col-12">
+				<div class="footer-text text-center">
                 {% if socialaccount_providers %}
                     <p>Вы можете войти, используя социальную сеть из списка ниже:
                     </p>
-                    <div class="container text-center">
-                        <ul class="socialaccount_providers">
+                    <div class="d-flex justify-content-center">
+                        <ul class="socialaccount_providers ">
                             {% include "socialaccount/snippets/provider_list.html" with process="login" %}
                         </ul>
                     </div>
@@ -44,21 +49,28 @@
                 {% endif %}
 				</div>
 			</div>
-			<div class="col-md-6 section-auth-right">
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3"></div>
+			<div class="col-lg-6 col-md-6 col-sm-12" style="margin-top: 40px;">
                 {% include "socialaccount/snippets/login_extra.html" %}
-                <p>Или войдите, используя логин и пароль, введенные при регистрации:</p>
+                <p class="text-center">Или войдите, используя логин и пароль, введенные при регистрации:</p>
                 <form method="POST" action="{% url 'account_login' %}">
                   {% csrf_token %}
                     <div class="contact-input-area">
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    {% render_field form.login|add_class:"form-control"|attr:"autofocus" placeholder="Ваш email" %}
+                            <div class="col-12">
+                                <div class="wrap-input100">
+                                    <label for="{{ form.login.auto_id }}" class="label-input100">{{ form.login.label }}</label>
+                                    {% render_field form.login|add_class:"input100" %}
+                                    <span class="focus-input100"></span>
                                 </div>
-                                <div class="form-group">
-                                    {% render_field form.password|add_class:"form-control" placeholder="Пароль" %}
+                                <div class="wrap-input100">
+                                    <label for="{{ form.password.auto_id }}" class="label-input100">{{ form.password.label }}</label>
+                                    {% render_field form.password|add_class:"input100" %}
+                                    <span class="focus-input100"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group text-center">
                                     <p><a style="color: #5b32b4;">Запомнить меня?</a>{% render_field form.remember %}</p>
                                 </div>
 
@@ -66,14 +78,16 @@
                                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                                 {% endif %}
 
-                                <div class="form-group">
+                                <div class="form-group text-center">
                                     <p><a class="button secondaryAction" href="{% url 'account_reset_password' %}" style="color: #5b32b4;">{% trans "Forgot Password?" %}</a></p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group text-center">
                                     <p><a href="{{ signup_url }}" style="color: #5b32b4;">Зарегистрироваться</a></p>
                                 </div>
-                                <button class="btn submit-btn" type="submit">{% trans "Sign In" %}</button>
-                                {% if form.errors %}
+                                <div class="text-center">
+                                    <button class="btn submit-btn" type="submit">{% trans "Sign In" %}</button>
+                                    {% if form.errors %}
+                                </div>
                                 <div class="form-error">
                                     <p>Ошибки:</p>
                                     <ul>
@@ -93,6 +107,7 @@
                     </div>
                 </form>
 			</div>
+            <div class="col-lg-3 col-md-3"></div>
 		</div>
 		<!-- End Row -->
     </div>

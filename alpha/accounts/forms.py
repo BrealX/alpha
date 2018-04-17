@@ -99,12 +99,12 @@ class UserEmailChangeForm(forms.Form):
     }
 
     new_email1 = forms.EmailField(
-        label=_("New email address"),
+        label="Новый Email",
         widget=forms.EmailInput,
     )
 
     new_email2 = forms.EmailField(
-        label=_("New email address confirmation"),
+        label="Новый Email еще раз",
         widget=forms.EmailInput,
     )
 
