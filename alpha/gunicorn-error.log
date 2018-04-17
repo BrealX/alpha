@@ -19,3 +19,20 @@ Attempt to authenticate with a custom backend failed.
 Attempt to authenticate with a custom backend failed.
 Attempt to authenticate with a custom backend failed.
 <QueryDict: {'anonymous_email': ['sveta1984@mail.ru'], 'anonymous_phone': ['+38 (066) 755-43-43'], 'anonymous_name': ['Светлана'], 'anonymous_city': ['92'], 'anonymous_area': ['10'], 'anonymous_additional': ['самовывоз'], 'csrfmiddlewaretoken': ['sOUgVGYy6ORP2kEDF8UXSCKQPKgkdmkz7veonWo2tIoUU20yA1muddWuJgP4qzrG']}>
+Internal Server Error: /contacts/
+Traceback (most recent call last):
+  File "/home/yozhik/lib/python3.5/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/home/yozhik/lib/python3.5/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/yozhik/lib/python3.5/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/yozhik/alpha/alpha/landing/views.py", line 20, in contacts
+    return render(request, 'landing/contacts.html', locals())
+  File "/home/yozhik/lib/python3.5/site-packages/django/shortcuts.py", line 36, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/yozhik/lib/python3.5/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/yozhik/lib/python3.5/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: landing/contacts.html
