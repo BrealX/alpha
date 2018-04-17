@@ -2,30 +2,36 @@
 {% load i18n %}
 
 {% block content %}
-<section class="section-activation section-padding-100">
+
+<section class="section-header"></section>
+<section class="section-navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb">
-				    <li>
-					    <a href="{% url 'home' %}">На главную</a>
-				    </li>
-				    <li>
-					    <a href="{% url 'account_login' %}">Авторизация</a>
-				    </li>
-				    <li class="active">
-					    {% trans "Account Inactive" %}
-				    </li>
-			    </ul>
+        <div class="row d-flex">
+            <div class="col-lg-9 order-2 order-lg-1">
+                <div class="section-heading justify-content-lg-start justify-content-center">
+                    <h2>Аккаунт неактивен</h2>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right order-1 order-lg-2">
+                <ul class="breadcrumb justify-content-lg-end justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'home' %}">На главную</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'account_login' %}">Авторизация</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Аккаунт неактивен
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End Row -->
+    </div>
+</section>
+<section class="section-activation">
+    <div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="section-heading" style="text-align: center;">
-					<h2 class="text-white">{% trans "Account Inactive" %}</h2>
-					<div class="line-shape"></div>
-				</div>
 				<div class="footer-text text-center">
 					<p>{% trans "This account is inactive." %}</p>
 					<p>Если у Вас возникли какие-либо вопросы, свяжитесь с нами для уточнения деталей.</p>

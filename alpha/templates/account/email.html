@@ -4,27 +4,33 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<section class="section-email section-padding-100">
+
+<section class="section-header"></section>
+<section class="section-navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb">
-                    <li>
+        <div class="row d-flex">
+            <div class="col-lg-9 order-2 order-lg-1">
+                <div class="section-heading justify-content-lg-start justify-content-center">
+                    <h2>E-mail адреса</h1>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right order-1 order-lg-2">
+                <ul class="breadcrumb justify-content-lg-end justify-content-center">
+                    <li class="breadcrumb-item">
                         <a href="{% url 'home' %}">На главную</a>
                     </li>
-                    <li class="active">
+                    <li class="breadcrumb-item active">
                         E-mail адреса
                     </li>
                 </ul>
             </div>
         </div>
-        <!-- End Row -->
+    </div>
+</section>
+<section class="section-email">
+    <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="section-heading">
-                    <h2 class="text-white">E-mail адреса</h2>
-                    <div class="line-shape"></div>
-                </div>
                 <div class="footer-text">
                     {% if user.emailaddress_set.all %}
                     <p>Следующие e-mail адреса прикреплены к Вашему аккаунту:</p>

@@ -45,13 +45,12 @@
 </section>
 <!-- End Section -->
 <!-- Section -->
-<section class="section-main-slider bg-white section-padding-100">
+<section id="new_arrivals" class="section-main-slider bg-white section-padding-100">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="section-heading text-center">
+                <div class="section-heading justify-content-center">
                     <h2>Новые поступления</h2>
-                    <div class="line-shape"></div>
                 </div>
             </div>
         </div>
@@ -93,13 +92,12 @@
 </section>
 <!-- End Section Parallax 1 -->
 <!-- Section Microphones -->
-<section class="section-microphones bg-white section-padding-100" id="microphones">
+<section id="microphones" class="section-microphones bg-white section-padding-100">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="section-heading text-center">
+                <div class="section-heading justify-content-center">
                     <h2>Микрофоны-караоке</h2>
-                    <div class="line-shape"></div>
                 </div>
             </div>
         </div>
@@ -142,13 +140,12 @@
 </section>
 <!-- End Section Parallax 2 -->
 <!-- Section Multiplayers -->
-<section class="section-multiplayers bg-white section-padding-100" id="microphones" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px;">
+<section id="multiplayers" class="section-multiplayers bg-white section-padding-100" style="box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 30px -20px; margin-bottom: 374px;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="section-heading text-center">
+                <div class="section-heading justify-content-center">
                     <h2>Мультиплееры</h2>
-                    <div class="line-shape"></div>
                 </div>
             </div>
         </div>
@@ -175,11 +172,12 @@
 {% endblock %}
 
 {% block javascript %}
+
     <script>
         //Mouse click scroll
         $(document).ready(function () {
             $(".mouse").click(function () {
-                $('html, body').animate({scrollTop: '+=900px'}, 1200);
+                $('html, body').animate({scrollTop: $('#new_arrivals').offset().top}, 1500);
             });
         });
     </script>
@@ -203,4 +201,17 @@
             }
         });
     </script>
+
+    <script type="text/javascript">
+        // Catalog navigation
+        $(document).ready(function(){
+            $("#cat_dropdown").on("click", "a", function (event) {
+                event.preventDefault();
+                var id  = $(this).attr('href'),
+                    top = $(id).offset().top;
+                $('body,html').animate({scrollTop: top}, 1500);
+            });
+        });
+    </script>
+
 {% endblock %}

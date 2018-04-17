@@ -3,51 +3,65 @@
 {% load i18n avatar_tags %}
 
 {% block content %}
-<section class="section-avatar section-padding-100">
+
+<section class="section-header"></section>
+<section class="section-navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb">
-                    <li>
+        <div class="row d-flex">
+            <div class="col-lg-7 order-2 order-lg-1">
+                <div class="section-heading justify-content-lg-start justify-content-center">
+                    <h2>Аватар</h2>
+                </div>
+            </div>
+            <div class="col-lg-5 text-right order-1 order-lg-2">
+                <ul class="breadcrumb justify-content-lg-end justify-content-center">
+                    <li class="breadcrumb-item">
                         <a href="{% url 'home' %}">На главную</a>
                     </li>
-                    <li>
-                        <a href="{% url 'user_my_profile' %}">Личный кабинет</a>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'my_profile' %}">Профиль</a>
                     </li>
-                    <li class="active">
-                        Изменение аватара
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'user_my_profile' %}">Профиль</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Аватар
                     </li>
                 </ul>
             </div>
         </div>
-        <!-- End Row -->
+    </div>
+</section>
+<section class="section-avatar">
+    <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="section-heading" style="text-align: center;">
-                    <h2 class="text-white">{% trans "Your current avatar: " %}</h2>
-                    <div class="line-shape"></div>
-                    {% if request.user|has_avatar %}
-                    <p>Пожалуйста, подтвердите удаление аватара</p>
-                    {% endif %}
-                </div>
-                <div class="footer-text">
+            <div class="col-12">
+                <div class="footer-text text-center">
                     <img class="rounded-circle img-fluid" src="{% avatar_url user 150 %}" alt="">
                     {% if not request.user|has_avatar %}
-                    {% url 'avatar_change' as avatar_change_url %}
+                    {% url 'avatar_add' as avatar_change_url %}
                     <p>У вас нет аватаров, удалять нечего. Пожалуйста, <a href="{{ avatar_change_url }}">загрузите</a> аватар.</p>
                     {% else %}
-                    <form method="POST" action="{% url 'avatar_delete' %}">
-                    {% csrf_token %}
-                        <ul>
-                        {{ delete_avatar_form.as_ul }}
-                        </ul>
-                        <input class="btn submit-btn" type="submit" value="Удалить" />
-                    </form>
                     {% endif %}
                 </div>
             </div>
         </div>
+        {% if request.user|has_avatar %}
+        <div class="row">
+            <div class="col-lg-3 col-md-3"></div>
+            <div class="col-lg-6 col-md-6 col-sm-12" style="margin-top: 40px; text-align: center;">
+                <form method="POST" action="{% url 'avatar_delete' %}">
+                {% csrf_token %}
+                    <ul>
+                    {{ delete_avatar_form.as_ul }}
+                    </ul>
+                    <input class="btn submit-btn" type="submit" value="Удалить" />
+                </form>
+            </div>
+            <div class="col-lg-3 col-md-3"></div>
+        </div>
         <!-- End Row -->
+        {% endif %}
     </div>
     <!-- End Container -->
 </section>

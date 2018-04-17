@@ -3,31 +3,37 @@
 {% load i18n %}
 
 {% block content %}
-<section class="section-after-registration section-padding-100">
+
+<section class="section-header"></section>
+<section class="section-navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb">
-				    <li>
-					    <a href="{% url 'home' %}">На главную</a>
-				    </li>
-				    <li>
-					    <a href="{% url 'account_signup' %}">Регистрация</a>
-				    </li>
-				    <li class="active">
-					    Подтвердите email
-				    </li>
-			    </ul>
+        <div class="row d-flex">
+            <div class="col-lg-9 order-2 order-lg-1">
+                <div class="section-heading justify-content-lg-start justify-content-center">
+                    <h2>Подтвердите email</h1>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right order-1 order-lg-2">
+                <ul class="breadcrumb justify-content-lg-end justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'home' %}">На главную</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'account_signup' %}">Регистрация</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Подтвердите email
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End Row -->
+    </div>
+</section>
+<section class="section-after-registration">
+    <div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="section-heading" style="text-align: center;">
-					<h2 class="text-white">Подтвердите email</h2>
-					<div class="line-shape"></div>
-				</div>
-				<div class="footer-text">
+				<div class="footer-text text-center">
 					<p>На Ваш email отправлена ссылка для подтверждения электронной почты. Пожалуйста, перейдите по ссылке и завершите процесс регистрации! Если вы не получили верификационное письмо в течение нескольких минут, пожалуйста, свяжитесь с нами.</p>
 				</div>
 			</div>

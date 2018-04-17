@@ -2,35 +2,41 @@
 {% load static %}
 
 {% block dashboard %}
-<section class="section-dashboard section-padding-100">
+
+<section class="section-header"></section>
+<section class="section-navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb">
-				    <li>
-					    <a href="{% url 'home' %}">На главную</a>
-				    </li>
-				    <li class="active">
-					    Личный кабинет
-				    </li>
-			    </ul>
+        <div class="row d-flex">
+            <div class="col-lg-9 order-2 order-lg-1">
+                <div class="section-heading justify-content-lg-start justify-content-center">
+                    <h2>Профиль</h1>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right order-1 order-lg-2">
+                <ul class="breadcrumb justify-content-lg-end justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'home' %}">На главную</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Профиль
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End Row -->
+    </div>
+</section>
+<section class="section-my-profile">
+    <div class="container">
 		<div class="row">
-			<div class="col-md-6">
-				<div class="section-heading">
-					<h2 class="text-white">Личный кабинет</h2>
-					<div class="line-shape"></div>
-				</div>
-				<div class="footer-text">
-					<p>Добро пожаловать в личный кабинет! Здесь Вы можете управлять Вашей персональной информацией и Вашими заказами.</p>
+			<div class="col-12">
+				<div class="footer-text text-center">
+					<p>Добро пожаловать в личный кабинет! Здесь можно изменить персональную информацию, учётные данные, а также просмотреть историю заказов и отзывов.</p>
 				</div>
 			</div>
 		</div>
-		<!-- End Row -->
 		<div class="row">
-			<div class="col-12 col-md-6 col-lg-3">
+			<div class="col-lg-3 col-md-3"></div>
+			<div class="col-12 col-sm-12 col-md-3 col-lg-3">
 				<div class="single-dashboard-item">
 					<div class="dashboard-image">
 						<img src="{% static 'img/accounts/dashboard-orders.jpg' %}" alt="">
@@ -46,7 +52,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-12 col-md-6 col-lg-3">
+			<div class="col-12 col-sm-12 col-md-3 col-lg-3">
 				<div class="single-dashboard-item">
 					<div class="dashboard-image">
 						<img src="{% static 'img/accounts/dashboard-credentials.jpg' %}" alt="">
@@ -62,9 +68,11 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-lg-3 col-md-3"></div>
 		</div>
     </div>
     <!-- End Container -->
 </section>
 <!-- End Section Dashboard -->
-{% endblock %}
+
+{% endblock dashboard %}

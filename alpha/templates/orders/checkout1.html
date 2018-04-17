@@ -3,34 +3,37 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<section class="section-checkout1 section-padding-100 clearfix">
+
+<section class="section-header"></section>
+<section class="section-navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb" style="margin-bottom: 40px;">
-				    <li>
-					    <a href="{% url 'home' %}">На главную</a>
-				    </li>
-                    <li>
-					    <a href="{% url 'checkout' %}">Корзина</a>
-				    </li>
-				    <li class="active">
-					    Оформление заказа (Шаг 1 из 2)
-				    </li>
-			    </ul>
+        <div class="row d-flex">
+            <div class="col-lg-7 order-2 order-lg-1">
+                <div class="section-heading justify-content-lg-start justify-content-center">
+                    <h2>Оформление заказа (Шаг 1 из 2)</h1>
+                </div>
+            </div>
+            <div class="col-lg-5 text-right order-1 order-lg-2">
+                <ul class="breadcrumb justify-content-lg-end justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'home' %}">На главную</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'checkout' %}">Корзина</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Оформление заказа (Шаг 1 из 2)
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End Row -->
     </div>
-    <!-- End Container -->
+</section>
+<section class="section-checkout1">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="section-heading">
-                    <h2>Оформление заказа</h2>
-                    <div class="line-shape"></div>
-                </div>
-                <div class="footer-text">
+                <div class="footer-text text-center">
                     {% if user.is_authenticated %}
                     <p>Вы можете изменить указанные данные, например, если получать товар будете не Вы!</p>
                     {% else %}

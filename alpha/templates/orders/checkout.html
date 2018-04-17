@@ -2,33 +2,38 @@
 {% load static %}
 
 {% block content %}
-<section id="section_checkout" class="section-checkout section-padding-100 clearfix">
+
+<section class="section-header"></section>
+<section class="section-navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb" style="margin-bottom: 40px;">
-				    <li>
-					    <a href="{% url 'home' %}">На главную</a>
-				    </li>
-				    <li class="active">
-					    Корзина
-				    </li>
-			    </ul>
+        <div class="row d-flex">
+            <div class="col-lg-9 order-2 order-lg-1">
+                <div class="section-heading justify-content-lg-start justify-content-center">
+                    <h2>Корзина</h1>
+                </div>
+            </div>
+            <div class="col-lg-3 text-right order-1 order-lg-2">
+                <ul class="breadcrumb justify-content-lg-end justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'home' %}">На главную</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Корзина
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End Row -->
     </div>
-    <!-- End Container -->
+</section>
+<section class="section-checkout">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="section-heading">
-                    <h2 class="text-white">Корзина</h2>
-                    <div class="line-shape"></div>
+                <div class="footer-text text-center">
+                    <p>На странице корзины можно изменить количество заказанного товара или удалить его. Далее это сделать будет невозможно.</p>
                 </div>
             </div>
         </div>
-        <!-- End Row -->
         <div class="row">
             <div class="col-12">
                 <!-- Cart Page Start -->
@@ -45,7 +50,7 @@
                                         </a>
                                     </div>
                                 </td>
-                                <td style="width: 40%;">
+                                <td style="width: 30%;">
                                     <div class="CartDescription">
                                         <h4>
                                             <a href="{% url 'product_land' item.product.id %}">{{ item.product.name }}</a>
@@ -53,7 +58,7 @@
                                         <span class="cart-item-price">{{ item.price }}</span><span> грн.</span>
                                     </div>
                                 </td>
-                                <td class="CartQuantity" style="width: 15%;">
+                                <td class="CartQuantity" style="width: 20%;">
                                     <input class="cart-touchspin form-control" name="cart_touchspin" type="text" value="{{ item.quantity }}" data-product_id="{{ item.product.id }}">
                                 </td>
                                 <td class="CartSubtotal" style="width: 15%;">

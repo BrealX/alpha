@@ -3,60 +3,64 @@
 {% load widget_tweaks %}
 
 {% block dashboard %}
-<section class="section-profile-address section-padding-100">
+
+<section class="section-header"></section>
+<section class="section-navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb">
-				    <li>
-					    <a href="{% url 'home' %}">На главную</a>
-				    </li>
-                    <li>
-					    <a href="{% url 'user_dashboard' %}">Личный кабинет</a>
-				    </li>
-					<li>
-					    <a href="{% url 'user_my_profile' %}">Мой профиль</a>
-				    </li>
-				    <li class="active">
-				    	{% if user.profile.delivery_city %}
-					    Редактирование адреса
-					    {% else %}
-					    Добавление адреса
-				    	{% endif %}
-				    </li>
-			    </ul>
+        <div class="row d-flex">
+            <div class="col-lg-7 order-2 order-lg-1">
+                <div class="section-heading justify-content-lg-start justify-content-center">
+                    <h2>{% if user.profile.delivery_city %}
+                        Редактирование адреса
+                        {% else %}
+                        Добавление адреса
+                        {% endif %}</h1>
+                </div>
+            </div>
+            <div class="col-lg-5 text-right order-1 order-lg-2">
+                <ul class="breadcrumb justify-content-lg-end justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'home' %}">На главную</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'my_profile' %}">Профиль</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'user_my_profile' %}">Профиль</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        {% if user.profile.delivery_city %}
+                        Редактирование адреса
+                        {% else %}
+                        Добавление адреса
+                        {% endif %}
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End Row -->
+    </div>
+</section>
+<section class="section-profile-address">
+    <div class="container">
 		<div class="row">
-			<div class="col-md-6">
-				<div class="section-heading">
-					{% if user.profile.delivery_city %}
-					<h2 class="text-white">Редактирование адреса</h2>
-					{% else %}
-					<h2 class="text-white">Добавление адреса</h2>
-				    {% endif %}
-					<div class="line-shape"></div>
-				</div>
-			</div>
 			<div class="col-12">
-				<div class="footer-text" style="line-height: 30px;">
+				<div class="footer-text text-center">
 					<p>
 						{% if user.profile.delivery_city %}
-							Вы можете отредактировать адрес доставки, изменив указанные в форме данные! Выберите область и город. Если желаете забирать товар самостоятельно, то поле "Дополнительная информация" можно оставить пустым. Если потребуется доставка, то укажите в этом поле номер и адрес отделения перевозчика или полной почтовый адрес для отправки Укрпочтой!
+							Вы можете отредактировать адрес доставки, изменив указанные в форме данные! Из выпадающих списков необходимо выбрать область и город. В поле "Дополнительная информация" укажите "самовывоз", если будете забирать товар самостоятельно, или укажите в этом поле номер и адрес отделения перевозчика или полной почтовый адрес для отправки Укрпочтой!
 						{% else %}
-							Добавьте адрес доставки в Ваш профиль. Тогда при оформлении заказов Вам не нужно будет заполнять его вручную. Если же заказ нужно будет отправить не по основному адресу (например, кому-нибудь на подарок, Вы всегда сможете изменить эти данные на этапе оформление нового заказа! Выберите область и город. Если желаете забирать товар самостоятельно, то поле "Дополнительная информация" можно оставить пустым. Если потребуется доставка, то укажите в этом поле номер и адрес отделения перевозчика или полной почтовый адрес для отправки Укрпочтой!
+							Добавьте адрес доставки в Ваш профиль, чтобы при оформлении заказов не нужно было заполнять его вручную. Если заказ нужно отправить не по основному адресу (например, кому-нибудь на подарок), Вы всегда сможете изменить эти данные на этапе оформление нового заказа! Из выпадающих списков необходимо выбрать область и город. В поле "Дополнительная информация" укажите "самовывоз", если будете забирать товар самостоятельно, или укажите в этом поле номер и адрес отделения перевозчика или полной почтовый адрес для отправки Укрпочтой!
 						{% endif %}
 					</p>
 				</div>
 			</div>
 			<div class="col-12">
-				<div class="footer-text">
+				<div class="footer-text text-center">
 					{% if user.profile.delivery_city %}
-					<p>Текущий адрес доставки: {{ user.profile.delivery_area }}, {{ user.profile.delivery_city }}, {{ user.profile.delivery_address }}</p>
+					<p style="color: #6E52E5;">Текущий адрес доставки: {{ user.profile.delivery_area }}, {{ user.profile.delivery_city }}, {{ user.profile.delivery_address }}</p>
 					{% endif %}
                     {% if message_success %}
-                    <p style="color: #5b32b4;">{{ message }}</p>
+                    <p style="color: #6E52E5;">{{ message_success }}</p>
                     {% endif %}
 				</div>
 			</div>
