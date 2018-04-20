@@ -10,6 +10,8 @@ import json
 from carton.cart import Cart
 from products.models import Product
 from django.views.decorators.http import require_POST
+from decouple import config
+from django.urls import reverse
 
 
 @require_POST
@@ -175,24 +177,64 @@ def order_confirm(request):
 def order_notification(request):
     # Email settings
     data = request.GET
-    subject = 'Новый заказ на сайте "ЁжиК."'
+    order_customer_name = data.get('order_customer_name', '')
+    order_customer_email = data.get('order_customer_email', '')
+    order_overall = data.get('order_overall', '')
+    order_id = data.get('order_id', '')
+    sitename = get_current_site(request)
+    order = Order.objects.get(id=order_id, is_active=True)
+    order_items = OrderItem.objects.filter(order_id=order_id, is_active=True)
+    order_details = [('Товар: ' + str(item.product.name) + ', ' +
+     'количество - ' + str(item.quantity) + ' шт., ' + 'по цене ' + str(item.price) + ' грн.') for item in order_items]
+    order_delivery_address = order.customer_address
+    order_customer_phone = order.customer_phone
+    order_link = request.build_absolute_uri(reverse('user_my_orders'))
+    
+    subject = 'Новый заказ на сайте ' + str(sitename)
     message = render_to_string(
-        template_name='orders/order_notification.html',
-        context={
-            'order_id': data.get('order_id', ''),
-            'domain': get_current_site(request),
-            'order_overall': data.get('order_overall', ''),
-            'order_customer_name': data.get('order_customer_name'),
-        })
+        template_name='orders/order_notification.txt')
+    html_message_admin = render_to_string(
+            'orders/order_notification_admin.html',
+            context={
+                'name': order_customer_name,
+                'phone': order_customer_phone,
+                'email': order_customer_email,
+                'address': order_delivery_address,
+                'sitename': sitename,
+                'siteemail': config('DEFAULT_FROM_EMAIL'),
+                'order_id': order_id,
+                'order_overall': order_overall,
+                'details': order_details,
+            })
+    html_message_user = render_to_string(
+            'orders/order_notification_user.html',
+            context={
+                'email': order_customer_email,
+                'sitename': sitename,
+                'siteemail': config('DEFAULT_FROM_EMAIL'),
+                'order_id': order_id,
+                'order_overall': order_overall,
+                'link': order_link,
+            })
 
-    send_to = [data.get('order_customer_email'), settings.EMAIL_HOST_USER,]
-
+    # send notification to the site administration
     send_mail(
-        subject,
-        message,
-        settings.EMAIL_HOST_USER,
-        send_to,
-        fail_silently=False)
+        subject=subject, # Subject here
+        message=message, # Mail message here
+        from_email=config('DEFAULT_FROM_EMAIL'), # Send From 
+        recipient_list=[config('DEFAULT_FROM_EMAIL')], # Send To
+        fail_silently=False,
+        html_message=html_message_admin,
+    )
+    # send notification to the user
+    send_mail(
+        subject=subject, # Subject here
+        message=message, # Mail message here
+        from_email=config('DEFAULT_FROM_EMAIL'), # Send From 
+        recipient_list=[order_customer_email, ], # Send To
+        fail_silently=False,
+        html_message=html_message_user,
+    )
 
     return_dict = dict()
     return JsonResponse(return_dict)

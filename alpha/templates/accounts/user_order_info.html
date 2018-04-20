@@ -2,39 +2,44 @@
 {% load static %}
 
 {% block dashboard %}
-<section class="section-order-info section-padding-100">
+
+<section class="section-header"></section>
+<section class="section-navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb">
-				    <li>
-					    <a href="{% url 'home' %}">На главную</a>
-				    </li>
-                    <li>
-					    <a href="{% url 'my_profile' %}">Личный кабинет</a>
-				    </li>
-                    <li>
-					    <a href="{% url 'user_my_orders' %}">Мои заказы</a>
-				    </li>
-				    <li class="active">
-					    Информация по заказу №{{ order.id }}
-				    </li>
-			    </ul>
+        <div class="row d-flex">
+            <div class="col-lg-7 order-2 order-lg-1">
+                <div class="section-heading justify-content-lg-start justify-content-center">
+                    <h2>Детали заказа {{ order.id }}</h1>
+                </div>
+            </div>
+            <div class="col-lg-5 text-right order-1 order-lg-2">
+                <ul class="breadcrumb justify-content-lg-end justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'home' %}">На главную</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'my_profile' %}">Профиль</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'user_my_orders' %}">Профиль</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Детали заказа
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End Row -->
+    </div>
+</section>
+<section class="section-order-info">
+    <div class="container">
 		<div class="row">
-			<div class="col-md-6">
-				<div class="section-heading">
-					<h2 class="text-white">Информация по заказу №{{ order.id }}</h2>
-					<div class="line-shape"></div>
-				</div>
-				<div class="footer-text">
-					<p>Детальная информация по заказу представлена ниже.</p>
+			<div class="col">
+				<div class="footer-text text-center">
+					<p>Детальная информация по заказу № {{ order.id }} представлена ниже.</p>
 				</div>
 			</div>
 		</div>
-		<!-- End Row -->
         <div class="row">
             <div class="col-12 box mt-0 mb-lg-0">
                 <div class="table-responsive">
@@ -64,8 +69,12 @@
                         {% endfor %}
                         <tfoot>
                             <tr>
-                                <th class="text-left" colspan="2">Итого по заказу:</th>
-                                <th>{{ order.total_order_amount }}</th>
+                                <th class="text-left" colspan="2">Статус заказа:</th>
+                                <th>{{ order.status.name }}</th>
+                            </tr>
+                            <tr>
+                                <th class="text-left" colspan="2">Сумма по заказу:</th>
+                                <th>{{ order.total_order_amount }} грн.</th>
                             </tr>
                             <tr>
                                 <th class="text-left" colspan="2">Адрес доставки:</th>

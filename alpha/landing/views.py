@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from alpha.settings import DEFAULT_FROM_EMAIL
+from django.contrib.sites.shortcuts import get_current_site
 
 
 def home(request):
@@ -26,27 +27,51 @@ def contact(request):
     contact_name = request.POST.get('contact_name', 'Инкогнито')
     contact_email = request.POST.get('contact_email', '')
     form_content = request.POST.get('form_content', 'Никакой вопрос не был задан')
+    sitename = get_current_site(request)
     return_dict = dict()
     if contact_email:
         if not re.match(r"[^@]+@[^@]+\.[^@]+", contact_email):
             return_dict['error'] = "Похоже, Вы ввели недопустимый адрес email!"
             return JsonResponse(return_dict)
         # Email settings
-        subject = 'Новый вопрос на сайте "ЁжиК."'
+        subject = 'Новый вопрос на сайте ' + str(sitename)
         message = render_to_string(
-            template_name='products/contact_form.html', 
+            template_name='products/contact_form.txt')
+        html_message_admin = render_to_string(
+            'products/contact_form_admin.html',
             context={
-                'contact_name': contact_name, 
-                'contact_email': contact_email, 
-                'form_content': form_content,
+                'name': contact_name,
+                'email': contact_email,
+                'content': form_content,
+                'sitename': sitename,
+                'siteemail': DEFAULT_FROM_EMAIL,
             })
-        send_to = DEFAULT_FROM_EMAIL
+        html_message_user = render_to_string(
+            'products/contact_form_user.html',
+            context={
+                'name': contact_name,
+                'email': contact_email,
+                'content': form_content,
+                'sitename': sitename,
+                'siteemail': DEFAULT_FROM_EMAIL,
+            })
+        # send notification to the site administration
         send_mail(
-            subject, # Subject here
-            message, # Mail message here
-            contact_email, # Send From 
-            [send_to], # Send To
+            subject=subject, # Subject here
+            message=message, # Mail message here
+            from_email=DEFAULT_FROM_EMAIL, # Send From 
+            recipient_list=[DEFAULT_FROM_EMAIL], # Send To
             fail_silently=False,
+            html_message=html_message_admin,
+        )
+        # send notification to the user
+        send_mail(
+            subject=subject, # Subject here
+            message=message, # Mail message here
+            from_email=DEFAULT_FROM_EMAIL, # Send From 
+            recipient_list=[contact_email], # Send To
+            fail_silently=False,
+            html_message=html_message_user,
         )
         return_dict['success'] = "Сообщение успешно отправлено! Мы постараемся ответить как можно скорее!"
         return JsonResponse(return_dict)

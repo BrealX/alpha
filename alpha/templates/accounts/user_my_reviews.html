@@ -4,39 +4,40 @@
 {% load products_tags %}
 
 {% block content %}
-<section class="section-reviews section-padding-100">
+
+<section class="section-header"></section>
+<section class="section-navigation">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb">
-				    <li>
-					    <a href="{% url 'home' %}">На главную</a>
-				    </li>
-                    <li>
-					    <a href="{% url 'my_profile' %}">Личный кабинет</a>
-				    </li>
-                    <li>
-                        <a href="{% url 'user_my_profile' %}">Мой профиль</a>
+        <div class="row d-flex">
+            <div class="col-lg-7 order-2 order-lg-1">
+                <div class="section-heading justify-content-lg-start justify-content-center">
+                    <h2>Отзывы о товарах</h1>
+                </div>
+            </div>
+            <div class="col-lg-5 text-right order-1 order-lg-2">
+                <ul class="breadcrumb justify-content-lg-end justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'home' %}">На главную</a>
                     </li>
-				    <li class="active">
-					    Мои отзывы
-				    </li>
-			    </ul>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'my_profile' %}">Профиль</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Отзывы о товарах
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End Row -->
+    </div>
+</section>
+<section class="section-reviews">
+    <div class="container">
 		<div class="row">
-			<div class="col-md-6">
-				<div class="section-heading">
-					<h2 class="text-white">Мои отзывы</h2>
-					<div class="line-shape"></div>
-				</div>
-			</div>
-            <div class="col-12">
-                <div class="footer-text">
-                    <p>В этом разделе Вы можете получить доступ ко всем Вашим отзывам на товары. Вы можете изменить их текст или удалить их.</p>
+            <div class="col">
+                <div class="footer-text text-center">
+                    <p>В этом разделе Вы можете получить доступ ко всем Вашим отзывам на товары. Вы можете изменить их текст или удалить их</p>
                     {% if not feedbacks %}
-                    <p>Пока Вы еще не оставляли отзывов о наших товарах.</p>
+                    <p>Пока Вы еще не оставляли отзывов о наших товарах</p>
                     {% endif %}
                 </div>
             </div>

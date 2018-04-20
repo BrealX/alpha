@@ -10,6 +10,7 @@ from products.models import Review
 from products.forms import ReviewForm
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
+from allauth.account.decorators import verified_email_required
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -84,52 +85,25 @@ https://github.com/pennersr/django-allauth/issues/373'''
     return render(request, 'accounts/auth.html', args)'''
 
 
-# now using allauth login views, this view was written for backup
-'''def user_register(request):
-    args = {}
-    args.update(csrf(request))
-    reg_error = ''
-    if request.POST:
-        reg_form = UserRegistrationForm(request.POST or None)
-        if reg_form.is_valid():
-            try:
-                data = request.POST
-                new_user_email = data.get('new_user_email')
-                new_user_name = data.get('new_user_name')
-                new_user, created = User.objects.get_or_create(
-                    username=new_user_email, 
-                    first_name=new_user_name,
-                    email=new_user_email,
-                    is_active=False
-                )
-                new_user.set_password(reg_form.cleaned_data['password'])
-                new_user.save()
-                return render(request, 'registration/register_done.html', {'new_user': new_user})
-            except Exception:
-                reg_error = 'Пользователь с таким email уже зарегистрирован. Попробуйте другой адрес.'
-    else:
-        reg_form = UserRegistrationForm(request.POST or None)
-    args['reg_form'] = reg_form
-    args['reg_error'] = reg_error
-    return render(request, 'accounts/register.html', args)'''
-
-
 def user_logout(request):
     logout(request)
     return redirect('home')
 
 
+@verified_email_required
 @login_required(login_url='account_login')
 def my_profile(request):
     return render(request, 'accounts/my_profile.html', locals())
 
 
+@verified_email_required
 @login_required(login_url='account_login')
 def user_my_profile(request):
     user = request.user
     return render(request, 'accounts/user_my_profile.html', locals())
 
 
+@verified_email_required
 @login_required(login_url='account_login')
 def user_my_orders(request):
     user = request.user
@@ -137,6 +111,7 @@ def user_my_orders(request):
     return render(request, 'accounts/user_my_orders.html', locals())
 
 
+@verified_email_required
 @login_required(login_url='account_login')
 def user_order_info(request, order_id):
     user = request.user
@@ -145,6 +120,7 @@ def user_order_info(request, order_id):
     return render(request, 'accounts/user_order_info.html', locals())
 
 
+@verified_email_required
 @login_required(login_url='account_login')
 def user_my_reviews(request):
     user = request.user
@@ -162,6 +138,7 @@ def user_my_reviews(request):
     return render(request, 'accounts/user_my_reviews.html', locals())
 
 
+@verified_email_required
 @login_required(login_url='account_login')
 def add_address(request):
     user = request.user
@@ -189,6 +166,7 @@ def add_address(request):
     return render(request, 'accounts/user_add_address.html', locals())
 
 
+@verified_email_required
 @login_required(login_url='account_login')
 def delete_address(request):
     user = request.user
@@ -201,6 +179,7 @@ def delete_address(request):
     return JsonResponse(return_dict)
 
 
+@verified_email_required
 @login_required(login_url='account_login')
 def add_personal(request):
     user = request.user
@@ -229,6 +208,7 @@ def add_personal(request):
     return render(request, 'accounts/user_add_personal.html', locals())
 
 
+@verified_email_required
 @login_required(login_url='account_login')
 def delete_personal(request):
     user = request.user
@@ -241,6 +221,7 @@ def delete_personal(request):
     return JsonResponse(return_dict)
 
 
+@verified_email_required
 @login_required(login_url='account_login')
 def delete_review(request):
     user = request.user
@@ -254,6 +235,7 @@ def delete_review(request):
     return JsonResponse(return_dict)
 
 
+@verified_email_required
 @login_required(login_url='account_login')
 def delete_account(request):
     '''makes current User inactive and marks his username as deleted in order to
@@ -264,62 +246,15 @@ def delete_account(request):
         if user.is_superuser:
             pass
         else:
-            User.objects.filter(id=user.id).update(email=user.username)
+            email = user.email
             name = 'zzdeleted' + str(user.id)
-            process = User.objects.filter(id=user.id).update(is_active=False, username=name)
+            deleted_allauth_email = name + '@deleted.com'
+            allauth_email = EmailAddress.objects.filter(user=user).update(email=deleted_allauth_email)
+            process = User.objects.filter(id=user.id).update(is_active=False, username=name, email=name, last_name=email)
     return JsonResponse(return_dict)
 
 
-def after_registration(request):
-    # Successful account registration alert & activation link creation
-    user = User.objects.latest('id')
-    salt = binascii.hexlify(os.urandom(32))
-    activation_key = hashlib.sha512()
-    activation_key.update(('%s%s' % (salt, user.username)).encode('utf-8'))
-    activation_key = activation_key.hexdigest()
-    key_expires = datetime.datetime.today() + datetime.timedelta(2)
-    user.profile.activation_key = activation_key
-    user.profile.key_expires = key_expires
-    user.save()
-
-    # Email settings
-    subject = 'Активация аккаунта на сайте "Книжный Ёж"'
-    message = render_to_string(
-        template_name='registration/acc_active_email.html', 
-        context={
-        'user': user, 
-        'domain': get_current_site(request), 
-        'activation_key': activation_key
-        })
-
-    send_to = user.email
-
-    send_mail(
-        subject, 
-        message, 
-        settings.EMAIL_HOST_USER, 
-        [send_to], 
-        fail_silently=False)    
-
-    args = {}
-    args['user'] = user
-    return render(request, 'registration/after_registration.html', args)
-
-
-def account_activation(request, activation_key):
-    # New account activation from emailed activation link
-    user_profile = get_object_or_404(Profile, activation_key=activation_key)
-    error = None
-    if user_profile.key_expires < timezone.now():
-        error = 1
-        return render(request, 'registration/account_activation.html', {'error': error})
-    user_account = user_profile.user
-    user_account.is_active = True
-    user_profile.activation_key = ""
-    user_account.save()
-    return render(request, 'registration/account_activation.html')
-
-
+@verified_email_required
 @login_required(login_url='account_login')
 def change_password(request):
     if request.POST:
@@ -362,9 +297,7 @@ def email_change(request):
     form = UserEmailChangeForm(user, request.POST or None)
     if request.POST:
         if form.is_valid():
-            data = request.POST
-            new_email = data.get('new_email1')
-            form.save()
+            new_email = request.POST.get('new_email1')
             allauth_email = EmailAddress.objects.get(user=user)
             allauth_email.change(request, new_email)
             return redirect('my_profile')
