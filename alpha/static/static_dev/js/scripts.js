@@ -271,7 +271,7 @@ $(document).ready(function() {
         });
     });
 
-    // Ajax Landing Page Contact Form sending
+    // Ajax Contact Form sending
     $('#landing_contact_submit').on('click', function(e) {
         e.preventDefault();
         var contact_form = $('#landing_contact_form');

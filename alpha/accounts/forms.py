@@ -133,10 +133,3 @@ class UserEmailChangeForm(forms.Form):
                     code='email_mismatch',
                 )
         return new_email2
-
-    def save(self, commit=True):
-        email = self.cleaned_data["new_email1"]
-        self.user.email = email
-        if commit:
-            self.user.save()
-        return self.user

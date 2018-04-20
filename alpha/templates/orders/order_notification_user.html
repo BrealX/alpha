@@ -1,7 +1,4 @@
 {% load static %}
-{% load i18n %}
-{% load account %}
-{% user_display user as user_display %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
@@ -9,7 +6,7 @@
   <meta name="viewport" content="initial-scale=1.0">
   <meta name="format-detection" content="telephone=no">
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
-  <title>{% trans "Confirm E-mail Address" %}</title>
+  <title>Новый заказ!</title>
   <style type="text/css">
     body{ margin: 0; padding: 0; }
     img{ border: 0px; display: block; }
@@ -138,7 +135,7 @@
                         <table class="vb-content" border="0" cellspacing="9" cellpadding="0" style="border-collapse: separate; width: 100%; mso-cellspacing: 9px; border-spacing: 9px;" width="552"><!-- TODO class="title" -->
                           <tbody>
                             <tr>
-                              <td width="100%" valign="top" align="center" style="font-weight: normal; color: #3f3f3f; font-size: 22px; font-family: Arial, Helvetica, sans-serif; text-align: center;"><span style="font-weight: normal;"><strong>Подтверждение E-mail</strong></span>
+                              <td width="100%" valign="top" align="center" style="font-weight: normal; color: #6E52E5; font-size: 22px; font-family: Arial, Helvetica, sans-serif; text-align: center;"><span style="font-weight: normal;"><strong>Новый заказ на сайте {{ sitename }}</strong></span>
                               </td>
                             </tr>
                           </tbody>
@@ -163,7 +160,13 @@
                 <tbody>
                   <tr>
                     <td class="long-text links-color" width="100%" valign="top" align="left" style="font-weight: normal; color: #3f3f3f; font-size: 13px; font-family: Arial, Helvetica, sans-serif; text-align: left; line-height: normal;">
-                      <p style="margin: 1em 0px; margin-bottom: 0px; margin-top: 0px; text-align: center;">Привет! Вы получили это письмо, потому что пользователь {{ user_display }} указал этот адрес для привязки к своему аккаунту. Если Вы подтверждаете это действие, то перейдите по ссылке ниже. В противном случае просто проигнорируйте данное письмо.</p>
+                      <p style="margin: 1em 0px; margin-bottom: 0px; margin-top: 0px; text-align: center;">Привет! Вы оформили новый заказ на сайте {{ sitename }}.
+                      <br>
+                      <br><strong>Номер заказа: {{ order_id }}</strong>
+                      <br><strong>Сумма заказа: {{ order_overall }} грн.</strong>
+                      </p>
+                      <p style="margin: 1em 0px; margin-bottom: 0px; margin-top: 0px; text-align: center;"><br>Если вы были авторизированы на сайте, то детали заказа можно посмотреть в личном кабинете в разделе "Мой профиль - Заказы". Для быстрого перехода в раздел, нажмите на ссылку ниже:
+                      </p>
                     </td>
                   </tr>
                 </tbody>
@@ -187,7 +190,7 @@
                         <tbody>
                           <tr>
                             <td width="auto" valign="middle" align="center" bgcolor="#00b0f0" style="text-align: center; font-weight: normal; padding: 12px; padding-left: 14px; padding-right: 14px; background-color: #00b0f0; color: #fff; font-size: 16px; font-family: Arial, Helvetica, sans-serif; border-radius: 5px;">
-                              <a href="{{ activate_url }}" style="text-decoration: none; font-weight: normal; color: #fff; font-size: 16px; font-family: Arial, Helvetica, sans-serif;">Подтвердить</a>
+                              <a href="{{ link }}" style="text-decoration: none; font-weight: normal; color: #fff; font-size: 16px; font-family: Arial, Helvetica, sans-serif;">Мои заказы</a>
                             </td>
                           </tr>
                         </tbody>
@@ -211,7 +214,7 @@
                 <tbody>
                   <tr>
                     <td class="long-text links-color" width="100%" valign="top" align="left" style="font-weight: normal; color: #3f3f3f; font-size: 13px; font-family: Arial, Helvetica, sans-serif; text-align: left; line-height: normal;">
-                      <p style="margin: 1em 0px; margin-bottom: 0px; margin-top: 0px; text-align: center;"><em>Если Вы не подтвердите электронный адрес, то мы не сможем присылать уведомления о заказах на сайте, а также возможен отказ при авторизации на сайте!</em></p>
+                      <p style="margin: 1em 0px; margin-bottom: 0px; margin-top: 0px; text-align: center;"><em>Благодарим Вас за оформление заказа! Мы свяжемся с Вами в ближайшее время для уточнения деталей. Будем рады видеть Вас снова в гостях у нашего ЁжиКа!</em></p>
                     </td>
                   </tr>
                 </tbody>
