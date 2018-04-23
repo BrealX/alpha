@@ -271,7 +271,7 @@ $(document).ready(function() {
         });
     });
 
-    // Ajax Landing Page Contact Form sending
+    // Ajax Contact Form sending
     $('#landing_contact_submit').on('click', function(e) {
         e.preventDefault();
         var contact_form = $('#landing_contact_form');
@@ -290,11 +290,11 @@ $(document).ready(function() {
             success: function(data) {
                 if (!data.error) {
                     $('#landing_modal_div p').text(data.success);
-                    $('#landing_modal_div').attr('class', 'col-md-12');
+                    $('#landing_modal_div').attr('class', 'col alert success alert-dismissible');
                     $('#landing_contact_form')[0].reset(); // Cleans the form after successful Ajax
                 }
                 $('#landing_modal_div p').text(data.error);
-                $('#landing_modal_div').attr('class', 'col-md-12');
+                $('#landing_modal_div').attr('class', 'col alert error alert-dismissible');
             }
         });
     });
