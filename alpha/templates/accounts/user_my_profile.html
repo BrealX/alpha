@@ -27,6 +27,16 @@
                 </ul>
             </div>
         </div>
+        <div class="row justify-content-center">
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 <section class="section-profile">
@@ -154,7 +164,7 @@
 						<div class="profile-hover-effects">
 							<div class="profile-goto-icon">
 								{% if request.user|has_avatar %}
-                                <a href="{% url 'avatar_change' %}">Изменить</a>
+                                <a href="{% url 'avatar_add' %}">Изменить</a>
                                 <a href="{% url 'avatar_delete' %}" id="my_avatar_delete">Удалить</a>
                                 {% else %}
                                 <a href="{% url 'avatar_add' %}">Добавить</a>
@@ -192,7 +202,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-							<h5 class="modal-title" id="deleteModalCenterTitle"><strong style="color: #5b32b4;">Внимание! Удаление аккаунта {{ user.username }}!</strong></h5>
+							<h5 class="modal-title" id="deleteModalCenterTitle"><strong style="color: #6E52E5;">Внимание! Удаление аккаунта {{ user.username }}!</strong></h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times</span>
 							</button>

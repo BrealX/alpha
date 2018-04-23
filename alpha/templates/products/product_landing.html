@@ -290,7 +290,7 @@
                         <div class="client-thumbnail text-center">
                             <img src="{% avatar_url feedback.user %}">
                         </div>
-                        {% if user.is_authenticated and user_ordered_products and not user_product_reviews %}
+                        {% if user.is_authenticated and product_is_purchased and not user_product_reviews %}
                         <div class="footer-text text-center">
                             <button id="feedback_button" type="button" class="btn feedback-btn" data-toggle="modal" data-target="#addfeedbackModal">Оставить отзыв</button>
                         </div>
@@ -307,9 +307,9 @@
                 {{ form.non_field_errors }}
                 <div class="footer-text text-center">
                     <p>К данному товару еще никто не оставлял отзывы</p>
-                    {% if user.is_authenticated and not user_ordered_products %}
+                    {% if user.is_authenticated and not product_is_purchased %}
                     <p>Чтобы оставить отзыв, нужно сначала приобрести товар</p>
-                    {% elif user.is_authenticated and user_ordered_products %}
+                    {% elif user.is_authenticated and user_ordered_products and product_is_purchased %}
                     <button id="feedback_button" type="button" class="btn feedback-btn" data-toggle="modal" data-target="#addfeedbackModal">Оставить отзыв</button>
                     {% endif %}
                 </div>

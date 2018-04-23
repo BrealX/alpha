@@ -25,6 +25,16 @@
                 </ul>
             </div>
         </div>
+        <div class="row justify-content-center">
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 <section class="section-email">
@@ -34,7 +44,7 @@
                 <div class="footer-text text-center">
                     <p>Здесь можно изменить ваш текущий электронный адрес.</p>
                     {% if user.email %}
-                    <p>Следующий e-mail адрес прикреплен к Вашему аккаунту: <span style="color: #5b32b4; font-weight: bolder;">{{ user.email }}</span></p>
+                    <p>Следующий e-mail адрес прикреплен к Вашему аккаунту: <span style="color: #6E52E5; font-weight: bolder;">{{ user.email }}</span></p>
                     {% else %}
                     <p>Внимание! На данный момент у Вас нет привязанных e-mail адресов. Чтобы получать уведомления сайта при оформлении заказов, а также для сброса/восстановления вашего пароля, необходимо добавить электронный адрес!</p>
                     {% endif %}
@@ -48,11 +58,6 @@
                 {% if user.email %}
                 <form action="{% url 'email_change' %}" method="post">
                 {% csrf_token %}
-                    {% if message_error %}
-                    <div class="form-error" role="alert">
-                        <p>{{ message_error }}</p>
-                    </div>
-                    {% endif %}
                     <div class="wrap-input100">
                         <label for="{{ form.new_email1.auto_id }}" class="label-input100">{{ form.new_email1.label }}</label>
                         {% render_field form.new_email1|add_class:"input100" %}
@@ -74,14 +79,3 @@
     </div>
 </section>
 {% endblock %}
-
-
-<!--            
-              
-
-                        <div class="buttonHolder">
-                            <button class="secondaryAction btn submit-btn" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
-                            <button class="primaryAction btn submit-btn" type="submit" name="action_change" >{% trans 'Change' %}</button>
-                        </div>
-                
- -->

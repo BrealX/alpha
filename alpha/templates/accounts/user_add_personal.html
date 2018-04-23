@@ -38,6 +38,16 @@
                 </ul>
             </div>
         </div>
+        <div class="row justify-content-center">
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 <section class="section-add-personal">
@@ -55,11 +65,6 @@
             <div class="row">
                 <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
                     <div class="wrap-input100 validate-input">
-                    {% for error in user_form.first_name.errors %}
-                        <span class="label-input100 form-error text-center">{{ error }}</span>
-                    {% endfor %}
-                    </div>
-                    <div class="wrap-input100 validate-input">
                         <label for="{{ user_form.first_name.auto_id }}" class="label-input100">{{ user_form.first_name.label }}</label>
                         {% render_field user_form.first_name class="input100" %}
                         <span class="focus-input100"></span>
@@ -67,23 +72,9 @@
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
                     <div class="wrap-input100 validate-input">
-                        {% for error in profile_form.phone.errors %}
-                        <span class="label-input100 form-error text-center">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="wrap-input100 validate-input">
                         <label for="{{ profile_form.phone.auto_id }}" class="label-input100">{{ profile_form.phone.label }}</label>
                         {% render_field profile_form.phone class="input100 phone-mask" type="tel" %}
                     </div>
-                </div>
-                <div class="col-12">
-                    {% if message_success %}
-                    <div class="text-center" style="color: #5b32b4; margin-top: 30px;">
-                        <ul>
-                            <li>{{ message_success }}</li>
-                        </ul>
-                    </div>
-                    {% endif %}
                 </div>
                 <div class="col-12">
                     <div class="container-addpersonal100-form-btn">

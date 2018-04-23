@@ -38,6 +38,16 @@
                 </ul>
             </div>
         </div>
+        <div class="row justify-content-center">
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 <section class="section-profile-address">
@@ -70,11 +80,6 @@
         {% csrf_token %}
             <div class="row">
 			    <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
-					<div class="wrap-input100 validate-input">
-                    {% for error in form.delivery_area.errors %}
-                        <span class="label-input100 form-error text-center">{{ error }}</span>
-                    {% endfor %}
-                    </div>
                     <div class="wrap-input100">
                         <label for="{{ form.delivery_area.auto_id }}" class="label-input100">{{ form.delivery_area.label }}</label>
                         {% render_field form.delivery_area class="select-container input100" %}
@@ -82,11 +87,6 @@
 					</div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
-                    <div class="wrap-input100 validate-input">
-                    {% for error in form.delivery_city.errors %}
-                        <span class="label-input100 form-error text-center">{{ error }}</span>
-                    {% endfor %}
-                    </div>
 					<div class="wrap-input100">
                         <label for="{{ form.delivery_city.auto_id }}" class="label-input100">{{ form.delivery_city.label }}</label>
                         {% render_field form.delivery_city class="select-container input100" disabled=true %}
@@ -94,11 +94,6 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-12">
-                    <div class="wrap-input100 validate-input">
-                    {% for error in form.delivery_address.errors %}
-                        <span class="label-input100 form-error text-center">{{ error }}</span>
-                    {% endfor %}
-                    </div>
                     <div class="wrap-input100">
                         <label for="{{ form.delivery_address.auto_id }}" class="label-input100">{{ form.delivery_address.label }}</label>
                         {% render_field form.delivery_address class="input100" %}

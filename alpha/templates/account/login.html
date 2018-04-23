@@ -28,6 +28,23 @@
                 </ul>
             </div>
         </div>
+        <div class="row justify-content-center">          
+            {% if form.errors %}
+            <div class="alert error alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {% for field in form %}
+                {% for error in field.errors %}    
+                    {% blocktrans %}{{ error }}{% endblocktrans %}
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}    
+                    {% blocktrans %}{{ error }}{% endblocktrans %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
     </div>
 </section>
 <section class="section-auth">
@@ -71,7 +88,7 @@
                                     <span class="focus-input100"></span>
                                 </div>
                                 <div class="form-group text-center">
-                                    <p><a style="color: #5b32b4;">Запомнить меня?</a>{% render_field form.remember %}</p>
+                                    <p><a style="color: #6E52E5;">Запомнить меня?</a>{% render_field form.remember %}</p>
                                 </div>
 
                                 {% if redirect_field_value %}
@@ -79,29 +96,14 @@
                                 {% endif %}
 
                                 <div class="form-group text-center">
-                                    <p><a class="button secondaryAction" href="{% url 'account_reset_password' %}" style="color: #5b32b4;">{% trans "Forgot Password?" %}</a></p>
+                                    <p><a class="button secondaryAction" href="{% url 'account_reset_password' %}" style="color: #6E52E5;">{% trans "Forgot Password?" %}</a></p>
                                 </div>
                                 <div class="form-group text-center">
-                                    <p><a href="{{ signup_url }}" style="color: #5b32b4;">Зарегистрироваться</a></p>
+                                    <p><a href="{{ signup_url }}" style="color: #6E52E5;">Зарегистрироваться</a></p>
                                 </div>
                                 <div class="text-center">
                                     <button class="btn submit-btn" type="submit">{% trans "Sign In" %}</button>
-                                    {% if form.errors %}
                                 </div>
-                                <div class="form-error">
-                                    <p>Ошибки:</p>
-                                    <ul>
-                                    {% for field in form %}
-                                    {% for error in field.errors %}    
-                                        <li>{% blocktrans %}{{ error }}{% endblocktrans %}</li>
-                                    {% endfor %}
-                                    {% endfor %}
-                                    {% for error in form.non_field_errors %}    
-                                        <li>{% blocktrans %}{{ error }}{% endblocktrans %}</li>
-                                    {% endfor %}
-                                    </ul>
-                                </div>
-                                {% endif %}
                             </div>
                         </div>
                     </div>

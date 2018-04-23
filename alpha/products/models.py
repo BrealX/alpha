@@ -114,6 +114,7 @@ class Product(models.Model):
     def product_all_images(self):
         return (self.images.get(is_main=False),) 
 
+    @property
     def price_with_discount(self):
         price_with_discount = self.price - (self.price * self.discount / 100)  
         return "%.2f" % price_with_discount
@@ -182,4 +183,3 @@ class Review(models.Model):
 
     def get_user(self):
         return self.user
-        

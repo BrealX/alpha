@@ -31,16 +31,33 @@
                 </ul>
             </div>
         </div>
+        <div class="row justify-content-center">
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 <section class="section-avatar">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col">
+                <div class="footer-text text-center">
+                    <p>Здесь можно добавить или изменить аватар вашего профиля. Сейчас ваш аватар выглядит вот так:</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
                 <div class="footer-text text-center">
                     <img class="rounded-circle img-fluid" src="{% avatar_url user 150 %}" alt="">
                     {% if not request.user|has_avatar %}
-                    <p>{% trans "You haven't uploaded an avatar yet. Please upload one now." %}</p>
+                    <p style="margin-top: 10px;">{% trans "You haven't uploaded an avatar yet. Please upload one now." %}</p>
                     {% endif %}
                 </div>
             </div>
@@ -51,7 +68,7 @@
 				<form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}">
 				{% csrf_token %}
     				<label class="btn submit-btn" for={{ upload_avatar_form.avatar.auto_id }}>
-						<i class="fas fa-cloud-upload-alt"></i>Загрузить изображение
+						<i class="fas fa-cloud-upload-alt"></i> Загрузить изображение
     				</label>
     				{% render_field upload_avatar_form.avatar %}
     				<br>
