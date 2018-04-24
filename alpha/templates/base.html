@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
+    <title>ЁжиК!</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -95,5 +95,36 @@
     <script type="text/javascript">$(window).on('load', function () { $preloader = $('.loaderArea'), $loader = $preloader.find('.loader'); $loader.fadeOut(); $preloader.delay(350).fadeOut('slow');});</script>
     <script type="text/javascript">jQuery(function ($) { $(".phone-mask").mask("+38 (099) 999-99-99"); });</script>
     {{ form.media.js }}
+
+    <script>
+        $(document).ready(function(){
+            // Add/Remove Like on product
+            function updateLikes(btn, newCount) {
+                btn.find('span').text(newCount);
+            };
+
+            $('.add-fav').on('click', function(e) {
+                e.preventDefault();
+                var this_ = $(this);
+                var like_url = this_.data('href');
+                var likes_count = parseInt(this_.data('likes'));
+                $.ajax({
+                    url: like_url,
+                    type: 'GET',
+                    data: {},
+                    cache: true,
+                    success: function(data) {
+                        console.log(data);
+                        updateLikes(this_, data.likes_count);
+                    }, 
+                    error: function(error) {
+                        console.log(error);
+                        console.log('error');
+                    }
+                })
+            });
+
+        });
+    </script>
 </body>
 </html>

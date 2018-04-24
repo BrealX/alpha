@@ -1,31 +1,31 @@
 # -*- coding: utf-8 -*-
-
-from django.shortcuts import render
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
-from .forms import LoginForm, UserRegistrationForm, UserChangeFirstnameForm, ProfileChangePhoneForm, ProfileChangeAddressForm, UserEmailChangeForm
-from django.contrib.auth.models import User
-from .models import Profile
-from orders.models import OrderDeliveryArea, OrderDeliveryCity, Order, OrderItem
-from products.models import Review
-from products.forms import ReviewForm
-from django.template.context_processors import csrf
-from django.contrib.auth.decorators import login_required
-from allauth.account.decorators import verified_email_required
-from django.conf import settings
-from django.core.mail import send_mail
-from django.template.loader import render_to_string
-from django.contrib.sites.shortcuts import get_current_site
-from django.shortcuts import redirect
 import datetime
 import hashlib
 import os
 import binascii
-from django.utils import timezone
-from django.shortcuts import get_object_or_404, render, redirect
-from django.http import JsonResponse
-from django.contrib import messages
-from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
+
+from allauth.account.decorators import verified_email_required
 from allauth.account.models import EmailAddress
+
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
+from django.contrib.auth.models import User
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render, redirect
+from django.template.loader import render_to_string
+from django.template.context_processors import csrf
+from django.utils import timezone
+
+from .forms import LoginForm, UserRegistrationForm, UserChangeFirstnameForm, ProfileChangePhoneForm, ProfileChangeAddressForm, UserEmailChangeForm
+from .models import Profile
+from orders.models import OrderDeliveryArea, OrderDeliveryCity, Order, OrderItem
+from products.models import Review
+from products.forms import ReviewForm
 
 
 ''' hack to make Django Allauth Set Password working.
@@ -135,6 +135,9 @@ def user_my_reviews(request):
             id=review_id).update(
             text=data.get('text'),
             score=data.get('score'))
+        messages.success(request, "Отзыв успешно изменён!")
+    elif request.POST and not form.is_valid():
+        messages.error(request, "Пожалуйста, устраните ошибки! Форма заполнена не верно!")
     return render(request, 'accounts/user_my_reviews.html', locals())
 
 
@@ -144,8 +147,6 @@ def add_address(request):
     user = request.user
     profile = user.profile
     form = ProfileChangeAddressForm(request.POST or None, instance=profile)
-    message_error = ""
-    message_success = ""
     if request.POST:
         if form.is_valid():
             data = request.POST
@@ -159,10 +160,10 @@ def add_address(request):
             profile_to_change.delivery_city = delivery_city
             profile_to_change.delivery_address = profile_delivery_address
             profile_to_change.save()
-            message_success = "Данные успешно изменены. Спасибо!"
+            messages.success(request, "Адрес доставки успешно изменен!")
             return render(request, 'accounts/user_add_address.html', locals())
         else:
-            message_error = "Вы пытаетесь отправить пустую форму, либо заполнили не все поля."
+            messages.error(request, "Вы пытаетесь отправить пустую форму, либо заполнили не все поля!")
     return render(request, 'accounts/user_add_address.html', locals())
 
 
@@ -186,8 +187,6 @@ def add_personal(request):
     user_form = UserChangeFirstnameForm(request.POST or None, instance=user)
     profile = user.profile
     profile_form = ProfileChangePhoneForm(request.POST or None, instance=profile)
-    message_error = ""
-    message_success = ""
     if request.POST:
         if user_form.is_valid() and profile_form.is_valid():
             data = request.POST
@@ -201,10 +200,10 @@ def add_personal(request):
             user_to_change = user_form.save(commit=False)
             user_to_change.first_name = user_firstname
             user_to_change.save()
-            message_success = "Данные успешно изменены. Спасибо!"
+            messages.success(request, "Персональные данные успешно изменены!")
             return render(request, 'accounts/user_add_personal.html', locals())
         else:
-            message_error = "Вы пытаетесь отправить пустую форму, либо заполнили не все поля."
+            messages.error(request, "Вы пытаетесь отправить пустую форму, либо заполнили не все поля!")
     return render(request, 'accounts/user_add_personal.html', locals())
 
 
@@ -232,6 +231,7 @@ def delete_review(request):
         id=review_id).update(
         is_active=False)
     return_dict = dict()
+    messages.success(request, "Отзыв успешно удалён!")
     return JsonResponse(return_dict)
 
 
@@ -265,7 +265,7 @@ def change_password(request):
             messages.success(request, 'Пароль был успешно обновлён!')
             return redirect('password_change')
         else:
-            messages.error(request, 'Пожалуйста, устраните ошибки.')
+            messages.error(request, 'Пожалуйста, устраните ошибки. Вы ввели неверный текущий пароль либо введенные новые пароли не совпадают. Также убедитесь, что все поля формы заполнены!')
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'accounts/change_password.html', {
@@ -287,7 +287,7 @@ def set_password(request):
                 update_session_auth_hash(request, user)
                 messages.success(request, 'Пароль был успешно установлен!')
             else:
-                messages.error(request, 'Пожалуйста, устраните ошибки.')
+                messages.error(request, 'Пожалуйста, устраните ошибки. Введенные новые пароли не совпадают либо вы пытаетесь отправить пустую форму!')
     return render(request, 'accounts/set_password.html', locals())
 
 
@@ -300,8 +300,9 @@ def email_change(request):
             new_email = request.POST.get('new_email1')
             allauth_email = EmailAddress.objects.get(user=user)
             allauth_email.change(request, new_email)
+            messages.success(request, 'Электронный адрес успешно изменён!')
             return redirect('my_profile')
-        message_error = "Форма заполнена не верно. Введенные адреса не совпадают либо не являются email адресами"
+        messages.error(request, 'Форма заполнена не верно. Введенные адреса не совпадают либо не являются email адресами!')
         return render(request, 'accounts/change_email.html', locals())
     else:
         return render(request, 'accounts/change_email.html', locals())

@@ -1,7 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import RedirectView
+
+from orders.models import Order, OrderItem
 from products.models import Product, Review
 from products.forms import ReviewForm
-from orders.models import Order, OrderItem
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import authentication, permissions
 
 
 def product_land(request, product_id):
@@ -36,3 +42,30 @@ def product_land(request, product_id):
                 new_form.order = user_ordered_products.last().order
             new_form.save()
     return render(request, 'products/product_landing.html', locals())
+
+
+class ProductLikeAPIToggle(APIView):
+    authentication_classes = (authentication.SessionAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, product_id, format=None):
+        obj = get_object_or_404(Product, id=product_id)
+        url_ = obj.get_absolute_url()
+        user = self.request.user
+        updated = False
+        liked = False        
+        if user.is_authenticated:
+            if user in obj.likes.all():
+                liked = False
+                obj.likes.remove(user)
+            else:
+                liked = True
+                obj.likes.add(user)
+            updated = True
+        likes_count = obj.likes.count()
+        data = {
+            'updated': updated,
+            'liked': liked,
+            'likes_count': likes_count,
+        }
+        return Response(data)

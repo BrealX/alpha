@@ -37,6 +37,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     inlines = [ReviewInline, ProductImageInline]
     list_display = [field.name for field in Product._meta.fields]
+    exclude = ('likes',)
     list_filter = ['name', ]
     search_fields = ['name', 'id']
 

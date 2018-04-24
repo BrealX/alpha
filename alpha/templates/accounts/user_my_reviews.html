@@ -28,6 +28,16 @@
                 </ul>
             </div>
         </div>
+        <div class="row justify-content-center">
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 <section class="section-reviews">
@@ -97,30 +107,28 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="col-12">
+                                <div class="col">
                                     <div class="review-form-container">
-                                        <form method="POST" action=".">
+                                        <form method="POST" action="." id="feedback_change_form">
                                         {% csrf_token %}
                                             <p class="change-feedback-product"></p>
                                             <input type="hidden" id="review_id" />
-                                            <p>
-                                                <label for="{{ form.score.id_for_label }}">{{ form.score.label }}</label>
-                                                {% render_field form.score|add_class:"form-control" %}
-                                            </p>
-                                            <p>
-                                                <label for="{{ form.text.id_for_label }}">{{ form.text.label }}</label>
-                                            </p>
-                                            <p>
-                                                {% render_field form.text|add_class:"form-control" %}
-                                            </p>
-                                            <p class="text-center">
-                                                <button class="btn submit-btn" type="submit">Редактировать</button>
-                                            </p>
+                                            <div class="wrap-input100">
+                                                <label for="{{ form.score.auto_id }}" class="label-input100">{{ form.score.label }}</label>
+                                                {% render_field form.score|add_class:"input100" %}
+                                                <span class="focus-input100"></span>
+                                            </div>
+                                            <div class="wrap-input100">
+                                                <label for="{{ form.text.auto_id }}" class="label-input100">{{ form.text.label }}</label>
+                                                {% render_field form.text|add_class:"input100" %}
+                                                <span class="focus-input100"></span>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
+                                <button form="feedback_change_form" class="btn submit-btn" type="submit">Редактировать</button>
                                 <button type="button" class="btn submit-btn" data-dismiss="modal">Закрыть</button>
                             </div>
                         </div>

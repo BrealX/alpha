@@ -145,13 +145,6 @@ $(document).ready(function() {
         });
     });
 
-    // Add to Wishlist Click Event
-    $('.add-fav').click(function (e) {
-        e.preventDefault();
-        $(this).addClass("active"); // ADD TO WISH LIST BUTTON 
-        $(this).attr('data-original-title', 'Понравилось');// Change Tooltip text
-    });
-
     // Bootstrap Touchspin at Cart Page Initializer
     $('.cart-touchspin').TouchSpin({
         min: 1,
@@ -290,11 +283,11 @@ $(document).ready(function() {
             success: function(data) {
                 if (!data.error) {
                     $('#landing_modal_div p').text(data.success);
-                    $('#landing_modal_div').attr('class', 'col-md-12');
+                    $('#landing_modal_div').attr('class', 'col alert success alert-dismissible');
                     $('#landing_contact_form')[0].reset(); // Cleans the form after successful Ajax
                 }
                 $('#landing_modal_div p').text(data.error);
-                $('#landing_modal_div').attr('class', 'col-md-12');
+                $('#landing_modal_div').attr('class', 'col alert error alert-dismissible');
             }
         });
     });

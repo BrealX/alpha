@@ -30,17 +30,28 @@
                 </ul>
             </div>
         </div>
+        <div class="row justify-content-center">
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 <section class="section-avatar">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col">
                 <div class="footer-text text-center">
+                    <p>Здесь можно удалить аватар вашего профиля. Сейчас ваш аватар выглядит вот так:</p>
                     <img class="rounded-circle img-fluid" src="{% avatar_url user 150 %}" alt="">
                     {% if not request.user|has_avatar %}
                     {% url 'avatar_add' as avatar_change_url %}
-                    <p>У вас нет аватаров, удалять нечего. Пожалуйста, <a href="{{ avatar_change_url }}">загрузите</a> аватар.</p>
+                    <p style="margin-top: 10px;">У вас нет аватаров, удалять нечего. Пожалуйста, <a href="{{ avatar_change_url }}">загрузите</a> аватар.</p>
                     {% else %}
                     {% endif %}
                 </div>
@@ -48,17 +59,18 @@
         </div>
         {% if request.user|has_avatar %}
         <div class="row">
-            <div class="col-lg-3 col-md-3"></div>
-            <div class="col-lg-6 col-md-6 col-sm-12" style="margin-top: 40px; text-align: center;">
+            <div class="col-3"></div>
+            <div class="col-12" style="margin-top: 40px; text-align: center;">
                 <form method="POST" action="{% url 'avatar_delete' %}">
                 {% csrf_token %}
-                    <ul>
-                    {{ delete_avatar_form.as_ul }}
-                    </ul>
+                    <div class="wrap-input100 justify-content-center">
+                        <label for="{{ delete_avatar_form.choices.auto_id }}" class="label-input100">{{ delete_avatar_form.choices.label }}</label>
+                        {% render_field delete_avatar_form.choices %}
+                    </div>
                     <input class="btn submit-btn" type="submit" value="Удалить" />
                 </form>
             </div>
-            <div class="col-lg-3 col-md-3"></div>
+            <div class="col-3"></div>
         </div>
         <!-- End Row -->
         {% endif %}
