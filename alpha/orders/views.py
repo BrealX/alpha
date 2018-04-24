@@ -19,7 +19,7 @@ def add_to_cart(request):
     cart = Cart(request.session)
     data = json.loads(request.POST.get('cart_changes'))
     for k, v in data.items():
-        product = Product.objects.get(id=int(k))
+        product = Product.objects.get(id=int(k))        
         quantity = int(v['qnty'])
         is_delete = v['is_delete']
         if is_delete == 'true':
@@ -28,7 +28,7 @@ def add_to_cart(request):
             if product in cart:
                 cart.set_quantity(product, quantity=quantity)
             else:
-                cart.add(product, price=product.price_with_discount(), quantity=quantity)
+                cart.add(product, price=product.price_with_discount, quantity=quantity)
 
     products_in_cart = cart.items
     products_in_cart_total_qnty = cart.unique_count  
@@ -40,7 +40,7 @@ def add_to_cart(request):
         product_dict = dict()
         product_dict['id'] = item.product.id
         product_dict['name'] = item.product.name
-        product_dict['price'] = item.product.price_with_discount()
+        product_dict['price'] = item.product.price_with_discount
         product_dict['qnty'] = item.quantity
         product_dict['image'] = item.product.product_main_image.image.url
         product_dict['total_price'] = item.subtotal
