@@ -48,3 +48,4 @@ Attempt to authenticate with a custom backend failed.
 <QueryDict: {'delivery_city': ['92'], 'phone': ['+38 (050) 777-92-71'], 'delivery_address': ['самовывоз'], 'csrfmiddlewaretoken': ['ky1Ab0Jo8bzCTlAXQezq3v2gceWlxjQRUbBdUsDTbPqGqwtxU11m2ka5i7qHLxWy'], 'first_name': ['Женя'], 'delivery_area': ['10'], 'email': ['jennyko2006@gmail.com']}>
 <QueryDict: {'delivery_city': ['28'], 'phone': ['+38 (050) 777-92-71'], 'delivery_address': ['НП 12'], 'csrfmiddlewaretoken': ['gfK4R8AAzETW5bjOHjN81olVqEqdSp2HQSkHAAu5CiK0CmcoL6f40dtKwxUz6D8o'], 'first_name': ['Женя'], 'delivery_area': ['4'], 'email': ['jennyko2006@gmail.com']}>
 Attempt to authenticate with a custom backend failed.
+Attempt to authenticate with a custom backend failed.
