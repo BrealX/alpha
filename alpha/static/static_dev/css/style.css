@@ -1263,9 +1263,16 @@ div.carousel-item:nth-child(3) > div:nth-child(1)
         line-height: 1.1;
     }
 
-    .section-main-banner
+    div.carousel-item:nth-child(1) > div:nth-child(1) 
     {
-
+        position: absolute;
+        width: auto;
+    }
+    
+    div.carousel-item:nth-child(3) > div:nth-child(1) 
+    {
+        position: absolute;
+        width: auto;
     }
 }
 

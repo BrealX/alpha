@@ -15,6 +15,7 @@ class OrderAdmin(admin.ModelAdmin):
 
     inlines = [OrderItemInline]
     list_display = [field.name for field in Order._meta.fields]
+    exclude = ('session_key',)
 
 
 admin.site.register(Order, OrderAdmin)

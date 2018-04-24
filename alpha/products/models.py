@@ -1,6 +1,7 @@
-from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db import models
+from django.urls import reverse
 
 
 class ProductCategory(models.Model):
@@ -84,6 +85,10 @@ class Product(models.Model):
         blank=True, 
         null=True, 
         default=None)
+    likes = models.ManyToManyField(
+        User,
+        blank = True,
+        related_name='product_likes')
     is_active = models.BooleanField(
         default=True)
     is_new = models.BooleanField(
@@ -119,6 +124,14 @@ class Product(models.Model):
         price_with_discount = self.price - (self.price * self.discount / 100)  
         return "%.2f" % price_with_discount
 
+    def get_absolute_url(self):
+        return reverse('product_land', kwargs={'product_id': self.id})
+
+    def get_like_url(self):
+        return reverse('like-toggle', kwargs={'product_id': self.id})
+
+    def get_api_like_url(self):
+        return reverse('like-api-toggle', kwargs={'product_id': self.id})
 
 class ProductImage(models.Model):
     product = models.ForeignKey(

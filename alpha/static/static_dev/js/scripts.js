@@ -145,13 +145,6 @@ $(document).ready(function() {
         });
     });
 
-    // Add to Wishlist Click Event
-    $('.add-fav').click(function (e) {
-        e.preventDefault();
-        $(this).addClass("active"); // ADD TO WISH LIST BUTTON 
-        $(this).attr('data-original-title', 'Понравилось');// Change Tooltip text
-    });
-
     // Bootstrap Touchspin at Cart Page Initializer
     $('.cart-touchspin').TouchSpin({
         min: 1,

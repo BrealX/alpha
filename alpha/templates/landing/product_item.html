@@ -1,6 +1,7 @@
 <div class="slider-element text-center">
-    <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Понравилось" data-placement="left">
+    <a href="" class="add-fav" data-href="{{ product.get_api_like_url }}" data-likes="{{ product.likes.count }}">
         <i class="fas fa-heart"></i>
+        <span>{{ product.likes.count }}</span>
     </a>
     <div class="slider-image">
         <a href="{% url 'product_land' product.id %}">
