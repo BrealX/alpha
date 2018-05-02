@@ -28,64 +28,8 @@ from products.models import Review
 from products.forms import ReviewForm
 
 
-''' hack to make Django Allauth Set Password working.
-
-Initially when loggin in or signing up with social account user has no password. 
-He should set it manually. This view doesn't work properly because user gets a default
-non usable password with value '!' by Django. The User model's save() method is overriden 
-and it checks if the password is usable. If it isn't, it means that a staff member has 
-changed it and it must be hashed calling make_password() Django function. So as a result
-the user signed up via social account has already usable password (hashed '!').
-Then when Allauth SetPassword View checks if user has usable_password (allauth views.py line 597)
-it redirects the User to ChangePassword View, where he should change the password that he doesn't
-know actually.
-
-To fix this, I have added some code to the standard Django User model.
-So: at django.contrib.auth.models
-
-add line 'from django.contrib.auth.hashers import is_password_usable, make_password' to the top
-then add:
-
-def save(self, *args, **kwargs):
-    if self.password != '!' and not is_password_usable(self.password):
-        self.password = make_password(self.password)
-        super(User, self).save(*args, **kwargs)
-
-to the class User(AbstractUser) (line 357 Django 2.0.3)
-
-After that fix Allauth Set password View works correctly.
-https://github.com/pennersr/django-allauth/issues/373'''
-
-
-# now using allauth login views, this view was written for backup
-'''def user_login(request):
-    args = {}
-    args.update(csrf(request))
-    login_error = None
-    if request.POST:
-        login_form = LoginForm(request.POST or None)
-        if login_form.is_valid():
-            cd = login_form.cleaned_data
-            username = cd['user_email'].lower()
-            user = authenticate(username=username, password=cd['user_password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('home')
-                else:
-                    login_error = 'Данный аккаунт заблокирован. Пожалуйста, свяжитесь с нами для' \
-                        + ' восстановления учетной записи!'
-            else:
-                login_error = 'Пользователь с таким email не зарегистрирован либо введен неверный пароль. Пожалуйста,' \
-                    + ' проверьте введенные данные!'
-    else:
-        login_form = LoginForm()
-    args['login_form'] = login_form
-    args['login_error'] = login_error
-    return render(request, 'accounts/auth.html', args)'''
-
-
 def user_logout(request):
+    # simple standard Django logout
     logout(request)
     return redirect('home')
 
@@ -107,7 +51,7 @@ def user_my_profile(request):
 @login_required(login_url='account_login')
 def user_my_orders(request):
     user = request.user
-    orders = Order.objects.filter(user=user, is_active=True).order_by('-created')
+    orders = Order.objects.filter(user=user, is_active=True).order_by('-created') # to show all current user product orders
     return render(request, 'accounts/user_my_orders.html', locals())
 
 
@@ -124,9 +68,10 @@ def user_order_info(request, order_id):
 @login_required(login_url='account_login')
 def user_my_reviews(request):
     user = request.user
-    feedbacks = Review.objects.filter(user=user, is_active=True).order_by('-created')
+    feedbacks = Review.objects.filter(user=user, is_active=True).order_by('-created') # to show all current user feedbacks leaved
     form = ReviewForm(request.POST or None)
     if request.POST and form.is_valid():
+        # review editing logic
         data = request.POST
         review_id = data.get('review_id')
         review_to_update = Review.objects.filter(
@@ -149,6 +94,7 @@ def add_address(request):
     form = ProfileChangeAddressForm(request.POST or None, instance=profile)
     if request.POST:
         if form.is_valid():
+            # add delivery address to user profile page. this data is further filled to the form at checkout pages
             data = request.POST
             profile_delivery_area_id = data.get('delivery_area')
             delivery_area = OrderDeliveryArea.objects.get(id=profile_delivery_area_id)
@@ -170,6 +116,7 @@ def add_address(request):
 @verified_email_required
 @login_required(login_url='account_login')
 def delete_address(request):
+    # AJAX delivery address deletion
     user = request.user
     user.profile.delivery_area = None
     user.profile.delivery_city = None
@@ -189,6 +136,7 @@ def add_personal(request):
     profile_form = ProfileChangePhoneForm(request.POST or None, instance=profile)
     if request.POST:
         if user_form.is_valid() and profile_form.is_valid():
+            # add user first_name and phone to user profile page. this data is further filled to the form at checkout pages
             data = request.POST
             profile_phone = data.get('phone')
             profile_to_change = profile_form.save(commit=False)
@@ -210,6 +158,7 @@ def add_personal(request):
 @verified_email_required
 @login_required(login_url='account_login')
 def delete_personal(request):
+    # AJAX name and phone deletion
     user = request.user
     user.first_name = ''
     user.profile.phone = ''
@@ -223,6 +172,7 @@ def delete_personal(request):
 @verified_email_required
 @login_required(login_url='account_login')
 def delete_review(request):
+    # AJAX review deletion
     user = request.user
     review_id = request.POST.get('feedback_id')
     review_to_delete = Review.objects.filter(
@@ -275,6 +225,7 @@ def change_password(request):
 
 @login_required(login_url='account_login')
 def set_password(request):
+    # when user signs up via social account he has no password at all. in order the user can log in with username and password this view sets users' password
     user = request.user
     form = SetPasswordForm(request.POST or None)
     if user.has_usable_password():

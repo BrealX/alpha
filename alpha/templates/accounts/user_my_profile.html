@@ -197,31 +197,103 @@
 				</div>
 			</div>
         </div>
-            <!-- Modal -->
-            <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden='true'>
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-							<h5 class="modal-title" id="deleteModalCenterTitle"><strong style="color: #6E52E5;">Внимание! Удаление аккаунта {{ user.username }}!</strong></h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times</span>
-							</button>
-                        </div>
-                        <div class="modal-body">
-                            <p>
-                                Если Вы действительно желаете удалить аккаунт, нажмите кнопку "Удалить". Все Ваши данные будут удалены и восстановить их будет уже нельзя. Удалить?
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn submit-btn" data-dismiss="modal">Отменить</button>
-                            <button type="button" class="btn submit-btn btn-delete">Удалить</button>
-                        </div>
-                    </div>
-                </div>
+    </div>
+</section>
+<!-- Profile Delete Modal -->
+<div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden='true'>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+				<h5 class="modal-title" id="deleteModalCenterTitle"><strong style="color: #6E52E5;">Внимание! Удаление аккаунта {{ user.username }}!</strong></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times</span>
+				</button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Если Вы действительно желаете удалить аккаунт, нажмите кнопку "Удалить". Все Ваши данные будут удалены и восстановить их будет уже нельзя. Удалить?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn submit-btn" data-dismiss="modal">Отменить</button>
+                <button type="button" class="btn submit-btn btn-delete">Удалить</button>
             </div>
         </div>
     </div>
-    <!-- End Container -->
-</section>
-<!-- End Section Profile -->
+</div>
 {% endblock %}
+
+{% block javascript %}
+	<script>
+		// Address delete on AJAX
+	    $('#my_profile_address_delete').on('click', function(e) {
+	        e.preventDefault();
+	        var address_delete_form = $('#my_profile_address_delete_form');
+	        var url = address_delete_form.attr('action');
+	        var csfr_token = $('#my_profile_address_delete_form [name="csrfmiddlewaretoken"]').val();
+	        data = {}
+	        data["csrfmiddlewaretoken"] = csfr_token;
+	        $.ajax({
+	            url: url,
+	            type: 'POST',
+	            data: data,
+	            cache: true,
+	            success: function(data) {
+	                if (!data.profile_delivery_city) {
+	                    $('.address-line').html("");
+	                    $('.address-line').text("Вы не указали адрес доставки");
+	                };
+	            }
+	        });
+	    });
+	</script>
+	<script>
+		// Name and Phone delete on AJAX
+	    $('#my_personal_delete').on('click', function(e) {
+	        e.preventDefault();
+	        var personal_delete_form = $('#my_personal_delete_form');
+	        var url = personal_delete_form.attr('action');
+	        var csfr_token = $('#my_personal_delete_form [name="csrfmiddlewaretoken"]').val();
+	        data = {}
+	        data["csrfmiddlewaretoken"] = csfr_token;
+	        $.ajax({
+	            url: url,
+	            type: 'POST',
+	            data: data,
+	            cache: true,
+	            success: function(data) {
+	                if (!data.user_firstname && !data.profile_phone) {
+	                    $('.profile-firstname, .profile_phone').html("");
+	                    $('.profile-firstname').text("Вы не указали имя");
+	                    $('.profile-phone').text("Вы не указали контактный номер телефона");
+	                };
+	            }
+	        });
+	    });
+	</script>
+	<script>
+		// Modal window on account deletion (delete confirmation & delete process)
+	    $('div#deleteModalCenter').on('show.bs.modal', function(e) {
+	        $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
+	    });
+	    $('div#deleteModalCenter').on('click', '.btn-delete', function(e) {
+	        e.preventDefault();
+	        var account_delete_form = $('#my_account_delete_form');
+	        var url = account_delete_form.attr('action');
+	        var go_home_form = $('#go_home_form');
+	        var redirect_url = go_home_form.attr('action');
+	        var csfr_token = $('#my_account_delete_form [name="csrfmiddlewaretoken"]').val();
+	        data = {};
+	        data["csrfmiddlewaretoken"] = csfr_token;
+	        $.ajax({
+	            url: url,
+	            type: 'POST',
+	            data: data,
+	            cache: true,
+	            success: function(data) {
+	                window.location.href = redirect_url;
+	            }
+	        })
+	    });
+	</script>
+{% endblock javascript %}

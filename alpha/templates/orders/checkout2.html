@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block content %}
-
 <section class="section-header"></section>
 <section class="section-navigation">
     <div class="container">
@@ -84,37 +83,7 @@
             </div>
             <div class="col-lg-3 col-md-3"></div>
         </div>
-        <!-- End Row -->
-        <div class="row">
-            <!-- Modal -->
-            <div class="modal fade" id="order_info_modal" tabindex="-1" role="dialog" aria-labelledby="order_info_modal_title" aria-hidden='true'>
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-							<h5 class="modal-title" id="order_info_modal_title"><strong style="color: #6E52E5;">Ваш заказ успешно оформлен!</strong></h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times</span>
-							</button>
-                        </div>
-                        <div class="modal-body">
-                            <p style="font-weight: 400;">
-                                Благодарим Вас за заказ в нашем магазине!
-                                <br>
-                                Ваш заказ № {{ order_id }} на сумму {{ order_overall }} грн. создан, мы перезвоним Вам на номер {{ order_customer_phone }} в ближайшее время!
-                                <br>
-                                Также на адрес {{ order_customer_email }} мы отправили информацию о заказе.
-                                Будем рады видеть Вас снова в нашем магазине!
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button id="order_info_modal_close" type="button" class="btn submit-btn" data-dismiss="modal">Закрыть</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-    <!-- End Container -->
     <div class="container text-center" style="margin-top: 30px;">
         <div class="row align-items-center">
             <div class="col-md-12">
@@ -126,5 +95,78 @@
     <input id="checkout2_page_order_id" class="d-none" value="{{ order.id }}">
     <form action="{% url 'order_notification' %}" id="order_notification_form"></form>
 </section>
-<!-- End Section -->
+<!-- Order Notification Modal -->
+<div class="modal fade" id="order_info_modal" tabindex="-1" role="dialog" aria-labelledby="order_info_modal_title" aria-hidden='true'>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="order_info_modal_title"><strong style="color: #6E52E5;">Ваш заказ успешно оформлен!</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-weight: 400;">
+                    Благодарим Вас за заказ в нашем магазине!
+                    <br>
+                    Ваш заказ № {{ order_id }} на сумму {{ order_overall }} грн. создан, мы перезвоним Вам на номер {{ order_customer_phone }} в ближайшее время!
+                    <br>
+                    Также на адрес {{ order_customer_email }} мы отправили информацию о заказе.
+                    Будем рады видеть Вас снова в нашем магазине!
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button id="order_info_modal_close" type="button" class="btn submit-btn" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
+{% block javascript %}
+    <script>
+        // Order confirmation
+        $('#order_confirm_button').on('click', function(e) {
+            e.preventDefault();
+            var order_confirm_button = $(this);
+            var url = order_confirm_button.attr("href");
+            var data = {};
+            data['order_id'] = $('#checkout2_page_order_id').attr('value');
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: data,
+                cache: true,
+                success: function(data) {
+                    if (data.order_id) {
+                        $("#order_info_modal").modal('show');
+                        var order_id = data.order_id;
+                        var order_overall = data.order_overall;
+                        var order_customer_email = data.order_customer_email;
+                        var order_customer_name = data.order_customer_name;
+                        var notification_url = $('#order_notification_form').attr('action');
+                        var data = {};
+                        data['order_id'] = order_id;
+                        data['order_overall'] = order_overall;
+                        data['order_customer_email'] = order_customer_email;
+                        data['order_customer_name'] = order_customer_name;
+
+                        $.ajax({
+                            url: notification_url,
+                            type: 'GET',
+                            data: data,
+                            cache: true,
+                        });
+                    };
+                }
+            });
+        });
+    </script>
+    <script>
+        // Redirects to Home Page when Order Info Close Button clicked
+        $('#order_info_modal_close').on('click', function(e) {
+            e.preventDefault();
+            window.location.href = '/';
+        });
+    </script>
+{% endblock javascript %}

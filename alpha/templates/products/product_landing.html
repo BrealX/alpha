@@ -421,27 +421,24 @@
     </div>
 </div>
 {% endblock %}
-
 {% block javascript %}
-    
     <!-- CountTo Plugin
     http://verstaemvse.ru/avtomaticheskij-schetchik-countto-js.html -->
-    <script type="text/javascript" src="{% static 'js/jquery.countTo.js' %}"></script>
-
+    <script type="text/javascript" src="{% static 'js/jquery.countTo.min.js' %}"></script>
     <!-- Smoothproducts Zoomer
     https://github.com/kthornbloom/Smoothproducts -->
     <script type="text/javascript" src="{% static 'js/smoothproducts.min.js' %}"></script>
-
     <!-- Star Rating 
         http://plugins.krajee.com -->
-    <script type="text/javascript" src="{% static 'js/star-rating.js' %}"></script>    
-    <script type="text/javascript" src="{% static 'js/star-rating_locale_ru.js' %}"></script>    
-
+    <script type="text/javascript" src="{% static 'js/star-rating.min.js' %}"></script>    
+    <script type="text/javascript" src="{% static 'js/star-rating_locale_ru.min.js' %}"></script>    
     <script type="text/javascript">
-        // Product Page Zoomer Initializer
+        // Zoomer Initializer
         $(window).on('load', function() {
             $('.sp-wrap').smoothproducts();
         });
+    </script>
+    <script>
         // CountTo Plugin Initializer (https://stackoverflow.com/questions/43202706/jquery-counto-js-on-scroll-count-numbers-not-onload)
         function isScrolledIntoView(el) {
             if (el.getBoundingClientRect().top | el.getBoundingClientRect().bottom) {
@@ -465,7 +462,6 @@
             }
         });
     </script>
-
     <script>
         $("#id_score").rating({
             min: 0,
@@ -474,7 +470,6 @@
             size: 'sm',
         });
     </script>
-
     <script>
         $('#feedback_button').on('click', function() {
             var scroll_positon = $(window).scrollTop();
@@ -486,7 +481,6 @@
             localStorage.setItem('scrollPosition', '0');
         });
     </script>
-
     <script>
         $('.owl-carousel').owlCarousel({
             loop:true,
@@ -508,5 +502,15 @@
             }
         })
     </script>
-
+    <script>
+        // Shows full feedback text at modal window when 'Read more' button is clicked at Landing Page
+        $('#feedbackModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var username = button.data('username');
+            var feedback_text = button.data('feedback_text');
+            var modal = $(this);
+            modal.find('.modal-title').text('Отзыв от пользователя ' + username);
+            modal.find('.modal-body .review-form-container').text(feedback_text);
+        });
+    </script>
 {% endblock %}
