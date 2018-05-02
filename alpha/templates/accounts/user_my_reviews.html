@@ -4,7 +4,6 @@
 {% load products_tags %}
 
 {% block content %}
-
 <section class="section-header"></section>
 <section class="section-navigation">
     <div class="container">
@@ -94,83 +93,81 @@
 </section>
 <!-- End Section Orders -->
 <!-- Modal Change Feedback -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 mx-auto">
-                <div class="modal fade" id="changefeedbackModal" tabindex="-1" role="dialog" aria-labelledby="addfeedbackModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="changefeedbackModalLabel">Редактирование отзыва</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="col">
-                                    <div class="review-form-container">
-                                        <form method="POST" action="." id="feedback_change_form">
-                                        {% csrf_token %}
-                                            <p class="change-feedback-product"></p>
-                                            <input type="hidden" id="review_id" />
-                                            <div class="wrap-input100">
-                                                <label for="{{ form.score.auto_id }}" class="label-input100">{{ form.score.label }}</label>
-                                                {% render_field form.score|add_class:"input100" %}
-                                                <span class="focus-input100"></span>
-                                            </div>
-                                            <div class="wrap-input100">
-                                                <label for="{{ form.text.auto_id }}" class="label-input100">{{ form.text.label }}</label>
-                                                {% render_field form.text|add_class:"input100" %}
-                                                <span class="focus-input100"></span>
-                                            </div>
-                                        </form>
-                                    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-7 mx-auto">
+            <div class="modal fade" id="changefeedbackModal" tabindex="-1" role="dialog" aria-labelledby="addfeedbackModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="changefeedbackModalLabel">Редактирование отзыва</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col">
+                                <div class="review-form-container">
+                                    <form method="POST" action="." id="feedback_change_form">
+                                    {% csrf_token %}
+                                        <p class="change-feedback-product"></p>
+                                        <input type="hidden" id="review_id" />
+                                        <div class="wrap-input100">
+                                            <label for="{{ form.score.auto_id }}" class="label-input100">{{ form.score.label }}</label>
+                                            {% render_field form.score|add_class:"input100" %}
+                                            <span class="focus-input100"></span>
+                                        </div>
+                                        <div class="wrap-input100">
+                                            <label for="{{ form.text.auto_id }}" class="label-input100">{{ form.text.label }}</label>
+                                            {% render_field form.text|add_class:"input100" %}
+                                            <span class="focus-input100"></span>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button form="feedback_change_form" class="btn submit-btn" type="submit">Редактировать</button>
-                                <button type="button" class="btn submit-btn" data-dismiss="modal">Закрыть</button>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button form="feedback_change_form" class="btn submit-btn" type="submit">Редактировать</button>
+                            <button type="button" class="btn submit-btn" data-dismiss="modal">Закрыть</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <!-- Modal Delete Feedback -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 mx-auto">
-                <div class="modal fade" id="deletefeedbackModal" tabindex="-1" role="dialog" aria-labelledby="addfeedbackModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="deletefeedbackModalLabel">Удаление отзыва</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="review_delete_form" action="{% url 'delete_review' %}">{% csrf_token %}
-                                    <input id="delete_input" type="hidden" />
-                                </form>
-                                <form action="{% url 'user_my_reviews' %}" id="go_back_form"></form>
-                                <p>Вы действительно желаете удалить данный отзыв? (После этого возможно будет оставить новый отзыв на странице товара)</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn submit-btn" data-dismiss="modal">Отменить</button>
-                                <button type="submit" class="btn submit-btn btn-delete">Удалить</button>
-                            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-7 mx-auto">
+            <div class="modal fade" id="deletefeedbackModal" tabindex="-1" role="dialog" aria-labelledby="addfeedbackModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deletefeedbackModalLabel">Удаление отзыва</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="review_delete_form" action="{% url 'delete_review' %}">{% csrf_token %}
+                                <input id="delete_input" type="hidden" />
+                            </form>
+                            <form action="{% url 'user_my_reviews' %}" id="go_back_form"></form>
+                            <p>Вы действительно желаете удалить данный отзыв? (После этого возможно будет оставить новый отзыв на странице товара)</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn submit-btn" data-dismiss="modal">Отменить</button>
+                            <button type="submit" class="btn submit-btn btn-delete">Удалить</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
-
 {% block javascript %}
-
     <script>
         $('#changefeedbackModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
@@ -188,7 +185,6 @@
             modal.find('#id_score').text(score);
         })
     </script>
-
     <script>
         $('#deletefeedbackModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
@@ -197,5 +193,27 @@
             modal.find('#delete_input').attr('value', feedback_id);
         })
     </script>
-
+    <script>
+        // My Profile Reviews Page review delete button
+        $('#deletefeedbackModal .btn-delete').on('click', function(e) {
+            e.preventDefault();
+            var form = $('#review_delete_form');
+            var url = form.attr('action');
+            var csfr_token = $('#review_delete_form [name="csrfmiddlewaretoken"]').val();
+            var feedback_id = $('#delete_input').val();
+            var redirect_url = $('#go_back_form').attr('action');
+            data = {}
+            data["csrfmiddlewaretoken"] = csfr_token;
+            data["feedback_id"] = feedback_id;
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: data,
+                cache: true,
+                success: function(data) {
+                    window.location.href = redirect_url;
+                }
+            });
+        });
+    </script>
 {% endblock javascript %}

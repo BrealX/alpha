@@ -65,18 +65,6 @@ $(document).ready(function() {
         single_adding(button);
     });
 
-    // Changes product in cart quantity when user makes changes at Checkout Page with touchspin plugin
-    $('#checkout_page_submit').on('click', function() {
-        var inputs = $('.cart-touchspin');
-        var cart_changes = {};
-        for(var i = 0; i < inputs.length; i++) {
-            product_id = $(inputs[i]).data('product_id');
-            qnty = parseInt($(inputs[i]).val());
-            cart_changes[product_id] = {qnty: qnty, is_delete: false};
-        }
-        cart_updating(cart_changes);
-    });
-
     // Delete items from miniCart
     $('div.minicart-button').on('click', 'a.delete-item', function(e) {
         e.preventDefault();
@@ -88,7 +76,19 @@ $(document).ready(function() {
         cart_updating(cart_changes);
 	});
 
-    // Delete items from Checkout Page
+    // Changes product in cart quantity with touchspin plugin
+    $('#checkout_page_submit').on('click', function() {
+        var inputs = $('.cart-touchspin');
+        var cart_changes = {};
+        for(var i = 0; i < inputs.length; i++) {
+            product_id = $(inputs[i]).data('product_id');
+            qnty = parseInt($(inputs[i]).val());
+            cart_changes[product_id] = {qnty: qnty, is_delete: false};
+        }
+        cart_updating(cart_changes);
+    });
+
+    // Delete items from cart
     $('.cart-area').on('click', 'a.delete-item', function(e) {
         e.preventDefault();
         var cart_changes = {};
@@ -97,8 +97,7 @@ $(document).ready(function() {
         cart_changes[product_id] = {qnty: qnty, is_delete: true};
         
         cart_updating(cart_changes);
-	});
-
+    });
     
     // Shows Cart subtotal (at miniCart dropdown and Cart Page)
     function calculatingTotalCartSum(){
@@ -145,103 +144,6 @@ $(document).ready(function() {
         });
     });
 
-    // Bootstrap Touchspin at Cart Page Initializer
-    $('.cart-touchspin').TouchSpin({
-        min: 1,
-        step: 1,
-    });
-
-    // My Profile Page address delete button
-    $('#my_profile_address_delete').on('click', function(e) {
-        e.preventDefault();
-        var address_delete_form = $('#my_profile_address_delete_form');
-        var url = address_delete_form.attr('action');
-        var csfr_token = $('#my_profile_address_delete_form [name="csrfmiddlewaretoken"]').val();
-        data = {}
-        data["csrfmiddlewaretoken"] = csfr_token;
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: data,
-            cache: true,
-            success: function(data) {
-                if (!data.profile_delivery_city) {
-                    $('.address-line').html("");
-                    $('.address-line').text("Вы не указали адрес доставки");
-                };
-            }
-        });
-    });
-
-    // My Profile Page Personal delete button
-    $('#my_personal_delete').on('click', function(e) {
-        e.preventDefault();
-        var personal_delete_form = $('#my_personal_delete_form');
-        var url = personal_delete_form.attr('action');
-        var csfr_token = $('#my_personal_delete_form [name="csrfmiddlewaretoken"]').val();
-        data = {}
-        data["csrfmiddlewaretoken"] = csfr_token;
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: data,
-            cache: true,
-            success: function(data) {
-                if (!data.user_firstname && !data.profile_phone) {
-                    $('.profile-firstname, .profile_phone').html("");
-                    $('.profile-firstname').text("Вы не указали имя");
-                    $('.profile-phone').text("Вы не указали контактный номер телефона");
-                };
-            }
-        });
-    });
-
-    // My Profile Reviews Page review delete button
-    $('#deletefeedbackModal .btn-delete').on('click', function(e) {
-        e.preventDefault();
-        var form = $('#review_delete_form');
-        var url = form.attr('action');
-        var csfr_token = $('#review_delete_form [name="csrfmiddlewaretoken"]').val();
-        var feedback_id = $('#delete_input').val();
-        var redirect_url = $('#go_back_form').attr('action');
-        data = {}
-        data["csrfmiddlewaretoken"] = csfr_token;
-        data["feedback_id"] = feedback_id;
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: data,
-            cache: true,
-            success: function(data) {
-                window.location.href = redirect_url;
-            }
-        });
-    });
-
-    // Modal window on account deletion (delete confirmation & delete process)
-    $('div#deleteModalCenter').on('show.bs.modal', function(e) {
-        $(this).find('.btn-delete').attr('href', $(e.relatedTarget).data('href'));
-    });
-    $('div#deleteModalCenter').on('click', '.btn-delete', function(e) {
-        e.preventDefault();
-        var account_delete_form = $('#my_account_delete_form');
-        var url = account_delete_form.attr('action');
-        var go_home_form = $('#go_home_form');
-        var redirect_url = go_home_form.attr('action');
-        var csfr_token = $('#my_account_delete_form [name="csrfmiddlewaretoken"]').val();
-        data = {};
-        data["csrfmiddlewaretoken"] = csfr_token;
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: data,
-            cache: true,
-            success: function(data) {
-                window.location.href = redirect_url;
-            }
-        })
-    });
-
     // Ajax request for chained select Areas/Cities at /orders/checkout1 page
     $('select#id_anonymous_area, select#id_delivery_area').on('change', function() {
         var area_id = $(this).val();
@@ -263,87 +165,4 @@ $(document).ready(function() {
             }
         });
     });
-
-    // Ajax Contact Form sending
-    $('#landing_contact_submit').on('click', function(e) {
-        e.preventDefault();
-        var contact_form = $('#landing_contact_form');
-        var url = contact_form.attr('action');
-        var csfr_token = $('#landing_contact_form [name="csrfmiddlewaretoken"]').val();
-        data = {}
-        data["csrfmiddlewaretoken"] = csfr_token;
-        data['contact_name'] = $('#contact_name').val();
-        data['contact_email'] = $('#contact_email').val();
-        data['form_content'] = $('#contact_content').val();
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: data,
-            cache: true,
-            success: function(data) {
-                if (!data.error) {
-                    $('#landing_modal_div p').text(data.success);
-                    $('#landing_modal_div').attr('class', 'col alert success alert-dismissible');
-                    $('#landing_contact_form')[0].reset(); // Cleans the form after successful Ajax
-                }
-                $('#landing_modal_div p').text(data.error);
-                $('#landing_modal_div').attr('class', 'col alert error alert-dismissible');
-            }
-        });
-    });
-
-    // Checkout2 Page order confirmation
-    $('#order_confirm_button').on('click', function(e) {
-        e.preventDefault();
-        var order_confirm_button = $(this);
-        var url = order_confirm_button.attr("href");
-        var data = {};
-        data['order_id'] = $('#checkout2_page_order_id').attr('value');
-
-        $.ajax({
-            url: url,
-            type: 'GET',
-            data: data,
-            cache: true,
-            success: function(data) {
-                if (data.order_id) {
-                    $("#order_info_modal").modal('show');
-                    var order_id = data.order_id;
-                    var order_overall = data.order_overall;
-                    var order_customer_email = data.order_customer_email;
-                    var order_customer_name = data.order_customer_name;
-                    var notification_url = $('#order_notification_form').attr('action');
-                    var data = {};
-                    data['order_id'] = order_id;
-                    data['order_overall'] = order_overall;
-                    data['order_customer_email'] = order_customer_email;
-                    data['order_customer_name'] = order_customer_name;
-
-                    $.ajax({
-                        url: notification_url,
-                        type: 'GET',
-                        data: data,
-                        cache: true,
-                    });
-                };
-            }
-        });
-    });
-
-    // Redirects to Home Page when Order Info Close Button clicked
-    $('#order_info_modal_close').on('click', function(e) {
-        e.preventDefault();
-        window.location.href = '/';
-    });
-
-    // Shows full feedback text at modal window when 'Read more' button is clicked at Landing Page
-    $('#feedbackModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var username = button.data('username');
-        var feedback_text = button.data('feedback_text');
-        var modal = $(this);
-        modal.find('.modal-title').text('Отзыв от пользователя ' + username);
-        modal.find('.modal-body .review-form-container').text(feedback_text);
-    });
-
 });
