@@ -4,6 +4,10 @@
 {% load products_tags %}
 {% load avatar_tags %}
 
+{% block meta %}
+    <title>Купить {{ product.category.name }} {{ product.name }} с доставкой по Украине</title>
+{% endblock meta %}
+
 {% block header %}
     <link rel="stylesheet" href="{% static 'css/smoothproducts.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/star-rating.css' %}" media="all" type="text/css" />
@@ -15,7 +19,7 @@
         <div class="row h-100 align-items-center">
             <div class="col-lg-8 col-md-8 col-12">
                 <div class="landing-heading">
-                    <h4>{{ product.name }}</h4>
+                    <h1>{{ product.name }}</h1>
                     <h6>{{ product.name|slice:":1" }}</h6>
                     <p>{{ product.category.description }}</p>
                 </div>
@@ -26,7 +30,6 @@
                             <button type="submit" class="btn submit-btn" id="landing_page_submit_btn" data-product_id="{{ product.id }}" data-qnty="1">ЗАКАЗАТЬ</button>
                         </div>
                     </form>
-                    <!-- FormEnd -->
                 </div>
             </div>
             <div class="col-4 landing-picture d-none d-md-block d-lg-block">
@@ -35,7 +38,6 @@
         </div>
     </div>
 </section>
-<!-- Section -->
 <section class="special-area">
     <div class="container">
         <div class="row">

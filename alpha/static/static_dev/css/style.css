@@ -365,6 +365,7 @@ label
     margin-bottom: 30px;
 }
 
+.section-heading > h1,
 .section-heading > h2
 {
     font-family: 'Cabin', sans-serif;
@@ -2065,6 +2066,7 @@ h5.parallaxSubtitle
     margin-bottom: 100px;
 }
 
+.landing-heading > h1,
 .landing-heading > h4
 {
     font-size: 36px;
