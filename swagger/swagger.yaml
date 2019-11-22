@@ -1,0 +1,3672 @@
+---
+swagger: "2.0"
+info:
+  description: |
+    We Meet API description
+  version: 0.0.3
+  title: We Meet API
+  contact:
+    name: admin@wemeet.nl
+basePath: /
+schemes:
+- http
+- https
+paths:
+  /api/page/:
+    post:
+      tags:
+      - Slug
+      description: Fetch instance information by slug
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Slug information
+        required: true
+        schema:
+          $ref: '#/definitions/body'
+      responses:
+        200:
+          description: The venue or space information
+          examples:
+            application/json:
+              space_id: 1
+              venue_id: 1
+              space_name: 'Landgoed Ulvenhart #101'
+              internal_name: ""
+              space_description: ""
+              space_reference: "101"
+              access_instructions: ""
+              booking_limit: 0
+              space_size: 120
+              has_discount: false
+              discount_percentage: 8
+              discount_description: You are eligible if...
+              wifi_name: wemeet
+              wifi_code: "123456789"
+              booking_type: DIRECT
+              cancellation_th: 48
+              book_before_th: 1
+              host_approval_th: 24
+              short_day_price: 367.0
+              half_day_price: 524.0
+              day_price: 681.0
+              full_day_price: 885.0
+              service_break: 0
+              status: DRAFT
+        400:
+          description: Request parameters error
+        404:
+          description: Record not found
+        409:
+          description: Record reading error
+  /api/venue/find/:
+    post:
+      tags:
+      - Search
+      description: Route for venue search/filtering
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Filters, search and pagination parameters
+        required: true
+        schema:
+          $ref: '#/definitions/body_1'
+      responses:
+        200:
+          description: List of found venues and spaces
+          examples:
+            application/json:
+              venues:
+              - venue_id: 1
+                venue_name: Museum Rotterdam
+                image: category-wecelebrate.png
+                location:
+                  lat: 51.9221741
+                  lng: 4.481067
+                address:
+                - Museum Rotterdam
+                - Rodezand
+                - Rotterdam
+                - Netherlands
+                address_full: Rodezand 176, 854 JH Rotterdam, Netherlands
+                direct: false
+                price: 11
+                working_time:
+                  TUE:
+                    open: 09:00
+                    close: 15:00
+                  FRI:
+                    open: 09:00
+                    close: 15:00
+                  SAT:
+                    open: 09:00
+                    close: 15:00
+                features:
+                  wheelchair_accessible: false
+                  public_transport_nearby: false
+                  rooms_for_overnight_stay: true
+                  inspiring_location: true
+                  waterside: false
+                  garden_terrace_or_courtyard: false
+                  catering: true
+                  bar_cafe: false
+                  restaurant: false
+                  host_on_site: true
+                spaces:
+                - space_id: 101
+                  image: category-wecelebrate.png
+                  activities:
+                  - 0
+                  - 1
+                  - 2
+                  - 3
+                  favorite: true
+                  features:
+                    privacy: true
+                    air_conditioning: true
+                    cabled_internet: true
+                    toilet_for_disabled: false
+                - space_id: 102
+                  image: category-weremember.png
+                  activities:
+                  - 0
+                  - 1
+                  favorite: true
+                  features:
+                    privacy: true
+                    air_conditioning: true
+                    cabled_internet: false
+                    toilet_for_disabled: false
+                - space_id: 103
+                  image: category-wemeet.png
+                  activities:
+                  - 0
+                  - 1
+                  - 3
+                  favorite: true
+                  features:
+                    privacy: true
+                    air_conditioning: false
+                    cabled_internet: true
+                    toilet_for_disabled: false
+              - venue_id: 2
+                venue_name: Marines Museum
+                image: category-wepresent.png
+                location:
+                  lat: 51.9187227
+                  lng: 4.4914216
+                address:
+                - Marines Museum
+                - Wijnhaven
+                - Rotterdam
+                - Netherlands
+                address_full: Wijnhaven 332, 1234 AH Rotterdam, Netherlands
+                direct: true
+                price: 10
+                working_time:
+                  TUE:
+                    open: 08:00
+                    close: 18:00
+                  FRI:
+                    open: 08:00
+                    close: 18:00
+                  SAT:
+                    open: 08:00
+                    close: 18:00
+                features:
+                  wheelchair_accessible: false
+                  public_transport_nearby: true
+                  rooms_for_overnight_stay: true
+                  inspiring_location: false
+                  waterside: true
+                  garden_terrace_or_courtyard: true
+                  catering: false
+                  bar_cafe: true
+                  restaurant: true
+                  host_on_site: false
+                spaces:
+                - space_id: 104
+                  image: category-wepresent.png
+                  activities:
+                  - 3
+                  favorite: true
+                  features:
+                    privacy: true
+                    air_conditioning: false
+                    cabled_internet: true
+                    toilet_for_disabled: false
+                - space_id: 105
+                  image: category-weremember.png
+                  activities:
+                  - 1
+                  - 2
+                  - 3
+                  favorite: true
+                  features:
+                    privacy: true
+                    air_conditioning: true
+                    cabled_internet: false
+                    toilet_for_disabled: false
+                - space_id: 106
+                  image: category-wecelebrate.png
+                  activities:
+                  - 0
+                  - 3
+                  favorite: true
+                  features:
+                    privacy: false
+                    air_conditioning: true
+                    cabled_internet: false
+                    toilet_for_disabled: false
+              - venue_id: 3
+                venue_name: Museum Van Loon
+                image: category-wecelebrate.png
+                location:
+                  lat: 52.363235
+                  lng: 4.894002
+                address:
+                - Museum Van Loon
+                - Keizersgracht
+                - Amsterdam
+                - Netherlands
+                address_full: Keizersgracht 543, 654 UT Amsterdam, Netherlands
+                direct: false
+                price: 8
+                working_time:
+                  WED:
+                    open: 11:00
+                    close: 22:00
+                  SAT:
+                    open: 11:00
+                    close: 22:00
+                  SUN:
+                    open: 11:00
+                    close: 22:00
+                features:
+                  wheelchair_accessible: false
+                  public_transport_nearby: true
+                  rooms_for_overnight_stay: true
+                  inspiring_location: true
+                  waterside: true
+                  garden_terrace_or_courtyard: true
+                  catering: true
+                  bar_cafe: true
+                  restaurant: true
+                  host_on_site: true
+                spaces:
+                - space_id: 101
+                  image: category-wecelebrate.png
+                  activities:
+                  - 0
+                  - 1
+                  - 2
+                  - 3
+                  favorite: true
+                  features:
+                    privacy: true
+                    air_conditioning: true
+                    cabled_internet: true
+                    toilet_for_disabled: false
+                - space_id: 102
+                  image: category-weremember.png
+                  activities:
+                  - 0
+                  - 1
+                  favorite: true
+                  features:
+                    privacy: true
+                    air_conditioning: false
+                    cabled_internet: true
+                    toilet_for_disabled: false
+                - space_id: 103
+                  image: category-wemeet.png
+                  activities:
+                  - 0
+                  - 1
+                  - 3
+                  favorite: true
+                  features:
+                    privacy: true
+                    air_conditioning: true
+                    cabled_internet: false
+                    toilet_for_disabled: false
+              - venue_id: 4
+                venue_name: Nienoord Museum
+                image: category-wepresent.png
+                location:
+                  lat: 53.1677634
+                  lng: 6.3948413
+                address:
+                - Nienoord Museum
+                - Museum Nienoord
+                - Nienoord
+                - "1"
+                - 9351 AC
+                - Leek
+                - Netherlands
+                address_full: Nienoord 893, 1230 MK Leek, Netherlands
+                direct: true
+                price: 10
+                working_time:
+                  MON:
+                    open: 09:00
+                    close: 18:00
+                  THU:
+                    open: 09:00
+                    close: 18:00
+                  SUN:
+                    open: 09:00
+                    close: 18:00
+                features:
+                  wheelchair_accessible: false
+                  public_transport_nearby: true
+                  rooms_for_overnight_stay: true
+                  inspiring_location: true
+                  waterside: true
+                  garden_terrace_or_courtyard: true
+                  catering: true
+                  bar_cafe: true
+                  restaurant: false
+                  host_on_site: false
+                spaces:
+                - space_id: 104
+                  image: category-wepresent.png
+                  activities:
+                  - 3
+                  favorite: true
+                  features:
+                    privacy: true
+                    air_conditioning: true
+                    cabled_internet: true
+                    toilet_for_disabled: true
+                - space_id: 105
+                  image: category-weremember.png
+                  activities:
+                  - 1
+                  - 2
+                  - 3
+                  favorite: true
+                  features:
+                    privacy: true
+                    air_conditioning: true
+                    cabled_internet: true
+                    toilet_for_disabled: true
+                - space_id: 106
+                  image: category-wecelebrate.png
+                  activities:
+                  - 0
+                  - 3
+                  favorite: true
+                  features:
+                    privacy: true
+                    air_conditioning: true
+                    cabled_internet: true
+                    toilet_for_disabled: true
+              pagination:
+                page: 1
+                pages: 10
+        400:
+          description: Request parameters error
+        404:
+          description: Record with ID {record_id} not found
+        409:
+          description: Record listing error
+  /api/admin/account/:
+    get:
+      tags:
+      - Account admin
+      description: GET Accounts list
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: Accounts list
+          examples:
+            application/json:
+            - account_id: 1
+              email: we@meet.com
+              email_verified: true
+              first_name: First Name
+              last_name: Last Name
+              is_pending_update: false
+              is_subscribed: true
+              locale: NL
+              phone: +11111111
+              phone_country_code: 1
+              phone_verified: false
+              social_networks:
+                google: 2y597ytowkhgs
+            - account_id: 2
+              email: they@meet.com
+              email_verified: false
+              first_name: Just Name
+              last_name: Just Surname
+              is_pending_update: false
+              is_subscribed: false
+              locale: EN
+              phone: +222222
+              phone_country_code: 2
+              phone_verified: false
+              social_networks: {}
+        409:
+          description: Record reading error
+  /api/admin/account/{account_id}/:
+    get:
+      tags:
+      - Account admin
+      description: Get Account instance by ID
+      produces:
+      - application/json
+      parameters:
+      - name: account_id
+        in: path
+        description: ID of the account to get
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: Account instance
+          examples:
+            application/json:
+              account_id: 1
+              email: we@meet.com
+              email_verified: true
+              first_name: First Name
+              last_name: Last Name
+              is_pending_update: false
+              is_subscribed: true
+              locale: NL
+              phone: +11111111
+              phone_country_code: 1
+              phone_verified: true
+              social_networks: {}
+        400:
+          description: Request parameters error
+        404:
+          description: Account with ID {account_id} not found
+        409:
+          description: Record reading error
+  /api/account/registration/:
+    post:
+      tags:
+      - Auth
+      description: Registration by email
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Create user object
+        required: true
+        schema:
+          $ref: '#/definitions/body_2'
+      responses:
+        200:
+          description: successful registration. Return User instance
+          examples:
+            application/json:
+              account_id: 1
+              email: test@test.com
+              email_verified: false
+              first_name: Name
+              last_name: Surname
+              is_pending_update: false
+              is_subscribed: false
+              locale: NL
+              phone: +11111111
+              phone_country_code: 1
+              phone_verified: false
+              social_networks: {}
+        400:
+          description: Error if email is already registered
+        409:
+          description: Record creating error
+  /api/account/auth-token/:
+    post:
+      tags:
+      - Auth
+      description: Endpoint for getting short-term auth token by email or phone
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Activate user
+        required: true
+        schema:
+          $ref: '#/definitions/body_3'
+      responses:
+        200:
+          description: short-term auth token
+          examples:
+            application/json:
+              token: b457a0cbf
+              login: test@test.com
+              is_email: true
+              account_id: 1
+        400:
+          description: Error if email or phone don't exist in database or account is not active yet
+  /api/account/access-token/{token}/:
+    get:
+      tags:
+      - Auth
+      description: Endpoint for getting access_token with refresh_token by short-term auth_token (from short link)
+      produces:
+      - application/json
+      parameters:
+      - name: token
+        in: path
+        description: auth_token
+        required: true
+        type: string
+      responses:
+        200:
+          description: Account instance info, access and refresh tokens
+          examples:
+            application/json:
+              account_id: 1
+              email_verified: true
+              first_name: Name
+              last_name: Surname
+              is_subscribed: true
+              phone_verified: true
+              phone: +1111111
+              phone_country_code: 1
+              is_pending_update: false
+              locale: NL
+              email: test@test.com
+              access_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTA4OSwidGltZXN0IjoxNTcwMTgwODc5Ljc4Mzc1N30.C9cQD5wNiXcNdFsb7oJvDs_jXL9y9vLSVLocCeCfNPE
+              refresh_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTA4OSwidGltZXN0IjoxNTcwMTgwODc5Ljc4Mzc1N30.4_2-NtJAsJAaiPlRZhiVC4HDiB_9Lr6kAyWUPUMHEJU
+              websockets_connected: false
+        400:
+          description: Error if token is wrong or expired
+        409:
+          description: Record reading error
+  /api/account/refresh-token/:
+    post:
+      tags:
+      - Auth
+      description: Endpoint for updating access_token via refresh_token
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Refresh access token
+        required: true
+        schema:
+          $ref: '#/definitions/body_4'
+      responses:
+        200:
+          description: new access_token and refresh_token
+          examples:
+            application/json:
+              access_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTA4OSwidGltZXN0IjoxNTcwMTgwODc5Ljc4Mzc1N30.C9cQD5wNiXcNdFsb7oJvDs_jXL9y9vLSVLocCeCfNPE
+              refresh_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTA4OSwidGltZXN0IjoxNTcwMTgwODc5Ljc4Mzc1N30.4_2-NtJAsJAaiPlRZhiVC4HDiB_9Lr6kAyWUPUMHEJU
+        401:
+          description: Error if refresh_token is wrong or expired
+  /api/account/oauth/{network}/:
+    post:
+      tags:
+      - Auth
+      description: social authorization
+      produces:
+      - application/json
+      parameters:
+      - name: network
+        in: path
+        description: network
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: Change email
+        required: true
+        schema:
+          $ref: '#/definitions/body_5'
+      responses:
+        200:
+          description: Email successfully changed
+        400:
+          description: If new email is already registered
+        409:
+          description: Record updating error
+  /api/account/info/:
+    get:
+      tags:
+      - Auth
+      description: Current account info
+      produces:
+      - text/plain
+      parameters: []
+      responses:
+        200:
+          description: new access_token and refresh_token
+        401:
+          description: Access permission error
+  /api/account/profile/:
+    patch:
+      tags:
+      - Auth
+      description: Change profile
+      produces:
+      - text/plain
+      parameters:
+      - in: body
+        name: body
+        description: Change profile
+        required: true
+        schema:
+          $ref: '#/definitions/body_6'
+      responses:
+        200:
+          description: Profile successfully changed
+        400:
+          description: Request parameters error
+        401:
+          description: Access permission error
+  /api/account/resend-verification/:
+    post:
+      tags:
+      - Auth
+      description: Resend verification message
+      produces:
+      - text/plain
+      parameters:
+      - in: body
+        name: body
+        description: Method phone | email
+        required: true
+        schema:
+          $ref: '#/definitions/body_7'
+      responses:
+        200:
+          description: successful resend
+        400:
+          description: Request parameters error
+        429:
+          description: too many requests
+  /api/account/verify-email/{token}/:
+    get:
+      tags:
+      - Auth
+      description: Verification email
+      produces:
+      - text/plain
+      parameters:
+      - name: token
+        in: path
+        description: token
+        required: true
+        type: string
+      responses:
+        200:
+          description: successful activation. Return User instance
+        400:
+          description: Error if token or email is wrong or if user is already activated
+  /api/account/verify-phone/{code}/:
+    get:
+      tags:
+      - Auth
+      description: Verification phone
+      produces:
+      - text/plain
+      parameters:
+      - name: code
+        in: path
+        description: code
+        required: true
+        type: string
+      responses:
+        200:
+          description: successful phone verification
+        400:
+          description: Error if code is incorrect or expired
+  /api/account/verify-token/:
+    get:
+      tags:
+      - Auth
+      description: DEBUG verify_token
+      produces:
+      - text/plain
+      parameters: []
+      responses:
+        200:
+          description: Success
+        401:
+          description: Access permission error
+  /api/account/logout/:
+    get:
+      tags:
+      - Auth
+      description: Logout
+      produces:
+      - text/plain
+      parameters: []
+      responses:
+        200:
+          description: Delete access and refresh tokens
+        401:
+          description: Access permission error
+  /api/category/:
+    get:
+      tags:
+      - General Categories
+      description: Fetch static space categories
+      parameters: []
+      responses:
+        200:
+          description: List of available space categories
+          examples:
+            application/json:
+            - category_id: 1
+              category_name: We Meet
+              category_description: All purpose meetings focussed on the exchange of ideas and opinions
+              category_json:
+                mandatory_facilities:
+                - 1
+                - 2
+                - 3
+                recommended_facilities:
+                - 4
+                - 5
+              icon_name: iconName
+            - category_id: 2
+              category_name: We Present
+              category_description: Primarily, one person presents information to a group. Screening of films or documentaries
+              category_json:
+                mandatory_facilities:
+                - 5
+                - 6
+                recommended_facilities:
+                - 1
+                - 2
+              icon_name: iconName
+            - category_id: 3
+              category_name: We Train
+              category_description: A trainer presents information to a group but (group) interaction is an essential element
+              category_json:
+                mandatory_facilities:
+                - 1
+                recommended_facilities:
+                - 2
+                - 3
+              icon_name: iconName
+            - category_id: 4
+              category_name: We Celebrate
+              category_description: A joyous occasion, not a dancing or live music (high Db) event
+              category_json:
+                mandatory_facilities:
+                - 1
+                - 2
+                - 3
+                recommended_facilities:
+                - 4
+                - 5
+              icon_name: iconName
+            - category_id: 5
+              category_name: We Remember
+              category_description: A meeting to dwell upon the loss of a departed family member, friend or colleague or to commemorate some impressive past event
+              category_json:
+                mandatory_facilities:
+                - 2
+                recommended_facilities:
+                - 4
+                - 5
+              icon_name: iconName
+        409:
+          description: Record reading error
+      security:
+      - Bearer: []
+  /api/configuration/:
+    get:
+      tags:
+      - General Configurations
+      description: Fetch static space configurations
+      parameters: []
+      responses:
+        200:
+          description: List of available space configurations
+          examples:
+            application/json:
+            - configuration_id: 1
+              configuration_type: BLOCK_BOARDROOM
+              icon_name: iconName
+            - configuration_id: 2
+              configuration_type: U_SHAPE
+              icon_name: iconName
+            - configuration_id: 3
+              configuration_type: THEATRE
+              icon_name: iconName
+            - configuration_id: 4
+              configuration_type: CLASSROM
+              icon_name: iconName
+            - configuration_id: 5
+              configuration_type: CIRCLE
+              icon_name: iconName
+            - configuration_id: 6
+              configuration_type: STANDING
+              icon_name: iconName
+        409:
+          description: Record reading error
+      security:
+      - Bearer: []
+  /api/service/venue/:
+    get:
+      tags:
+      - General Services
+      description: Fetch system services for venues
+      parameters: []
+      responses:
+        200:
+          description: List of available venue services
+          examples:
+            application/json:
+            - system_service_id: 1
+              system_service_name: parking
+              description: ""
+              system_service_type: FACILITY
+              allow_on_demand: true
+              is_always_on_demand: false
+              is_inventory_allowed: true
+              order_type: PER_ITEM_OR_PER_HOUR
+              is_venue: true
+              is_space: false
+              icon_name: iconName
+            - system_service_id: 2
+              system_service_name: locker
+              description: ""
+              system_service_type: FACILITY
+              allow_on_demand: true
+              is_always_on_demand: false
+              is_inventory_allowed: true
+              expect_quantity: true
+              order_type: PER_ITEM
+              is_venue: true
+              is_space: false
+              icon_name: iconName
+            - system_service_id: 3
+              system_service_name: kitchen
+              description: ""
+              system_service_type: FACILITY
+              allow_on_demand: false
+              is_always_on_demand: false
+              is_inventory_allowed: false
+              expect_quantity: false
+              order_type: STATIC
+              is_venue: true
+              is_space: false
+              icon_name: iconName
+            - system_service_id: 4
+              system_service_name: snacks
+              description: ""
+              system_service_type: CATERING
+              allow_on_demand: true
+              is_always_on_demand: true
+              is_inventory_allowed: false
+              expect_quantity: true
+              order_type: PER_ITEM
+              is_venue: true
+              is_space: false
+              icon_name: iconName
+            - system_service_id: 5
+              system_service_name: lunch vegetarian
+              description: ""
+              system_service_type: CATERING
+              allow_on_demand: true
+              is_always_on_demand: true
+              is_inventory_allowed: false
+              expect_quantity: true
+              order_type: PER_ITEM
+              is_venue: true
+              is_space: false
+              icon_name: iconName
+        409:
+          description: Record reading failed
+      security:
+      - Bearer: []
+  /api/service/space/:
+    get:
+      tags:
+      - General Services
+      description: Fetch system services for spaces
+      parameters: []
+      responses:
+        200:
+          description: List of available space services
+          examples:
+            application/json:
+            - system_service_id: 1
+              system_service_name: self service coffee, tea, water
+              description: ""
+              system_service_type: FACILITY
+              allow_on_demand: false
+              is_always_on_demand: false
+              is_inventory_allowed: false
+              expect_quantity: false
+              order_type: STATIC
+              is_venue: false
+              is_space: true
+              icon_name: iconName
+            - system_service_id: 2
+              system_service_name: digiboard / smart board
+              description: ""
+              system_service_type: FACILITY
+              allow_on_demand: false
+              is_always_on_demand: false
+              is_inventory_allowed: false
+              expect_quantity: false
+              order_type: STATIC
+              is_venue: false
+              is_space: true
+              icon_name: iconName
+            - system_service_id: 3
+              system_service_name: whiteboard
+              description: ""
+              system_service_type: FACILITY
+              allow_on_demand: true
+              is_always_on_demand: false
+              is_inventory_allowed: true
+              expect_quantity: false
+              order_type: STATIC
+              is_venue: false
+              is_space: true
+              icon_name: iconName
+            - system_service_id: 4
+              system_service_name: Stage parts
+              description: ""
+              system_service_type: FACILITY
+              allow_on_demand: true
+              is_always_on_demand: true
+              is_inventory_allowed: true
+              expect_quantity: false
+              order_type: STATIC
+              is_venue: false
+              is_space: true
+              icon_name: iconName
+        409:
+          description: Record reading failed
+      security:
+      - Bearer: []
+  /api/feature/venue/:
+    get:
+      tags:
+      - General Features
+      description: Fetch static features for venues
+      parameters: []
+      responses:
+        200:
+          description: List of available venue features
+          examples:
+            application/json:
+            - space_id: 4
+              feature_id: 8
+              feature_type: VENUE
+              feature_name: bar_cafe
+            - space_id: 4
+              feature_id: 10
+              feature_type: SPACE
+              feature_name: privacy
+            - space_id: 4
+              feature_id: 11
+              feature_type: SPACE
+              feature_name: airconditioning
+            - space_id: 4
+              feature_id: 12
+              feature_type: SPACE
+              feature_name: cabled_internet
+            - space_id: 4
+              feature_id: 13
+              feature_type: SPACE
+              feature_name: toilet_for_disabled
+        409:
+          description: Record reading error
+      security:
+      - Bearer: []
+  /api/feature/space/:
+    get:
+      tags:
+      - General Features
+      description: Fetch static features for spaces
+      parameters: []
+      responses:
+        200:
+          description: List of available space features
+          examples:
+            application/json:
+            - feature_id: 1
+              feature_type: SPACE
+              feature_name: privacy
+              description: Space
+              icon_name: iconName
+            - feature_id: 2
+              feature_type: SPACE
+              feature_name: waterside
+              description: Breathtaking waterside
+              icon_name: iconName
+            - feature_id: 3
+              feature_type: SPACE
+              feature_name: garden, terrace or courtyard
+              description: Courtyard
+              icon_name: iconName
+            - feature_id: 4
+              feature_type: SPACE
+              feature_name: airconditioning
+              description: Airconditioning
+              icon_name: iconName
+        409:
+          description: Record reading error
+      security:
+      - Bearer: []
+  /api/feature/global/:
+    get:
+      tags:
+      - General Features
+      description: Fetch static global features both for venues and spaces
+      parameters: []
+      responses:
+        200:
+          description: List of available global features
+          examples:
+            application/json:
+            - feature_id: 1
+              feature_type: GLOBAL
+              feature_name: privacy
+              description: Space
+              icon_name: iconName
+            - feature_id: 2
+              feature_type: GLOBAL
+              feature_name: waterside
+              description: Breathtaking waterside
+              icon_name: iconName
+            - feature_id: 3
+              feature_type: GLOBAL
+              feature_name: garden, terrace or courtyard
+              description: Courtyard
+              icon_name: iconName
+            - feature_id: 4
+              feature_type: GLOBAL
+              feature_name: inspiring location
+              description: Description
+              icon_name: iconName
+            - feature_id: 5
+              feature_type: GLOBAL
+              feature_name: waterside
+              description: Waterside
+              icon_name: iconName
+        409:
+          description: Record reading error
+      security:
+      - Bearer: []
+  /api/label/:
+    get:
+      tags:
+      - General Labels
+      description: Fetch general labels
+      parameters: []
+      responses:
+        200:
+          description: List of available labels
+          examples:
+            application/json:
+            - label_id: 1
+              label_name: wemeet.nl
+              description: Description
+              domain: https://wemeet.nl
+            - label_id: 2
+              label_name: wemeet.be
+              description: Description
+              domain: https://weemeet.be
+            - label_id: 3
+              label_name: wemeet.lu
+              description: Description
+              domain: https://wemeet.lu
+            - label_id: 4
+              label_name: wemeet.fr
+              description: Description
+              domain: https://wemeet.fr
+        409:
+          description: Record reading error
+      security:
+      - Bearer: []
+  /api/geo/place/{place_id}/:
+    get:
+      tags:
+      - Geo
+      description: Fetch geo information by Place ID
+      parameters:
+      - name: place_id
+        in: path
+        description: Place ID
+        required: true
+        type: string
+      responses:
+        200:
+          description: Geo object
+          examples:
+            application/json:
+              geo_id: 1
+              place_id: ChIJC1QPOU5wxkcRRNrFBWOLAcY
+              longitude: 4.997491836547852
+              latitude: 52.1208610534668
+              city: Utrecht
+              street: Brink
+              street_number: "2"
+              region: Utrecht
+              address: Brink 2, 3455 SE Utrecht, Netherlands
+              postal_code: 3455 SE
+        400:
+          description: Request parameters error
+        404:
+          description: Geo not found
+        409:
+          description: Record reading failed
+  /api/geo/{geo_id}/:
+    get:
+      tags:
+      - Geo
+      description: Fetch a geo information by Geo ID
+      parameters:
+      - name: geo_id
+        in: path
+        description: Geo ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Geo object
+          examples:
+            application/json:
+              geo_id: 1
+              place_id: ChIJC1QPOU5wxkcRRNrFBWOLAcY
+              longitude: 4.997491836547852
+              latitude: 52.1208610534668
+              city: Utrecht
+              street: Brink
+              street_number: "2"
+              region: Utrecht
+              address: Brink 2, 3455 SE Utrecht, Netherlands
+              postal_code: 3455 SE
+        400:
+          description: Request parameters error
+        404:
+          description: Geo not found
+        409:
+          description: Record reading failed
+  /api/image/{image_id}/:
+    get:
+      tags:
+      - Image
+      description: GET image by ID
+      consumes:
+      - application/json
+      parameters:
+      - name: image_id
+        in: path
+        description: Image ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Return an image record
+          examples:
+            application/json:
+              image_id: 1
+              label_id: 1
+              entity_id: 1
+              entity_type: VENUE
+              image_filename: 97764a4a46a05670e0913c5704a17d6d.jpg
+              order: 1
+              image_meta:
+                id: JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/original
+                url: https://ik.imagekit.io/wemeet/images/img_iAD7uW6tc.jpg
+                name: img_iAD7uW6tc.jpg
+                size: "45705"
+                width: "667"
+                height: "739"
+                imagePath: /images/img_iAD7uW6tc.jpg
+                thumbnail: https://ik.imagekit.io/wemeet/tr:n-media_library_thumbnail/images/img_iAD7uW6tc.jpg
+                fileFolder: /JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/
+                transformation: ""
+        400:
+          description: Request parameters error
+        404:
+          description: Image not found
+        409:
+          description: Record reading error
+  /api/image/venue/{venue_id}/:
+    get:
+      tags:
+      - Image
+      description: GET venue images by venue ID
+      consumes:
+      - application/json
+      parameters:
+      - name: venue_id
+        in: path
+        description: Venue ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Return a list of venue images by Venue ID
+          examples:
+            application/json:
+            - image_id: 1
+              label_id: 1
+              entity_id: 1
+              entity_type: VENUE
+              image_filename: 97764a4a46a05670e0913c5704a17d6d.jpg
+              order: 1
+              image_meta:
+                id: JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/original
+                url: https://ik.imagekit.io/wemeet/images/img_iAD7uW6tc.jpg
+                name: img_iAD7uW6tc.jpg
+                size: "45705"
+                width: "667"
+                height: "739"
+                imagePath: /images/img_iAD7uW6tc.jpg
+                thumbnail: https://ik.imagekit.io/wemeet/tr:n-media_library_thumbnail/images/img_iAD7uW6tc.jpg
+                fileFolder: /JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/
+                transformation: ""
+            - image_id: 2
+              label_id: 1
+              entity_id: 1
+              entity_type: VENUE
+              image_filename: 97764aa17d6d.jpg
+              image_meta:
+                id: JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/original
+                url: https://ik.imagekit.io/wemeet/images/img_iAD7uW6tc.jpg
+                name: img_iAD7uW6tc.jpg
+                size: "45705"
+                width: "667"
+                height: "739"
+                imagePath: /images/img_iAD7uW6tc.jpg
+                thumbnail: https://ik.imagekit.io/wemeet/tr:n-media_library_thumbnail/images/img_iAD7uW6tc.jpg
+                fileFolder: /JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/
+                transformation: ""
+        400:
+          description: Request parameters error
+        404:
+          description: Venue not found
+        409:
+          description: Record reading error
+  /api/image/venue/{venue_id}/bulk/:
+    post:
+      tags:
+      - Image
+      description: Attach images to specified venue
+      produces:
+      - application/json
+      parameters:
+      - name: venue_id
+        in: path
+        description: Venue ID
+        required: true
+        type: integer
+      - in: body
+        name: body
+        description: List of venue images IDs
+        required: true
+        schema:
+          $ref: '#/definitions/body_8'
+      responses:
+        201:
+          description: Venue images are attached successfully. Returns created list of Venue Images
+          examples:
+            application/json:
+            - image_id: 1
+              label_id: 1
+              entity_id: 1
+              entity_type: VENUE
+              image_filename: 97764a4a46a05670e0913c5704a17d6d.jpg
+              order: 1
+              image_meta:
+                id: JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/original
+                url: https://ik.imagekit.io/wemeet/images/img_iAD7uW6tc.jpg
+                name: img_iAD7uW6tc.jpg
+                size: "45705"
+                width: "667"
+                height: "739"
+                imagePath: /images/img_iAD7uW6tc.jpg
+                thumbnail: https://ik.imagekit.io/wemeet/tr:n-media_library_thumbnail/images/img_iAD7uW6tc.jpg
+                fileFolder: /JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/
+                transformation: ""
+            - image_id: 2
+              label_id: 1
+              entity_id: 1
+              entity_type: VENUE
+              image_filename: 97764aa17d6d.jpg
+              image_meta:
+                id: JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/original
+                url: https://ik.imagekit.io/wemeet/images/img_iAD7uW6tc.jpg
+                name: img_iAD7uW6tc.jpg
+                size: "45705"
+                width: "667"
+                height: "739"
+                imagePath: /images/img_iAD7uW6tc.jpg
+                thumbnail: https://ik.imagekit.io/wemeet/tr:n-media_library_thumbnail/images/img_iAD7uW6tc.jpg
+                fileFolder: /JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/
+                transformation: ""
+        400:
+          description: Request parameters error
+        404:
+          description: Venue or images not found
+        409:
+          description: Record creating error
+      security:
+      - Bearer: []
+    patch:
+      tags:
+      - Image
+      description: Delete venue images
+      produces:
+      - application/json
+      parameters:
+      - name: venue_id
+        in: path
+        description: Venue ID
+        required: true
+        type: integer
+      - in: body
+        name: body
+        description: Lists of venue images IDs to to delete
+        required: true
+        schema:
+          $ref: '#/definitions/body_9'
+      responses:
+        204:
+          description: Venue images are deleted successfully.
+        400:
+          description: Request parameters error
+        404:
+          description: Venue or images not found
+        409:
+          description: Record deleting error
+      security:
+      - Bearer: []
+  /api/image/space/{space_id}/:
+    get:
+      tags:
+      - Image
+      description: GET space images by space ID
+      consumes:
+      - application/json
+      parameters:
+      - name: space_id
+        in: path
+        description: Space ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Return a list of space images by Space ID
+          examples:
+            application/json:
+            - image_id: 1
+              label_id: 1
+              entity_id: 1
+              entity_type: SPACE
+              image_filename: 97764aa17d6d.jpg
+              order: 1
+              image_meta:
+                id: JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/original
+                url: https://ik.imagekit.io/wemeet/images/img_iAD7uW6tc.jpg
+                name: img_iAD7uW6tc.jpg
+                size: "45705"
+                width: "667"
+                height: "739"
+                imagePath: /images/img_iAD7uW6tc.jpg
+                thumbnail: https://ik.imagekit.io/wemeet/tr:n-media_library_thumbnail/images/img_iAD7uW6tc.jpg
+                fileFolder: /JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/
+                transformation: ""
+            - image_id: 2
+              label_id: 1
+              entity_id: 1
+              entity_type: SPACE
+              image_filename: 97764aa17d6d.jpg
+              image_meta:
+                id: JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/original
+                url: https://ik.imagekit.io/wemeet/images/img_iAD7uW6tc.jpg
+                name: img_iAD7uW6tc.jpg
+                size: "45705"
+                width: "667"
+                height: "739"
+                imagePath: /images/img_iAD7uW6tc.jpg
+                thumbnail: https://ik.imagekit.io/wemeet/tr:n-media_library_thumbnail/images/img_iAD7uW6tc.jpg
+                fileFolder: /JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/
+                transformation: ""
+        400:
+          description: Request parameters error
+        404:
+          description: Space or images not found
+        409:
+          description: Record reading error
+  /api/image/space/{space_id}/bulk/:
+    post:
+      tags:
+      - Image
+      description: Attach images to specified space
+      produces:
+      - application/json
+      parameters:
+      - name: space_id
+        in: path
+        description: Space ID
+        required: true
+        type: integer
+      - in: body
+        name: body
+        description: List of space images IDs
+        required: true
+        schema:
+          $ref: '#/definitions/body_10'
+      responses:
+        201:
+          description: Space images are attached successfully. Returns created list of Space Images
+          examples:
+            application/json:
+            - image_id: 1
+              label_id: 1
+              entity_id: 1
+              entity_type: SPACE
+              image_filename: 97764aa17d6d.jpg
+              order: 1
+              image_meta:
+                id: JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/original
+                url: https://ik.imagekit.io/wemeet/images/img_iAD7uW6tc.jpg
+                name: img_iAD7uW6tc.jpg
+                size: "45705"
+                width: "667"
+                height: "739"
+                imagePath: /images/img_iAD7uW6tc.jpg
+                thumbnail: https://ik.imagekit.io/wemeet/tr:n-media_library_thumbnail/images/img_iAD7uW6tc.jpg
+                fileFolder: /JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/
+                transformation: ""
+            - image_id: 2
+              label_id: 1
+              entity_id: 1
+              entity_type: SPACE
+              image_filename: 97764aa17d6d.jpg
+              image_meta:
+                id: JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/original
+                url: https://ik.imagekit.io/wemeet/images/img_iAD7uW6tc.jpg
+                name: img_iAD7uW6tc.jpg
+                size: "45705"
+                width: "667"
+                height: "739"
+                imagePath: /images/img_iAD7uW6tc.jpg
+                thumbnail: https://ik.imagekit.io/wemeet/tr:n-media_library_thumbnail/images/img_iAD7uW6tc.jpg
+                fileFolder: /JwWDMf2julJLZR/images/img_iAD7uW6tc.jpg/
+                transformation: ""
+        400:
+          description: Request parameters error
+        404:
+          description: Space with ID {space_id} not found
+        409:
+          description: Record creating error
+      security:
+      - Bearer: []
+    patch:
+      tags:
+      - Image
+      description: Delete space images
+      produces:
+      - application/json
+      parameters:
+      - name: space_id
+        in: path
+        description: Space ID
+        required: true
+        type: integer
+      - in: body
+        name: body
+        description: Lists of space images IDs to delete
+        required: true
+        schema:
+          $ref: '#/definitions/body_11'
+      responses:
+        204:
+          description: Space images are deleted successfully.
+        400:
+          description: Request parameters error
+        404:
+          description: Space or images not found
+        409:
+          description: Record deleting error
+      security:
+      - Bearer: []
+  /api/image/:
+    post:
+      tags:
+      - Image
+      description: POST image to ImageKit.io via WeMeet backend
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      parameters:
+      - name: image
+        in: formData
+        description: Upload image
+        required: true
+        type: file
+      - name: label_id
+        in: formData
+        required: true
+        type: integer
+      - name: order
+        in: formData
+        required: false
+        type: integer
+      responses:
+        201:
+          description: Image was successfully uploaded
+          examples:
+            application/json:
+              image_id: 1
+              label_id: 1
+              image_filename: 97764a4a46a05670e0913c5704a17d6d.jpg
+              order: 1
+              image_meta:
+                id: JwWDMf2julJLZR/images/img_my8TxgUAi.jpg/original
+                url: https://ik.imagekit.io/wemeet/images/img_my8TxgUAi.jpg
+                name: img_my8TxgUAi.jpg
+                size: "45705"
+                width: "667"
+                height: "739"
+                imagePath: /images/img_my8TxgUAi.jpg
+                thumbnail: https://ik.imagekit.io/wemeet/tr:n-media_library_thumbnail/images/img_my8TxgUAi.jpg
+                fileFolder: /JwWDMf2julJLZR/images/img_my8TxgUAi.jpg/
+                transformation: ""
+        400:
+          description: Request parameters error
+        404:
+          description: File not found error
+        409:
+          description: Call to Image.io API failed
+  /api/images/:
+    post:
+      tags:
+      - Image
+      description: Fetch images with provided IDs from ImageKit.io with provided height and width
+      parameters:
+      - in: body
+        name: body
+        description: Images IDs and properties
+        required: true
+        schema:
+          $ref: '#/definitions/body_12'
+      responses:
+        200:
+          description: Image record
+          examples:
+            application/json:
+            - image_id: 1
+              label_id: 1
+              image_filename: 97764a4a46a05670e0913c5704a17d6d.jpg
+              order: 1
+              image_meta:
+                id: JwWDMf2julJLZR/images/img_otpN5c6TK.jpg/original
+                url: https://ik.imagekit.io/wemeet/images/tr:w-320,h-320/img_otpN5c6TK.jpg
+                name: img_otpN5c6TK.jpg
+                size: "45705"
+                width: "667"
+                height: "739"
+                imagePath: /images/img_otpN5c6TK.jpg
+                thumbnail: https://ik.imagekit.io/wemeet/tr:n-media_library_thumbnail/images/img_otpN5c6TK.jpg
+                fileFolder: /JwWDMf2julJLZR/images/img_otpN5c6TK.jpg/
+                transformation: ""
+        400:
+          description: Bad body parameters
+        404:
+          description: Image not found
+        409:
+          description: Record reading failed
+      security:
+      - Bearer: []
+  /api/organisation/:
+    get:
+      tags:
+      - Organisation
+      description: Get organisation details
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: Organisation by account ID from header token
+          examples:
+            application/json:
+              organisation_id: 1
+              organisation_type: PUBLIC
+              organisation_name: The Gradient
+              coc: 1883901094302
+              coc_geo_id: 312
+              address: Nijenstein 65, 3328 ZK Dordrecht, Nederland
+              vat_number: VAT#123
+              vat_rate: 21
+              is_finance_coc_geo: true
+              finance_geo_id: 312
+              finance_address: Nijenstein 65, 3328 ZK Dordrecht, Nederland
+              finance_email: user@example.com
+              service_fee: 15
+              account_id: 1
+        401:
+          description: You don't have permission to this action
+        404:
+          description: Organization not found
+        409:
+          description: Record reading failed
+      security:
+      - Bearer: []
+  /api/organisation/private/:
+    post:
+      tags:
+      - Organisation
+      description: Add new private organization
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Add private organization
+        required: true
+        schema:
+          $ref: '#/definitions/body_13'
+      responses:
+        201:
+          description: The organisation is successfully created. Returns the created organisation.
+          examples:
+            application/json:
+              organisation_id: 1
+              organisation_type: PRIVATE
+              coc_geo_id: 3
+              address: Nijenstein 65, 3328 ZK Dordrecht, Nederland
+              vat_number: VAT#123
+              vat_rate: 21
+              is_finance_coc_geo: false
+              finance_geo_id: 5
+              finance_address: Nijenstein 88, 3328 ZK Dordrecht, Nederland
+              finance_email: user@example.com
+              service_fee: 15
+              account_id: 1
+        401:
+          description: You don't have permission to this action
+        409:
+          description: Record creating failed
+      security:
+      - Bearer: []
+  /api/organisation/public/:
+    post:
+      tags:
+      - Organisation
+      description: Add new public organization
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Add public organization
+        required: true
+        schema:
+          $ref: '#/definitions/body_14'
+      responses:
+        201:
+          description: The organisation is successfully created. Returns the created organisation.
+          examples:
+            application/json:
+              organisation_id: 1
+              organisation_type: PUBLIC
+              organisation_name: The Gradient
+              coc: 1883901094302
+              coc_geo_id: 312
+              address: Nijenstein 65, 3328 ZK Dordrecht, Nederland
+              vat_number: VAT#123
+              vat_rate: 21
+              is_finance_coc_geo: true
+              finance_geo_id: 312
+              finance_address: Nijenstein 65, 3328 ZK Dordrecht, Nederland
+              finance_email: user@example.com
+              service_fee: 15
+              account_id: 1
+        401:
+          description: You don't have permission to this action
+        409:
+          description: Record creating failed
+      security:
+      - Bearer: []
+  /api/space/:
+    post:
+      tags:
+      - Space
+      description: Add a new space
+      parameters:
+      - in: body
+        name: body
+        description: A new space
+        required: true
+        schema:
+          $ref: '#/definitions/body_15'
+      responses:
+        201:
+          description: |
+            The space is successfully created. Returns the created space object
+          examples:
+            application/json:
+              space_id: 11457
+              venue_id: 60
+              space_name: 'Medisch Centrum Molenaar #60101'
+              internal_name: Big space with good view
+              space_description: Custom space description
+              space_reference: "101"
+              access_instructions: On the corner near shopping mall
+              booking_limit: 100
+              has_discount: true
+              booking_type: MANUAL
+              service_break: 10
+              has_mandatory: true
+              status: DRAFT
+              label_id: 1
+        400:
+          description: Request parameters error
+        404:
+          description: Categories not found
+        409:
+          description: Record creating failed
+      security:
+      - Bearer: []
+  /api/space/{space_id}/:
+    get:
+      tags:
+      - Space
+      description: Fetch a space with specified ID
+      parameters:
+      - name: space_id
+        in: path
+        description: Space ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Space with specified ID
+          examples:
+            application/json:
+              space_id: 5
+              venue_id: 2
+              space_name: 'Medisch Centrum Molenaar #2102'
+              internal_name: Big space with good view
+              space_description: ""
+              space_reference: "102"
+              access_instructions: ""
+              booking_limit: 0
+              space_size: 120
+              has_discount: false
+              discount_percentage: 3
+              discount_description: You are eligible if...
+              wifi_name: wemeet
+              wifi_code: "123456789"
+              booking_type: DIRECT
+              cancellation_th: 72
+              book_before_th: 8
+              host_approval_th: 48
+              short_day_price: 260.0
+              half_day_price: 371.0
+              day_price: 594.0
+              full_day_price: 772.0
+              service_break: 45
+              status: DRAFT
+        400:
+          description: Request parameters error
+        404:
+          description: Space not found
+        409:
+          description: Record reading failed
+      security:
+      - Bearer: []
+    delete:
+      tags:
+      - Space
+      description: Delete a space with specified ID
+      parameters:
+      - name: space_id
+        in: path
+        description: Space ID
+        required: true
+        type: integer
+      responses:
+        204:
+          description: The space is successfully deleted
+        400:
+          description: Request parameters error
+        404:
+          description: Space not found
+        409:
+          description: Record deleting failed
+      security:
+      - Bearer: []
+    patch:
+      tags:
+      - Space
+      description: Update a space with specified ID
+      parameters:
+      - name: space_id
+        in: path
+        description: Space ID
+        required: true
+        type: integer
+      - in: body
+        name: body
+        description: Space data
+        required: true
+        schema:
+          $ref: '#/definitions/body_16'
+      responses:
+        200:
+          description: |
+            The space is successfully updated. Returns the updated space.
+          examples:
+            application/json:
+              space_id: 60
+              venue_id: 14
+              space_name: 'Medisch Centrum Molenaar #14102'
+              internal_name: Big space with good view
+              space_description: ""
+              space_reference: "102"
+              access_instructions: ""
+              booking_limit: 0
+              space_size: 100
+              has_discount: true
+              discount_percentage: 15
+              discount_description: You are eligible if...
+              wifi_name: wifiname
+              wifi_code: "123456789"
+              booking_type: MANUAL
+              cancellation_th: 24
+              book_before_th: 36
+              host_approval_th: 6
+              half_day_price: 191.0
+              day_price: 248.0
+              full_day_price: 298.0
+              service_break: 30
+              status: DRAFT
+              label_id: 1
+        400:
+          description: Request parameters error
+        404:
+          description: Space not found
+        409:
+          description: Record updating failed
+      security:
+      - Bearer: []
+  /api/venue/{venue_id}/space/:
+    get:
+      tags:
+      - Space
+      description: Fetch a list of venue spaces
+      parameters:
+      - name: venue_id
+        in: path
+        description: Venue ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Spaces list by venue ID
+          examples:
+            application/json:
+            - space_id: 20
+              venue_id: 5
+              space_name: 'Medisch Centrum Molenaar #5102'
+              internal_name: Big space with good view
+              space_description: ""
+              space_reference: "102"
+              access_instructions: ""
+              booking_limit: 3
+              space_size: 120
+              has_discount: true
+              discount_percentage: 3
+              discount_description: You are eligible if...
+              wifi_name: wemeet
+              wifi_code: "123456789"
+              booking_type: MANUAL
+              cancellation_th: 24
+              book_before_th: 8
+              host_approval_th: 48
+              short_day_price: 266.0
+              half_day_price: 333.0
+              day_price: 666.0
+              full_day_price: 799.0
+              service_break: 60
+              status: APPROVED
+        400:
+          description: Request parameters error
+        404:
+          description: Venue not found
+        409:
+          description: Record reading failed
+      security:
+      - Bearer: []
+  /api/space/{space_id}/configuration/:
+    get:
+      tags:
+      - Space Configuration
+      description: Fetch a list of space configurations
+      parameters:
+      - name: space_id
+        in: path
+        description: Space ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Configurations list by space ID
+          examples:
+            application/json:
+            - space_id: 4
+              configuration_id: 8
+              is_default: false
+              configuration_price: 13.0
+              min_guests: 5
+              max_guests: 14
+              configuration_type: INFORMAL
+              label_id: 1
+            - space_id: 4
+              configuration_id: 4
+              is_default: true
+              configuration_price: 0.0
+              min_guests: 7
+              max_guests: 20
+              configuration_type: CLASSROOM
+              label_id: 1
+        400:
+          description: Request parameters error
+        404:
+          description: Space with ID {space_id} not found
+        409:
+          description: Record reading failed
+      security:
+      - Bearer: []
+  /api/space/{space_id}/configuration/bulk/:
+    post:
+      tags:
+      - Space Configuration
+      description: Add space configurations in bulk
+      parameters:
+      - name: space_id
+        in: path
+        description: Space ID
+        required: true
+        type: integer
+      - in: body
+        name: body
+        description: Add new space configurations
+        required: true
+        schema:
+          $ref: '#/definitions/body_17'
+      responses:
+        201:
+          description: |
+            The configurations is successfully created. Returns the created space  configurations list
+          examples:
+            application/json:
+            - configuration_id: 1
+              space_id: 1
+              label_id: 1
+              configuration_type: BLOCK_BOARDROOM
+              icon_name: iconName
+              is_default: true
+              configuration_price: 20.0
+              min_guests: 5
+              max_guests: 300
+            - configuration_id: 2
+              space_id: 1
+              label_id: 1
+              configuration_type: U_SHAPE
+              icon_name: iconName
+              is_default: false
+              configuration_price: 50.0
+              min_guests: 5
+              max_guests: 300
+            - configuration_id: 3
+              space_id: 1
+              label_id: 1
+              configuration_type: THEATRE
+              icon_name: iconName
+              is_default: false
+              configuration_price: 45.0
+              min_guests: 10
+              max_guests: 200
+        400:
+          description: Request parameters error
+        404:
+          description: Space with ID {space_id} not found
+        409:
+          description: Record creating failed
+      security:
+      - Bearer: []
+    patch:
+      tags:
+      - Space Configuration
+      description: Update space configurations
+      parameters:
+      - name: space_id
+        in: path
+        description: Space ID
+        required: true
+        type: integer
+      - in: body
+        name: body
+        description: New space configurations data
+        required: true
+        schema:
+          $ref: '#/definitions/body_18'
+      responses:
+        200:
+          description: |
+            The configurations is successfully updated. Returns the updated space  configurations list
+          examples:
+            application/json:
+            - configuration_id: 1
+              space_id: 1
+              label_id: 1
+              configuration_type: BLOCK_BOARDROOM
+              icon_name: iconName
+              is_default: true
+              configuration_price: 20.0
+              min_guests: 5
+              max_guests: 300
+            - configuration_id: 2
+              space_id: 1
+              label_id: 1
+              configuration_type: U_SHAPE
+              icon_name: iconName
+              is_default: false
+              configuration_price: 50.0
+              min_guests: 5
+              max_guests: 300
+        400:
+          description: Request parameters error
+        404:
+          description: Space with ID {space_id} not found
+        409:
+          description: Record updating failed
+      security:
+      - Bearer: []
+  /api/space/{venue_id}/services/:
+    get:
+      tags:
+      - Space Services
+      description: Fetch a list of the available services for space
+      parameters:
+      - name: venue_id
+        in: path
+        description: Venue ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Space services list
+          examples:
+            application/json:
+            - system_service_id: 2
+              system_service_name: smart_board
+              price: 0.0
+              vat_rate: 21
+              description: ""
+              is_inventory_enabled: false
+              is_enabled: true
+              is_on_demand: false
+              max_inventory: 0
+              is_always_on_demand: false
+              allow_on_demand: false
+              is_inventory_allowed: false
+              expect_quantity: false
+              order_type: STATIC
+              venue_id: 3
+              venue_service_id: 876
+            - system_service_id: 8
+              system_service_name: beamer
+              price: 15.0
+              vat_rate: 21
+              description: ""
+              is_inventory_enabled: true
+              is_enabled: true
+              is_on_demand: true
+              max_inventory: 3
+              is_always_on_demand: false
+              allow_on_demand: true
+              is_inventory_allowed: true
+              expect_quantity: false
+              order_type: STATIC
+              venue_id: 3
+              venue_service_id: 532
+            - system_service_id: 1
+              system_service_name: self_service_beverages
+              is_inventory_enabled: false
+              is_enabled: true
+              max_inventory: 0
+              is_always_on_demand: false
+              allow_on_demand: false
+              is_inventory_allowed: false
+              expect_quantity: false
+              order_type: STATIC
+            - system_service_id: 2
+              system_service_name: smart_board
+              is_inventory_enabled: false
+              is_enabled: true
+              max_inventory: 0
+              is_always_on_demand: false
+              allow_on_demand: false
+              is_inventory_allowed: false
+              expect_quantity: false
+              order_type: STATIC
+            - system_service_id: 3
+              system_service_name: white_board
+              is_inventory_enabled: false
+              is_enabled: true
+              max_inventory: 0
+              is_always_on_demand: false
+              allow_on_demand: true
+              is_inventory_allowed: true
+              expect_quantity: false
+              order_type: STATIC
+        400:
+          description: Request parameters error
+        404:
+          description: Venue not found
+        409:
+          description: Records listing failed
+      security:
+      - Bearer: []
+  /api/space/{space_id}/facility/:
+    get:
+      tags:
+      - Space Facility
+      description: Fetch a list of space facilities
+      parameters:
+      - name: space_id
+        in: path
+        description: Space ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Space facilities list
+          examples:
+            application/json:
+            - label_id: 1
+              space_id: 4
+              venue_service_id: 197
+              venue_id: 2
+              system_service_id: 13
+              price: 0.0
+              vat_rate: 21
+              description: ""
+              is_inventory_enabled: false
+              is_enabled: true
+              is_on_demand: false
+              max_inventory: 0
+              is_inventory_allowed: true
+              is_venue: false
+              is_always_on_demand: false
+              allow_on_demand: true
+              expect_quantity: false
+              order_type: STATIC
+              is_space: true
+              system_service_name: sound_system_incl_mic
+              system_service_type: FACILITY
+            - label_id: 1
+              space_id: 4
+              venue_service_id: 19231
+              venue_id: 2
+              system_service_id: 3
+              price: 0.0
+              vat_rate: 21
+              description: ""
+              is_inventory_enabled: false
+              is_enabled: true
+              is_on_demand: false
+              max_inventory: 0
+              is_inventory_allowed: true
+              is_venue: false
+              is_always_on_demand: false
+              allow_on_demand: true
+              expect_quantity: false
+              order_type: STATIC
+              is_space: true
+              system_service_name: white_board
+              system_service_type: FACILITY
+        400:
+          description: Request parameters error
+        404:
+          description: Space with ID {space_id} not found
+        409:
+          description: Records listing failed
+      security:
+      - Bearer: []
+  /api/space/facility/bulk/:
+    post:
+      tags:
+      - Space Facility
+      description: Add space facilities in bulk
+      parameters:
+      - in: body
+        name: body
+        description: New space facilities
+        required: true
+        schema:
+          $ref: '#/definitions/body_19'
+      responses:
+        201:
+          description: |
+            Space facilities are successfully created. Return the created space facilities list
+          examples:
+            application/json:
+            - label_id: 1
+              space_id: 4
+              venue_service_id: 197
+              venue_id: 2
+              system_service_id: 13
+              price: 0.0
+              vat_rate: 21
+              description: ""
+              is_inventory_enabled: false
+              is_enabled: true
+              is_on_demand: false
+              max_inventory: 0
+              is_inventory_allowed: true
+              is_venue: false
+              is_always_on_demand: false
+              allow_on_demand: true
+              expect_quantity: false
+              order_type: STATIC
+              is_space: true
+              system_service_name: sound_system_incl_mic
+              system_service_type: FACILITY
+            - label_id: 1
+              space_id: 4
+              venue_service_id: 19231
+              venue_id: 2
+              system_service_id: 3
+              price: 0.0
+              vat_rate: 21
+              description: ""
+              is_inventory_enabled: false
+              is_enabled: true
+              is_on_demand: false
+              max_inventory: 0
+              is_inventory_allowed: true
+              is_venue: false
+              is_always_on_demand: false
+              allow_on_demand: true
+              expect_quantity: false
+              order_type: STATIC
+              is_space: true
+              system_service_name: white_board
+              system_service_type: FACILITY
+        400:
+          description: Request parameters error
+        404:
+          description: Space with ID {space_id} not found
+        409:
+          description: Record creating error
+      security:
+      - Bearer: []
+    patch:
+      tags:
+      - Space Facility
+      description: Update space facilities in bulk
+      parameters:
+      - in: body
+        name: body
+        description: Space facilities updated data
+        required: true
+        schema:
+          $ref: '#/definitions/body_20'
+      responses:
+        200:
+          description: |
+            Space facilities are successfully updated. Return the updated space facilities list
+          examples:
+            application/json:
+            - label_id: 1
+              space_id: 5
+              venue_service_id: 25640
+              venue_id: 2
+              system_service_id: 2
+              price: 5.0
+              vat_rate: 9
+              is_inventory_enabled: true
+              is_enabled: true
+              is_on_demand: true
+              max_inventory: 5
+              is_inventory_allowed: false
+              is_venue: false
+              is_always_on_demand: false
+              allow_on_demand: false
+              expect_quantity: false
+              order_type: STATIC
+              is_space: true
+              system_service_name: smart_board
+              system_service_type: FACILITY
+        400:
+          description: Request parameters error
+        404:
+          description: Space with ID {space_id} not found
+        409:
+          description: Record updating error
+      security:
+      - Bearer: []
+  /api/space/{space_id}/feature/:
+    get:
+      tags:
+      - Space Feature
+      description: Fetch a list of space features
+      parameters:
+      - name: space_id
+        in: path
+        description: Space ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Space features list
+          examples:
+            application/json:
+            - feature_id: 1
+              space_id: 1
+              label_id: 1
+              feature_type: SPACE
+              name: privacy
+              description: Description
+              icon_name: iconName
+            - feature_id: 2
+              space_id: 1
+              label_id: 1
+              feature_type: SPACE
+              name: waterside
+              description: Breathtaking waterside
+              icon_name: iconName
+            - feature_id: 3
+              space_id: 1
+              label_id: 1
+              feature_type: SPACE
+              name: garden, terrace or courtyard
+              description: Terrace
+              icon_name: iconName
+            - feature_id: 4
+              space_id: 1
+              label_id: 1
+              feature_type: SPACE
+              name: airconditioning
+              description: Description
+              icon_name: iconName
+        400:
+          description: Request parameters error
+        404:
+          description: Space with ID {space_id} not found
+        409:
+          description: Record reading failed
+      security:
+      - Bearer: []
+  /api/space/feature/bulk/:
+    post:
+      tags:
+      - Space Feature
+      description: Add space features in bulk
+      parameters:
+      - in: body
+        name: body
+        description: Add new space features
+        required: true
+        schema:
+          $ref: '#/definitions/body_21'
+      responses:
+        201:
+          description: |
+            The features are successfully created. Returns the created features list
+          examples:
+            application/json:
+            - space_id: 10
+              feature_id: 1
+              feature_type: VENUE
+              feature_name: wheelchair_accessible
+            - space_id: 10
+              feature_id: 2
+              feature_type: VENUE
+              feature_name: public_transport_nearby
+            - space_id: 10
+              feature_id: 3
+              feature_type: VENUE
+              feature_name: rooms_for_overnight_stay
+        400:
+          description: Request parameters error
+        404:
+          description: Space with ID {space_id} not found
+        409:
+          description: Record creating failed
+      security:
+      - Bearer: []
+    patch:
+      tags:
+      - Space Feature
+      description: Update space features in bulk
+      parameters:
+      - in: body
+        name: body
+        description: Update space features
+        required: true
+        schema:
+          $ref: '#/definitions/body_22'
+      responses:
+        200:
+          description: |
+            The features are successfully updated. Returns the updated features list
+          examples:
+            application/json:
+            - space_id: 10
+              feature_id: 1
+              feature_type: VENUE
+              feature_name: wheelchair_accessible
+            - space_id: 10
+              feature_id: 2
+              feature_type: VENUE
+              feature_name: public_transport_nearby
+        400:
+          description: Request parameters error
+        404:
+          description: Space with ID {space_id} not found
+        409:
+          description: Record updating failed
+      security:
+      - Bearer: []
+  /api/venue/{venue_id}/:
+    get:
+      tags:
+      - Venue
+      description: Venue instance by id (with User instance)
+      parameters:
+      - name: venue_id
+        in: path
+        description: Venue ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Venue by user_id from headers token and venue_id
+          examples:
+            application/json:
+              venue_id: 5
+              venue_name: Wereldmuseum
+              venue_description: Het Wereldmuseum beschikt over verschillende zalen met elk een unieke sfeer en uitstraling.
+              geo_id: 193
+              working_time:
+                MON:
+                - open: 9:00
+                  close: 16:30
+                TUE:
+                - open: 10:30
+                  close: 1:30
+                WED:
+                - open: 10:30
+                  close: 1:30
+                THU:
+                - open: 04:00
+                  close: 20:30
+                FRI:
+                - open: 10:30
+                  close: 1:30
+                SAT:
+                - open: 10:30
+                  close: 1:30
+                SUN:
+                - open: 10:30
+                  close: 1:30
+              organisation_id: 30
+              allow_customer_catering: true
+              contact_name: Contact name
+              contact_phone: +31638060874
+              contact_email: xxx@wemeet.nl
+              venue_slug: wereldmuseum
+              status: DRAFT
+        400:
+          description: Request parameters error
+        404:
+          description: Venue not found
+        409:
+          description: Record reading failed
+      security:
+      - Bearer: []
+    delete:
+      tags:
+      - Venue
+      description: Delete a venue with specified ID
+      parameters:
+      - name: venue_id
+        in: path
+        description: Venue ID
+        required: true
+        type: integer
+      responses:
+        204:
+          description: The venue is successfully deleted
+        400:
+          description: Request parameters are incorrect
+        404:
+          description: Venue not found
+        409:
+          description: Record deleting failed
+      security:
+      - Bearer: []
+    patch:
+      tags:
+      - Venue
+      description: Update venue
+      parameters:
+      - name: venue_id
+        in: path
+        description: Venue ID
+        required: true
+        type: integer
+      - in: body
+        name: body
+        description: Venue data
+        required: true
+        schema:
+          $ref: '#/definitions/body_23'
+      responses:
+        200:
+          description: |
+            The venue is successfully updated. Returns the updated venue.
+          examples:
+            application/json:
+              venue_id: 1
+              venue_name: Hilton Amsterdam
+              venue_description: Welkom bij het Hotel Hilton Amsterdam, bekend staand om John Lennon en Yoko Ono's 'Bed-in for peace' in 1969.
+              geo_id: 310
+              working_time:
+                SUN:
+                - open: 02:05
+                  close: 23:00
+                SAT:
+                - open: 12:00
+                  close: 11:00
+              organisation_id: 41
+              allow_customer_catering: true
+              contact_name: Contact_name_here
+              contact_phone: +380000000001
+              contact_email: email@none.none.net
+              venue_slug: hilton-amsterdam
+              status: REJECTED
+        404:
+          description: Venue not found
+        409:
+          description: |
+            Call to PlaceAPI was not successful (probably because of invalid place_id).
+      security:
+      - Bearer: []
+  /api/venue/:
+    get:
+      tags:
+      - Venue
+      description: Fetch a list of venues
+      parameters: []
+      responses:
+        200:
+          description: Venues list
+          examples:
+            application/json:
+            - venue_id: 172
+              venue_name: Landgoed Ulvenhart
+              venue_description: Uw meest kostbare herinneringen beginnen bij het idyllische Landgoed Ulvenhart.
+              geo_id: 310
+              working_time:
+                SUN:
+                - open: 09:00
+                  close: 4:00
+                - open: 19:00
+                  close: 23:00
+                SAT:
+                - open: 1:00
+                  close: 11:00
+              organisation_id: 58
+              allow_customer_catering: true
+              contact_name: Contact_name_here
+              contact_phone: +38 000 000 00 01
+              contact_email: email@none.none.net
+              venue_slug: landgoed-ulvenhart
+              status: DRAFT
+        409:
+          description: Record reading failed
+      security:
+      - Bearer: []
+    post:
+      tags:
+      - Venue
+      description: Add a new venue
+      parameters:
+      - in: body
+        name: body
+        description: A new venue
+        required: true
+        schema:
+          $ref: '#/definitions/body_24'
+      responses:
+        201:
+          description: |
+            The venue is successfully created. Returns the created venue
+          examples:
+            application/json:
+              venue_id: 1
+              venue_name: Amsterdam Pipe Museum
+              venue_description: 2000 items representing the variety of smoking pipes and utensils that have been used in all parts of the world over the past 25 centuries.
+              working_time:
+                TUE:
+                - open: 9:00
+                  close: 18:00
+                FRI:
+                - open: 9:00
+                  close: 18:00
+                SAT:
+                - open: 09:00
+                  close: 18:00
+              contact_email: venueowner@wemeet.zone
+              contact_phone: +31 32 93 824
+              contact_name: The Owner
+              organisation_id: 1
+              geo_id: 111
+              allow_customer_catering: true
+              status: REVIEW
+              venue_slug: amsterdam-pipe-museum
+        409:
+          description: |
+            Call to PlaceAPI was not successful (probably because of invalid place_id).
+      security:
+      - Bearer: []
+  /api/venue/{venue_id}/feature/:
+    get:
+      tags:
+      - Venue Feature
+      description: Fetch a list of venue features
+      parameters:
+      - name: venue_id
+        in: path
+        description: Venue ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: Venue features list
+          examples:
+            application/json:
+            - feature_id: 1
+              venue_id: 1
+              feature_type: VENUE
+              name: wheelchair accessible
+              description: Description
+              icon_name: iconName
+            - feature_id: 2
+              venue_id: 1
+              feature_type: VENUE
+              name: public transport nearby
+              description: Description
+              icon_name: iconName
+            - feature_id: 3
+              venue_id: 1
+              feature_type: VENUE
+              name: rooms for overnight stay
+              description: Description
+              icon_name: iconName
+        400:
+          description: Request parameters error
+        404:
+          description: Venue with ID {venue_id} not found
+        409:
+          description: Record reading failed
+      security:
+      - Bearer: []
+  /api/venue/{venue_id}/services/:
+    get:
+      tags:
+      - Venue Services
+      description: Fetch a list of venue  services either caterings or facilities
+      parameters:
+      - name: venue_id
+        in: path
+        description: Venue ID
+        required: true
+        type: integer
+      responses:
+        200:
+          description: List of services either caterings or facilities
+          examples:
+            application/json:
+            - venue_service_id: 164
+              venue_id: 4
+              system_service_id: 10
+              price: 0.0
+              vat_rate: 21
+              description: ""
+              is_inventory_enabled: false
+              is_enabled: true
+              is_on_demand: false
+              max_inventory: 0
+              is_inventory_allowed: false
+              is_venue: true
+              is_always_on_demand: false
+              allow_on_demand: false
+              expect_quantity: false
+              order_type: STATIC
+              is_space: false
+              system_service_name: scanner
+              system_service_type: FACILITY
+            - venue_service_id: 550
+              venue_id: 4
+              system_service_id: 10
+              price: 0.0
+              vat_rate: 21
+              description: ""
+              is_inventory_enabled: false
+              is_enabled: true
+              is_on_demand: false
+              max_inventory: 0
+              is_inventory_allowed: false
+              is_venue: true
+              is_always_on_demand: false
+              allow_on_demand: false
+              expect_quantity: false
+              order_type: STATIC
+              is_space: false
+              system_service_name: scanner
+              system_service_type: FACILITY
+        400:
+          description: Request parameters error
+        404:
+          description: Venue with ID {venue_id} not found
+        409:
+          description: Record reading failed
+      security:
+      - Bearer: []
+  /api/venue/services/bulk/:
+    post:
+      tags:
+      - Venue Services
+      description: Add venue services in bulk
+      parameters:
+      - in: body
+        name: body
+        description: New venue services
+        required: true
+        schema:
+          $ref: '#/definitions/body_25'
+      responses:
+        201:
+          description: |
+            The services are successfully created. Returns the created services
+          examples:
+            application/json:
+            - venue_service_id: 164
+              venue_id: 4
+              system_service_id: 10
+              price: 0.0
+              vat_rate: 21
+              description: ""
+              is_inventory_enabled: false
+              is_enabled: true
+              is_on_demand: false
+              max_inventory: 0
+              is_inventory_allowed: false
+              is_venue: true
+              is_always_on_demand: false
+              allow_on_demand: false
+              expect_quantity: false
+              order_type: STATIC
+              is_space: false
+              system_service_name: scanner
+              system_service_type: FACILITY
+            - venue_service_id: 550
+              venue_id: 4
+              system_service_id: 10
+              price: 0.0
+              vat_rate: 21
+              description: ""
+              is_inventory_enabled: false
+              is_enabled: true
+              is_on_demand: false
+              max_inventory: 0
+              is_inventory_allowed: false
+              is_venue: true
+              is_always_on_demand: false
+              allow_on_demand: false
+              expect_quantity: false
+              order_type: STATIC
+              is_space: false
+              system_service_name: scanner
+              system_service_type: FACILITY
+        400:
+          description: Request parameters error
+        404:
+          description: Venue with ID {venue_id} not found
+        409:
+          description: Record creating failed
+      security:
+      - Bearer: []
+    patch:
+      tags:
+      - Venue Services
+      description: Update venue services in bulk
+      parameters:
+      - in: body
+        name: body
+        description: New venue services data
+        required: true
+        schema:
+          $ref: '#/definitions/body_26'
+      responses:
+        200:
+          description: |
+            Venue services are successfully updated. Return the updated services list
+          examples:
+            application/json:
+            - venue_service_id: 164
+              venue_id: 4
+              system_service_id: 10
+              price: 0.0
+              vat_rate: 21
+              description: ""
+              is_inventory_enabled: false
+              is_enabled: true
+              is_on_demand: false
+              max_inventory: 0
+              is_inventory_allowed: false
+              is_venue: true
+              is_always_on_demand: false
+              allow_on_demand: false
+              expect_quantity: false
+              order_type: STATIC
+              is_space: false
+              system_service_name: scanner
+              system_service_type: FACILITY
+            - venue_service_id: 550
+              venue_id: 4
+              system_service_id: 10
+              price: 0.0
+              vat_rate: 21
+              description: ""
+              is_inventory_enabled: false
+              is_enabled: true
+              is_on_demand: false
+              max_inventory: 0
+              is_inventory_allowed: false
+              is_venue: true
+              is_always_on_demand: false
+              allow_on_demand: false
+              expect_quantity: false
+              order_type: STATIC
+              is_space: false
+              system_service_name: scanner
+              system_service_type: FACILITY
+        400:
+          description: Request parameters error
+        409:
+          description: Record updating error
+      security:
+      - Bearer: []
+  /api/venue/feature/bulk:
+    post:
+      tags:
+      - Venue Feature
+      description: Add venue features in bulk
+      parameters:
+      - in: body
+        name: body
+        description: Add new venue features
+        required: true
+        schema:
+          $ref: '#/definitions/body_27'
+      responses:
+        201:
+          description: |
+            The features are successfully created. Returns the created features list
+          examples:
+            application/json:
+            - feature_id: 1
+              venue_id: 1
+              feature_type: VENUE
+              name: wheelchair accessible
+              description: Description
+              icon_name: iconName
+            - feature_id: 2
+              venue_id: 1
+              feature_type: VENUE
+              name: public transport nearby
+              description: Description
+              icon_name: iconName
+            - feature_id: 3
+              venue_id: 1
+              feature_type: VENUE
+              name: rooms for overnight stay
+              description: Description
+              icon_name: iconName
+        400:
+          description: Request parameters error
+        404:
+          description: Venue feature not found
+        409:
+          description: Record creating failed
+      security:
+      - Bearer: []
+    patch:
+      tags:
+      - Venue Feature
+      description: Delete venue features in bulk
+      parameters:
+      - in: body
+        name: body
+        description: Delete venue features
+        required: true
+        schema:
+          $ref: '#/definitions/body_28'
+      responses:
+        204:
+          description: Venue features are successfully deleted.
+        400:
+          description: Request parameters error
+        404:
+          description: Venue feature not found
+        409:
+          description: Record deleting failed
+      security:
+      - Bearer: []
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  apispacefacilitybulk_venue_services_1:
+    type: object
+    properties:
+      venue_service_id:
+        type: integer
+        description: Venue Service ID
+      price:
+        type: number
+        description: Facility price (for on demand only)
+      vat_rate:
+        type: integer
+        description: VAT rate in %
+      description:
+        type: string
+        description: Facility description
+      is_inventory_enabled:
+        type: boolean
+        description: If the facility is enabled by default
+      is_enabled:
+        type: boolean
+      is_on_demand:
+        type: boolean
+      max_inventory:
+        type: integer
+  body_27:
+    type: object
+    properties:
+      venue_id:
+        type: integer
+        description: Venue ID
+      feature_ids:
+        $ref: '#/definitions/apispacefeaturebulk_feature_ids'
+  apivenueservicesbulk_venue_services_to_delete_ids:
+    type: object
+    properties:
+      venue_service_id:
+        type: integer
+        description: Venue Service ID pending to delete
+  body_28:
+    type: object
+    properties:
+      venue_id:
+        type: integer
+        description: Venue ID
+      feature_ids_to_delete:
+        $ref: '#/definitions/apispacefeaturebulk_feature_ids'
+  body_25:
+    type: object
+    properties:
+      venue_id:
+        type: integer
+        description: Venue ID
+      venue_services:
+        type: array
+        description: Venue service data
+        items:
+          $ref: '#/definitions/apivenueservicesbulk_venue_services'
+  body_26:
+    type: object
+    properties:
+      venue_services:
+        type: array
+        description: Venue service data
+        items:
+          $ref: '#/definitions/apivenueservicesbulk_venue_services_1'
+      venue_services_to_delete_ids:
+        $ref: '#/definitions/apivenueservicesbulk_venue_services_to_delete_ids'
+  body:
+    type: object
+    properties:
+      slug:
+        type: string
+        description: Raw slug
+  body_3:
+    type: object
+    properties:
+      login:
+        type: string
+  body_4:
+    type: object
+    properties:
+      token:
+        type: string
+  body_1:
+    type: object
+    properties:
+      filters:
+        $ref: '#/definitions/apivenuefind_filters'
+      search:
+        $ref: '#/definitions/apivenuefind_search'
+      pagination:
+        $ref: '#/definitions/apivenuefind_pagination'
+  body_2:
+    type: object
+    properties:
+      email:
+        type: string
+        format: email
+      first_name:
+        type: string
+      last_name:
+        type: string
+      phone:
+        type: string
+      is_subscribed:
+        type: boolean
+  apispacefeaturebulk_feature_ids:
+    type: object
+    properties:
+      feature_id:
+        type: integer
+        description: General Feature ID
+  body_12:
+    type: object
+    properties:
+      images_ids:
+        type: array
+        description: Image ID
+        items:
+          type: integer
+      height:
+        type: integer
+        description: Image height in pixels
+      widtht:
+        type: integer
+        description: Image width in pixels
+  body_13:
+    type: object
+    properties:
+      organisation_type:
+        type: string
+        description: Organization type
+        enum:
+        - PRIVATE
+        - PUBLIC
+      vat_number:
+        type: string
+        description: Organization VAT number
+      vat_rate:
+        type: integer
+        description: VAT rate, 0 stands for VAT exempt
+      is_finance_coc_geo:
+        type: boolean
+        description: Whether the address and financial address are the same
+      finance_email:
+        type: string
+        format: email
+      place_id:
+        type: string
+        description: Valid Google Places ID
+      finance_place_id:
+        type: string
+        description: Valid Google Place ID
+  body_9:
+    type: object
+    properties:
+      images_to_delete_ids:
+        type: array
+        items:
+          type: integer
+          description: Image ID
+  body_10:
+    type: object
+    properties:
+      images_ids:
+        type: array
+        items:
+          type: integer
+          description: Image ID
+  body_11:
+    type: object
+    properties:
+      images_to_delete_ids:
+        type: array
+        items:
+          type: integer
+          description: Image ID
+  body_7:
+    type: object
+    properties:
+      method:
+        type: string
+  body_8:
+    type: object
+    properties:
+      images_ids:
+        type: array
+        items:
+          type: integer
+          description: Image ID
+  body_5:
+    type: object
+    properties:
+      token:
+        type: string
+  apivenuefind_search:
+    type: object
+    properties:
+      location:
+        $ref: '#/definitions/apivenuefind_search_location'
+  body_6:
+    type: object
+    properties:
+      email:
+        type: string
+        format: email
+      first_name:
+        type: string
+      last_name:
+        type: string
+      phone:
+        type: string
+      locale:
+        type: string
+  body_18:
+    type: object
+    properties:
+      configurations:
+        type: array
+        items:
+          $ref: '#/definitions/apispacespace_idconfigurationbulk_configurations'
+      configurations_to_delete:
+        type: array
+        items:
+          type: integer
+          description: General Configuration ID to unlink from current Space
+  body_19:
+    type: object
+    properties:
+      space_id:
+        type: integer
+        description: Space ID
+      label_id:
+        type: integer
+        description: Label ID
+      venue_services:
+        type: array
+        description: Space facilities data
+        items:
+          $ref: '#/definitions/apispacefacilitybulk_venue_services'
+  body_16:
+    type: object
+    properties:
+      internal_name:
+        type: string
+        description: Space internal name visible only by vendor
+      space_description:
+        type: string
+        description: Space description
+      access_instructions:
+        type: string
+        description: Additional access instructions
+      categories:
+        type: array
+        items:
+          type: object
+          example:
+            category_id: 1
+            has_mandatory: true
+          description: Space Categories Data
+          properties: {}
+      booking_limit:
+        type: integer
+        description: Space booking limit per day
+      space_size:
+        type: integer
+        description: Space size in square meters
+      has_discount:
+        type: boolean
+      discount_percentage:
+        type: integer
+      discount_description:
+        type: string
+      wifi_name:
+        type: string
+        description: The name of the space WiFi network
+      wifi_code:
+        type: string
+        description: The space WiFi password
+      booking_type:
+        type: string
+        enum:
+        - DIRECT
+        - MANUAL
+      cancellation_th:
+        type: integer
+        description: Space booking cancellation time threshold
+      book_before_th:
+        type: integer
+        description: Last Date, custom requests and acceptance bookings are allowed
+      host_approval_th:
+        type: integer
+        description: Time host has to respond to custom or on acceptance booking requests (timestamp)
+      short_day_price:
+        type: number
+      half_day_price:
+        type: number
+      day_proce:
+        type: number
+      full_day_price:
+        type: number
+      service_break:
+        type: integer
+      status:
+        type: string
+        enum:
+        - DRAFT
+        - REVIEW
+        - REJECTED
+        - APPROVED
+  body_17:
+    type: object
+    properties:
+      configurations:
+        type: array
+        items:
+          $ref: '#/definitions/apispacespace_idconfigurationbulk_configurations'
+      label_id:
+        type: integer
+  apispacefeaturebulk_feature_ids_to_delete:
+    type: object
+    properties:
+      feature_id:
+        type: integer
+        description: General Feature ID pending for deletion
+  body_14:
+    type: object
+    properties:
+      organisation_type:
+        type: string
+        description: Organization type
+        enum:
+        - PRIVATE
+        - PUBLIC
+      organisation_name:
+        type: string
+        description: Organization name
+      coc:
+        type: integer
+        description: Chamber of Commerce number
+      vat_number:
+        type: string
+        description: Organization VAT number
+      vat_rate:
+        type: integer
+        description: VAT rate, 0 stands for VAT exempt
+      is_finance_coc_geo:
+        type: boolean
+        description: Whether the address and financial address are the same
+      finance_email:
+        type: string
+        format: email
+      finance_place_id:
+        type: string
+        description: Valid Google Place ID
+  apispacefacilitybulk_venue_services:
+    type: object
+    properties:
+      system_service_id:
+        type: integer
+        description: System Service ID
+      price:
+        type: number
+        description: Facility price (for on demand only)
+      vat_rate:
+        type: integer
+        description: VAT rate in %
+      description:
+        type: string
+        description: Facility description
+      is_inventory_enabled:
+        type: boolean
+        description: If the facility is enabled by default
+      is_enabled:
+        type: boolean
+      max_inventory:
+        type: integer
+  body_15:
+    type: object
+    properties:
+      venue_id:
+        type: integer
+        description: Venue ID
+      internal_name:
+        type: string
+        description: Space internal name visible only by vendor
+      space_description:
+        type: string
+        description: Space description
+      access_instructions:
+        type: string
+        description: Additional access instructions
+      categories:
+        type: array
+        items:
+          type: object
+          example:
+            category_id: 1
+            has_mandatory: true
+          description: Space Categories Data
+          properties: {}
+      booking_limit:
+        type: integer
+        description: Space booking limit per day
+      space_size:
+        type: integer
+        description: Space size in square meters
+      has_discount:
+        type: boolean
+      discount_percentage:
+        type: integer
+      discount_description:
+        type: string
+      wifi_name:
+        type: string
+        description: The name of the space WiFi network
+      wifi_code:
+        type: string
+        description: The space WiFi password
+      booking_type:
+        type: string
+        enum:
+        - DIRECT
+        - MANUAL
+      cancellation_th:
+        type: integer
+        description: Space booking cancellation time threshold
+      book_before_th:
+        type: integer
+        description: Last Date, custom requests and acceptance bookings are allowed
+      host_approval_th:
+        type: integer
+        description: Time host has to respond to custom or on acceptance booking requests (timestamp)
+      short_day_price:
+        type: number
+      half_day_price:
+        type: number
+      day_proce:
+        type: number
+      full_day_price:
+        type: number
+      service_break:
+        type: integer
+      label_id:
+        type: integer
+        description: Label ID
+  apivenuefind_filters:
+    type: object
+    properties:
+      slot_from:
+        type: string
+        description: Date started from which the space must be available
+      slot_to:
+        type: string
+        description: Date until which the space must be available
+      categories:
+        type: array
+        items:
+          type: integer
+          description: Category ID
+      price_from:
+        type: number
+        description: Space lower price limit
+      price_to:
+        type: number
+        description: Space top price limit
+      facilities:
+        type: array
+        items:
+          type: integer
+          description: System Service ID
+      features:
+        type: array
+        items:
+          type: integer
+          description: Feature ID
+      is_direct_booking:
+        type: boolean
+        description: Filter spaces only with direct booking
+      attendees:
+        type: integer
+        description: Filter spaces by attendees amount
+      configurations:
+        type: array
+        items:
+          type: integer
+          description: Configuration ID
+  apivenuefind_pagination:
+    type: object
+    properties:
+      page:
+        type: integer
+        description: Number of the page requested
+      size:
+        type: integer
+        description: Number of records one page is holding
+  apispacefeaturebulk_feature_ids_1:
+    type: object
+    properties:
+      feature_id:
+        type: integer
+        description: General Feature ID to add
+  apivenuefind_search_location:
+    type: object
+    properties:
+      latitude:
+        type: number
+        description: Latitude within which spaces must be filtered
+      longitude:
+        type: number
+        description: Longtitude within which spaces must be filtered
+  body_23:
+    type: object
+    properties:
+      venue_name:
+        type: string
+        description: Venue name
+      venue_description:
+        type: string
+        description: Venue description
+      place_id:
+        type: string
+        description: Google Place ID
+      working_time:
+        type: object
+        example:
+          MON:
+          - open: 9:00
+            close: 18:00
+          TUE:
+          - open: 9:00
+            close: 18:00
+          WED:
+          - open: 9:00
+            close: 18:00
+          THU:
+          - open: 9:00
+            close: 18:00
+          FRI:
+          - open: 9:00
+            close: 18:00
+          SAT:
+          - open: 10:00
+            close: 16:00
+        description: Venue working time
+        properties: {}
+      contact_name:
+        type: string
+        description: Venue contact name
+      contact_phone:
+        type: string
+        description: Venue contact phone
+      contact_email:
+        type: string
+        format: email
+        description: Venue contact email
+      allow_customer_catering:
+        type: boolean
+        description: Whether customers are allowed to organize their own catering
+      status:
+        type: string
+        description: Venue Label status type
+        enum:
+        - DRAFT
+        - REVIEW
+        - REJECTED
+        - APPROVED
+  apivenueservicesbulk_venue_services:
+    type: object
+    properties:
+      system_service_id:
+        type: integer
+        description: System Service ID
+      price:
+        type: number
+        description: Price (for on demand only)
+      vat_rate:
+        type: integer
+        description: VAT rate in %
+      description:
+        type: string
+        description: Description
+      max_inventory:
+        type: integer
+      is_inventory_enabled:
+        type: boolean
+        description: If the service is enabled by default
+      is_enabled:
+        type: boolean
+      is_on_demand:
+        type: boolean
+  apivenueservicesbulk_venue_services_1:
+    type: object
+    properties:
+      venue_service_id:
+        type: integer
+        description: Venue Service ID
+      price:
+        type: number
+        description: Price (for on demand only)
+      vat_rate:
+        type: integer
+        description: VAT rate in %
+      description:
+        type: string
+        description: Service description
+      max_inventory:
+        type: integer
+      is_inventory_enabled:
+        type: boolean
+        description: If the service is enabled by default
+      is_enabled:
+        type: boolean
+      is_on_demand:
+        type: boolean
+  body_24:
+    type: object
+    properties:
+      venue_name:
+        type: string
+        description: Venue name
+      venue_description:
+        type: string
+        description: Venue description
+      place_id:
+        type: string
+        example: ChIJZaK6A18LxkcRtU0k5CK9ICA
+        description: Valid Google Place ID
+      working_time:
+        type: object
+        example:
+          MON:
+          - open: 9:00
+            close: 18:00
+          TUE:
+          - open: 9:00
+            close: 18:00
+          WED:
+          - open: 9:00
+            close: 18:00
+          THU:
+          - open: 9:00
+            close: 18:00
+          FRI:
+          - open: 9:00
+            close: 18:00
+          SAT:
+          - open: 10:00
+            close: 16:00
+        description: Venue working days and hours
+        properties: {}
+      allow_customer_catering:
+        type: boolean
+        description: |
+          Whether customers are allowed to organize their own catering
+      contact_name:
+        type: string
+        description: Venue contact name
+      contact_phone:
+        type: string
+        description: Venue contact phone
+      contact_email:
+        type: string
+        format: email
+        description: Venue contact email
+      label_id:
+        type: integer
+        description: Venue Label ID
+  body_21:
+    type: object
+    properties:
+      space_id:
+        type: integer
+        description: Space ID
+      feature_ids:
+        $ref: '#/definitions/apispacefeaturebulk_feature_ids'
+  body_22:
+    type: object
+    properties:
+      space_id:
+        type: integer
+        description: Space ID
+      feature_ids:
+        $ref: '#/definitions/apispacefeaturebulk_feature_ids_1'
+      feature_ids_to_delete:
+        $ref: '#/definitions/apispacefeaturebulk_feature_ids_to_delete'
+  apispacespace_idconfigurationbulk_configurations:
+    type: object
+    properties:
+      configuration_id:
+        type: integer
+        description: General Configuration ID
+      is_default:
+        type: boolean
+        description: Whether this configuration is default
+      configuration_price:
+        type: number
+        description: Configuration price
+      min_guests:
+        type: integer
+      max_guests:
+        type: integer
+  body_20:
+    type: object
+    properties:
+      venue_services:
+        type: array
+        description: Space facilities data
+        items:
+          $ref: '#/definitions/apispacefacilitybulk_venue_services_1'
+      venue_services_to_delete_ids:
+        type: array
+        items:
+          type: integer
+          description: Venue Service IDs pending to delete
